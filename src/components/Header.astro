@@ -1,0 +1,72 @@
+---
+import { siteConfig } from '../config/site.config';
+---
+
+<header class="sticky top-0 bg-cream border-b border-light-gray z-50">
+  <nav class="container-custom py-4 flex items-center justify-between">
+    <!-- Logo / Brand Name -->
+    <a href="/" class="font-display text-2xl font-bold text-charcoal hover:text-rust transition-colors">
+      {siteConfig.brandName}
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center gap-8">
+      <a href="/" class="font-utility uppercase text-sm tracking-wider text-charcoal hover:text-rust transition-colors">Shop</a>
+      <a href="/about" class="font-utility uppercase text-sm tracking-wider text-charcoal hover:text-rust transition-colors">About</a>
+      <button id="cart-toggle" class="relative font-utility uppercase text-sm tracking-wider text-charcoal hover:text-rust transition-colors">
+        Cart
+        <span id="cart-count" class="hidden absolute -top-2 -right-3 bg-rust text-warm-white text-xs rounded-full w-5 h-5 flex items-center justify-center">0</span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-toggle" class="md:hidden text-charcoal">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-light-gray">
+    <div class="container-custom py-4 flex flex-col gap-4">
+      <a href="/" class="font-utility uppercase text-sm tracking-wider text-charcoal hover:text-rust transition-colors">Shop</a>
+      <a href="/about" class="font-utility uppercase text-sm tracking-wider text-charcoal hover:text-rust transition-colors">About</a>
+      <button id="cart-toggle-mobile" class="font-utility uppercase text-sm tracking-wider text-charcoal hover:text-rust transition-colors text-left">
+        Cart <span id="cart-count-mobile" class="text-rust"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script>
+  // Mobile menu toggle
+  document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
+    const menu = document.getElementById('mobile-menu');
+    menu?.classList.toggle('hidden');
+  });
+
+  // Update cart count
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const count = cart.reduce((sum: number, item: any) => sum + item.quantity, 0);
+    
+    const badge = document.getElementById('cart-count');
+    const mobileBadge = document.getElementById('cart-count-mobile');
+    
+    if (count > 0) {
+      badge?.classList.remove('hidden');
+      if (badge) badge.textContent = count.toString();
+      if (mobileBadge) mobileBadge.textContent = `(${count})`;
+    } else {
+      badge?.classList.add('hidden');
+      if (mobileBadge) mobileBadge.textContent = '';
+    }
+  }
+
+  // Update on page load
+  updateCartCount();
+
+  // Listen for cart updates
+  window.addEventListener('cart-updated', updateCartCount);
+</script>

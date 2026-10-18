@@ -1,0 +1,5 @@
+<svg width="800" height="800" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="800" fill="#F5F0E6"/>
+  <text x="400" y="420" font-family="Arial" font-size="32" fill="#8C8578" text-anchor="middle">Product Image</text>
+  <text x="400" y="460" font-family="Arial" font-size="20" fill="#C4BDB2" text-anchor="middle">(T-Shirt)</text>
+</svg>

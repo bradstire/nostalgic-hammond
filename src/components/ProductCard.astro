@@ -1,0 +1,189 @@
+---
+import type { Product } from '../data/mockProducts';
+
+interface Props {
+  product: Product;
+}
+
+const { product } = Astro.props;
+
+// Complete image mapping for all products
+const productImages: Record<string, string[]> = {
+  'cave-tangi-tee-white': [
+    '/images/cave_tangi_tee_white_01_main.png',
+    '/images/cave_tangi_tee_white_02.png',
+    '/images/cave_tangi_tee_white_03.png',
+    '/images/cave_tangi_tee_white_04.png',
+    '/images/cave_tangi_tee_white_05.png',
+    '/images/cave_tangi_tee_white_06.png',
+  ],
+  'cave-tangi-tee-cream': [
+    '/images/cave_tangi_tee_cream_01_main.png',
+    '/images/cave_tangi_tee_cream_02.png',
+    '/images/cave_tangi_tee_cream_03.png',
+    '/images/cave_tangi_tee_cream_04.png',
+    '/images/cave_tangi_tee_cream_05.png',
+    '/images/cave_tangi_tee_cream_06.png',
+  ],
+  'cave-tangi-tee-black': [
+    '/images/cave_tangi_tee_black_01_main.png',
+    '/images/cave_tangi_tee_black_02.png',
+    '/images/cave_tangi_tee_black_03.png',
+    '/images/cave_tangi_tee_black_04.png',
+    '/images/cave_tangi_tee_black_05.png',
+    '/images/cave_tangi_tee_black_06.png',
+  ],
+  'cave-tangi-dad-hat-black': [
+    '/images/nostalgic_Hammond_hat_black_01_main.png',
+    '/images/nostalgic_Hammond_hat_black_02.png',
+    '/images/nostalgic_Hammond_hat_black_03.png',
+    '/images/nostalgic_Hammond_hat_black_04.png',
+    '/images/nostalgic_Hammond_hat_black_05.png',
+    '/images/nostalgic_Hammond_hat_black_06.png',
+  ],
+  'cave-tangi-dad-hat-forest': [
+    '/images/nostalgic_Hammond_hat_green_01_main.png',
+    '/images/nostalgic_Hammond_hat_green_02.png',
+    '/images/nostalgic_Hammond_hat_green_03.png',
+    '/images/nostalgic_Hammond_hat_green_04.png',
+    '/images/nostalgic_Hammond_hat_green_05.png',
+    '/images/nostalgic_Hammond_hat_green_06.png',
+  ],
+  'cave-tangi-dad-hat-khaki': [
+    '/images/nostalgic_Hammond_hat_khaki_01_main.png',
+    '/images/nostalgic_Hammond_hat_khaki_02.png',
+    '/images/nostalgic_Hammond_hat_khaki_03.png',
+    '/images/nostalgic_Hammond_hat_khaki_04.png',
+    '/images/nostalgic_Hammond_hat_khaki_05.png',
+    '/images/nostalgic_Hammond_hat_khaki_06.png',
+  ],
+  'hammond-phys-ed-ringer-tee': [
+    '/images/nostalgic_Hammond_pe_tee_01_main.png',
+    '/images/nostalgic_Hammond_pe_tee_02.png',
+    '/images/nostalgic_Hammond_pe_tee_03.png',
+    '/images/nostalgic_Hammond_pe_tee_04.png',
+    '/images/nostalgic_Hammond_pe_tee_05.png',
+    '/images/nostalgic_Hammond_pe_tee_06.png',
+  ],
+  'tornadoes-crew-neck-sweatshirt': [
+    '/images/tornadoes_crewneck_white_01_main.png',
+    '/images/tornadoes_crewneck_white_02.png',
+    '/images/tornadoes_crewneck_white_03.png',
+    '/images/tornadoes_crewneck_white_04.png',
+    '/images/tornadoes_crewneck_white_05.png',
+    '/images/tornadoes_crewneck_white_06.png',
+  ],
+  'strawberry-stadium-framed-poster': [
+    '/images/strawberry_stadium_poster_12x16_01_main.png',
+    '/images/strawberry_stadium_poster_12x16_02.png',
+    '/images/strawberry_stadium_poster_12x16_03.png',
+  ],
+  'greetings-from-hammond-8x10': [
+    '/images/greetings_poster_8x10_01_main.png',
+    '/images/greetings_poster_8x10_02.png',
+    '/images/greetings_poster_8x10_03.png',
+  ],
+  'greetings-from-hammond-11x14': [
+    '/images/greetings_poster_11x14_01_main.png',
+    '/images/greetings_poster_11x14_02.png',
+    '/images/greetings_poster_11x14_03.png',
+  ],
+  'greetings-from-hammond-16x20': [
+    '/images/greetings_poster_16x20_01_main.png',
+    '/images/greetings_poster_16x20_02.png',
+    '/images/greetings_poster_16x20_03.png',
+  ],
+  // Duplicate entries for handle variations
+  'strawberry-stadium-framed-poster-12-16': [
+    '/images/strawberry_stadium_poster_12x16_01_main.png',
+    '/images/strawberry_stadium_poster_12x16_02.png',
+    '/images/strawberry_stadium_poster_12x16_03.png',
+  ],
+  'retro-sketch-raglan-baby-tee': [
+    '/images/retro-sketch-raglan-baby-tee-01-main.png',
+    '/images/retro-sketch-raglan-baby-tee-02.png',
+    '/images/retro-sketch-raglan-baby-tee-03.png',
+    '/images/retro-sketch-raglan-baby-tee-04.png',
+  ],
+  'retro-sketch-baby-tee': [
+    '/images/retro-sketch-raglan-baby-tee-01-main.png',
+    '/images/retro-sketch-raglan-baby-tee-02.png',
+    '/images/retro-sketch-raglan-baby-tee-03.png',
+    '/images/retro-sketch-raglan-baby-tee-04.png',
+  ],
+  'retro-sketch-3-4-sleeve-raglan': [
+    '/images/retro-sketch-3qtr-raglan-01-main.png',
+    '/images/retro-sketch-3qtr-raglan-02.png',
+  ],
+  'retro-sketch-34-sleeve-raglan': [
+    '/images/retro-sketch-3qtr-raglan-01-main.png',
+    '/images/retro-sketch-3qtr-raglan-02.png',
+  ],
+};
+
+// Use mapped images if available, otherwise fallback to product.images
+const imageSrc = productImages[product.handle]?.[0] || product.images[0].src;
+const image = { src: imageSrc, alt: product.images[0].alt };
+
+// Format price: remove trailing .0 for whole dollar amounts
+const formatPrice = (price: string) => {
+  const num = parseFloat(price);
+  return num % 1 === 0 ? num.toFixed(0) : price;
+};
+---
+
+<a 
+  href={`/products/${product.handle}`}
+  class="product-card group block rounded-sm overflow-hidden transition-colors duration-300"
+>
+  <!-- Product Image -->
+  <div class="relative aspect-square overflow-hidden">
+    <img
+      src={image.src}
+      alt={image.alt}
+      class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-charcoal/0 group-hover:bg-charcoal/5 transition-colors duration-300"></div>
+  </div>
+
+  <!-- Product Info -->
+  <div class="p-5">
+    <h3 class="product-title font-display text-lg leading-tight mb-2.5 text-charcoal group-hover:text-rust transition-colors duration-200">
+      {product.title}
+    </h3>
+    <p class="product-price text-rust font-semibold tracking-wide">
+      ${formatPrice(product.price)}
+    </p>
+  </div>
+</a>
+
+<style>
+  .product-card {
+    background-color: transparent;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
+                box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08), 0 4px 8px rgba(0, 0, 0, 0.04);
+  }
+  
+  .product-title {
+    font-size: 1.125rem;
+    line-height: 1.3;
+  }
+  
+  .product-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.025em;
+  }
+  
+  @media (max-width: 768px) {
+    .product-title {
+      font-size: 1rem;
+    }
+  }
+</style>

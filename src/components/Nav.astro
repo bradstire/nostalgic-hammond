@@ -1,0 +1,110 @@
+---
+// Simple, always-visible navigation
+---
+
+<header class="fixed top-0 w-full z-50 bg-warm-black/95 backdrop-blur-sm border-b border-rust/20">
+  <nav class="container-custom h-16 flex items-center justify-between">
+    <!-- Logo -->
+    <a href="/" class="flex items-baseline gap-1.5 transition-colors group">
+      <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-style: normal; letter-spacing: 2px; font-size: 16px; color: #E8E0D4; text-transform: uppercase;">NOSTALGIC</span>
+      <span style="font-family: 'Playfair Display', serif; font-weight: 400; font-size: 20px; color: #B85C3E; font-style: italic;">Hammond</span>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <div class="hidden md:flex items-center gap-6">
+      <a href="/" class="nav-link">Shop</a>
+      <a href="/about" class="nav-link">About</a>
+      <button id="cart-toggle" class="nav-link relative">
+        Cart
+        <span id="cart-count" class="hidden absolute -top-1.5 -right-2 bg-rust text-warm-white text-xs rounded-full w-4 h-4 flex items-center justify-center text-[10px]">0</span>
+      </button>
+    </div>
+
+    <!-- Mobile Menu Button -->
+    <button id="mobile-menu-toggle" class="md:hidden text-warm-white hover:text-rust transition-colors">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="hidden md:hidden border-t border-rust/20 bg-warm-black/98">
+    <div class="container-custom py-4 flex flex-col gap-3">
+      <a href="/" class="mobile-nav-link">Shop</a>
+      <a href="/about" class="mobile-nav-link">About</a>
+      <button id="cart-toggle-mobile" class="mobile-nav-link text-left">
+        Cart <span id="cart-count-mobile" class="text-rust text-sm"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<style>
+  .nav-link {
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #E8E0D4;
+    transition: color 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    color: #B85C3E;
+  }
+  
+  .mobile-nav-link {
+    font-family: sans-serif;
+    text-transform: uppercase;
+    font-size: 13px;
+    letter-spacing: 3px;
+    color: #E8E0D4;
+    padding: 0.5rem 0;
+    transition: color 0.2s ease;
+  }
+  
+  .mobile-nav-link:hover {
+    color: #B85C3E;
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  document.getElementById('mobile-menu-toggle')?.addEventListener('click', () => {
+    const menu = document.getElementById('mobile-menu');
+    menu?.classList.toggle('hidden');
+  });
+
+  // Update cart count
+  function updateCartCount() {
+    const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+    const count = cart.reduce((sum: number, item: any) => sum + item.quantity, 0);
+    
+    const badge = document.getElementById('cart-count');
+    const mobileBadge = document.getElementById('cart-count-mobile');
+    
+    if (count > 0) {
+      badge?.classList.remove('hidden');
+      if (badge) badge.textContent = count.toString();
+      if (mobileBadge) mobileBadge.textContent = `(${count})`;
+    } else {
+      badge?.classList.add('hidden');
+      if (mobileBadge) mobileBadge.textContent = '';
+    }
+  }
+
+  // Update on page load
+  updateCartCount();
+
+  // Listen for cart updates
+  window.addEventListener('cart-updated', updateCartCount);
+  
+  // Close mobile menu when clicking a link
+  document.querySelectorAll('.mobile-nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      menu?.classList.add('hidden');
+    });
+  });
+</script>

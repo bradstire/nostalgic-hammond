@@ -1,0 +1,242 @@
+---
+---
+
+<!-- Cart Drawer Overlay -->
+<div id="cart-drawer" class="fixed inset-0 bg-charcoal/50 z-50 hidden">
+  <div class="absolute right-0 top-0 h-full w-full md:w-96 bg-warm-white shadow-2xl overflow-y-auto">
+    <div class="p-6">
+      <!-- Header -->
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="font-display text-2xl font-bold">Cart</h2>
+        <button id="close-cart" class="text-charcoal hover:text-rust">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Cart Items -->
+      <div id="cart-items" class="mb-6">
+        <!-- Items will be rendered by JavaScript -->
+      </div>
+
+      <!-- Empty Cart Message -->
+      <div id="empty-cart" class="hidden text-center py-12">
+        <p class="text-warm-gray font-body">Your cart is empty</p>
+      </div>
+
+      <!-- Cart Footer -->
+      <div id="cart-footer" class="border-t border-light-gray pt-6">
+        <!-- Free Shipping Notice -->
+        <div id="shipping-notice" class="mb-4 p-3 bg-cream rounded-sm">
+          <p class="text-sm font-body text-charcoal"></p>
+        </div>
+
+        <!-- Subtotal -->
+        <div class="flex justify-between items-center mb-6">
+          <span class="font-utility uppercase tracking-wider text-charcoal">Subtotal</span>
+          <span id="cart-subtotal" class="price text-2xl font-bold text-rust">$0.00</span>
+        </div>
+
+        <!-- Checkout Button -->
+        <button
+          id="checkout-btn"
+          class="w-full bg-rust text-warm-white font-utility uppercase tracking-wider py-4 rounded-sm hover:bg-rust/90 transition-colors"
+        >
+          Checkout
+        </button>
+        <p class="text-xs text-warm-gray text-center mt-3 font-body">
+          Secure checkout powered by Shopify
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  import { getOrCreateCheckout, updateLineItem, removeLineItem, type ShopifyCheckout, type ShopifyLineItem } from '../lib/shopify';
+
+  // Checkout state
+  let checkout: ShopifyCheckout | null = null;
+
+  // Open/close cart
+  async function openCart() {
+    document.getElementById('cart-drawer')?.classList.remove('hidden');
+    await renderCart();
+  }
+
+  function closeCart() {
+    document.getElementById('cart-drawer')?.classList.add('hidden');
+  }
+
+  // Render cart items from Shopify checkout
+  async function renderCart() {
+    const cartItemsEl = document.getElementById('cart-items');
+    const emptyCartEl = document.getElementById('empty-cart');
+    const cartFooterEl = document.getElementById('cart-footer');
+
+    try {
+      // Fetch current checkout
+      checkout = await getOrCreateCheckout();
+      const lineItems = checkout.lineItems || [];
+
+      if (lineItems.length === 0) {
+        emptyCartEl?.classList.remove('hidden');
+        cartFooterEl?.classList.add('hidden');
+        if (cartItemsEl) cartItemsEl.innerHTML = '';
+        return;
+      }
+
+      emptyCartEl?.classList.add('hidden');
+      cartFooterEl?.classList.remove('hidden');
+
+      // Render items
+      if (cartItemsEl) {
+        cartItemsEl.innerHTML = lineItems.map((item: ShopifyLineItem) => {
+          const itemPrice = parseFloat(item.variant.price.amount);
+          const itemTotal = itemPrice * item.quantity;
+          const imageSrc = item.variant.image?.src || '/images/placeholder-tee.jpg';
+
+          return `
+            <div class="flex gap-4 mb-4 pb-4 border-b border-light-gray">
+              <img src="${imageSrc}" alt="${item.title}" class="w-20 h-20 object-cover rounded-sm" />
+              <div class="flex-1">
+                <h3 class="font-display text-sm mb-1">${item.title}</h3>
+                <p class="text-xs text-warm-gray font-body mb-2">${item.variant.title}</p>
+                <div class="flex items-center gap-2">
+                  <button data-line-item-id="${item.id}" class="decrease-qty text-warm-gray hover:text-charcoal">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 12H4"></path>
+                    </svg>
+                  </button>
+                  <span class="text-sm font-utility">${item.quantity}</span>
+                  <button data-line-item-id="${item.id}" class="increase-qty text-warm-gray hover:text-charcoal">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"></path>
+                    </svg>
+                  </button>
+                  <button data-line-item-id="${item.id}" class="remove-item ml-auto text-rust hover:text-rust/80 text-xs font-utility uppercase">
+                    Remove
+                  </button>
+                </div>
+              </div>
+              <div class="text-right">
+                <p class="price font-bold text-rust">$${itemTotal.toFixed(2)}</p>
+              </div>
+            </div>
+          `;
+        }).join('');
+
+        // Attach event listeners for quantity controls
+        document.querySelectorAll('.increase-qty').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            const lineItemId = (e.currentTarget as HTMLElement).dataset.lineItemId;
+            if (!lineItemId) return;
+
+            const item = lineItems.find((i: ShopifyLineItem) => i.id === lineItemId);
+            if (item) {
+              await updateLineItem(lineItemId, item.quantity + 1);
+              await renderCart();
+            }
+          });
+        });
+
+        document.querySelectorAll('.decrease-qty').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            const lineItemId = (e.currentTarget as HTMLElement).dataset.lineItemId;
+            if (!lineItemId) return;
+
+            const item = lineItems.find((i: ShopifyLineItem) => i.id === lineItemId);
+            if (item && item.quantity > 1) {
+              await updateLineItem(lineItemId, item.quantity - 1);
+              await renderCart();
+            }
+          });
+        });
+
+        document.querySelectorAll('.remove-item').forEach(btn => {
+          btn.addEventListener('click', async (e) => {
+            const lineItemId = (e.currentTarget as HTMLElement).dataset.lineItemId;
+            if (!lineItemId) return;
+
+            await removeLineItem(lineItemId);
+            await renderCart();
+          });
+        });
+      }
+
+      // Update subtotal
+      const subtotal = parseFloat(checkout.subtotalPrice.amount);
+      const subtotalEl = document.getElementById('cart-subtotal');
+      if (subtotalEl) subtotalEl.textContent = `$${subtotal.toFixed(2)}`;
+
+      // Update shipping notice
+      const shippingNoticeEl = document.getElementById('shipping-notice');
+      if (shippingNoticeEl) {
+        const remaining = 75 - subtotal;
+        if (remaining > 0) {
+          shippingNoticeEl.querySelector('p')!.textContent = 
+            `Add $${remaining.toFixed(2)} more for free shipping`;
+        } else {
+          shippingNoticeEl.querySelector('p')!.textContent = 
+            '🎉 You qualify for free shipping!';
+        }
+      }
+    } catch (error) {
+      console.error('[Cart] Error rendering cart:', error);
+      if (cartItemsEl) {
+        cartItemsEl.innerHTML = '<p class="text-rust text-sm">Error loading cart. Please refresh.</p>';
+      }
+    }
+  }
+
+  // Event listeners
+  document.getElementById('cart-toggle')?.addEventListener('click', openCart);
+  document.getElementById('cart-toggle-mobile')?.addEventListener('click', openCart);
+  document.getElementById('close-cart')?.addEventListener('click', closeCart);
+  
+  // Click outside to close
+  document.getElementById('cart-drawer')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) closeCart();
+  });
+
+  // Listen for cart updates from product pages
+  window.addEventListener('cart-updated', () => {
+    openCart(); // Opens drawer AND renders cart contents
+  });
+
+  // Checkout button - Redirect to Shopify hosted checkout
+  document.getElementById('checkout-btn')?.addEventListener('click', async () => {
+    try {
+      if (!checkout) {
+        checkout = await getOrCreateCheckout();
+      }
+
+      if (checkout.lineItems.length === 0) {
+        alert('Your cart is empty');
+        return;
+      }
+
+      // Redirect to Shopify's hosted checkout page
+      window.location.href = checkout.webUrl;
+    } catch (error) {
+      console.error('[Cart] Error during checkout:', error);
+      alert('Error proceeding to checkout. Please try again.');
+    }
+  });
+</script>
+
+<style>
+  #cart-drawer {
+    animation: slideIn 0.3s ease-out;
+  }
+
+  @keyframes slideIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+</style>

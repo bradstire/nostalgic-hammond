@@ -1,0 +1,51 @@
+---
+// Free shipping announcement banner
+---
+
+<div class="shipping-banner">
+  <div class="container-custom">
+    <p class="banner-text">FREE SHIPPING ON ORDERS $60+</p>
+  </div>
+</div>
+
+<style>
+  .shipping-banner {
+    background-color: #3B3632;
+    border-bottom: 1px solid #2C2825;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 60;
+    padding: 0.5rem 0;
+  }
+
+  .banner-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: #E8E0D4;
+    text-align: center;
+    margin: 0;
+    font-weight: 500;
+  }
+
+  @media (min-width: 768px) {
+    .banner-text {
+      font-size: 12px;
+    }
+  }
+</style>
+
+<script>
+  // Adjust nav position to account for banner
+  const nav = document.getElementById('dark-nav');
+  if (nav) {
+    nav.style.top = '32px';
+  }
+  
+  const hero = document.getElementById('hero');
+  if (hero) {
+    hero.style.marginTop = '92px';
+  }
+</script>

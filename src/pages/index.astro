@@ -1,0 +1,43 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ShippingBanner from '../components/ShippingBanner.astro';
+import DarkNav from '../components/DarkNav.astro';
+import Hero from '../components/Hero.astro';
+import FeaturedProducts from '../components/FeaturedProducts.astro';
+import Footer from '../components/Footer.astro';
+import ProductCard from '../components/ProductCard.astro';
+import CartDrawer from '../components/CartDrawer.astro';
+import EmailPopup from '../components/EmailPopup.astro';
+import { getAllProducts } from '../lib/products';
+
+const products = await getAllProducts();
+---
+
+<Layout>
+  <ShippingBanner />
+  <DarkNav />
+  <Hero />
+  <FeaturedProducts />
+  
+  <main class="bg-cream">
+    <div id="collection" class="container-custom py-16 md:py-20">
+      <!-- Collection Label -->
+      <div class="flex items-center justify-center gap-6 mb-12 md:mb-14">
+        <div class="flex-grow h-px bg-light-gray/60 max-w-[120px]"></div>
+        <span class="font-utility uppercase text-xs tracking-[0.25em] text-warm-gray">Collection</span>
+        <div class="flex-grow h-px bg-light-gray/60 max-w-[120px]"></div>
+      </div>
+
+      <!-- Product Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {products.map(product => (
+          <ProductCard product={product} />
+        ))}
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+  <CartDrawer />
+  <EmailPopup />
+</Layout>

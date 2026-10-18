@@ -1,0 +1,112 @@
+---
+import { siteConfig } from '../config/site.config';
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="footer-dark">
+  <div class="container-custom py-12">
+    <!-- Main Footer Content -->
+    <div class="flex flex-col md:flex-row justify-between items-center gap-8 mb-8">
+      <!-- Logo & Tagline -->
+      <div class="text-center md:text-left">
+        <div class="logo-wrapper">
+          <span class="logo-nostalgic">NOSTALGIC</span>
+          <span class="logo-hammond">Hammond</span>
+        </div>
+        <p class="tagline">{siteConfig.tagline}</p>
+      </div>
+
+      <!-- Links -->
+      <div class="flex gap-10">
+        <a href="/" class="footer-link">SHOP</a>
+        <a href="/about" class="footer-link">ABOUT</a>
+      </div>
+    </div>
+
+    <!-- Contact -->
+    <div class="text-center mb-8">
+      <a href="mailto:info@nostalgichammond.com" class="footer-link">
+        info@nostalgichammond.com
+      </a>
+    </div>
+
+    <!-- Divider -->
+    <div class="footer-divider"></div>
+
+    <!-- Copyright -->
+    <div class="text-center pt-8">
+      <p class="copyright">© {currentYear} {siteConfig.brandName}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .footer-dark {
+    background: #3B3632;
+    border-top: 2px solid #B85C3E;
+    margin-top: 4rem;
+  }
+
+  .logo-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: baseline;
+    justify-content: center;
+    margin-bottom: 8px;
+  }
+
+  @media (min-width: 768px) {
+    .logo-wrapper {
+      justify-content: flex-start;
+    }
+  }
+
+  .logo-nostalgic {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-style: normal;
+    font-size: 16px;
+    letter-spacing: 2px;
+    color: #E8E0D4;
+    text-transform: uppercase;
+  }
+
+  .logo-hammond {
+    font-family: 'Playfair Display', serif;
+    font-weight: 400;
+    font-style: italic;
+    font-size: 20px;
+    color: #B85C3E;
+  }
+
+  .tagline {
+    font-size: 14px;
+    color: #E8E0D4;
+  }
+
+  .footer-link {
+    font-family: sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: #E8E0D4;
+    text-decoration: none;
+    transition: opacity 0.2s;
+  }
+
+  .footer-link:hover {
+    opacity: 0.7;
+  }
+
+  .footer-divider {
+    height: 1px;
+    background-color: #B85C3E;
+  }
+
+  .copyright {
+    font-size: 13px;
+    color: #E8E0D4;
+    opacity: 0.6;
+  }
+</style>

@@ -1,0 +1,343 @@
+---
+// Email capture popup with Klaviyo integration
+---
+
+<div id="email-popup-overlay" class="popup-overlay hidden">
+  <div class="popup-container">
+    <button id="popup-close" class="popup-close" aria-label="Close">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"></line>
+        <line x1="6" y1="6" x2="18" y2="18"></line>
+      </svg>
+    </button>
+
+    <div id="popup-form-view">
+      <h2 class="popup-brand">NOSTALGIC <span class="popup-brand-hammond">Hammond</span></h2>
+      <div class="popup-divider"></div>
+      <p class="popup-offer">15% OFF YOUR FIRST ORDER</p>
+      <form id="email-signup-form" class="popup-form">
+        <input 
+          type="email" 
+          id="popup-email" 
+          name="email" 
+          placeholder="Enter your email" 
+          required 
+          class="popup-input"
+        />
+        <button type="submit" class="popup-submit">Get My 15% Off</button>
+      </form>
+      <p class="popup-footer">Hammond — remembered right.</p>
+    </div>
+
+    <div id="popup-success-view" class="hidden">
+      <div class="popup-success-icon">✓</div>
+      <p class="popup-success-message">Check your email for your code</p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .popup-overlay {
+    position: fixed;
+    inset: 0;
+    background-color: rgba(44, 40, 37, 0.85);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+    padding: 1rem;
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .popup-overlay.hidden {
+    display: none;
+  }
+
+  .popup-container {
+    position: relative;
+    background-color: #F5F0E6;
+    border: 2px solid #C8BFB3;
+    max-width: 460px;
+    width: 100%;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    animation: slideUp 0.4s ease-out;
+  }
+
+  .popup-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    color: #8C8578;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: color 0.2s;
+  }
+
+  .popup-close:hover {
+    color: #B85C3E;
+  }
+
+  .popup-brand {
+    font-family: 'Playfair Display', serif;
+    font-weight: 700;
+    font-size: 24px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #2C2825;
+    margin: 0 0 1rem;
+  }
+
+  .popup-brand-hammond {
+    font-weight: 400;
+    font-style: italic;
+    color: #B85C3E;
+    text-transform: none;
+    letter-spacing: 0;
+  }
+
+  .popup-divider {
+    width: 60px;
+    height: 2px;
+    background-color: #B85C3E;
+    margin: 0 auto 1.5rem;
+  }
+
+  .popup-offer {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 28px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: #2C2825;
+    margin: 0 0 1.5rem;
+  }
+
+  .popup-form {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .popup-input {
+    font-family: 'Source Serif 4', serif;
+    font-size: 15px;
+    padding: 0.875rem 1rem;
+    border: 1px solid #C8BFB3;
+    background-color: #E8E0D4;
+    color: #2C2825;
+    transition: border-color 0.2s;
+  }
+
+  .popup-input:focus {
+    outline: none;
+    border-color: #B85C3E;
+  }
+
+  .popup-submit {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 1rem;
+    background-color: #2C2825;
+    color: #E8E0D4;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .popup-submit:hover {
+    background-color: #3B3632;
+  }
+
+  .popup-submit:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .popup-footer {
+    font-family: 'Source Serif 4', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: #8C8578;
+    margin: 0;
+  }
+
+  .popup-success-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background-color: #B85C3E;
+    color: #F5F0E6;
+    font-size: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+  }
+
+  .popup-success-message {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    color: #2C2825;
+    margin: 0;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slideUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @media (max-width: 640px) {
+    .popup-container {
+      padding: 2rem 1.5rem;
+    }
+
+    .popup-brand {
+      font-size: 20px;
+    }
+
+    .popup-offer {
+      font-size: 24px;
+    }
+  }
+</style>
+
+<script>
+  const STORAGE_KEY = 'nh_popup_seen';
+  const KLAVIYO_COMPANY_ID = 'X6vHTB';
+  const KLAVIYO_LIST_ID = 'XdKJkQ';
+
+  function hasSeenPopup() {
+    return localStorage.getItem(STORAGE_KEY) === 'true';
+  }
+
+  function markPopupSeen() {
+    localStorage.setItem(STORAGE_KEY, 'true');
+  }
+
+  function showPopup() {
+    const overlay = document.getElementById('email-popup-overlay');
+    if (overlay) {
+      overlay.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    }
+  }
+
+  function hidePopup() {
+    const overlay = document.getElementById('email-popup-overlay');
+    if (overlay) {
+      overlay.classList.add('hidden');
+      document.body.style.overflow = '';
+    }
+  }
+
+  async function submitEmail(email: string) {
+    try {
+      const response = await fetch('https://manage.kmail-lists.com/ajax/subscriptions/subscribe', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          'g': KLAVIYO_LIST_ID,
+          'email': email,
+          '$fields': '$source',
+          '$source': 'Website Popup'
+        })
+      });
+
+      if (!response.ok) {
+        const errorText = await response.text();
+        console.error('Klaviyo legacy API error:', response.status, errorText);
+        throw new Error('Failed to subscribe');
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Email signup error:', error);
+      return false;
+    }
+  }
+
+  // Show popup after 5 seconds if not seen before
+  if (!hasSeenPopup()) {
+    setTimeout(showPopup, 5000);
+  }
+
+  // Close button handler
+  document.getElementById('popup-close')?.addEventListener('click', () => {
+    hidePopup();
+    markPopupSeen();
+  });
+
+  // Click outside to close
+  document.getElementById('email-popup-overlay')?.addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+      hidePopup();
+      markPopupSeen();
+    }
+  });
+
+  // Form submission
+  document.getElementById('email-signup-form')?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const form = e.target as HTMLFormElement;
+    const emailInput = document.getElementById('popup-email') as HTMLInputElement;
+    const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+    
+    if (!emailInput || !submitBtn) return;
+
+    const email = emailInput.value.trim();
+    if (!email) return;
+
+    // Disable form
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting...';
+
+    const success = await submitEmail(email);
+
+    if (success) {
+      // Show success view
+      const formView = document.getElementById('popup-form-view');
+      const successView = document.getElementById('popup-success-view');
+      
+      if (formView && successView) {
+        formView.classList.add('hidden');
+        successView.classList.remove('hidden');
+      }
+
+      markPopupSeen();
+
+      // Close after 3 seconds
+      setTimeout(() => {
+        hidePopup();
+      }, 3000);
+    } else {
+      // Re-enable form on error
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Get My 15% Off';
+      alert('Something went wrong. Please try again.');
+    }
+  });
+</script>
