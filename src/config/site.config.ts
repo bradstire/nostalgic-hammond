@@ -8,6 +8,8 @@ export const siteConfig = {
   secondaryAccent: "#C4A35A", // Aged Gold
   shopifyStoreDomain: "nostalgic-towns.myshopify.com",
   shopifyStorefrontToken: import.meta.env.SHOPIFY_STOREFRONT_TOKEN || "",
+  // Meta Pixel ID (not a secret; ships in every page). Empty = pixel disabled.
+  metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID || "",
   socialLinks: {
     instagram: "",
     facebook: "",
