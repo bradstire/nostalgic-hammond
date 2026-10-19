@@ -25,7 +25,7 @@ export const mockProducts: Product[] = [
   {
     handle: "cave-tangi-tee-white",
     title: "Cave Tangi Tee — White",
-    description: "Drink. Dine. Dance. The Cave Tangi opened in 1938 on the highway between Hammond and Ponchatoula. The sign didn't survive. The memory did.",
+    description: "Drink. Dine. Dance. The Cave Tangi opened in October 1938 on Highway 51, just north of Ponchatoula on the road to Hammond. People still talk about it.",
     price: "34.00",
     images: [
       { src: "/images/tee-white-01.png", alt: "Cave Tangi Tee White" },
@@ -47,7 +47,7 @@ export const mockProducts: Product[] = [
   {
     handle: "cave-tangi-tee-cream",
     title: "Cave Tangi Tee — Cream",
-    description: "Drink. Dine. Dance. The Cave Tangi opened in 1938 on the highway between Hammond and Ponchatoula. The sign didn't survive. The memory did.",
+    description: "Drink. Dine. Dance. The Cave Tangi opened in October 1938 on Highway 51, just north of Ponchatoula on the road to Hammond. People still talk about it.",
     price: "34.00",
     images: [
       { src: "/images/tee-cream-01.png", alt: "Cave Tangi Tee Cream" },
@@ -69,7 +69,7 @@ export const mockProducts: Product[] = [
   {
     handle: "cave-tangi-tee-black",
     title: "Cave Tangi Tee — Black",
-    description: "Drink. Dine. Dance. The Cave Tangi opened in 1938 on the highway between Hammond and Ponchatoula. The sign didn't survive. The memory did.",
+    description: "Drink. Dine. Dance. The Cave Tangi opened in October 1938 on Highway 51, just north of Ponchatoula on the road to Hammond. People still talk about it.",
     price: "34.00",
     images: [
       { src: "/images/tee-black-01.png", alt: "Cave Tangi Tee Black" },
@@ -183,7 +183,7 @@ export const mockProducts: Product[] = [
   {
     handle: "strawberry-stadium-framed-poster",
     title: "Strawberry Stadium — Framed Poster 12×16",
-    description: "Southeastern Louisiana College, circa 1940. Hand-tinted postcard, Curt Teich & Co. The stadium was erected in 1937 for $50,000.",
+    description: "Southeastern Louisiana College, 1940. Linen postcard by Curt Teich & Co. Built in 1937 as a WPA project and named for the area's strawberry farmers.",
     price: "58.00",
     images: [
       { src: "/images/poster-stadium-01.png", alt: "Strawberry Stadium Framed Poster" },
@@ -198,7 +198,7 @@ export const mockProducts: Product[] = [
   {
     handle: "greetings-from-hammond-8x10",
     title: "Greetings from Hammond — 8×10",
-    description: "Large letter postcard, Curt Teich & Co. The kind they sold at the drugstore on Thomas Street.",
+    description: "Large-letter linen postcard, Curt Teich & Co., 1946. Hammond, \"the strawberry capital of the world,\" according to the back of the card.",
     price: "38.00",
     images: [
       { src: "/images/poster-greetings-8x10-01.png", alt: "Greetings from Hammond 8x10" },
@@ -213,7 +213,7 @@ export const mockProducts: Product[] = [
   {
     handle: "greetings-from-hammond-11x14",
     title: "Greetings from Hammond — 11×14",
-    description: "Large letter postcard, Curt Teich & Co. The kind they sold at the drugstore on Thomas Street.",
+    description: "Large-letter linen postcard, Curt Teich & Co., 1946. Hammond, \"the strawberry capital of the world,\" according to the back of the card.",
     price: "48.00",
     images: [
       { src: "/images/poster-greetings-11x14-01.png", alt: "Greetings from Hammond 11x14" },
@@ -228,7 +228,7 @@ export const mockProducts: Product[] = [
   {
     handle: "greetings-from-hammond-16x20",
     title: "Greetings from Hammond — 16×20",
-    description: "Large letter postcard, Curt Teich & Co. The kind they sold at the drugstore on Thomas Street.",
+    description: "Large-letter linen postcard, Curt Teich & Co., 1946. Hammond, \"the strawberry capital of the world,\" according to the back of the card.",
     price: "72.00",
     images: [
       { src: "/images/poster-greetings-16x20-01.png", alt: "Greetings from Hammond 16x20" },
