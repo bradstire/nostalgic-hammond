@@ -4,8 +4,12 @@ import tailwind from '@astrojs/tailwind';
 import sitemap from '@astrojs/sitemap';
 import { towns, resolveTownSlug } from './src/config/towns.mjs';
 
-// One codebase, many towns: PUBLIC_TOWN picks the town for this build (unset = hammond).
-const town = towns[resolveTownSlug(process.env.PUBLIC_TOWN)];
+// One codebase, many towns. The town for this build comes from PUBLIC_TOWN (set per Vercel project),
+// or from a git branch named `town/<slug>` (so pushing that branch yields a private Vercel preview).
+// Unset = hammond.
+const branchTown = (process.env.VERCEL_GIT_COMMIT_REF || '').match(/^town\/([a-z0-9-]+)$/)?.[1];
+const townSlug = resolveTownSlug(process.env.PUBLIC_TOWN || branchTown);
+const town = towns[townSlug];
 
 // https://astro.build/config
 export default defineConfig({
@@ -18,6 +22,10 @@ export default defineConfig({
     }
   },
   vite: {
+    // One resolved value for server and client code (src/config/site.config.ts reads it).
+    define: {
+      'import.meta.env.PUBLIC_TOWN': JSON.stringify(townSlug),
+    },
     build: {
       assetsInlineLimit: 0
     }

@@ -1,6 +1,6 @@
 import { towns, resolveTownSlug } from './towns.mjs';
 
-// Which town this build is for. Set PUBLIC_TOWN in the Vercel project; unset = hammond.
+// Which town this build is for (resolved in astro.config.mjs: PUBLIC_TOWN, or a `town/<slug>` branch).
 export const townSlug = resolveTownSlug(import.meta.env.PUBLIC_TOWN);
 export const town = towns[townSlug as keyof typeof towns];
 
