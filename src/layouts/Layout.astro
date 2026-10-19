@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { siteConfig } from '../config/site.config';
+import { siteConfig, town } from '../config/site.config';
 
 interface Props {
   title?: string;
@@ -24,6 +24,7 @@ const canonicalUrl = new URL(Astro.url.pathname, siteConfig.siteUrl).href;
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="canonical" href={canonicalUrl} />
+    {!town.launched && <meta name="robots" content="noindex, nofollow" />}
     <meta name="generator" content={Astro.generator} />
     
     <!-- Preload critical fonts -->

@@ -1,13 +1,22 @@
 import { mockProducts, type Product } from '../data/mockProducts';
-import { siteConfig } from '../config/site.config';
-import { getProductImages } from './imageMap';
+import { siteConfig, town, townSlug } from '../config/site.config';
+import { getProductImages, hasLocalImages } from './imageMap';
+import { DEFAULT_TOWN } from '../config/towns.mjs';
+
+// A product belongs to a town through a Shopify tag `town:<slug>`.
+// The pilot town (Hammond) also keeps every untagged product, so its catalog needs no retagging.
+function belongsToThisTown(tags: string[] = []): boolean {
+  const townTags = tags.map(t => t.trim().toLowerCase()).filter(t => t.startsWith('town:'));
+  if (townTags.length === 0) return townSlug === DEFAULT_TOWN;
+  return townTags.includes(`town:${townSlug}`);
+}
 
 const USE_LIVE_API = !!siteConfig.shopifyStorefrontToken;
 
 export async function getAllProducts(): Promise<Product[]> {
   if (!USE_LIVE_API) {
     console.log('[Products] Using mock data (no Shopify token configured)');
-    return mockProducts;
+    return townSlug === DEFAULT_TOWN ? mockProducts : [];
   }
 
   // TODO: Implement Shopify Storefront API GraphQL call
@@ -25,7 +34,7 @@ export async function getAllProducts(): Promise<Product[]> {
         body: JSON.stringify({
           query: `
             query GetAllProducts {
-              products(first: 50, sortKey: TITLE) {
+              products(first: 250, sortKey: TITLE) {
                 edges {
                   node {
                     handle
@@ -72,8 +81,17 @@ export async function getAllProducts(): Promise<Product[]> {
     let products: Product[] = [];
     
     data.products.edges.forEach((edge: any) => {
-      // Use local transparent PNGs instead of Shopify CDN
-      const localImages = getProductImages(edge.node.handle);
+      if (!belongsToThisTown(edge.node.tags)) return;
+
+      // Use local transparent PNGs instead of Shopify CDN when we have them;
+      // newer products (other towns) use their Shopify images.
+      const shopifyImages = edge.node.images.edges.map((img: any) => ({
+        src: img.node.url,
+        alt: img.node.altText || edge.node.title,
+      }));
+      const localImages = hasLocalImages(edge.node.handle) || shopifyImages.length === 0
+        ? getProductImages(edge.node.handle)
+        : shopifyImages;
       
       const baseProduct = {
         handle: edge.node.handle,
@@ -124,23 +142,9 @@ export async function getAllProducts(): Promise<Product[]> {
       }
     });
 
-    // Custom sort order: Cave Tangi items first, then Hammond PE, Tornadoes, posters (with split Greetings sizes), Retro Sketch
-    const sortOrder = [
-      'cave-tangi-tee-white',
-      'cave-tangi-tee-cream',
-      'cave-tangi-tee-black',
-      'cave-tangi-dad-hat-black',
-      'cave-tangi-dad-hat-forest',
-      'cave-tangi-dad-hat-khaki',
-      'hammond-phys-ed-ringer-tee',
-      'tornadoes-crew-neck-sweatshirt',
-      'strawberry-stadium-framed-poster-12-16',
-      'greetings-from-hammond-8x10',
-      'greetings-from-hammond-11x14',
-      'greetings-from-hammond-16x20',
-      'retro-sketch-raglan-baby-tee',
-      'retro-sketch-3-4-sleeve-raglan',
-    ];
+    // Custom sort order per town (src/config/towns.mjs). Hammond: Cave Tangi items first, then
+    // Hammond PE, Tornadoes, posters (with split Greetings sizes), Retro Sketch.
+    const sortOrder: string[] = town.sortOrder;
 
     products.sort((a, b) => {
       const indexA = sortOrder.indexOf(a.handle);
@@ -153,6 +157,10 @@ export async function getAllProducts(): Promise<Product[]> {
 
     return products;
   } catch (error) {
+    if (townSlug !== DEFAULT_TOWN) {
+      // Never ship the pilot's mock catalog under another town's name.
+      throw new Error(`[Products] Shopify fetch failed for town "${townSlug}": ${error}`);
+    }
     console.error('[Products] Failed to fetch from Shopify, falling back to mock data:', error);
     return mockProducts;
   }

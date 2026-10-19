@@ -1,5 +1,6 @@
 ---
 // Simple, always-visible navigation
+import { siteConfig } from '../config/site.config';
 ---
 
 <header class="fixed top-0 w-full z-50 bg-warm-black/95 backdrop-blur-sm border-b border-rust/20">
@@ -7,7 +8,7 @@
     <!-- Logo -->
     <a href="/" class="flex items-baseline gap-1.5 transition-colors group">
       <span style="font-family: 'Playfair Display', serif; font-weight: 700; font-style: normal; letter-spacing: 2px; font-size: 16px; color: #E8E0D4; text-transform: uppercase;">NOSTALGIC</span>
-      <span style="font-family: 'Playfair Display', serif; font-weight: 400; font-size: 20px; color: #B85C3E; font-style: italic;">Hammond</span>
+      <span style="font-family: 'Playfair Display', serif; font-weight: 400; font-size: 20px; color: #B85C3E; font-style: italic;">{siteConfig.townName}</span>
     </a>
 
     <!-- Desktop Navigation -->

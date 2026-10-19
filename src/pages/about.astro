@@ -3,7 +3,10 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import CartDrawer from '../components/CartDrawer.astro';
-import { siteConfig } from '../config/site.config';
+import { siteConfig, townSlug } from '../config/site.config';
+
+const bodies = import.meta.glob('../towns/*/About.astro', { eager: true }) as Record<string, any>;
+const AboutBody = bodies[`../towns/${townSlug}/About.astro`].default;
 ---
 
 <Layout title="About" description={`About ${siteConfig.brandName} — ${siteConfig.tagline} nostalgia`}>
@@ -16,37 +19,7 @@ import { siteConfig } from '../config/site.config';
           About {siteConfig.brandName}
         </h1>
 
-        <div class="space-y-6 text-base md:text-lg leading-relaxed text-charcoal/90">
-          <p>
-            Hammond's history wasn't made in boardrooms. It was made down the highway at the Cave Tangi in Ponchatoula on a Friday night, 
-            at Strawberry Stadium on a Saturday afternoon, in the hallways of Hammond High when "Tornadoes" 
-            meant something you felt in your chest.
-          </p>
-
-          <p>
-            These designs come from photographs, postcards, yearbooks — the things that survived when the 
-            buildings didn't. Every piece tells a story that somebody who was there will recognize immediately, 
-            and everybody else should know.
-          </p>
-
-          <p>
-            This is Hammond. Not the Hammond of master plans and economic development committees. The Hammond 
-            that drove down to dance at the Cave Tangi, cheered at Strawberry Stadium, and sent postcards that said 
-            "Greetings from Hammond" in letters six feet tall.
-          </p>
-        </div>
-
-        <!-- Greetings Postcard Image -->
-        <a 
-          href="/products/greetings-from-hammond-11x14" 
-          class="block mt-16 mx-auto max-w-[70%] transition-transform duration-300 hover:scale-[1.02]"
-        >
-          <img 
-            src="/images/greetings_web.png" 
-            alt="Greetings from Hammond vintage postcard design" 
-            class="w-full h-auto rounded-sm shadow-[0_4px_12px_rgba(0,0,0,0.15)] border border-light-gray/30"
-          />
-        </a>
+        <AboutBody />
       </div>
     </div>
   </main>

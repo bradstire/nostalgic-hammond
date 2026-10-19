@@ -1,5 +1,6 @@
 ---
 // Email capture popup with Klaviyo integration
+import { town } from '../config/site.config';
 ---
 
 <div id="email-popup-overlay" class="popup-overlay hidden">
@@ -12,7 +13,7 @@
     </button>
 
     <div id="popup-form-view">
-      <h2 class="popup-brand">NOSTALGIC <span class="popup-brand-hammond">Hammond</span></h2>
+      <h2 class="popup-brand">NOSTALGIC <span class="popup-brand-hammond">{town.townName}</span></h2>
       <div class="popup-divider"></div>
       <p class="popup-offer">15% OFF YOUR FIRST ORDER</p>
       <form id="email-signup-form" class="popup-form">
@@ -26,7 +27,7 @@
         />
         <button type="submit" class="popup-submit">Get My 15% Off</button>
       </form>
-      <p class="popup-footer">Hammond — remembered right.</p>
+      <p class="popup-footer">{town.popup.footer}</p>
     </div>
 
     <div id="popup-success-view" class="hidden">

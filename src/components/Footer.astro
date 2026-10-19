@@ -1,5 +1,5 @@
 ---
-import { siteConfig } from '../config/site.config';
+import { siteConfig, town } from '../config/site.config';
 
 const currentYear = new Date().getFullYear();
 ---
@@ -12,23 +12,23 @@ const currentYear = new Date().getFullYear();
       <div class="text-center md:text-left">
         <div class="logo-wrapper">
           <span class="logo-nostalgic">NOSTALGIC</span>
-          <span class="logo-hammond">Hammond</span>
+          <span class="logo-hammond">{siteConfig.townName}</span>
         </div>
         <p class="tagline">{siteConfig.tagline}</p>
       </div>
 
       <!-- Links -->
       <div class="flex gap-10">
-        <a href="/" class="footer-link">SHOP</a>
-        <a href="/about" class="footer-link">ABOUT</a>
-        <a href="/ponchatoula" class="footer-link">PONCHATOULA</a>
+        {town.footerLinks.map((l) => (
+          <a href={l.href} class="footer-link">{l.label}</a>
+        ))}
       </div>
     </div>
 
     <!-- Contact -->
     <div class="text-center mb-8">
-      <a href="mailto:info@nostalgichammond.com" class="footer-link">
-        info@nostalgichammond.com
+      <a href={`mailto:${siteConfig.contactEmail}`} class="footer-link">
+        {siteConfig.contactEmail}
       </a>
     </div>
 

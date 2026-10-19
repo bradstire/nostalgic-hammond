@@ -1,43 +1,30 @@
 ---
-// Dual hero section with featured products
+// Dual hero section with featured products (per town: see `featured` in src/config/towns.mjs)
+import { town } from '../config/site.config';
+const featured = town.featured;
 ---
 
+{featured.length > 0 && (
 <section class="featured-section">
   <div class="container-custom">
     <div class="featured-grid">
-      <!-- Product 1: Cave Tangi Tee Black -->
-      <a href="/products/cave-tangi-tee-black" class="featured-card">
-        <div class="featured-badge">BEST SELLER</div>
+      {featured.map((f) => (
+      <a href={`/products/${f.handle}`} class="featured-card">
+        <div class={f.badgeAlt ? 'featured-badge featured-badge-alt' : 'featured-badge'}>{f.badge}</div>
         <div class="featured-image-wrapper">
           <img 
-            src="/images/tee-black-01.png" 
-            alt="Cave Tangi Tee — Black" 
+            src={f.image} 
+            alt={f.title} 
             class="featured-image"
             loading="eager"
           />
         </div>
         <div class="featured-content">
-          <h3 class="featured-title">Cave Tangi Tee — Black</h3>
-          <p class="featured-price">$34</p>
+          <h3 class="featured-title">{f.title}</h3>
+          <p class="featured-price">{f.price}</p>
         </div>
       </a>
-
-      <!-- Product 2: Hammond Phys Ed Ringer Tee -->
-      <a href="/products/hammond-phys-ed-ringer-tee" class="featured-card">
-        <div class="featured-badge featured-badge-alt">FEATURED</div>
-        <div class="featured-image-wrapper">
-          <img 
-            src="/images/ringer-tee-01.png" 
-            alt="Hammond Phys Ed Ringer Tee" 
-            class="featured-image"
-            loading="eager"
-          />
-        </div>
-        <div class="featured-content">
-          <h3 class="featured-title">Hammond Phys Ed Ringer Tee</h3>
-          <p class="featured-price">$34</p>
-        </div>
-      </a>
+      ))}
     </div>
 
     <!-- View All Link -->
@@ -46,6 +33,7 @@
     </div>
   </div>
 </section>
+)}
 
 <style>
   .featured-section {

@@ -78,6 +78,10 @@ const imageMap: Record<string, ImageSet> = {
   },
 };
 
+export function hasLocalImages(handle: string): boolean {
+  return handle in imageMap;
+}
+
 export function getProductImages(handle: string): { src: string; alt: string }[] {
   const imageSet = imageMap[handle];
   

@@ -34,6 +34,9 @@ const products = await getAllProducts();
           <ProductCard product={product} />
         ))}
       </div>
+      {products.length === 0 && (
+        <p class="text-center font-utility uppercase text-xs tracking-[0.25em] text-warm-gray">First prints coming soon</p>
+      )}
     </div>
   </main>
 

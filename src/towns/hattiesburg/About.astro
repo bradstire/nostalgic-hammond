@@ -1,0 +1,47 @@
+---
+// Hattiesburg About page body. Rendered inside src/pages/about.astro.
+// Facts: founded 1882 by William H. Hardy, named for his wife Hattie; New Orleans & Northeastern
+// railroad through town in 1884; lumber boom from 1897; "Hub City" from a 1912 newspaper contest.
+import { getAllProducts } from '../../lib/products';
+
+const greetings = (await getAllProducts()).find(p => p.handle.startsWith('greetings-from-hattiesburg'));
+---
+        <div class="space-y-6 text-base md:text-lg leading-relaxed text-charcoal/90">
+          <p>
+            Hattiesburg was a railroad town from the start. William H. Hardy founded it in 1882 and named it
+            for his wife, Hattie. The trains came through in 1884, the pine woods fed a lumber boom, and in 1912
+            the town picked its own nickname in a newspaper contest: the Hub City.
+          </p>
+
+          <p>
+            These designs come from postcards, photographs and old newspaper pages — the things that survived
+            when the buildings didn't. Every piece starts with a place people in Hattiesburg still talk about.
+          </p>
+
+          <p>
+            This is Hattiesburg the way the people who grew up there remember it: Saturday afternoons on Main
+            Street, Hardy Street, Palmers Crossing, and a postcard that said "Greetings from Hattiesburg" from
+            the middle of a pansy.
+          </p>
+        </div>
+
+        <figure class="mt-16 mx-auto max-w-[60%]">
+          {greetings ? (
+            <a href={`/products/${greetings.handle}`} class="block transition-transform duration-300 hover:scale-[1.02]">
+              <img
+                src="/images/hattiesburg/greetings_web.jpg"
+                alt="Early 1900s postcard reading Greetings from Hattiesburg, Miss., with five small scenes set in a pansy"
+                class="w-full h-auto rounded-sm shadow-[0_4px_12px_rgba(0,0,0,0.15)] border border-light-gray/30"
+              />
+            </a>
+          ) : (
+            <img
+              src="/images/hattiesburg/greetings_web.jpg"
+              alt="Early 1900s postcard reading Greetings from Hattiesburg, Miss., with five small scenes set in a pansy"
+              class="w-full h-auto rounded-sm shadow-[0_4px_12px_rgba(0,0,0,0.15)] border border-light-gray/30"
+            />
+          )}
+          <figcaption class="mt-3 text-xs text-warm-gray text-center">
+            Postcard, early 1900s. Mississippi Department of Archives and History, Cooper Postcard Collection.
+          </figcaption>
+        </figure>
