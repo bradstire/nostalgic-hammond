@@ -9,3 +9,5 @@ Print-ready files for Printful products. Sources are public-domain postcards.
   Source: MDAH Cooper Postcard Collection, PI/1992.0001, system ID 90199 (same terms).
 
 Processing: stitched from MDAH's full-resolution zoom tiles, trimmed to the card edge, and fitted to the frame ratio (the pansy card gets a few percent of matching paper on each side). No retouching.
+- `hattiesburg_pe_front.png`: 3359×1306 transparent PNG at 300 dpi (about 11.2 × 4.4 in), navy #1F2A4A. Chest print for the Hattiesburg Physical Ed. ringer tee, modeled on the Hammond Phys Ed ringer.
+  Fonts: Graduate (OFL) and Oswald (OFL), Google Fonts. Generator: `src/hattiesburg_pe.py`.
