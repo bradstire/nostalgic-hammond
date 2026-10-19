@@ -55,6 +55,7 @@
 
 <script>
   import { getOrCreateCheckout, updateLineItem, removeLineItem, type ShopifyCheckout, type ShopifyLineItem } from '../lib/shopify';
+  import { siteConfig } from '../config/site.config';
 
   // Checkout state
   let checkout: ShopifyCheckout | null = null;
@@ -173,7 +174,7 @@
       // Update shipping notice
       const shippingNoticeEl = document.getElementById('shipping-notice');
       if (shippingNoticeEl) {
-        const remaining = 75 - subtotal;
+        const remaining = siteConfig.freeShippingThreshold - subtotal;
         if (remaining > 0) {
           shippingNoticeEl.querySelector('p')!.textContent = 
             `Add $${remaining.toFixed(2)} more for free shipping`;
