@@ -1,10 +1,11 @@
 ---
+import { siteConfig } from "../config/site.config";
 // Free shipping announcement banner
 ---
 
 <div class="shipping-banner">
   <div class="container-custom">
-    <p class="banner-text">FREE SHIPPING ON ORDERS $60+</p>
+    <p class="banner-text">FREE SHIPPING ON ORDERS ${siteConfig.freeShippingThreshold}+</p>
   </div>
 </div>
 
