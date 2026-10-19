@@ -249,6 +249,19 @@ const formatPrice = (price: string) => {
   let shopifyProduct: any = null;
   let preSelectedVariantId: string | null = null;
 
+  // Meta Pixel: ViewContent for this product page
+  (function () {
+    const btn = document.getElementById('add-to-cart') as HTMLButtonElement | null;
+    if (!btn || !(window as any).nhTrack) return;
+    (window as any).nhTrack('ViewContent', {
+      content_ids: [btn.dataset.productHandle],
+      content_name: btn.dataset.productTitle,
+      content_type: 'product',
+      value: parseFloat(btn.dataset.productPrice || '0'),
+      currency: 'USD',
+    });
+  })();
+
   // Initialize: Set up variant selection
   async function initializeProduct() {
     const addToCartBtn = document.getElementById('add-to-cart') as HTMLButtonElement;
@@ -347,6 +360,18 @@ const formatPrice = (price: string) => {
     try {
       // Add to real Shopify checkout
       await addToCheckout(selectedVariantId, 1);
+
+      // Meta Pixel: AddToCart (after the Shopify call succeeded)
+      if ((window as any).nhTrack) {
+        (window as any).nhTrack('AddToCart', {
+          content_ids: [button.dataset.productHandle],
+          content_name: button.dataset.productTitle,
+          content_type: 'product',
+          contents: [{ id: selectedVariantId, quantity: 1 }],
+          value: parseFloat(button.dataset.productPrice || '0'),
+          currency: 'USD',
+        });
+      }
 
       // Dispatch event to update cart
       window.dispatchEvent(new Event('cart-updated'));

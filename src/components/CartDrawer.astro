@@ -218,6 +218,19 @@
         return;
       }
 
+      // Meta Pixel: InitiateCheckout. eventID = checkout id so a server-side event for the
+      // same checkout (Shopify CAPI) dedupes instead of double counting.
+      if ((window as any).nhTrack) {
+        const items = (checkout.lineItems || []).map((li: any) => ({ id: li.variant?.id, quantity: li.quantity }));
+        (window as any).nhTrack('InitiateCheckout', {
+          num_items: items.reduce((n: number, i: any) => n + (i.quantity || 0), 0),
+          contents: items,
+          content_type: 'product',
+          value: parseFloat(checkout.subtotalPrice?.amount || '0'),
+          currency: 'USD',
+        }, String(checkout.id));
+      }
+
       // Redirect to Shopify's hosted checkout page
       window.location.href = checkout.webUrl;
     } catch (error) {
