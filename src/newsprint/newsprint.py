@@ -169,3 +169,31 @@ def mock(ink_bool, bg=(255, 255, 255), fg=(0, 0, 0), width=1000):
     H, W = ink_bool.shape
     m = np.empty((H, W, 3), np.uint8); m[:] = bg; m[ink_bool] = fg
     return cv2.resize(cv2.cvtColor(m, cv2.COLOR_RGB2BGR), (width, int(H * width / W)), interpolation=cv2.INTER_AREA)
+
+
+def vectorize(mask, turdsize=2, alphamax=1.0, opttolerance=0.2):
+    """potrace (pure-python potracer) -> SVG path string sized to mask (px units).
+    Note: potracer needs bool input; earlier testing showed polarity must be checked per run."""
+    import potrace
+    bm = potrace.Bitmap(~mask.astype(bool))  # potracer polarity: trace the inverse to get ink paths
+    plist = bm.trace(turdsize=turdsize, alphamax=alphamax, opticurve=True, opttolerance=opttolerance)
+    parts = []
+    for curve in plist:
+        s = curve.start_point
+        d = [f"M{s.x:.2f},{s.y:.2f}"]
+        for seg in curve.segments:
+            if seg.is_corner:
+                d.append(f"L{seg.c.x:.2f},{seg.c.y:.2f}L{seg.end_point.x:.2f},{seg.end_point.y:.2f}")
+            else:
+                d.append(f"C{seg.c1.x:.2f},{seg.c1.y:.2f} {seg.c2.x:.2f},{seg.c2.y:.2f} {seg.end_point.x:.2f},{seg.end_point.y:.2f}")
+        d.append("Z"); parts.append("".join(d))
+    H, W = mask.shape
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{W}" height="{H}" viewBox="0 0 {W} {H}">'
+            f'<path fill="#000" fill-rule="evenodd" d="{" ".join(parts)}"/></svg>')
+
+
+def render_svg(svg, W, H):
+    import cairosvg, io
+    png = cairosvg.svg2png(bytestring=svg.encode(), output_width=W, output_height=H, background_color="white")
+    im = np.array(Image.open(io.BytesIO(png)).convert("L"))
+    return im < 128
