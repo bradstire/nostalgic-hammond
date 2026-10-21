@@ -14,4 +14,16 @@ Pipeline + build scripts: `src/newsprint/` (`newsprint.py`, `teemock.py`, `resr_
 | `speeds_sign_front_{cream,black}loc.png` | Albert Speed's Restaurant sign redraw | Black (cream locator) / natural or white (black locator) | Flat red/cream/green vector-style art; "304 BROADWAY DR. · HATTIESBURG, MISS. · 1966". **Mr. Peanut-like top-hat panel excluded** |
 | `speeds_pylon_full.png` | Full pylon stack (Fresh Sea Food / main sign / Parking / Steaks) | Natural / black / forest; back print | 9 × 14 in |
 | `sacks_front_{black,white,cream}.png`, `sacks_storefront.svg` | Sack's Army Store, 1980 ad | Natural (black) / olive drab (cream) / black (white) | Storefront line art vector-smoothed; subline + bottom block re-typeset. **VISA/Master Charge logos, phone and hours removed** |
-| `hhs_{H_physed,h_hattiesburg,wordmark}_{purple,gold}.png` | R17 blackletter workaround set | Natural ringer w/ black trim (purple); black tee (gold) | Stock font glyphs only (Grenze Gotisch), never a trace of the 1983 jersey "h"; one school color per product; no tiger/HHS/school name |
+| `hhs_v2_{H_physed,H_hattiesburg_physed,H_only_leftchest}_{purple,gold}.png`, `hhs_oldenglish_H_s9.svg` | **v2 (10-21):** the actual 1983 jersey letter, an Old English capital H reconstructed from 7 registered views in the original team photo (fused, traced, wrinkle-cleaned) | Natural ringer (purple); black tee (gold) | v1 stock-font set removed (Brad: felt like guesswork). Current HHS marks are a tiger head ® and a block "H" (MHSAA plate), not this letter |
+
+## Revision pass (10-21 afternoon)
+| File(s) | Change |
+|---|---|
+| `camelot_v2_bag1974.png` | **Chain's own 1970s colors**: stacked inline blackletter in Camelot red (#C62832) inside royal-blue (#2E49B8) record-groove arcs, per the 1970s Camelot paper bag. Knight emblem not used |
+| `camelot_v2_sign_red_{blue,white}.png` | 1974 Cloverleaf sign wordmark in chain red, locator line blue (light tees) or white (dark tees) |
+| `camelot_v2_tristripe.png` | 1990s plastic-bag nod (yellow/cyan/red tri-stripe) for the millennial read |
+| `britches_*_black.png` + `mocks/britches_colors_v2.jpg` | Maroon/cream approved; added navy (denim; it was a jeans store), wood-tan + black ink (1971 wooden nickel, 631 Main St.), black + white (1987 ad) |
+| `culpepper_*` | Duck face redrawn on the exact 1968 silhouette: pie-cut eye (the white slit in the print), cap keyline, bill mouth line. Only one printing exists online (Kepper's 10-16 post = same ad). Hat file uses an eye-only face for embroidery |
+| `speeds_*` | QA vs the 1966 photo: warmer brick red, rounded neon-channel lettering (Archivo) with depth shadow, pale yellow-green arrow, wide mustard tower + orange base + white legs (pylon) |
+| `hats/hat_*.png` | Embroidery fronts, all within 4.0 × 2.0 in, text ≥ 0.25 in, est. min stroke ≥ 0.05 in: Hub City (authentic SR letters), Camelot stacked red/white, Britches stacked cream, Speed's 3-line red, HHS Old English H purple/gold, Culpepper duck. `concept_britches_nickel_badge_print.png` = print/patch idea, not embroidery |
+| `socks/sock_*.png` | Printful sublimation socks, basic template 4.49 × 18.85 in @300dpi (full bleed): HHS gym sock, Camelot, Hub City, Speed's |
