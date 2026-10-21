@@ -7,7 +7,7 @@ from teemock import sheet, chest
 D = "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/hb/hhs"
 R = "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/hb/ref/hhs"
 PURPLE, GOLD = (58, 16, 85), (184, 134, 11)
-svg = open(f"{R}/hhs_oldenglish_H_s9.svg").read()
+svg = open(f"{R}/hhs_oldenglish_H_connected.svg").read()
 import re
 w0, h0 = [int(v) for v in re.findall(r'width="(\d+)" height="(\d+)"', svg)[0]]
 def letter(h):

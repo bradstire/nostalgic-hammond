@@ -29,7 +29,7 @@ out = {}
 # 1) HHS gym sock — white, purple stripes, Old English H (one school color)
 P = (58, 16, 85); s = Strip((246, 246, 244))
 for i in range(3): s.band(0.55 * IN + i * 0.42 * IN, 0.55 * IN + i * 0.42 * IN + 0.22 * IN, P)
-svg = open(f"{HB}/ref/hhs/hhs_oldenglish_H_s9.svg").read(); w0, h0 = [int(v) for v in re.findall(r'width="(\d+)" height="(\d+)"', svg)[0]]
+svg = open(f"{HB}/ref/hhs/hhs_oldenglish_H_connected.svg").read(); w0, h0 = [int(v) for v in re.findall(r'width="(\d+)" height="(\d+)"', svg)[0]]
 hh = int(2.6 * IN); Hm = render_svg(svg, int(w0 * hh / h0), hh)
 y = s.put(Hm, P, 2.3 * IN)
 s.put(word("PHYS. ED.", "Graduate-Regular.ttf", None, w=int(2.6 * IN), tr=0.06), P, y + 0.25 * IN)
@@ -102,14 +102,26 @@ s = Strip(CR)
 s.band(0.35 * IN, 0.55 * IN, GR); s.band(0.62 * IN, 0.70 * IN, CR); s.band(0.70 * IN, 0.9 * IN, GR)
 s.a[int(1.5 * IN):int(7.4 * IN), int(0.25 * IN):W - int(0.25 * IN)] = DR
 s.a[int(1.6 * IN):int(7.3 * IN), int(0.35 * IN):W - int(0.35 * IN)] = R2
-y = 1.95 * IN
-for t, h in (("ALBERT", 1.05), ("SPEED'S", 1.35), ("RESTAU-", 1.0), ("RANT", 1.0)):
-    m = word(t, "Archivo[wdth,wght].ttf", {"wght": 760, "wdth": 82}, w=int(3.5 * IN), h=int(h * IN), tr=0.04, round_px=6)
-    y = s.put(m, CR, y) + 0.12 * IN
-s.put(word("304 BROADWAY DR.", "Jost[wght].ttf", {"wght": 700}, w=int(3.4 * IN), tr=0.08), R2, 12.9 * IN)
-s.put(word("HATTIESBURG · 1966", "Jost[wght].ttf", {"wght": 700}, w=int(3.4 * IN), tr=0.08), R2, 13.55 * IN)
-s.band(17.7 * IN, 17.9 * IN, GR)
-out["speeds"] = s.save("sock_speeds")
+def speeds_sock(lines, name):
+    s = Strip(CR)
+    s.band(0.35 * IN, 0.55 * IN, GR); s.band(0.62 * IN, 0.70 * IN, CR); s.band(0.70 * IN, 0.9 * IN, GR)
+    s.a[int(1.5 * IN):int(7.4 * IN), int(0.25 * IN):W - int(0.25 * IN)] = DR
+    s.a[int(1.6 * IN):int(7.3 * IN), int(0.35 * IN):W - int(0.35 * IN)] = R2
+    ms = [word(t, "Archivo[wdth,wght].ttf", {"wght": 760, "wdth": 82}, w=int(3.5 * IN), h=int(h * IN), tr=0.04, round_px=6) for t, h in lines]
+    if [t for t, _ in lines][-2:] == ["RESTAU", "RANT"]:   # one word split across two lines: same letter height
+        ms[-1] = word("RANT", "Archivo[wdth,wght].ttf", {"wght": 760, "wdth": 82}, h=ms[-2].shape[0], tr=0.04, round_px=6)
+    gap = 0.12 * IN
+    total = sum(m.shape[0] for m in ms) + gap * (len(ms) - 1)
+    y = 1.6 * IN + ((7.3 - 1.6) * IN - total) / 2          # center the stack in the red panel
+    for m in ms: y = s.put(m, CR, y) + gap
+    s.put(word("304 BROADWAY DR.", "Jost[wght].ttf", {"wght": 700}, w=int(3.4 * IN), tr=0.08), R2, 12.9 * IN)
+    s.put(word("HATTIESBURG · 1966", "Jost[wght].ttf", {"wght": 700}, w=int(3.4 * IN), tr=0.08), R2, 13.55 * IN)
+    s.band(17.7 * IN, 17.9 * IN, GR)
+    return s.save(name)
+# primary: stacked sign-style split, no hyphen (Brad 10-21)
+out["speeds"] = speeds_sock((("ALBERT", 1.05), ("SPEED'S", 1.35), ("RESTAU", 1.0), ("RANT", 1.0)), "sock_speeds")
+# alternate: RESTAURANT on one line
+out["speeds_alt"] = speeds_sock((("ALBERT", 1.15), ("SPEED'S", 1.5), ("RESTAURANT", 0.62)), "sock_speeds_oneline")
 
 # mock: render each strip as a sock silhouette (leg + foot)
 def sock_mock(p, label):
@@ -124,8 +136,8 @@ def sock_mock(p, label):
 import sys as _s; _s.path.insert(0, f"{HB}/lib"); from teemock import sheet
 sheet([sock_mock(out[k], l) for k, l in (("hhs", "HHS gym sock"), ("camelot", "Camelot"), ("hubcity", "Hub City"), ("speeds", "Albert Speed's"))], cols=4).save(f"{D}/socks_mocks.jpg", quality=88)
 # flat strips sheet (true art)
-flat = [Image.open(out[k]).convert("RGB").resize((180, int(180 * H / W))) for k in ("hhs", "camelot", "hubcity", "speeds")]
-fs = Image.new("RGB", (4 * 200, flat[0].height + 20), (236, 234, 230))
+flat = [Image.open(out[k]).convert("RGB").resize((180, int(180 * H / W))) for k in ("hhs", "camelot", "hubcity", "speeds", "speeds_alt")]
+fs = Image.new("RGB", (5 * 200, flat[0].height + 20), (236, 234, 230))
 for i, f in enumerate(flat): fs.paste(f, (10 + i * 200, 10))
 fs.save(f"{D}/socks_flat.jpg", quality=88)
 print("done", W, H)

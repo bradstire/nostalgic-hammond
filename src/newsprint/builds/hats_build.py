@@ -107,7 +107,7 @@ sp = gain(sp, 2)
 files["speeds"] = save(sp, (178, 46, 34), "hat_speeds_red", "2nd line height check below")
 
 # 5) HHS — reconstructed 1983 Old English H, single color
-svg = open(f"{HB}/ref/hhs/hhs_oldenglish_H_s9.svg").read()
+svg = open(f"{HB}/ref/hhs/hhs_oldenglish_H_connected.svg").read()
 w0, h0 = [int(v) for v in re.findall(r'width="(\d+)" height="(\d+)"', svg)[0]]
 hh = int(1.85 * DPI); H_h = render_svg(svg, int(w0 * hh / h0), hh)
 files["hhs_p"] = save(H_h, (58, 16, 85), "hat_hhs_oldenglishH_purple", "purple thread on white/natural hat")
