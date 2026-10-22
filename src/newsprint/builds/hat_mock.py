@@ -2,7 +2,7 @@
 import numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 D = "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/hb/hats"
-PPI = 90
+PPI = 70
 FONT = "/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf"
 
 def _art(path):
@@ -51,15 +51,16 @@ def sheet(ims, cols, out):
 
 if __name__ == "__main__":
     STONE, WHITE, BLACK, NAVY, MAROON, CREAM, KHAKI = (196, 182, 150), (244, 242, 236), (34, 34, 36), (31, 42, 68), (104, 30, 40), (232, 222, 196), (186, 168, 128)
-    sheet([front(f"{D}/hat_culpepper_duck_black.png", STONE, "Culpepper — FRONT: duck (black thread, stone hat)"),
-           back(f"{D}/hat_culpepper_back_black.png", STONE, "Culpepper — BACK: arched CULPEPPER / BODY & PAINT")], 2, f"{D}/culpepper_hat_front_back_mock.jpg")
+    sheet([front(f"{D}/hat_culpepper_front_lockup_black.png", STONE, "Culpepper — FRONT lockup: duck + CULPEPPER / BODY & PAINT"),
+           back(f"{D}/hat_culpepper_back_black.png", STONE, "Culpepper — BACK arch (alternate)")], 2, f"{D}/culpepper_hat_front_back_mock.jpg")
     sheet([front(f"{D}/hat_hubcity_black.png", WHITE, "Hub City — black on white"),
-           front(f"{D}/hat_camelot_red.png", WHITE, "Camelot — red on white"),
+           front(f"{D}/hat_camelot_red.png", WHITE, "Camelot — red (1839) on white"),
            front(f"{D}/hat_camelot_white.png", NAVY, "Camelot — white on navy"),
-           front(f"{D}/hat_britches_cream.png", MAROON, "Britches — cream on maroon"),
-           front(f"{D}/hat_speeds_red.png", CREAM, "Speed's — red on cream"),
-           front(f"{D}/hat_hhs_oldenglishH_purple.png", WHITE, "HHS H — purple on white"),
-           front(f"{D}/hat_hhs_oldenglishH_gold.png", BLACK, "HHS H — gold on black"),
-           front(f"{D}/hat_culpepper_duck_black.png", STONE, "Culpepper duck — front"),
-           back(f"{D}/hat_culpepper_back_black.png", STONE, "Culpepper — back arch")], 3, f"{D}/hats_mocks.jpg")
+           front(f"{D}/hat_britches_white.png", MAROON, "Britches — white on cranberry (no cream thread)"),
+           front(f"{D}/hat_speeds_red.png", CREAM, "Speed's — red (1839) on stone"),
+           front(f"{D}/hat_hhs_oldenglishH_purple.png", WHITE, "HHS H v3 — purple (1832) on white"),
+           front(f"{D}/hat_hhs_oldenglishH_gold.png", BLACK, "HHS H v3 — gold (1951) on black"),
+           front(f"{D}/hat_culpepper_front_lockup_black.png", STONE, "Culpepper — front lockup (primary)"),
+           front(f"{D}/hat_culpepper_duck_black.png", STONE, "Culpepper duck — front only"),
+           back(f"{D}/hat_culpepper_back_black.png", STONE, "Culpepper — back arch (alt; P/R bowls fill)")], 3, f"{D}/hats_mocks.jpg")
     print("ok")

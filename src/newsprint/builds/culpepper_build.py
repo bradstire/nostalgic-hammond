@@ -5,6 +5,7 @@ from teemock import place_print, sheet, chest
 from PIL import Image
 sys.path.insert(0, '/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/hb/culpepper')
 from face_redraw import face_cuts, face_cuts_hat
+from duck_details import details, details_hat, thicken_outlines
 
 D = "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/hb/culpepper"
 g = cv2.imread(f"{D}/culp_gray_3150.png", 0)
@@ -42,8 +43,9 @@ ink[stray] = False
 # 3b) face-detail redraw (eye, cap keyline, bill line) — tee weight and a heavier embroidery weight
 FR = (slice(1152, 2419), slice(1152, 2246))
 ink_hat = ink.copy()
-ink[FR] = face_cuts(ink[FR], line=8)
-ink_hat[FR] = face_cuts_hat(ink_hat[FR])
+base_FR = ink[FR].copy()
+ink[FR] = details(ink[FR], w=12, face_line=8)          # v3: face + shirt + arm negative space (Brad 10-22)
+ink_hat[FR] = details(ink_hat[FR], w=12, face_line=8)  # (hat is rebuilt from base_FR below at embroidery weight)
 
 # trim to content
 ys, xs = np.where(ink)
@@ -76,38 +78,38 @@ for k, m in designs.items():
         p = f"{D}/culpepper_{k}_{n_}.png"; to_rgba_ink(m, rgb).save(p, dpi=(300, 300)); paths[(k, n_)] = p
     print(k, m.shape, round(m.shape[1] / 300, 2), "x", round(m.shape[0] / 300, 2), "in")
 
-# 5) hat: duck only, embroidery-spec. Front panel max ~4.0in x 1.75in; duck at 1.75in tall.
-duck = ink[:, :]  # re-extract from the trimmed full
-dy0 = int(305 * 3.84) - (ys.min() - 20); dy1 = int(625 * 3.84) - (ys.min() - 20)
-dx0 = int(300 * 3.84) - (xs.min() - 20); dx1 = int(580 * 3.84) - (xs.min() - 20)
-dk = full_hat[max(0, dy0):dy1, max(0, dx0):dx1]
-yy, xx = np.where(dk); dk = dk[yy.min():yy.max() + 1, xx.min():xx.max() + 1]
-target_h = int(1.75 * 300)
-sc = target_h / dk.shape[0]
-dk_s = cv2.resize(dk.astype(np.float32), (int(dk.shape[1] * sc), target_h), interpolation=cv2.INTER_AREA) > 0.5
-# embroidery minimums (conservative): strokes thinner than ~1.2mm (14px) get +3px; holes < ~1mm^2 filled
-min_px = 14
-er = cv2.erode(dk_s.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (min_px, min_px)))
-fat = cv2.dilate(er, cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (min_px, min_px))) > 0
-thin = dk_s & ~fat
-thick = dk_s | (cv2.dilate(thin.astype(np.uint8), cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (7, 7))) > 0)
-n, lab, st, _ = cv2.connectedComponentsWithStats(thick.astype(np.uint8), 8)
-thick[np.isin(lab, [i for i in range(1, n) if st[i][4] < 150])] = False
-inv = (~thick).astype(np.uint8); n, lab, st, _ = cv2.connectedComponentsWithStats(inv, 8)
-for i in range(1, n):
-    x, y, w, h, area = st[i]
-    if area < 140 and not (x == 0 or y == 0 or x + w >= thick.shape[1] or y + h >= thick.shape[0]): thick[lab == i] = True
-cv2.imwrite(f"{D}/hat_compare.png", np.hstack([np.where(dk_s, 0, 255), np.full((dk_s.shape[0], 20), 200), np.where(thick, 0, 255)]).astype(np.uint8))
-hat = np.pad(thick, 10)
-hat = cv2.GaussianBlur(hat.astype(np.float32), (0, 0), 2.2) > 0.5
-svg = vectorize(hat, turdsize=20, alphamax=1.25, opttolerance=0.8)
+# 5) hat v3: embroidery weight built from the clean base (Brad 10-22). Printful dad hat front: 5.5 x 2.0 in;
+#    lines >= 0.05in; duck 1.9in tall -> scale ~0.45 from FR px, so 0.05in = ~33 FR px.
+def disk(r): return cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1))
+HAT_H = int(1.9 * 300)
+b = base_FR.copy()
+ys_, xs_ = np.where(b); b = b[ys_.min():ys_.max() + 1, xs_.min():xs_.max() + 1]
+sc = HAT_H / b.shape[0]; MIN_FR = int(np.ceil(0.05 * 300 / sc)) + 2
+b = thicken_outlines(b, MIN_FR)                                                   # thin black lines -> >= 0.05in
+inv = (~b).astype(np.uint8); n, lab, st, _ = cv2.connectedComponentsWithStats(inv, 8)
+for i_ in range(1, n):                                                           # white specks too small to stitch -> fill
+    x, y, w_, h_, area = st[i_]
+    if area < MIN_FR ** 2 and not (x == 0 or y == 0 or x + w_ >= b.shape[1] or y + h_ >= b.shape[0]): b[lab == i_] = True
+pad = np.zeros_like(base_FR); pad[ys_.min():ys_.max() + 1, xs_.min():xs_.max() + 1] = b
+# spray cloud: clean outline-only puff (white inside, as printed) at stitch width; gun nozzle kept as-is
+CY, CX = slice(15, 410), slice(800, 1005)
+cb = pad[CY, CX].copy()
+filled = cb.copy(); ff = np.zeros((cb.shape[0] + 2, cb.shape[1] + 2), np.uint8)
+inv_ = (~cb).astype(np.uint8); cv2.floodFill(inv_, ff, (0, 0), 0); filled = cb | (inv_ > 0)
+filled = cv2.morphologyEx(filled.astype(np.uint8), cv2.MORPH_OPEN, disk(6)) > 0
+ring = filled & ~(cv2.erode(filled.astype(np.uint8), disk(MIN_FR // 2 + 2)) > 0)
+yy, xx = np.mgrid[0:cb.shape[0], 0:cb.shape[1]]
+gun = (xx < 80) & (yy > 230) & (yy < 345)                     # nozzle where it meets the puff
+pad[CY, CX] = ring | (cb & gun)
+b = details_hat(pad, MIN_FR + 2)[ys_.min():ys_.max() + 1, xs_.min():xs_.max() + 1]   # white details >= 0.05in
+dk_s = cv2.resize(b.astype(np.float32), (int(b.shape[1] * sc), HAT_H), interpolation=cv2.INTER_AREA) > 0.5
+hat = np.pad(dk_s, 10)
+hat = cv2.GaussianBlur(hat.astype(np.float32), (0, 0), 1.6) > 0.5
+svg = vectorize(hat, turdsize=20, alphamax=1.1, opttolerance=0.6)
 open(f"{D}/culpepper_duck_hat_embroidery.svg", "w").write(svg)
-hat_v = render_svg(svg, hat.shape[1], hat.shape[0])
-print("hat vector ink before/after", round(hat.mean(), 3), round(hat_v.mean(), 3))
-cv2.imwrite(f"{D}/hat_vec_compare.png", np.hstack([np.where(hat, 0, 255), np.full((hat.shape[0], 20), 200), np.where(hat_v, 0, 255)]).astype(np.uint8))
-hat = hat_v
+hat = render_svg(svg, hat.shape[1], hat.shape[0])
 to_rgba_ink(hat, (17, 17, 17)).save(f"{D}/culpepper_duck_hat_embroidery.png", dpi=(300, 300))
-print("hat", hat.shape, round(hat.shape[1] / 300, 2), "x", round(hat.shape[0] / 300, 2), "in")
+print("hat", hat.shape, round(hat.shape[1] / 300, 2), "x", round(hat.shape[0] / 300, 2), "in; FR px per 0.05in =", MIN_FR)
 
 # mocks
 combos = [(paths[("full", "black")], (250, 250, 250), "White tee / full ad"),
