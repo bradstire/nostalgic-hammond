@@ -192,9 +192,12 @@ if __name__ == "__main__":
     results["hhs_g"] = finish(Hm, "gold", "hat_hhs_oldenglishH_gold")
 
     # 6) CULPEPPER duck (front) — v3 duck with opened face/shirt/arm, built at embroidery weight in culpepper/build.py
-    dk = np.array(Image.open(f"{HB}/culpepper/culpepper_duck_hat_embroidery.png"))[..., 3] > 127
+    # Brad 10-22 13:14: "Culpepper duck v2 everywhere" -> the v2 hat duck (eye + pupil), same drawing,
+    # scaled 1.75 -> 1.9in (front allows 2.0in) and only sub-0.05in lines rebuilt. No other changes.
+    dk = np.array(Image.open(f"{HB}/culpepper/v2restore/culpepper_duck_hat_embroidery.png"))[..., 3] > 127
     ys, xs = np.where(dk); dk = dk[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
-    dk = bridge_gaps(enforce_min_stroke(dk, 0.05))   # stroke rebuild + join sliver gaps (counter-opening/trimming damaged the face)
+    dk = fit(dk, h_in=1.9)
+    dk = enforce_min_stroke(dk, 0.05)
     results["duck"] = finish(dk, "black", "hat_culpepper_duck_black")
 
     # 7) CULPEPPER back — single arched word on the 2.0 x 1.0 in back panel, <= 5 characters per inch.

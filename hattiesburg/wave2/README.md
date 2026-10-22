@@ -52,3 +52,10 @@ Specs re-verified from Printful's own templates (10-22): dad hat front **5.5 x 2
 | `src/newsprint/vtype.py`, `src/newsprint/embcheck.py`, `src/newsprint/builds/*_v3.py` | Vector-type helpers (font → polygons → mitred offsets → SVG/PNG) and the embroidery checker, reusable for every town |
 
 Fonts used in art (outlines baked into the art, no font files shipped): Manufacturing Consent, Grenze Gotisch, Jost, Inter, Archivo, Oswald, Graduate (all SIL OFL); TeX Gyre Heros (GUST licence).
+
+## 10-22 afternoon (Brad 13:12-13:14)
+| File(s) | Change |
+|---|---|
+| `camelot_v3_{bag1974,sign_red_blue,sign_red_white,tristripe}_solid.{png,svg}` | Solid-letter versions. Reference check: the 1970s paper bag is outlined (keyline + white channel); the **1974 Cloverleaf sign and 1990s bags are solid**. Sign + tri-stripe should be solid; bag design: outlined (bag-faithful) or solid — Brad's pick. `mocks/camelot_outline_vs_solid.jpg`, `mocks/camelot_sign_outline_vs_solid.jpg` |
+| `culpepper_{full,houserule}_*`, `culpepper_duck_hat_embroidery.*`, `hats/hat_culpepper_*` | **Duck v2 restored on every product** (Brad: "Culpepper duck v2 everywhere"). Hat files use the v2 hat duck, scaled 1.75 -> 1.9in with only sub-0.05in lines rebuilt; checker flag: ~6 small white details (eye slit, collar dot, glove spots) will likely fill when stitched — sample first |
+| `hhs_H_v4_DRAFT.svg`, `mocks/hhs_H_v4_compare_DRAFT.png` | DRAFT for review: the jersey letter's structure (spur stroke + h body + ear) rebuilt from Manufacturing Consent's own parts (capital's left stroke, lowercase h, i-dot ear), ~20% condensed, jersey lean. Not yet rolled into tees/hat/sock |
