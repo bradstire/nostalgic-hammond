@@ -52,9 +52,9 @@ G, GV, MC = "GrenzeGotisch[wght].ttf", [900], "ManufacturingConsent-Regular.ttf"
 HEROS = "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/fonts/texgyreheros-bold.otf"
 GRAD = "Graduate-Regular.ttf"
 
-# 1) HHS gym sock — white, purple bands, v3 Old English H + PHYS. ED.
+# 1) HHS gym sock — white, purple bands, v4 Old English H + PHYS. ED.
 P, WH = (107, 82, 148), (246, 246, 244)        # purple matches the hat thread family
-svg = open(f"{HB}/ref/hhs/hhs_H_v3.svg").read(); w0, h0 = [int(v) for v in re.findall(r'width="(\d+)" height="(\d+)"', svg)[0]]
+svg = open(f"{HB}/ref/hhs/hhs_H_v4.svg").read(); w0, h0 = [int(v) for v in re.findall(r'width="(\d+)" height="(\d+)"', svg)[0]]
 Hm = render_svg(svg, int(w0 * 1.9 * DPI / h0), int(1.9 * DPI)); ys, xs = np.where(Hm); Hm = Hm[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
 if Hm.shape[1] > SW * 0.9: Hm = cv2.resize(Hm.astype(np.float32), (int(SW * 0.9), int(Hm.shape[0] * SW * 0.9 / Hm.shape[1])), interpolation=cv2.INTER_AREA) > 0.5
 pe = txt("PHYS. ED.", GRAD, None, 0.06, w=int(SW * 0.9))

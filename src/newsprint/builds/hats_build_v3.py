@@ -184,8 +184,8 @@ if __name__ == "__main__":
     sp = vstack([a1, a2, a3], 0.08)
     results["speeds"] = finish(sp, "red", "hat_speeds_red", text=[("ALBERT", 0.36, a1.shape[1] / DPI), ("SPEED'S", 0.56, a2.shape[1] / DPI), ("RESTAURANT", a3.shape[0] / DPI, a3.shape[1] / DPI)])
 
-    # 5) HHS — v3 Old English H (Manufacturing Consent, leaned to the 1983 jersey)
-    svg = open(f"{HB}/ref/hhs/hhs_H_v3.svg").read(); w0, h0 = [int(v) for v in re.findall(r'width="(\d+)" height="(\d+)"', svg)[0]]
+    # 5) HHS — v4 Old English H: jersey structure from Manufacturing Consent parts + Brad's 10-22 markup edits (hhs/make_H_v4e.py)
+    svg = open(f"{HB}/ref/hhs/hhs_H_v4.svg").read(); w0, h0 = [int(v) for v in re.findall(r'width="(\d+)" height="(\d+)"', svg)[0]]
     hh = int(1.9 * DPI); Hm = render_svg(svg, int(w0 * hh / h0), hh); ys, xs = np.where(Hm); Hm = Hm[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
     Hm = prep(Hm); Hm = separate_pieces(np.pad(Hm, 40), GAP); ys, xs = np.where(Hm); Hm = Hm[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
     results["hhs_p"] = finish(Hm, "purple", "hat_hhs_oldenglishH_purple")

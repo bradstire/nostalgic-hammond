@@ -3,7 +3,8 @@ Letterforms matched to the 1970s bag + 1974 Cloverleaf sign: Old English swash C
 + heavy textura lowercase / three-stem M (Grenze Gotisch Black, OFL) at natural width (v2 wrongly compressed it).
 Bag construction rebuilt as TRUE vector offsets (mitred): red fill | open channel | red keyline — no raster rings.
 Groove arcs are vector rings. Locator = bag's bold oblique grotesque (TeX Gyre Heros Bold, GUST licence, 12deg).
-Everything 300 dpi, binary alpha; SVG masters saved alongside."""
+Everything 300 dpi, binary alpha; SVG masters saved alongside.
+Brad 10-22 13:34: the outline stays ONLY on the 1970s bag arch; sign + tri-stripe outlined versions are superseded (_outlined)."""
 import sys, numpy as np
 sys.path.insert(0, "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/hb/lib")
 from vtype import run, text_geom, inline_word, raster, svg_doc, affinity, unary_union
@@ -71,12 +72,12 @@ if __name__ == "__main__":
     ob = one_i.bounds
     loc2 = centered(locator("CLOVERLEAF MALL · HATTIESBURG, MISS. · EST. 1974", int(6.8 * DPI)), (ob[0] + ob[2]) / 2, ob[3] + int(0.22 * DPI))
     H2 = int(loc2.bounds[3] + 0.1 * DPI); W2 = int(ob[2] + 0.25 * DPI)
-    save([(one_i, RED), (loc2, BLUE)], W2, H2, "camelot_v3_sign_red_blue")
-    save([(one_i, RED), (loc2, WHITE)], W2, H2, "camelot_v3_sign_red_white")
+    save([(one_i, RED), (loc2, BLUE)], W2, H2, "camelot_v3_sign_red_blue_outlined")
+    save([(one_i, RED), (loc2, WHITE)], W2, H2, "camelot_v3_sign_red_white_outlined")
 
     # C) 1990s tri-stripe nod: inline wordmark over yellow / cyan / red bars + locator
     sw = ob[2] - ob[0]; x0 = ob[0]; y0 = ob[3] + int(0.16 * DPI); bh = int(0.17 * DPI); gap = int(0.07 * DPI)
     bars = [(box(x0, y0 + i * (bh + gap), x0 + sw, y0 + i * (bh + gap) + bh), c) for i, c in enumerate((YEL, CYAN, RED))]
     loc3 = centered(locator("CLOVERLEAF MALL · HATTIESBURG, MISS. · EST. 1974", int(6.8 * DPI)), (ob[0] + ob[2]) / 2, y0 + 3 * (bh + gap) + int(0.12 * DPI))
     H3 = int(loc3.bounds[3] + 0.1 * DPI)
-    save([(bars[0][0], YEL), (bars[1][0], CYAN), (unary_union([one_i, bars[2][0], loc3]), RED)], W2, H3, "camelot_v3_tristripe")
+    save([(bars[0][0], YEL), (bars[1][0], CYAN), (unary_union([one_i, bars[2][0], loc3]), RED)], W2, H3, "camelot_v3_tristripe_outlined")
