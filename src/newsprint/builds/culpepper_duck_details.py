@@ -30,16 +30,16 @@ def details_hat(region, w):
     eye and pupil enlarged so each stitches (pupil ~0.05in, white ring around it ~0.05in)."""
     out = region.copy().astype(np.uint8)
     P = lambda pts: np.array(pts, np.int32)
-    cv2.polylines(out, [P([(150, 250), (205, 256), (250, 250)])], False, 0, int(w * 1.3))                                      # cap brim keyline (stops behind the eye)
-    cv2.ellipse(out, (340, 246), (int(w * 1.3), int(w * 1.55)), -10, 0, 360, 0, -1)                                # eye white
-    cv2.ellipse(out, (350 + w // 6, 252), (int(w * 0.55), int(w * 0.75)), -10, 0, 360, 1, -1)                     # pupil
+    cv2.polylines(out, [P([(150, 250), (205, 256), (232, 254)])], False, 0, int(w * 1.3))                                      # cap brim keyline (ends well behind the eye)
+    cv2.ellipse(out, (344, 258), (int(w * 1.55), int(w * 1.75)), -10, 0, 360, 0, -1)                               # eye white: >= 0.05in black to the cap
+    cv2.ellipse(out, (382, 264), (int(w * 0.55), int(w * 0.75)), -10, 0, 360, 1, -1)                               # pupil touches the front of the eye (pie-cut, looking at the gun): no floating island
     cv2.polylines(out, [P([(396, 276), (444, 262), (492, 241), (536, 218)])], False, 0, w)                         # bill line
     for name, pts in KEYLINES.items():
-        if name == "bill_base": continue          # would merge with the eye at stitch width
-        cv2.polylines(out, [P(pts)], False, 0, thickness=w)
-        for p in (pts[0], pts[-1]): cv2.circle(out, p, w // 2, 0, -1)
-    for c, ax, ang in FINGERS:
-        cv2.ellipse(out, c, (max(ax[0], int(w * 0.75)), max(ax[1], w // 2)), ang, 0, 360, 0, -1)
+        if name in ("bill_base", "cuff"): continue   # bill_base merges with the eye, cuff pinches next to the gun at stitch width
+        wk = int(w * 1.25)                         # 25% margin so cuts stay >= 0.05in after stroke rebuild
+        cv2.polylines(out, [P(pts)], False, 0, thickness=wk)
+        for p in (pts[0], pts[-1]): cv2.circle(out, p, wk // 2, 0, -1)
+    # glove fingers omitted at hat size: the cuts are too small to stay open when stitched (kept on the tee)
     return out > 0
 
 def thicken_outlines(b, min_px):

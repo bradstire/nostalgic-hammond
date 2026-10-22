@@ -87,6 +87,20 @@ def enforce_gaps(m, gap=GAP):
             out[(lab == j) & (dt < gap)] = False
     return out
 
+def bridge_gaps(m, gap=GAP):
+    """Where two separate shapes come closer than `gap`, JOIN them (fill the narrow white between) —
+    right for cartoon art where a sliver cut is accidental (a hand nearly severed from its arm)."""
+    n, lab, st, _ = cv2.connectedComponentsWithStats(m.astype(np.uint8), 8)
+    out = m.copy(); r = gap / 2 + 1
+    dts = {i: cv2.distanceTransform((lab != i).astype(np.uint8), cv2.DIST_L2, 5) for i in range(1, n) if st[i, 4] > 1500}
+    keys = list(dts)
+    for a_ in range(len(keys)):
+        for b_ in range(a_ + 1, len(keys)):
+            i, j = keys[a_], keys[b_]
+            if dts[i][lab == j].min() < gap:
+                out |= (dts[i] < r) & (dts[j] < r)
+    return out
+
 def prep(m):
     """final-size mask -> stitch-safe: strokes >= 0.05in, counters opened, pieces and letters >= 0.06in apart."""
     m = enforce_min_stroke(m, 0.05); m = open_counters(m, 2); m = enforce_min_stroke(m, 0.05)
@@ -180,7 +194,7 @@ if __name__ == "__main__":
     # 6) CULPEPPER duck (front) — v3 duck with opened face/shirt/arm, built at embroidery weight in culpepper/build.py
     dk = np.array(Image.open(f"{HB}/culpepper/culpepper_duck_hat_embroidery.png"))[..., 3] > 127
     ys, xs = np.where(dk); dk = dk[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
-    dk = enforce_gaps(prep(dk))
+    dk = bridge_gaps(enforce_min_stroke(dk, 0.05))   # stroke rebuild + join sliver gaps (counter-opening/trimming damaged the face)
     results["duck"] = finish(dk, "black", "hat_culpepper_duck_black")
 
     # 7) CULPEPPER back — single arched word on the 2.0 x 1.0 in back panel, <= 5 characters per inch.
@@ -223,10 +237,10 @@ if __name__ == "__main__":
 
     # 8) CULPEPPER front lockup (alternate): duck + CULPEPPER / BODY & PAINT beside it, all on the 5.5 x 2.0 front
     t1 = textline("CULPEPPER", JOST, [700], 0.08, h_in=0.40)
-    t2 = textline("BODY & PAINT", JOST, [640], 0.10, h_in=0.32)
+    t2 = textline("BODY & PAINT", JOST, [560], 0.12, h_in=0.34)
     t2 = fit(t2, w_in=min(t2.shape[1] / DPI, t1.shape[1] / DPI)) if t2.shape[1] > t1.shape[1] else t2
     txt = vstack([t1, t2], 0.10)
-    dks = enforce_gaps(prep(fit(dk, h_in=1.9)))
+    dks = dk
     H = max(dks.shape[0], txt.shape[0]); lock = np.zeros((H, dks.shape[1] + int(0.22 * DPI) + txt.shape[1]), bool)
     lock[H - dks.shape[0]:, :dks.shape[1]] = dks
     ty = (H - txt.shape[0]) // 2; lock[ty:ty + txt.shape[0], dks.shape[1] + int(0.22 * DPI):] = txt
