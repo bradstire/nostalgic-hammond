@@ -1,0 +1,383 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+import CartDrawer from '../../components/CartDrawer.astro';
+import { getAllProducts } from '../../lib/products';
+
+const { product } = Astro.props;
+
+// Complete image mapping for all products
+const productImages: Record<string, string[]> = {
+  'cave-tangi-tee-white': [
+    '/images/cave_tangi_tee_white_01_main.png',
+    '/images/cave_tangi_tee_white_02.png',
+    '/images/cave_tangi_tee_white_03.png',
+    '/images/cave_tangi_tee_white_04.png',
+    '/images/cave_tangi_tee_white_05.png',
+    '/images/cave_tangi_tee_white_06.png',
+  ],
+  'cave-tangi-tee-cream': [
+    '/images/cave_tangi_tee_cream_01_main.png',
+    '/images/cave_tangi_tee_cream_02.png',
+    '/images/cave_tangi_tee_cream_03.png',
+    '/images/cave_tangi_tee_cream_04.png',
+    '/images/cave_tangi_tee_cream_05.png',
+    '/images/cave_tangi_tee_cream_06.png',
+  ],
+  'cave-tangi-tee-black': [
+    '/images/cave_tangi_tee_black_01_main.png',
+    '/images/cave_tangi_tee_black_02.png',
+    '/images/cave_tangi_tee_black_03.png',
+    '/images/cave_tangi_tee_black_04.png',
+    '/images/cave_tangi_tee_black_05.png',
+    '/images/cave_tangi_tee_black_06.png',
+  ],
+  'cave-tangi-dad-hat-black': [
+    '/images/nostalgic_Hammond_hat_black_01_main.png',
+    '/images/nostalgic_Hammond_hat_black_02.png',
+    '/images/nostalgic_Hammond_hat_black_03.png',
+    '/images/nostalgic_Hammond_hat_black_04.png',
+    '/images/nostalgic_Hammond_hat_black_05.png',
+    '/images/nostalgic_Hammond_hat_black_06.png',
+  ],
+  'cave-tangi-dad-hat-forest': [
+    '/images/nostalgic_Hammond_hat_green_01_main.png',
+    '/images/nostalgic_Hammond_hat_green_02.png',
+    '/images/nostalgic_Hammond_hat_green_03.png',
+    '/images/nostalgic_Hammond_hat_green_04.png',
+    '/images/nostalgic_Hammond_hat_green_05.png',
+    '/images/nostalgic_Hammond_hat_green_06.png',
+  ],
+  'cave-tangi-dad-hat-khaki': [
+    '/images/nostalgic_Hammond_hat_khaki_01_main.png',
+    '/images/nostalgic_Hammond_hat_khaki_02.png',
+    '/images/nostalgic_Hammond_hat_khaki_03.png',
+    '/images/nostalgic_Hammond_hat_khaki_04.png',
+    '/images/nostalgic_Hammond_hat_khaki_05.png',
+    '/images/nostalgic_Hammond_hat_khaki_06.png',
+  ],
+  'hammond-phys-ed-ringer-tee': [
+    '/images/nostalgic_Hammond_pe_tee_01_main.png',
+    '/images/nostalgic_Hammond_pe_tee_02.png',
+    '/images/nostalgic_Hammond_pe_tee_03.png',
+    '/images/nostalgic_Hammond_pe_tee_04.png',
+    '/images/nostalgic_Hammond_pe_tee_05.png',
+    '/images/nostalgic_Hammond_pe_tee_06.png',
+  ],
+  'tornadoes-crew-neck-sweatshirt': [
+    '/images/tornadoes_crewneck_white_01_main.png',
+    '/images/tornadoes_crewneck_white_02.png',
+    '/images/tornadoes_crewneck_white_03.png',
+    '/images/tornadoes_crewneck_white_04.png',
+    '/images/tornadoes_crewneck_white_05.png',
+    '/images/tornadoes_crewneck_white_06.png',
+  ],
+  'strawberry-stadium-framed-poster': [
+    '/images/strawberry_stadium_poster_12x16_01_main.png',
+    '/images/strawberry_stadium_poster_12x16_02.png',
+    '/images/strawberry_stadium_poster_12x16_03.png',
+  ],
+  'greetings-from-hammond-8x10': [
+    '/images/greetings_poster_8x10_01_main.png',
+    '/images/greetings_poster_8x10_02.png',
+    '/images/greetings_poster_8x10_03.png',
+  ],
+  'greetings-from-hammond-11x14': [
+    '/images/greetings_poster_11x14_01_main.png',
+    '/images/greetings_poster_11x14_02.png',
+    '/images/greetings_poster_11x14_03.png',
+  ],
+  'greetings-from-hammond-16x20': [
+    '/images/greetings_poster_16x20_01_main.png',
+    '/images/greetings_poster_16x20_02.png',
+    '/images/greetings_poster_16x20_03.png',
+  ],
+  // Duplicate entries for handle variations
+  'strawberry-stadium-framed-poster-12-16': [
+    '/images/strawberry_stadium_poster_12x16_01_main.png',
+    '/images/strawberry_stadium_poster_12x16_02.png',
+    '/images/strawberry_stadium_poster_12x16_03.png',
+  ],
+  'retro-sketch-raglan-baby-tee': [
+    '/images/retro-sketch-raglan-baby-tee-01-main.png',
+    '/images/retro-sketch-raglan-baby-tee-02.png',
+    '/images/retro-sketch-raglan-baby-tee-03.png',
+    '/images/retro-sketch-raglan-baby-tee-04.png',
+  ],
+  'retro-sketch-baby-tee': [
+    '/images/retro-sketch-raglan-baby-tee-01-main.png',
+    '/images/retro-sketch-raglan-baby-tee-02.png',
+    '/images/retro-sketch-raglan-baby-tee-03.png',
+    '/images/retro-sketch-raglan-baby-tee-04.png',
+  ],
+  'retro-sketch-3-4-sleeve-raglan': [
+    '/images/retro-sketch-3qtr-raglan-01-main.png',
+    '/images/retro-sketch-3qtr-raglan-02.png',
+  ],
+  'retro-sketch-34-sleeve-raglan': [
+    '/images/retro-sketch-3qtr-raglan-01-main.png',
+    '/images/retro-sketch-3qtr-raglan-02.png',
+  ],
+};
+
+// Use mapped images if available, otherwise fallback to product.images
+const mappedImages = productImages[product.handle];
+const allImages = mappedImages 
+  ? mappedImages.map((src, i) => ({ src, alt: `${product.title} - ${i === 0 ? 'Main' : 'View ' + i}` }))
+  : product.images;
+const image = allImages[0];
+
+// Format price: remove trailing .0 for whole dollar amounts
+const formatPrice = (price: string) => {
+  const num = parseFloat(price);
+  return num % 1 === 0 ? num.toFixed(0) : price;
+};
+---
+
+<Layout title={product.title} description={product.description}>
+  <Nav />
+  
+  <main class="bg-cream min-h-screen pt-16">
+    <div class="container-custom py-12 md:py-16">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16">
+        <!-- Product Image Gallery -->
+        <div class="space-y-4">
+          <!-- Main Image -->
+          <div id="main-image-container" class="aspect-square rounded-sm overflow-hidden shadow-sm">
+            <img
+              id="main-image"
+              src={image.src}
+              alt={image.alt}
+              class="w-full h-full object-cover"
+            />
+          </div>
+
+          <!-- Thumbnail Row -->
+          {allImages.length > 1 && (
+            <div class="flex gap-3 overflow-x-auto pb-2">
+              {allImages.map((img, index) => (
+                <button
+                  type="button"
+                  class={`thumbnail flex-shrink-0 w-20 h-20 rounded-sm overflow-hidden border-2 transition-all duration-200 bg-transparent ${index === 0 ? 'border-rust' : 'border-light-gray/50 hover:border-rust/50'}`}
+                  data-image-src={img.src}
+                  data-image-alt={img.alt}
+                  data-index={index}
+                >
+                  <img
+                    src={img.src}
+                    alt={img.alt}
+                    class="w-full h-full object-cover bg-transparent"
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <!-- Product Details -->
+        <div class="flex flex-col lg:pt-4">
+          <h1 class="font-display text-3xl md:text-4xl leading-tight mb-5 text-charcoal">
+            {product.title}
+          </h1>
+
+          <p class="price text-3xl text-rust font-bold tracking-wide mb-8">
+            ${formatPrice(product.price)}
+          </p>
+
+          <!-- Product Description -->
+          <div class="mb-8">
+            <p class="text-base leading-relaxed text-charcoal/90">
+              {product.description}
+            </p>
+          </div>
+
+          <!-- Variant Selector (hidden for framed posters with dedicated size pages) -->
+          <div class="mb-6" id="variant-selector-container" style={product.shopifyProductTitle ? 'display: none;' : ''}>
+            <label for="variant-select" class="font-utility uppercase text-sm tracking-wider text-charcoal/70 mb-2.5 block">
+              {product.variants.length > 1 && product.variants[0].title !== 'One Size' ? 'Size' : 'Option'}
+            </label>
+            <select 
+              id="variant-select"
+              class="w-full md:w-auto min-w-[200px] px-4 py-3 border border-light-gray bg-white rounded-sm font-utility text-charcoal focus:border-rust focus:outline-none focus:ring-1 focus:ring-rust transition-colors"
+            >
+              {product.variants.map(variant => (
+                <option value={variant.id} disabled={!variant.available}>
+                  {variant.title} {!variant.available && '(Sold Out)'}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <!-- Add to Cart Button -->
+          <button
+            id="add-to-cart"
+            data-product-handle={product.handle}
+            data-product-title={product.shopifyProductTitle || product.title}
+            data-product-price={product.price}
+            data-product-image={image.src}
+            data-shopify-variant-id={product.shopifyVariantId || ''}
+            class="w-full md:w-auto px-12 py-4 bg-rust text-warm-white font-utility uppercase text-sm tracking-wider rounded-sm hover:bg-rust/90 active:bg-rust/80 transition-all duration-200 shadow-sm hover:shadow-md"
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+  <CartDrawer />
+</Layout>
+
+<script>
+  import { addToCheckout, findProductByTitle } from '../../lib/shopify';
+
+  // Store the Shopify product for this page
+  let shopifyProduct: any = null;
+  let preSelectedVariantId: string | null = null;
+
+  // Meta Pixel: ViewContent for this product page
+  (function () {
+    const btn = document.getElementById('add-to-cart') as HTMLButtonElement | null;
+    if (!btn || !(window as any).nhTrack) return;
+    (window as any).nhTrack('ViewContent', {
+      content_ids: [btn.dataset.productHandle],
+      content_name: btn.dataset.productTitle,
+      content_type: 'product',
+      value: parseFloat(btn.dataset.productPrice || '0'),
+      currency: 'USD',
+    });
+  })();
+
+  // Initialize: Set up variant selection
+  async function initializeProduct() {
+    const addToCartBtn = document.getElementById('add-to-cart') as HTMLButtonElement;
+    const hardcodedVariantId = addToCartBtn?.dataset.shopifyVariantId;
+    const productTitle = addToCartBtn?.dataset.productTitle;
+    
+    // Priority 1: Use hardcoded variant ID (for framed posters with dedicated pages)
+    if (hardcodedVariantId) {
+      preSelectedVariantId = hardcodedVariantId;
+      console.log('[Product] Using hardcoded variant ID:', hardcodedVariantId);
+      return; // Skip Shopify query - we have everything we need
+    }
+
+    // Priority 2: For products without hardcoded variant, query Shopify and populate dropdown
+    if (!productTitle) return;
+
+    try {
+      shopifyProduct = await findProductByTitle(productTitle);
+      
+      if (shopifyProduct) {
+        console.log('[Product] Found matching Shopify product:', shopifyProduct.title);
+        
+        const variantSelect = document.getElementById('variant-select') as HTMLSelectElement;
+        
+        // Populate dropdown for regular products (apparel, etc.)
+        if (variantSelect && shopifyProduct.variants) {
+          variantSelect.innerHTML = '';
+          
+          shopifyProduct.variants.forEach((variant: any) => {
+            const option = document.createElement('option');
+            option.value = variant.id;
+            option.textContent = variant.title;
+            option.disabled = !variant.available;
+            if (!variant.available) {
+              option.textContent += ' (Sold Out)';
+            }
+            variantSelect.appendChild(option);
+          });
+        }
+      } else {
+        console.warn('[Product] No matching Shopify product found for:', productTitle);
+      }
+    } catch (error) {
+      console.error('[Product] Error finding Shopify product:', error);
+    }
+  }
+
+  // Image Gallery: Thumbnail Click Handler
+  document.querySelectorAll('.thumbnail').forEach((thumb) => {
+    thumb.addEventListener('click', function() {
+      const button = this as HTMLButtonElement;
+      const imageSrc = button.dataset.imageSrc;
+      const imageAlt = button.dataset.imageAlt;
+      const index = button.dataset.index;
+      
+      // Update main image
+      const mainImage = document.getElementById('main-image') as HTMLImageElement;
+      if (mainImage && imageSrc && imageAlt) {
+        mainImage.src = imageSrc;
+        mainImage.alt = imageAlt;
+      }
+      
+      // Update thumbnail borders
+      document.querySelectorAll('.thumbnail').forEach((t) => {
+        t.classList.remove('border-rust');
+        t.classList.add('border-light-gray/50', 'hover:border-rust/50');
+      });
+      button.classList.remove('border-light-gray/50', 'hover:border-rust/50');
+      button.classList.add('border-rust');
+    });
+  });
+
+  // Add to Cart - Now uses real Shopify checkout
+  document.getElementById('add-to-cart')?.addEventListener('click', async function(e) {
+    const button = e.currentTarget as HTMLButtonElement;
+    
+    // Use pre-selected variant for framed posters, otherwise get from dropdown
+    let selectedVariantId: string | null = null;
+    if (preSelectedVariantId) {
+      selectedVariantId = preSelectedVariantId;
+    } else {
+      const variantSelect = document.getElementById('variant-select') as HTMLSelectElement;
+      selectedVariantId = variantSelect.value;
+    }
+
+    if (!selectedVariantId) {
+      alert('Please select a size');
+      return;
+    }
+
+    // Show loading state
+    const originalText = button.textContent;
+    button.textContent = 'Adding...';
+    button.disabled = true;
+
+    try {
+      // Add to real Shopify checkout
+      await addToCheckout(selectedVariantId, 1);
+
+      // Meta Pixel: AddToCart (after the Shopify call succeeded)
+      if ((window as any).nhTrack) {
+        (window as any).nhTrack('AddToCart', {
+          content_ids: [button.dataset.productHandle],
+          content_name: button.dataset.productTitle,
+          content_type: 'product',
+          contents: [{ id: selectedVariantId, quantity: 1 }],
+          value: parseFloat(button.dataset.productPrice || '0'),
+          currency: 'USD',
+        });
+      }
+
+      // Dispatch event to update cart
+      window.dispatchEvent(new Event('cart-updated'));
+
+      // Show confirmation
+      button.textContent = 'Added!';
+      setTimeout(() => {
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 1500);
+    } catch (error) {
+      console.error('[Product] Error adding to cart:', error);
+      alert('Failed to add to cart. Please try again.');
+      button.textContent = originalText;
+      button.disabled = false;
+    }
+  });
+
+  // Initialize product on page load
+  initializeProduct();
+</script>

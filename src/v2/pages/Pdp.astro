@@ -1,0 +1,392 @@
+---
+import V2Layout from '../V2Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCatalog, cdn, srcset, money, storyOf, specsOf, absImg, type V2Product } from '../catalog';
+import { FREE_SHIP, HOLIDAY_CUTOFF, SIZE_CHART, SOCK_CHART, FRAME_SIZE, MEMBER_LABEL, SHIP_MAKE, SHIP_TRANSIT, NOTE_BY_PREFIX, HIDDEN_FROM_GRID, PAIRS, blankFor, START_HERE } from '../data';
+import { clip } from '../clip';
+import { siteConfig } from '../../config/site.config';
+import { nw } from '../nw';
+
+interface Props { p: V2Product }
+const { p } = Astro.props;
+const all = await getCatalog();
+const famHandles = new Set(p.family.map((f) => f.handle).concat(p.handle));
+const samePlace = all.filter((x) => x.lead && !famHandles.has(x.handle) && x.place && x.place.slug === p.place?.slug).slice(0, 4);
+const alsoLike = START_HERE.map((h) => all.find((x) => x.handle === h)!).filter((x) => x && !famHandles.has(x.handle) && x.place?.slug !== p.place?.slug).slice(0, 4);
+// Story text without the not-affiliated sentence (shown once, from the place note).
+const story = storyOf(p).map((s) => s.replace(/\s*Not affiliated[^.]*\./gi, '').trim()).filter(Boolean);
+const specs = specsOf(p);
+const chart = p.type === 'Tee' ? SIZE_CHART[blankFor(p.handle)!] : null;
+const multiColor = p.colors.length > 1;
+const isFamily = p.family.length > 1;
+const optName = p.family.some((f) => MEMBER_LABEL[f.handle]) ? 'Style' : 'Color';
+const curOpt = p.family.find((f) => f.handle === p.handle && (!multiColor || f.color === p.colors[0].name));
+const isSock = p.type === 'Socks';
+const isHat = p.type === 'Hat';
+const hasSizes = p.sizes.length > 1;
+const single = !hasSizes && !multiColor;
+const defaultVariant = single ? p.variants[0] : null;
+const images = p.images.map((im) => ({ src: im.url, alt: im.alt, cdn: true }));
+if (p.detail) images.push({ src: p.detail, alt: `${p.title}, close-up of the print artwork`, cdn: false });
+const imgSrc = (im: { src: string; cdn: boolean }, w: number) => (im.cdn ? cdn(im.src, w) : `${im.src}-${w <= 360 ? 360 : w <= 540 ? 540 : 800}.webp`);
+const imgSet = (im: { src: string; cdn: boolean }) => (im.cdn ? srcset(im.src, [540, 720, 1080, 1440]) : `${im.src}-540.webp 540w, ${im.src}-800.webp 800w`);
+const url = `${siteConfig.siteUrl}/products/${p.handle}`;
+const note = Object.entries(NOTE_BY_PREFIX).find(([pre]) => p.handle.startsWith(pre))?.[1] || p.place?.note;
+// "Pairs well with": a hat for a tee (or a tee for a hat), from the same place when possible. Together they clear free shipping.
+const pairDef = PAIRS.find((pr) => pr.items.some((it) => famHandles.has(it.h)));
+const brand = p.handle.split('-').slice(0, 2).join('-');                 // e.g. "mississippi-britches"
+const findMate = (type: string) => all.find((x) => x.lead && x.type === type && x.handle.startsWith(brand))
+  || all.find((x) => x.lead && x.type === type && x.place?.slug === p.place?.slug);
+const mateHandle = pairDef?.items.find((it) => !famHandles.has(it.h))?.h
+  || (p.type === 'Tee' ? findMate('Hat')?.handle || 'hub-city-drag-raceway-hat'
+    : p.type === 'Hat' ? findMate('Tee')?.handle || 'beverly-drive-in-theatre-tee'
+    : p.type === 'Framed print' ? findMate('Socks')?.handle || 'hub-city-drag-raceway-socks' : null);
+const mate = mateHandle ? all.find((x) => x.handle === mateHandle) : null;
+// pictured colour: the pair's pinned colour, else the colour of the mate's first photo
+const mateColor = pairDef?.items.find((it) => it.h === mateHandle)?.color
+  || (mate && mate.colors.length > 1 ? mate.variants.find((v) => v.image === mate.images[0]?.url)?.options.Color : undefined);
+const mateSized = !!mate && mate.sizes.length > 1;
+const mateVariant = mate && !mateSized ? (mate.variants.find((v) => v.available && (!mateColor || v.options.Color === mateColor)) || mate.variants.find((v) => v.available)) : null;
+const mateSizes = mate && mateSized ? Object.fromEntries(mate.variants.filter((v) => v.available && (!mateColor || v.options.Color === mateColor)).map((v) => [v.options.Size, v.id])) : null;
+const mateImg = mate ? ((mateColor && mateVariant?.image) || mate.images[0]?.url) : null;
+const together = mate ? p.price + mate.price : 0;
+const mateHref = mate ? `/products/${mate.handle}${mateColor ? `?color=${encodeURIComponent(mateColor)}` : ''}` : '';
+const jsonld = [
+  {
+    '@context': 'https://schema.org', '@type': 'Product', name: p.baseTitle, description: story.join(' ') || p.title,
+    image: p.images.map((i) => (i.url.startsWith('local:') ? siteConfig.siteUrl + absImg(i.url) : i.url)), brand: { '@type': 'Brand', name: siteConfig.brandName }, url,
+    category: p.type,
+    offers: {
+      '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: Math.min(...p.variants.map((v) => v.price)), highPrice: Math.max(...p.variants.map((v) => v.price)),
+      offerCount: p.variants.length, availability: p.available ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock', url,
+      hasMerchantReturnPolicy: {
+        '@type': 'MerchantReturnPolicy', applicableCountry: 'US',
+        // Made to order: no returns for fit or change of mind (misprints and damage are replaced; see /shipping-returns).
+        returnPolicyCategory: 'https://schema.org/MerchantReturnNotPermitted',
+      },
+    },
+  },
+  {
+    '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+      { '@type': 'ListItem', position: 1, name: 'Home', item: siteConfig.siteUrl + '/' },
+      ...(p.place ? [{ '@type': 'ListItem', position: 2, name: p.place.short, item: `${siteConfig.siteUrl}/places/${p.place.slug}` }] : []),
+      { '@type': 'ListItem', position: p.place ? 3 : 2, name: p.title, item: url },
+    ],
+  },
+];
+const variantsJson = JSON.stringify(p.variants.map((v) => ({ id: v.id, n: v.numericId, a: v.available, p: v.price, o: v.options, i: v.image })));
+const check = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const desc = clip(story[0] || `${p.baseTitle} from ${siteConfig.brandName}.`);
+const ogImg = p.images[0] ? (p.images[0].url.startsWith('local:') ? absImg(p.images[0].url) : cdn(p.images[0].url, 1200)) : undefined;
+---
+<V2Layout title={p.baseTitle} description={desc} image={ogImg} jsonld={jsonld} noindex={HIDDEN_FROM_GRID.has(p.handle)}>
+  <div class="hb-wrap">
+    <nav class="hb-crumbs" aria-label="Breadcrumb">
+      <ol>
+        <li><a href="/">Home</a></li>
+        {p.place && <li><a href={`/places/${p.place.slug}`}>{p.place.short}</a></li>}
+        <li aria-current="page">{p.baseTitle}</li>
+      </ol>
+    </nav>
+    <div class="hb-pdp" data-pdp data-handle={p.handle} data-variants={variantsJson}>
+      <div class="hb-gallery">
+        <div class="hb-gallery__main">
+          <img data-main src={imgSrc(images[0], 1080)} srcset={imgSet(images[0])} sizes="(max-width: 900px) 100vw, 640px" width="1080" height="1080" alt={images[0].alt} fetchpriority="high" />
+        </div>
+        {images.length > 1 && (
+          <div class="hb-thumbs" role="group" aria-label="Product images">
+            {images.map((im, i) => (
+              <button type="button" data-thumb={imgSrc(im, 1080)} data-thumbset={imgSet(im)} data-alt={im.alt} aria-current={i === 0 ? 'true' : 'false'} aria-label={`Show image ${i + 1} of ${images.length}`}>
+                <img src={imgSrc(im, 360)} alt="" width="76" height="76" loading="lazy" />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div class="hb-buy">
+        <div>
+          {p.place && <p class="hb-eyebrow" style="margin-bottom:8px"><a href={`/places/${p.place.slug}`} style="text-decoration:none">{p.place.name} · <span class="hb-era">{p.place.era}</span></a></p>}
+          <h1 class="hb-h2 hb-pdp__title" set:html={nw(p.baseTitle)} />
+          <p class="hb-buy__price" style="margin:12px 0 0" data-price>{money(p.price)}</p>
+          <p class="hb-buy__ship">Free US shipping on orders ${FREE_SHIP}+{isHat ? ' · One size, adjustable strap' : ''}{p.type === 'Framed print' && FRAME_SIZE[p.handle] ? ` · ${FRAME_SIZE[p.handle]}` : ''}</p>
+        </div>
+
+        {isFamily && (
+          <div class="hb-opt">
+            <p class="hb-opt__legend" id="hb-color-l">{optName}: <span data-color-label>{curOpt?.label || p.colors[0]?.name}</span></p>
+            <ul class="hb-opt__row hb-opt__links" aria-labelledby="hb-color-l">
+              {p.family.map((f) => {
+                const here = f.handle === p.handle;
+                const selected = here && (!multiColor || f.color === p.colors[0].name);
+                return (
+                  <li><a class="hb-colorbtn" href={`/products/${f.handle}${multiColor || p.family.filter((x) => x.handle === f.handle).length > 1 ? `?color=${encodeURIComponent(f.color)}` : ''}`}
+                    aria-current={selected ? 'true' : undefined} aria-label={f.label} title={f.label}
+                    data-color={here && multiColor ? f.color : undefined} data-label={f.label}><span style={`background:${f.hex}`}></span></a></li>
+                );
+              })}
+            </ul>
+          </div>
+        )}
+        {!isFamily && multiColor && (
+          <fieldset class="hb-opt">
+            <legend>Color: <span data-color-label>{p.colors[0].name}</span></legend>
+            <div class="hb-opt__row" role="radiogroup" aria-label="Color">
+              {p.colors.map((c, i) => (
+                <button type="button" class="hb-colorbtn" role="radio" aria-checked={i === 0 ? 'true' : 'false'} data-color={c.name} aria-label={c.name} title={c.name}><span style={`background:${c.hex}`}></span></button>
+              ))}
+            </div>
+          </fieldset>
+        )}
+        {!isFamily && !multiColor && p.colors.length === 1 && <p style="margin:0;font-size:14.5px"><strong>Color:</strong> {p.colors[0].name}</p>}
+
+        {hasSizes && (
+          <fieldset class="hb-opt" id="hb-size">
+            <legend>Size: <span data-size-label>Choose a size</span></legend>
+            <div class="hb-opt__row" role="radiogroup" aria-label="Size">
+              {p.sizes.map((s) => (<button type="button" class="hb-size" role="radio" aria-checked="false" data-size={s}>{s}</button>))}
+            </div>
+            {chart && <p class="hb-note" style="margin:10px 0 0">Classic unisex fit. <a class="hb-link" href="#size-chart" data-open-chart>See size chart</a></p>}
+            {isSock && <p class="hb-note" style="margin:10px 0 0">Sized by shoe: S fits women's 6–8 / men's 5–6.5, M fits women's 8.5–11 / men's 7–9.5, L fits women's 11.5–13 / men's 10–13. <a class="hb-link" href="#size-chart" data-open-chart>Size guide</a></p>}
+          </fieldset>
+        )}
+
+        <div style="display:grid;gap:10px">
+          <button class="hb-btn hb-btn--primary hb-btn--block" type="button" data-atc data-add={defaultVariant?.id || ''} data-value={p.price} aria-disabled={single ? undefined : 'true'} aria-describedby="hb-buy-msg">
+            {single ? `Add to cart · ${money(p.price)}` : hasSizes ? 'Choose a size' : 'Add to cart'}
+          </button>
+          <a class="hb-shoppay" data-shoppay href={defaultVariant ? `https://${siteConfig.shopifyStoreDomain}/cart/${defaultVariant.numericId}:1?payment=shop_pay` : '#hb-size'} aria-disabled={single ? undefined : 'true'}>
+            Buy with<span class="hb-sr"> Shop Pay</span> <svg width="54" height="18" viewBox="0 0 54 18" aria-hidden="true"><text x="0" y="14" font-family="Inter Variable, sans-serif" font-weight="800" font-size="15" fill="#fff">shop</text><rect x="38" y="2" width="16" height="14" rx="4" fill="#fff"/><text x="40.5" y="13" font-family="Inter Variable, sans-serif" font-weight="800" font-size="9.5" fill="#5a31f4">Pay</text></svg>
+          </a>
+          <p class="hb-note hb-buy__msg" id="hb-buy-msg" data-msg role="status" aria-live="polite"></p>
+        </div>
+
+        {mate && mateImg && (
+          <div class="hb-mate" data-mate data-mate-variant={mateVariant?.id || ''} data-mate-sizes={mateSizes ? JSON.stringify(mateSizes) : undefined}>
+            <p class="hb-mate__h">Complete the pair{together >= FREE_SHIP ? ' · ships free' : ''}</p>
+            <div class="hb-mate__row">
+              <a href={mateHref} class="hb-mate__img" tabindex="-1" aria-hidden="true"><img src={cdn(mateImg, 160)} srcset={srcset(mateImg, [120, 160, 240])} sizes="64px" width="64" height="64" alt="" loading="lazy" /></a>
+              <div class="hb-mate__t">
+                <a href={mateHref} set:html={nw(mate.baseTitle + (mateColor ? `, ${mateColor}` : ''))} />
+                <span>+{money(mate.price)} · both for {money(together)}</span>
+                {mateSizes && (
+                  <label class="hb-mate__size"><span class="hb-sr">Size for {mate.baseTitle}</span>
+                    <select data-mate-size><option value="">Size</option>{Object.keys(mateSizes).map((sz) => <option value={sz}>{sz}</option>)}</select>
+                  </label>
+                )}
+              </div>
+            </div>
+            <button type="button" class="hb-btn hb-btn--dark hb-btn--block hb-mate__btn" data-mate-add data-value={together}>Add both · {money(together)}</button>
+          </div>
+        )}
+        <p class="hb-note" style="margin:0"><a class="hb-link" href="#hb-foot-email" data-focus-signup>Get 15% off your first order</a> when you join our email list.</p>
+
+        <ul class="hb-assure">
+          <li><Fragment set:html={check} /><span><strong>Made to order for you.</strong> Ships in <span class="hb-nw">{SHIP_MAKE} business days</span>, then <span class="hb-nw">{SHIP_TRANSIT} business days</span> to most US addresses. Order by <span class="hb-nw">{HOLIDAY_CUTOFF}</span> for Christmas.</span></li>
+          <li><Fragment set:html={check} /><span><strong>Misprinted or damaged?</strong> We replace it free. <a class="hb-link" href="/shipping-returns">Returns policy</a></span></li>
+          <li><Fragment set:html={check} /><span><strong>Secure checkout</strong> by Shopify: Shop Pay, Apple Pay, Google Pay, PayPal and cards.</span></li>
+        </ul>
+
+        {story.length > 0 && (
+          <div class="hb-storybox">
+            <p class="hb-eyebrow" style="margin-bottom:6px">The story</p>
+            {story.map((s) => <p>{s}</p>)}
+            {p.place && <p><a class="hb-link" href={`/places/${p.place.slug}`}>More about {p.place.short}</a></p>}
+            {note && <p class="hb-note">{note}</p>}
+          </div>
+        )}
+
+        <div class="hb-acc">
+          {chart && (
+            <details id="size-chart">
+              <summary>Size chart</summary>
+              <div class="hb-acc__body">
+                <p style="margin:0 0 6px">{chart.name}. Measurements are the garment laid flat, in inches.</p>
+                <table class="hb-table">
+                  <thead><tr><th scope="col">Size</th>{chart.sizes.map((s) => <th scope="col">{s}</th>)}</tr></thead>
+                  <tbody>
+                    <tr><th scope="row">Width (pit to pit)</th>{chart.width.map((v) => <td>{v}</td>)}</tr>
+                    <tr><th scope="row">Length</th>{chart.length.map((v) => <td>{v}</td>)}</tr>
+                  </tbody>
+                </table>
+                <p class="hb-note" style="margin:8px 0 0">Tip: lay a shirt you love flat and compare. Measurements can vary by up to 1 in.</p>
+              </div>
+            </details>
+          )}
+          {isSock && (
+            <details id="size-chart">
+              <summary>Size guide</summary>
+              <div class="hb-acc__body">
+                <table class="hb-table">
+                  <thead><tr><th scope="col">Size</th><th scope="col">US women's shoe</th><th scope="col">US men's shoe</th></tr></thead>
+                  <tbody>{SOCK_CHART.map((r) => <tr><th scope="row">{r.s}</th><td>{r.w}</td><td>{r.m}</td></tr>)}</tbody>
+                </table>
+                <p class="hb-note" style="margin:8px 0 0">Crew length, ribbed leg, cushioned sole. Between sizes? Size up.</p>
+              </div>
+            </details>
+          )}
+          {specs.length > 0 && (
+            <details>
+              <summary>Details & care</summary>
+              <div class="hb-acc__body"><ul style="margin:0;padding-left:18px">{specs.map((s) => <li>{s}</li>)}</ul>
+              {p.type === 'Tee' && <p style="margin:10px 0 0">Wash cold inside out, tumble dry low. Don't iron the print.</p>}</div>
+            </details>
+          )}
+          <details>
+            <summary>Shipping & returns</summary>
+            <div class="hb-acc__body">
+              <p style="margin:0 0 8px">Free US shipping on orders ${FREE_SHIP}+ (after discounts). Each piece is printed to order, so we can't accept returns for fit or a change of mind. If anything arrives misprinted, damaged or wrong, email a photo within 30 days and we'll replace or refund it.</p>
+              <a class="hb-link" href="/shipping-returns">Full shipping & returns policy</a>
+            </div>
+          </details>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {samePlace.length > 0 && (
+    <section class="hb-section--tight" aria-labelledby="rel-h" style="border-top:1px solid var(--line)">
+      <div class="hb-wrap">
+        <div class="hb-head"><h2 class="hb-h2 hb-h2--sm" id="rel-h">More from {p.place!.short}</h2><a class="hb-link" href={`/places/${p.place!.slug}`}>The story of {p.place!.short}</a></div>
+        <div class="hb-grid">{samePlace.map((r) => <ProductCard p={r} />)}</div>
+      </div>
+    </section>
+  )}
+  {alsoLike.length > 0 && (
+    <section class="hb-section--tight" aria-labelledby="also-h" style="border-top:1px solid var(--line)">
+      <div class="hb-wrap">
+        <div class="hb-head"><h2 class="hb-h2 hb-h2--sm" id="also-h">From other Hattiesburg places</h2><a class="hb-link" href="/shop">Shop all</a></div>
+        <div class="hb-grid">{alsoLike.map((r) => <ProductCard p={r} />)}</div>
+      </div>
+    </section>
+  )}
+
+  <div class="hb-sticky" data-sticky aria-hidden="true">
+    <div class="hb-sticky__t"><strong>{p.baseTitle}</strong><span data-sticky-price>{money(p.price)}</span></div>
+    <button class="hb-btn hb-btn--primary" type="button" data-sticky-btn tabindex="-1">{single ? 'Add to cart' : hasSizes ? 'Choose size' : 'Add to cart'}</button>
+  </div>
+</V2Layout>
+
+<script>
+  const root = document.querySelector('[data-pdp]') as HTMLElement;
+  if (root) {
+    type V = { id: string; n: string; a: boolean; p: number; o: Record<string, string>; i?: string };
+    const variants: V[] = JSON.parse(root.dataset.variants || '[]');
+    const atc = root.querySelector('[data-atc]') as HTMLButtonElement;
+    const pay = root.querySelector('[data-shoppay]') as HTMLAnchorElement;
+    const msg = root.querySelector('[data-msg]') as HTMLElement;
+    const main = root.querySelector('[data-main]') as HTMLImageElement;
+    const priceEl = root.querySelector('[data-price]') as HTMLElement;
+    const sticky = document.querySelector('[data-sticky]') as HTMLElement;
+    const stickyBtn = document.querySelector('[data-sticky-btn]') as HTMLButtonElement;
+    const hasColor = !!root.querySelector('[data-color]');
+    const hasSize = !!root.querySelector('[data-size]');
+    let color = (root.querySelector('[data-color][aria-checked="true"], [data-color][aria-current="true"]') as HTMLElement)?.dataset.color || null;
+    let size: string | null = null;
+    const fmt = (n: number) => '$' + (Number.isInteger(n) ? n.toFixed(0) : n.toFixed(2));
+    const domain = 'nostalgic-towns.myshopify.com';
+
+    function nudge() {
+      if (hasSize && size) { msg.textContent = 'That size is sold out. Try another size.'; return; }
+      if (!hasSize) return;
+      msg.textContent = 'Choose a size first.';
+      const first = root.querySelector('[data-size]') as HTMLElement; first?.focus();
+      document.getElementById('hb-size')?.classList.add('is-nudge'); setTimeout(() => document.getElementById('hb-size')?.classList.remove('is-nudge'), 700);
+    }
+    function pickColor(c: HTMLElement) {
+      color = c.dataset.color!;
+      root.querySelectorAll('[data-color]').forEach((b) => {
+        if (b.getAttribute('role') === 'radio') b.setAttribute('aria-checked', String(b === c));
+        else b === c ? b.setAttribute('aria-current', 'true') : b.removeAttribute('aria-current');
+      });
+      (root.querySelector('[data-color-label]') as HTMLElement).textContent = c.dataset.label || color;
+      const q = new URLSearchParams(location.search); q.set('color', color); history.replaceState(null, '', location.pathname + '?' + q);
+      sync();
+    }
+    function current(): V | undefined {
+      return variants.find((v) => (!hasColor || v.o.Color === color) && (!hasSize || v.o.Size === size));
+    }
+    function sync() {
+      // sold-out sizes for the chosen colour
+      root.querySelectorAll<HTMLElement>('[data-size]').forEach((b) => {
+        const v = variants.find((x) => x.o.Size === b.dataset.size && (!hasColor || x.o.Color === color));
+        b.dataset.soldout = String(!v || !v.a);
+        b.setAttribute('aria-label', b.dataset.size + (!v || !v.a ? ' (sold out)' : ''));
+      });
+      const v = current();
+      const ready = !!v && v.a;
+      if (v) priceEl.textContent = fmt(v.p);
+      atc.setAttribute('aria-disabled', String(!ready));
+      atc.dataset.add = ready ? v!.id : '';
+      atc.dataset.value = String(v ? v.p : 0);
+      atc.textContent = ready ? `Add to cart · ${fmt(v!.p)}` : hasSize && !size ? 'Choose a size' : 'Sold out';
+      pay.href = ready ? `https://${domain}/cart/${v!.n}:1?payment=shop_pay` : '#hb-size';
+      pay.toggleAttribute('aria-disabled', !ready);
+      stickyBtn.textContent = ready ? (size ? `Add ${size} to cart` : 'Add to cart') : hasSize && !size ? 'Choose size' : 'Sold out';
+      (document.querySelector('[data-sticky-price]') as HTMLElement).textContent = v ? fmt(v.p) : priceEl.textContent || '';
+      if (v?.i && hasColor) { main.src = v.i + (v.i.includes('?') ? '&' : '?') + 'width=1080'; main.srcset = ''; }
+    }
+    root.addEventListener('click', (e) => {
+      const t = e.target as HTMLElement;
+      const c = t.closest('[data-color]') as HTMLElement | null;
+      if (c) { e.preventDefault(); pickColor(c); return; }
+      const cur = t.closest('.hb-opt__links a[aria-current]');
+      if (cur) { e.preventDefault(); return; }
+      const sib = t.closest('.hb-opt__links a') as HTMLAnchorElement | null;
+      if (sib && size) { const u = new URL(sib.href); u.searchParams.set('size', size); sib.href = u.pathname + u.search; }
+      const s = t.closest('[data-size]') as HTMLElement | null;
+      if (s) {
+        size = s.dataset.size!;
+        root.querySelectorAll('[data-size]').forEach((b) => b.setAttribute('aria-checked', String(b === s)));
+        (root.querySelector('[data-size-label]') as HTMLElement).textContent = size;
+        msg.textContent = '';
+        sync(); return;
+      }
+      const th = t.closest('[data-thumb]') as HTMLElement | null;
+      if (th) {
+        main.src = th.dataset.thumb!; main.srcset = th.dataset.thumbset || ''; main.alt = th.dataset.alt || '';
+        root.querySelectorAll('[data-thumb]').forEach((b) => b.setAttribute('aria-current', String(b === th)));
+        return;
+      }
+      const mb = t.closest('[data-mate-add]') as HTMLElement | null;
+      if (mb) {
+        const box = mb.closest('[data-mate]') as HTMLElement;
+        const sel = box.querySelector('[data-mate-size]') as HTMLSelectElement | null;
+        const mateId = sel ? (sel.value ? JSON.parse(box.dataset.mateSizes || '{}')[sel.value] : '') : box.dataset.mateVariant;
+        if (atc.getAttribute('aria-disabled') === 'true') { e.preventDefault(); e.stopPropagation(); nudge(); return; }
+        if (!mateId) { e.preventDefault(); e.stopPropagation(); msg.textContent = 'Choose a size for the second piece.'; sel?.focus(); return; }
+        mb.dataset.add = [atc.dataset.add, mateId].join(',');   // the cart drawer picks this up as it bubbles
+        return;
+      }
+      if ((t.closest('[data-shoppay]') && pay.hasAttribute('aria-disabled')) || (t.closest('[data-atc]') && atc.getAttribute('aria-disabled') === 'true')) {
+        e.preventDefault(); e.stopPropagation(); nudge(); return;
+      }
+      if (t.closest('[data-open-chart]')) {
+        const d = document.getElementById('size-chart') as HTMLDetailsElement;
+        if (d) { e.preventDefault(); d.open = true; d.scrollIntoView({ behavior: 'smooth', block: 'start' }); (d.querySelector('summary') as HTMLElement)?.focus({ preventScroll: true }); }
+      }
+    });
+    // keyboard arrows within radiogroups
+    root.querySelectorAll('[role=radiogroup]').forEach((g) => g.addEventListener('keydown', (e: Event) => {
+      const k = (e as KeyboardEvent).key; if (!['ArrowRight', 'ArrowLeft', 'ArrowDown', 'ArrowUp'].includes(k)) return;
+      const items = [...g.querySelectorAll<HTMLElement>('[role=radio]')]; const i = items.indexOf(document.activeElement as HTMLElement);
+      const n = items[(i + (k === 'ArrowRight' || k === 'ArrowDown' ? 1 : -1) + items.length) % items.length]; n.focus(); n.click(); e.preventDefault();
+    }));
+    stickyBtn.addEventListener('click', () => {
+      if (atc.getAttribute('aria-disabled') === 'true') { document.getElementById('hb-size')?.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(nudge, 350); }
+      else atc.click();
+    });
+    // preselect ?color= and ?size= (sizes carry across colour/style switches)
+    const qs = new URLSearchParams(location.search);
+    const want = qs.get('color');
+    const wantEl = want ? [...root.querySelectorAll<HTMLElement>('[data-color]')].find((b) => b.dataset.color === want) : null;
+    if (wantEl) pickColor(wantEl);
+    const wantSize = qs.get('size');
+    const sizeEl = wantSize ? root.querySelector<HTMLElement>(`[data-size="${CSS.escape(wantSize)}"]`) : null;
+    if (sizeEl) { sizeEl.click(); }
+    // keep a buy button on screen (mobile) whenever the main one isn't visible
+    new IntersectionObserver(([en]) => { sticky.classList.toggle('is-on', !en.isIntersecting); }).observe(atc);
+    (window as any).nhTrack?.('ViewContent', { content_ids: variants.map((v) => v.n), content_type: 'product_group', value: variants[0]?.p, currency: 'USD' });
+    sync();
+  }
+</script>

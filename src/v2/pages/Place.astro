@@ -1,0 +1,69 @@
+---
+import V2Layout from '../V2Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCatalog } from '../catalog';
+import { PLACES, TYPE_ORDER, type Place } from '../data';
+import { siteConfig } from '../../config/site.config';
+import { nw } from '../nw';
+import { clip } from '../clip';
+interface Props { pl: Place }
+const { pl } = Astro.props;
+const all = await getCatalog();
+const items = all.filter((p) => p.lead && p.place?.slug === pl.slug).sort((a, b) => TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type));
+const others = PLACES.filter((x) => x.slug !== pl.slug);
+const big = pl.slug === 'beverly-drive-in';
+const jsonld = [{
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteConfig.siteUrl + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Places', item: `${siteConfig.siteUrl}/places` },
+    { '@type': 'ListItem', position: 3, name: pl.name, item: `${siteConfig.siteUrl}/places/${pl.slug}` },
+  ],
+}, {
+  '@context': 'https://schema.org', '@type': 'CollectionPage', name: `${pl.name}: Hattiesburg tees, hats & prints`, url: `${siteConfig.siteUrl}/places/${pl.slug}`,
+  about: { '@type': 'Place', name: `${pl.name}, Hattiesburg, Mississippi` },
+}];
+---
+<V2Layout title={pl.name.includes('Hattiesburg') ? pl.name : `${pl.name}, Hattiesburg`} description={clip(pl.story[0])} image={`/images/hb/places/${pl.tile}-900.jpg`} jsonld={jsonld}>
+  <div class="hb-wrap">
+    <nav class="hb-crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/places">Places</a></li><li aria-current="page">{pl.short}</li></ol></nav>
+  </div>
+  <section class="hb-section--tight">
+    <div class="hb-wrap" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center" data-place-hero>
+      <div>
+        <p class="hb-eyebrow"><span class="hb-era">{pl.era}</span></p>
+        <h1 class="hb-h1" style="font-size:clamp(2rem,4.4vw,3.4rem)" set:html={nw(pl.name)} />
+        {pl.story.map((s, i) => <p class={i === 0 ? 'hb-lede' : ''} style={i ? 'color:var(--ink-2);max-width:36em' : ''}>{s}</p>)}
+        <dl style="display:flex;flex-wrap:wrap;gap:12px 28px;margin:22px 0 0">
+          {pl.facts.map((f) => <div><dt class="hb-card__place">{f.k}</dt><dd style="margin:2px 0 0;font-weight:650">{f.v}</dd></div>)}
+        </dl>
+        <a class="hb-btn hb-btn--primary" href="#pieces" style="margin-top:24px">{items.length === 1 ? `Shop the ${items[0].type.toLowerCase()}${items[0].family.length > 1 ? ` · ${items[0].family.length} colors` : ''}` : `Shop ${items.length} designs`}</a>
+      </div>
+      <div style={`border-radius:var(--radius);overflow:hidden;background:${pl.tone};border:1px solid rgba(30,26,22,.12)`}>
+        <picture>
+          <source type="image/avif" srcset={`/images/hb/places/${pl.tile}-600.avif 600w, /images/hb/places/${pl.tile}-900.avif 900w`} sizes="(max-width: 900px) 100vw, 560px" />
+          <img src={`/images/hb/places/${pl.tile}-900.webp`} srcset={`/images/hb/places/${pl.tile}-600.webp 600w, /images/hb/places/${pl.tile}-900.webp 900w`} sizes="(max-width: 900px) 100vw, 560px" width="900" height={big ? 900 : 675} alt={`${pl.name} artwork from the Nostalgic Hattiesburg collection`} fetchpriority="high" />
+        </picture>
+      </div>
+    </div>
+  </section>
+  <section class="hb-section--tight" id="pieces" aria-labelledby="pieces-h">
+    <div class="hb-wrap">
+      <div class="hb-head"><h2 class="hb-h2" id="pieces-h" set:html={nw(`${pl.short.startsWith('The ') ? pl.short : 'The ' + pl.short} collection`)} />{pl.note && <p class="hb-note" style="margin:0">{pl.note}</p>}</div>
+      <div class={`hb-grid${items.length <= 2 ? ' hb-grid--few' : ''}`}>{items.map((p, i) => <ProductCard p={p} eager={i < 2} />)}</div>
+      <aside class="hb-sources" aria-labelledby="src-h">
+        <h3 id="src-h">Sources</h3>
+        <ul>{pl.sources.map((s) => <li>{s.url ? <a class="hb-link" href={s.url} rel="nofollow noopener">{s.label}</a> : s.label}</li>)}</ul>
+        <p class="hb-note">Know more about {pl.short.replace(/^The /, 'the ')}? Have a photo? <a class="hb-link" href={`mailto:${siteConfig.contactEmail}?subject=${encodeURIComponent(pl.short)}`}>Tell us</a>.</p>
+      </aside>
+    </div>
+  </section>
+  <section class="hb-section--tight" style="border-top:1px solid var(--line)" aria-labelledby="more-h">
+    <div class="hb-wrap">
+      <h2 class="hb-h2" id="more-h" style="font-size:clamp(1.4rem,2.4vw,1.9rem);margin-bottom:18px">More Hattiesburg places</h2>
+      <div class="hb-filters">{others.map((o) => <a class="hb-chip" href={`/places/${o.slug}`}>{o.short}</a>)}</div>
+    </div>
+  </section>
+</V2Layout>
+<style>
+  @media (max-width: 900px) { [data-place-hero] { grid-template-columns: 1fr !important; } [data-place-hero] > div:last-child { order: -1; } }
+</style>

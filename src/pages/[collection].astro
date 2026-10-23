@@ -1,44 +1,6 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Nav from '../components/Nav.astro';
-import Footer from '../components/Footer.astro';
-import CartDrawer from '../components/CartDrawer.astro';
-import ProductCard from '../components/ProductCard.astro';
-import { getAllProducts } from '../lib/products';
-import { town, townSlug } from '../config/site.config';
-
-// Sub-collection pages for the current town (e.g. Hammond's /ponchatoula).
-// Each one's intro lives in src/towns/<town>/collections/<slug>.astro.
-export async function getStaticPaths() {
-  return town.collections.map((c) => ({ params: { collection: c.slug }, props: { c } }));
-}
-
-const { c } = Astro.props;
-const intros = import.meta.glob('../towns/*/collections/*.astro', { eager: true }) as Record<string, any>;
-const Intro = intros[`../towns/${townSlug}/collections/${c.slug}.astro`].default;
-const products = (await getAllProducts()).filter(p => p.handle.startsWith(c.handlePrefix));
+import Collection from '@site/Collection.astro';
+import { collectionPaths } from '@site/paths';
+export async function getStaticPaths() { return collectionPaths(); }
 ---
-
-<Layout
-  title={c.title}
-  description={c.description}
->
-  <Nav />
-
-  <main class="bg-cream min-h-screen pt-16">
-    <div class="container-custom py-16 md:py-20">
-      <div class="max-w-2xl mx-auto mb-14">
-        <Intro />
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-        {products.map(product => (
-          <ProductCard product={product} />
-        ))}
-      </div>
-    </div>
-  </main>
-
-  <Footer />
-  <CartDrawer />
-</Layout>
+<Collection {...Astro.props} />

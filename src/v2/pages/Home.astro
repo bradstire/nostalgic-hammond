@@ -1,0 +1,314 @@
+---
+import V2Layout from '../V2Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCatalog, cdn, srcset, money } from '../catalog';
+import { PLACES, START_HERE, PAIRS, FAQ, FREE_SHIP, TYPE_ORDER, TYPE_SLUG, HOLIDAY_CUTOFF, SHIP_MAKE } from '../data';
+import boxes from '../hero-boxes.json';
+import { nw } from '../nw';
+import { siteConfig } from '../../config/site.config';
+
+const all = await getCatalog();
+const leads = all.filter((p) => p.lead);
+const by = (h: string) => all.find((p) => p.handle === h);
+const start = START_HERE.map(by).filter(Boolean) as typeof all;
+const count = (slug: string) => leads.filter((p) => p.place?.slug === slug).length;
+// Pairs: pinned colour per item; tees get a size picker (default M).
+const pairs = PAIRS.map((pr) => {
+  const items = pr.items.map((it) => {
+    const p = by(it.h); if (!p) return null;
+    const vs = p.variants.filter((v) => v.available && (!it.color || v.options.Color === it.color));
+    const def = vs.find((v) => v.options.Size === 'M') || vs[0];
+    const sizes = p.sizes.length > 1 ? Object.fromEntries(vs.map((v) => [v.options.Size, v.id])) : null;
+    const img = (it.color && def?.image) || p.images[0]?.url;
+    return { p, color: it.color, def, sizes, img, href: `/products/${p.handle}${it.color ? `?color=${encodeURIComponent(it.color)}` : ''}` };
+  }).filter((x) => x && x.def) as any[];
+  return { ...pr, items };
+}).filter((pr) => pr.items.length === 2);
+const pairTotals = pairs.map((pr) => pr.items.reduce((sum: number, it: any) => sum + it.def.price, 0));
+const pairFrom = Math.min(...pairTotals);
+const typeImg: Record<string, string> = {
+  Tee: 'hub-city-drag-raceway-tee', Hat: 'camelot-music-hat', Socks: 'hub-city-drag-raceway-socks', 'Framed print': 'main-street-hattiesburg-framed-poster-18-12',
+};
+const LETTER_PLACE: Record<string, string> = {
+  main99: 'postcards', beverly: 'beverly-drive-in', hubcar: 'hub-city-drag-raceway', camelot: 'cloverleaf-mall', speeds: 'albert-speeds',
+  main98: 'postcards', culpepper: 'culpepper-body-paint', checker: 'hub-city-drag-raceway', physed: 'phys-ed', mainR: 'postcards', mainG: 'postcards',
+};
+const LETTER_LABEL: Record<string, string> = {
+  postcards: 'Hattiesburg Postcards', 'beverly-drive-in': 'Beverly Drive-In', 'hub-city-drag-raceway': 'Hub City Drag Raceway', 'cloverleaf-mall': 'Cloverleaf Mall (Camelot)',
+  'albert-speeds': "Albert Speed's", 'culpepper-body-paint': 'Culpepper Body & Paint', 'phys-ed': 'The Old English H',
+};
+const HERO_SIZES = '(min-width: 1240px) 900px, (min-width: 901px) 80vw, calc(100vw - 32px)';
+const picks = ([['beverly-drive-in-theatre-tee', 'Beverly tee'], ['camelot-music-hat', 'Camelot hat'], ['main-street-hattiesburg-framed-poster-18-12', 'Main Street print']] as const)
+  .map(([h, label]) => ({ p: by(h), label })).filter((x) => x.p) as { p: (typeof all)[number]; label: string }[];
+const placeCta = (slug: string) => {
+  const items = leads.filter((p) => p.place?.slug === slug);
+  return items.length === 1 ? `Shop the ${items[0].type.toLowerCase()}${items[0].family.length > 1 ? ` · ${items[0].family.length} colors` : ''}` : `Shop ${items.length} designs`;
+};
+// Legend: one entry per place, letters in word order.
+const legend: { slug: string; letters: string }[] = [];
+for (const b of boxes.wide as any[]) { const slug = LETTER_PLACE[b.key]; const e = legend.find((x) => x.slug === slug); e ? (e.letters += b.ch) : legend.push({ slug, letters: b.ch }); }
+const pct = (v: number) => (v * 100).toFixed(2) + '%';
+
+const jsonld = [
+  { '@context': 'https://schema.org', '@type': 'Organization', name: siteConfig.brandName, url: siteConfig.siteUrl, logo: siteConfig.siteUrl + '/images/hb/apple-touch-icon.png', email: siteConfig.contactEmail },
+  { '@context': 'https://schema.org', '@type': 'WebSite', name: siteConfig.brandName, url: siteConfig.siteUrl },
+];
+const check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+---
+<V2Layout jsonld={jsonld}>
+  <Fragment slot="head">
+    <link rel="preload" as="image" type="image/avif" media="(min-width: 901px)" imagesrcset="/images/hb/hero/wide-800.avif 800w, /images/hb/hero/wide-1200.avif 1200w, /images/hb/hero/wide-1600.avif 1600w, /images/hb/hero/wide-2400.avif 2400w" imagesizes="(min-width: 1240px) 900px, 80vw" fetchpriority="high" />
+    <link rel="preload" as="image" type="image/avif" media="(max-width: 900px)" imagesrcset="/images/hb/hero/stack-600.avif 600w, /images/hb/hero/stack-750.avif 750w, /images/hb/hero/stack-900.avif 900w, /images/hb/hero/stack-1200.avif 1200w" imagesizes="calc(100vw - 32px)" fetchpriority="high" />
+  </Fragment>
+
+  <section class="hb-hero">
+    <div class="hb-wrap hb-hero__grid">
+      <div class="hb-hero__text">
+        <p class="hb-eyebrow">Made-to-order tees, hats, socks &amp; prints</p>
+        <h1 class="hb-h1">Lost Hattiesburg, ready to&nbsp;wear.</h1>
+        <p class="hb-lede">Tees, hats, socks and prints redrawn from old Hattiesburg signs, ads and postcards. For anyone who's called it home, and anyone shopping for&nbsp;them.</p>
+        <div class="hb-hero__ctas">
+          <a class="hb-btn hb-btn--primary" href="/shop">Shop the collection</a>
+          <a class="hb-btn hb-btn--ghost" href="#places">Find your place</a>
+        </div>
+        <ul class="hb-picks" aria-label="Popular picks">
+          {picks.map(({ p, label }) => (
+            <li><a href={`/products/${p.handle}`}>
+              <img src={cdn(p.images[0].url, 240)} srcset={srcset(p.images[0].url, [180, 240, 360])} sizes="30vw" width="240" height="240" alt="" decoding="async" />
+              <span class="hb-picks__t">{label}</span>
+              <span class="hb-picks__p">{money(p.price)}</span>
+            </a></li>
+          ))}
+        </ul>
+      </div>
+      <figure class="hb-hero__art">
+        <div class="hb-hero__card">
+          <picture>
+            <source media="(max-width: 900px)" type="image/avif" srcset="/images/hb/hero/stack-600.avif 600w, /images/hb/hero/stack-750.avif 750w, /images/hb/hero/stack-900.avif 900w, /images/hb/hero/stack-1200.avif 1200w" sizes="calc(100vw - 32px)" />
+            <source media="(max-width: 900px)" type="image/webp" srcset="/images/hb/hero/stack-600.webp 600w, /images/hb/hero/stack-750.webp 750w, /images/hb/hero/stack-900.webp 900w, /images/hb/hero/stack-1200.webp 1200w" sizes="calc(100vw - 32px)" />
+            <source type="image/avif" srcset="/images/hb/hero/wide-800.avif 800w, /images/hb/hero/wide-1200.avif 1200w, /images/hb/hero/wide-1600.avif 1600w, /images/hb/hero/wide-2400.avif 2400w" sizes={HERO_SIZES} />
+            <img src="/images/hb/hero/wide-1200.webp" srcset="/images/hb/hero/wide-800.webp 800w, /images/hb/hero/wide-1200.webp 1200w, /images/hb/hero/wide-1600.webp 1600w, /images/hb/hero/wide-2400.webp 2400w" sizes={HERO_SIZES}
+              width="2400" height="1300" fetchpriority="high"
+              alt="A vintage-style 'Greetings from Hattiesburg' large-letter postcard. Each letter of HATTIESBURG holds a lost place: Main Street postcard scenes, a starry drive-in night for the Beverly, a 1966 drag-race photo and a checkered flag for Hub City Drag Raceway, Camelot Music's rainbow arch and stripes, Albert Speed's sign colors, the Culpepper duck, and purple-and-gold gym stripes with the Old English H." />
+          </picture>
+          <nav aria-label="Places in the postcard" class="hb-hots">
+            {boxes.wide.map((b: any) => (
+              <a class="hb-hot hb-hot--wide" href={`/places/${LETTER_PLACE[b.key]}`} style={`left:${pct(b.x)};top:${pct(b.y)};width:${pct(b.w)};height:${pct(b.h)}`} aria-label={`Letter ${b.ch}: ${LETTER_LABEL[LETTER_PLACE[b.key]]}`} data-label={LETTER_LABEL[LETTER_PLACE[b.key]]}></a>
+            ))}
+            {boxes.stack.map((b: any) => (
+              <a class="hb-hot hb-hot--stack" href={`/places/${LETTER_PLACE[b.key]}`} style={`left:${pct(b.x)};top:${pct(b.y)};width:${pct(b.w)};height:${pct(b.h)}`} aria-label={`Letter ${b.ch}: ${LETTER_LABEL[LETTER_PLACE[b.key]]}`}></a>
+            ))}
+          </nav>
+        </div>
+        <figcaption class="hb-hero__cap">
+          <span>Every letter holds a piece of old Hattiesburg. Tap one to see its story.</span>
+          <ul class="hb-legend" aria-label="What's in each letter">
+            {legend.map((e) => <li><a href={`/places/${e.slug}`}><b>{e.letters.split('').join(' ')}</b> {LETTER_LABEL[e.slug]}</a></li>)}
+          </ul>
+        </figcaption>
+      </figure>
+      <ul class="hb-trust">
+        <li><Fragment set:html={check} />Free US shipping on ${FREE_SHIP}+</li>
+        <li><Fragment set:html={check} />Made to order, ships in {SHIP_MAKE} days</li>
+        <li><Fragment set:html={check} />Misprinted or damaged? Free replacement</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="hb-section--tight" aria-labelledby="start-h">
+    <div class="hb-wrap">
+      <div class="hb-head">
+        <div>
+          <h2 class="hb-h2" id="start-h">Start here: one piece from every story</h2>
+        </div>
+        <a class="hb-link" href="/shop">Shop all {leads.length}</a>
+      </div>
+      <div class="hb-rail" role="list">
+        {start.map((p, i) => <div role="listitem"><ProductCard p={p} eager={i < 2} sizes="(max-width: 760px) 62vw, 300px" /></div>)}
+      </div>
+    </div>
+  </section>
+
+  <section class="hb-section" id="places" aria-labelledby="places-h">
+    <div class="hb-wrap">
+      <div class="hb-head">
+        <div>
+          <p class="hb-eyebrow">Shop by place</p>
+          <h2 class="hb-h2" id="places-h">Seven Hattiesburg stories people still talk&nbsp;about</h2>
+          <p>Each one has its own story, sources and collection. Grew up here, went to school here, or just love a good old sign? Start anywhere.</p>
+        </div>
+      </div>
+      <div class="hb-places">
+        {PLACES.map((pl) => (
+          <a class="hb-place" href={`/places/${pl.slug}`}>
+            <div class="hb-place__media" style={`background:${pl.tone}`}>
+              <picture>
+                <source type="image/avif" srcset={`/images/hb/places/${pl.tile}-600.avif 600w, /images/hb/places/${pl.tile}-900.avif 900w`} sizes="(max-width: 1000px) 50vw, 300px" />
+                <img src={`/images/hb/places/${pl.tile}-600.webp`} srcset={`/images/hb/places/${pl.tile}-600.webp 600w, /images/hb/places/${pl.tile}-900.webp 900w`} sizes="(max-width: 1000px) 50vw, 300px" alt="" width="600" height="450" loading="lazy" decoding="async" />
+              </picture>
+            </div>
+            <div class="hb-place__txt">
+              <div class="hb-place__era">{pl.era}</div>
+              <h3 class="hb-place__name" set:html={nw(pl.name)} />
+              <p class="hb-place__line" set:html={nw(pl.line)} />
+              <span class="hb-place__go">{placeCta(pl.slug)} <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        ))}
+        <a class="hb-place hb-place--all" href="/shop">
+          <h3 class="hb-place__name">Not sure where to start?</h3>
+          <p>See all {leads.length} designs, or filter by tees, hats, socks and prints.</p>
+          <span class="hb-place__go">Shop everything <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="hb-section" id="gifts" aria-labelledby="gifts-h" style="background:var(--paper-2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div class="hb-wrap">
+      <div class="hb-head">
+        <div>
+          <h2 class="hb-h2" id="gifts-h">Gift pairs that ship free</h2>
+          <p>A tee and a hat for {money(pairFrom)}, so US shipping is on us. Order by {HOLIDAY_CUTOFF} for Christmas delivery.</p>
+        </div>
+      </div>
+      <div class="hb-pairs">
+        {pairs.map((pr, pi) => {
+          const total = pr.items.reduce((sum: number, it: any) => sum + it.def.price, 0);
+          const ids = pr.items.map((it: any) => it.def.id).join(',');
+          return (
+            <article class="hb-pair" data-pair>
+              <div class="hb-pair__imgs">
+                {pr.items.map((it: any) => (
+                  <a href={it.href}>
+                    <img src={cdn(it.img, 360)} srcset={srcset(it.img, [240, 360, 540])} sizes="(max-width: 900px) 45vw, 190px" width="360" height="360" alt={`${it.p.baseTitle}${it.color ? ` in ${it.color}` : ''}`} loading="lazy" decoding="async" />
+                  </a>
+                ))}
+              </div>
+              <h3 class="hb-h3">{pr.title}</h3>
+              <p>{pr.note}</p>
+              <ul class="hb-pair__list">
+                {pr.items.map((it: any) => (
+                  <li>
+                    <span>{it.p.baseTitle}{it.color ? `, ${it.color}` : ''}</span>
+                    {it.sizes ? (
+                      <label class="hb-pair__size">
+                        <span class="hb-sr">Size for {it.p.baseTitle}</span>
+                        <select data-pair-size data-sizes={JSON.stringify(it.sizes)} required>
+                          <option value="" selected>Size</option>
+                          {Object.keys(it.sizes).map((sz) => <option value={sz}>{sz}</option>)}
+                        </select>
+                      </label>
+                    ) : <span class="hb-note" style="margin:0">One size</span>}
+                  </li>
+                ))}
+              </ul>
+              <div class="hb-pair__row">
+                <div class="hb-pair__price">{money(total)}<small>Ships free (US)</small></div>
+                <button class="hb-btn hb-btn--primary" type="button" data-add={ids} data-value={total} aria-disabled={pr.items.some((it: any) => it.sizes) ? 'true' : undefined} data-pair-btn>Add both to cart</button>
+              </div>
+              <p class="hb-pair__msg" role="status" aria-live="polite"></p>
+            </article>
+          );
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="hb-section hb-story" aria-labelledby="story-h">
+    <div class="hb-wrap">
+      <p class="hb-eyebrow">Redrawn from the record</p>
+      <h2 class="hb-h2" id="story-h">Real places. Real sources. Restored with&nbsp;care.</h2>
+      <div class="hb-story__grid">
+        <figure class="hb-artifact">
+          <div class="hb-artifact__img"><picture><source type="image/avif" srcset="/images/hb/story/postcard-600.avif 600w, /images/hb/story/postcard-900.avif 900w" sizes="(max-width: 900px) 100vw, 380px" /><img src="/images/hb/story/postcard-600.webp" srcset="/images/hb/story/postcard-600.webp 600w, /images/hb/story/postcard-900.webp 900w" sizes="(max-width: 900px) 100vw, 380px" width="600" height="450" alt="Colored postcard of Main Street, Hattiesburg, looking north, about 1915 to 1920" loading="lazy" /></picture></div>
+          <figcaption><strong>Main Street, c. 1915–20</strong>From the MDAH Cooper Postcard Collection (Mississippi Department of Archives and History). Cleaned of dust, never repainted.</figcaption>
+        </figure>
+        <figure class="hb-artifact">
+          <div class="hb-artifact__img"><picture><source type="image/avif" srcset="/images/hb/story/hubcity-600.avif 600w, /images/hb/story/hubcity-900.avif 900w" sizes="(max-width: 900px) 100vw, 380px" /><img src="/images/hb/story/hubcity-600.webp" srcset="/images/hb/story/hubcity-600.webp 600w, /images/hb/story/hubcity-900.webp 900w" sizes="(max-width: 900px) 100vw, 380px" width="600" height="450" alt="Restored 1966 newspaper ad for Hub City Drag Raceway announcing Ford versus Chevy match races" loading="lazy" /></picture></div>
+          <figcaption><strong>Hub City Drag Raceway, 1966</strong>Restored from the original newspaper ad, newsprint grain and all, then printed on a white tee.</figcaption>
+        </figure>
+        <figure class="hb-artifact">
+          <div class="hb-artifact__img"><picture><source type="image/avif" srcset="/images/hb/story/camelot-600.avif 600w, /images/hb/story/camelot-900.avif 900w" sizes="(max-width: 900px) 100vw, 380px" /><img src="/images/hb/story/camelot-600.webp" srcset="/images/hb/story/camelot-600.webp 600w, /images/hb/story/camelot-900.webp 900w" sizes="(max-width: 900px) 100vw, 380px" width="600" height="450" alt="Camelot Music rainbow arch logo in red and royal blue, as on the chain's 1970s shopping bag" loading="lazy" /></picture></div>
+          <figcaption><strong>Camelot Music, Cloverleaf Mall, 1974</strong>Our redraw of the chain's 1970s bag, in its original red and royal blue. Camelot's opening is in the mall's 1974 grand-opening ad.</figcaption>
+        </figure>
+      </div>
+      <p class="hb-story__note">We start with what's on the record: archive postcards, old newspaper ads, photos of the signs. Then we redraw each one so it prints sharp, and list our sources on every place page. Have a photo of a place we should bring back? <a href={`mailto:${siteConfig.contactEmail}?subject=A%20place%20to%20remember`} style="color:#fff">Send it our way</a>.</p>
+    </div>
+  </section>
+
+  <section class="hb-section" aria-labelledby="types-h">
+    <div class="hb-wrap">
+      <div class="hb-head"><div><h2 class="hb-h2" id="types-h">Shop by type</h2></div></div>
+      <div class="hb-types">
+        {TYPE_ORDER.map((t) => {
+          const p = by(typeImg[t]); const n = leads.filter((x) => x.type === t).length;
+          return p ? (
+            <a class="hb-type" href={`/shop?type=${TYPE_SLUG[t]}`}>
+              <div class="hb-type__img"><img src={cdn(p.images[0].url, 540)} srcset={srcset(p.images[0].url, [360, 540, 720])} sizes="(max-width: 760px) 50vw, 300px" width="540" height="540" alt="" loading="lazy" decoding="async" /></div>
+              <div><strong>{t === 'Framed print' ? 'Framed prints' : t === 'Socks' ? 'Socks' : t + 's'}</strong> <span>{n}&nbsp;{n === 1 ? 'style' : 'styles'}</span></div>
+            </a>
+          ) : null;
+        })}
+      </div>
+    </div>
+  </section>
+
+  <section class="hb-section--tight hb-email" aria-labelledby="email-h">
+    <div class="hb-wrap hb-email__in">
+      <div>
+        <h2 class="hb-h2" id="email-h">Get 15% off your first order</h2>
+        <p class="hb-lede" style="margin-top:8px">Plus the story behind each new place we bring back. A few emails a month, unsubscribe anytime.</p>
+      </div>
+      <form class="hb-form" data-signup novalidate>
+        <label for="hb-email-in">Email address</label>
+        <input class="hb-input" id="hb-email-in" type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
+        <button class="hb-btn hb-btn--dark" type="submit">Get my 15% off</button>
+        <p class="hb-form__msg" role="status" aria-live="polite"></p>
+        <p class="hb-form__legal">A few emails a month. Unsubscribe anytime. <a href="https://checkout.shopify.com/97765622131/policies/50774835571.html?locale=en" rel="nofollow">Privacy policy</a></p>
+      </form>
+    </div>
+  </section>
+
+  <section class="hb-section" aria-labelledby="faq-h">
+    <div class="hb-wrap">
+      <div class="hb-head"><div><h2 class="hb-h2" id="faq-h">Questions, answered</h2></div><a class="hb-link" href="/faq">All FAQs</a></div>
+      <div class="hb-faq">
+        {FAQ.slice(0, 5).map((f, i) => (<details open={i === 0}><summary>{f.q}</summary><p>{f.a}</p></details>))}
+      </div>
+    </div>
+  </section>
+</V2Layout>
+
+<style is:global>
+  .hb-hots { position: absolute; inset: 0; }
+  .hb-hot--stack { display: none; }
+  @media (max-width: 900px) { .hb-hot--wide { display: none; } .hb-hot--stack { display: block; } }
+</style>
+
+<script>
+  // Pair size pickers rewrite the "Add both" variant list.
+  document.querySelectorAll<HTMLElement>('[data-pair]').forEach((card) => {
+    const btn = card.querySelector('[data-add]') as HTMLElement;
+    const msg = card.querySelector('.hb-pair__msg') as HTMLElement;
+    const sels = [...card.querySelectorAll<HTMLSelectElement>('[data-pair-size]')];
+    const ready = () => sels.every((s) => s.value);
+    sels.forEach((sel) => sel.addEventListener('change', () => {
+      const ids = (btn.dataset.add || '').split(',');
+      const map = JSON.parse(sel.dataset.sizes || '{}');
+      const idx = [...card.querySelectorAll('.hb-pair__list li')].findIndex((li) => li.contains(sel));
+      if (sel.value) ids[idx] = map[sel.value];
+      btn.dataset.add = ids.join(',');
+      btn.setAttribute('aria-disabled', String(!ready())); if (ready()) msg.textContent = '';
+    }));
+    // Block "Add both" until every tee has a size (fit returns aren't possible on made-to-order pieces).
+    btn.addEventListener('click', (e) => {
+      if (ready()) return;
+      e.preventDefault(); e.stopImmediatePropagation();
+      msg.textContent = 'Choose a tee size first.';
+      sels.find((s) => !s.value)?.focus();
+    }, true);
+  });
+  import { signup } from '../signup';
+  document.querySelectorAll<HTMLFormElement>('main [data-signup]').forEach((f) => signup(f));
+</script>

@@ -1,0 +1,44 @@
+---
+import { FREE_SHIP, HOLIDAY_CUTOFF } from '../data';
+const links = [
+  { href: '/shop', label: 'Shop all' },
+  { href: '/places', label: 'Shop by place' },
+  { href: '/#gifts', label: 'Gifts' },
+  { href: '/about', label: 'Our story' },
+];
+---
+<aside class="hb-ann" aria-label="Store announcement">
+  <strong>Free US shipping on ${FREE_SHIP}+</strong><span aria-hidden="true"> · </span><span>Order by {HOLIDAY_CUTOFF} for Christmas</span>
+</aside>
+<header class="hb-header">
+  <div class="hb-wrap hb-header__in">
+    <a class="hb-logo" href="/" aria-label="Nostalgic Hattiesburg, home">
+      <small>Nostalgic</small>
+      <span>Hattiesburg</span>
+    </a>
+    <nav class="hb-nav" aria-label="Main">
+      {links.map((l) => <a href={l.href}>{l.label}</a>)}
+    </nav>
+    <details class="hb-menu">
+      <summary aria-label="Menu">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </summary>
+      <div class="hb-menu__bg" aria-hidden="true"></div>
+      <nav aria-label="Mobile" data-menu-links>
+        {links.map((l) => <a href={l.href}>{l.label}</a>)}
+        <a href="/faq">Help & FAQ</a>
+      </nav>
+    </details>
+    <button class="hb-cartbtn" type="button" data-cart-open aria-label="Open cart, 0 items">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 7h12l-1 13H7L6 7z"/><path d="M9 7V6a3 3 0 0 1 6 0v1"/></svg>
+      <span data-count="0" aria-live="polite">0</span>
+    </button>
+  </div>
+</header>
+<script>
+  // Close the mobile menu after choosing a link (same-page anchors don't navigate away).
+  const menu = document.querySelector('.hb-menu') as HTMLDetailsElement | null;
+  menu?.querySelector('[data-menu-links]')?.addEventListener('click', (e) => { if ((e.target as HTMLElement).closest('a')) menu.open = false; });
+  document.addEventListener('click', (e) => { const t = e.target as HTMLElement; if (menu?.open && (!menu.contains(t) || t.classList.contains('hb-menu__bg'))) menu.open = false; });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && menu?.open) { menu.open = false; menu.querySelector('summary')?.focus(); } });
+</script>

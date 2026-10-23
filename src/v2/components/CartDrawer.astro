@@ -1,0 +1,205 @@
+---
+import { FREE_SHIP } from '../data';
+import { getCatalog, cdn, money } from '../catalog';
+import { FRAME_SIZE } from '../data';
+// Add-ons offered in the cart to close the free-shipping gap. Only items priced at or above the
+// remaining gap are shown, so "ships free" is always true. Each option keeps its own photo.
+const all = await getCatalog();
+const addOns = ['camelot-music-socks', 'hub-city-drag-raceway-socks', 'albert-speeds-socks', 'hub-city-drag-raceway-hat', 'camelot-music-hat', 'albert-speeds-hat', 'hub-city-drag-raceway-tee', 'camelot-music-1974-bag-tee', 'beverly-drive-in-theatre-tee', 'hub-city-drag-raceway-framed-poster-12-12']
+  .map((h) => all.find((p) => p.handle === h)).filter(Boolean)
+  .map((p) => ({ handle: p!.handle, title: p!.baseTitle, price: p!.price, img: cdn(p!.images[0].url, 160), type: p!.type, place: p!.place?.slug || '',
+    sized: p!.sizes.length > 1,
+    // pictured colour first, so the default matches the thumbnail (and the product page)
+    variants: p!.variants.filter((v) => v.available).sort((a, b) => (b.image === p!.images[0]?.url ? 1 : 0) - (a.image === p!.images[0]?.url ? 1 : 0))
+      .map((v) => ({ id: v.id, label: v.options.Size || v.options.Color || 'One size', img: v.image ? cdn(v.image, 160) : '' })) }))
+  .map((a) => ({ ...a, img: a.variants[0]?.img || a.img }));
+// Display names for cart lines, matching the product pages (Shopify titles carry colour/size suffixes).
+const names = Object.fromEntries(all.map((p) => [p.handle, { t: p.baseTitle, c: p.colors.length === 1 ? p.colors[0].name : '', f: FRAME_SIZE[p.handle] || '', place: p.place?.slug || '' }]));
+---
+<dialog class="hb-drawer" id="hb-cart" aria-labelledby="hb-cart-title" data-addons={JSON.stringify(addOns)} data-names={JSON.stringify(names)}>
+  <div class="hb-drawer__bg" data-cart-close></div>
+  <section class="hb-drawer__panel">
+    <div class="hb-drawer__head">
+      <h2 id="hb-cart-title" tabindex="-1">Your cart</h2>
+      <button class="hb-x" type="button" data-cart-close aria-label="Close cart">×</button>
+    </div>
+    <div class="hb-ship" data-ship aria-live="polite">
+      <span data-ship-text>Free US shipping on orders ${FREE_SHIP}+</span>
+      <div class="hb-ship__bar" aria-hidden="true"><i data-ship-bar></i></div>
+    </div>
+    <div class="hb-lines" data-lines>
+      <p class="hb-empty">Your cart is empty.</p>
+    </div>
+    <div class="hb-upsell" data-upsell hidden></div>
+    <div class="hb-drawer__foot" data-foot hidden>
+      <div class="hb-sub"><span>Subtotal</span><span data-subtotal>$0</span></div>
+      <p class="hb-note" style="margin:0">Taxes and shipping are calculated at checkout. Free shipping is based on your total after discounts. Made to order: ships in 2–5 business days.</p>
+      <a class="hb-btn hb-btn--primary hb-btn--block" data-checkout href="#">Check out securely</a>
+      <p class="hb-note" style="margin:0;text-align:center">Shop Pay, Apple Pay, Google Pay, PayPal and cards accepted</p>
+    </div>
+ </section>
+</dialog>
+<div class="hb-toast" role="status" aria-live="polite" data-toast></div>
+
+<script>
+  import { getCart, addLines, updateLine, type Cart } from '../cart';
+  const FREE = 60;
+  const el = document.getElementById('hb-cart') as HTMLDialogElement;
+  type AddOn = { handle: string; title: string; price: number; img: string; type: string; place: string; sized: boolean; variants: { id: string; label: string; img: string }[] };
+  const addOns: AddOn[] = JSON.parse(el.dataset.addons || '[]');
+  const names: Record<string, { t: string; c: string; f: string; place: string }> = JSON.parse(el.dataset.names || '{}');
+  const lineTitle = (l: { handle: string; title: string }) => names[l.handle]?.t || l.title;
+  const lineVariant = (l: { handle: string; variantTitle: string }) => {
+    const n = names[l.handle]; const v = l.variantTitle && l.variantTitle !== 'Default Title' ? l.variantTitle : '';
+    return [n?.c, v, n?.f].filter(Boolean).join(' / ');
+  };
+  let lastFocus: HTMLElement | null = null;
+  let cart: Cart | null = null;
+  const fmt = (n: number) => '$' + (Number.isInteger(n) ? n.toFixed(0) : n.toFixed(2));
+  const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
+  const img = (u?: string) => (u ? u + (u.includes('?') ? '&' : '?') + 'width=160' : '');
+
+  function setCount(n: number) {
+    document.querySelectorAll('[data-count]').forEach((c) => { c.setAttribute('data-count', String(n)); c.textContent = String(n); });
+    document.querySelectorAll('[data-cart-open]').forEach((b) => b.setAttribute('aria-label', `Open cart, ${n} ${n === 1 ? 'item' : 'items'}`));
+  }
+
+  function render() {
+    const lines = el.querySelector('[data-lines]')!;
+    const foot = el.querySelector('[data-foot]') as HTMLElement;
+    const sub = cart?.subtotal || 0;
+    const left = Math.max(0, FREE - sub);
+    (el.querySelector('[data-ship-bar]') as HTMLElement).style.width = Math.min(100, (sub / FREE) * 100) + '%';
+    el.querySelector('[data-ship-text]')!.innerHTML = !cart || cart.count === 0
+      ? `Free US shipping on orders ${fmt(FREE)}+`
+      : left > 0 ? `You're <strong>${fmt(left)}</strong> away from free US shipping` : `<strong>Your order ships free</strong> (US)`;
+    setCount(cart?.count || 0);
+    if (!cart || cart.count === 0) {
+      lines.innerHTML = `<div class="hb-empty"><p>Your cart is empty.</p>
+        <p class="hb-empty__links"><a class="hb-btn hb-btn--primary" href="/shop">Shop the collection</a><a class="hb-btn hb-btn--ghost" href="/#gifts" data-cart-close>Gift pairs that ship free</a></p></div>`;
+      foot.hidden = true; renderUpsell(0); return;
+    }
+    foot.hidden = false;
+    el.querySelector('[data-subtotal]')!.textContent = fmt(sub);
+    lines.innerHTML = cart.lines.map((l) => `
+      <div class="hb-line">
+        <a href="/products/${l.handle}" tabindex="-1" aria-hidden="true"><img src="${img(l.image)}" alt="" width="76" height="76" loading="lazy"></a>
+        <div>
+          <a href="/products/${l.handle}" class="hb-line__t" style="text-decoration:none">${esc(lineTitle(l))}</a>
+          ${lineVariant(l) ? `<div class="hb-line__v">${esc(lineVariant(l))}</div>` : ''}
+          <div class="hb-qty" role="group" aria-label="Quantity for ${esc(lineTitle(l))}">
+            <button type="button" data-q="${l.id}" data-n="${l.quantity - 1}" data-role="dec" aria-label="Decrease quantity of ${esc(lineTitle(l))}">−</button>
+            <span>${l.quantity}</span>
+            <button type="button" data-q="${l.id}" data-n="${l.quantity + 1}" data-role="inc" aria-label="Increase quantity of ${esc(lineTitle(l))}">+</button>
+          </div>
+          <div><button type="button" class="hb-line__rm" data-q="${l.id}" data-n="0" data-role="rm">Remove<span class="hb-sr"> ${esc(lineTitle(l))}${lineVariant(l) ? ', ' + esc(lineVariant(l)) : ''}</span></button></div>
+        </div>
+        <div style="font-weight:700">${fmt(l.price * l.quantity)}</div>
+      </div>`).join('');
+    renderUpsell(left);
+  }
+  function renderUpsell(left: number) {
+    const box = el.querySelector('[data-upsell]') as HTMLElement;
+    const inCart = new Set(cart?.lines.map((l) => l.handle));
+    // cheapest add-ons that clear the gap, one per product type
+    const seen = new Set<string>();
+    const places = new Set(cart?.lines.map((l) => names[l.handle]?.place).filter(Boolean));
+    const picks = left > 0 ? addOns.filter((a) => !inCart.has(a.handle) && a.variants.length && a.price >= left)
+      .sort((x, y) => (places.has(y.place) ? 1 : 0) - (places.has(x.place) ? 1 : 0) || x.price - y.price)
+      .filter((a) => (seen.has(a.type) ? false : (seen.add(a.type), true))).slice(0, 2) : [];
+    if (!picks.length) { box.hidden = true; box.innerHTML = ''; return; }
+    box.hidden = false;
+    box.innerHTML = `<p class="hb-upsell__h">Add one of these and your order ships free</p>` + picks.map((a) => `
+      <div class="hb-upsell__item" data-up-item>
+        <img src="${a.img}" alt="" width="56" height="56" loading="lazy" data-up-img>
+        <div class="hb-upsell__t"><a href="/products/${a.handle}">${esc(a.title)}</a><span>${fmt(a.price)}</span></div>
+        ${a.variants.length > 1 ? `<label class="hb-sr" for="up-${a.handle}">${a.sized ? 'Size' : 'Color'} for ${esc(a.title)}</label><select id="up-${a.handle}" data-up-sel>${a.sized ? '<option value="">Size</option>' : ''}${a.variants.map((v) => `<option value="${v.id}" data-img="${v.img}">${esc(v.label)}</option>`).join('')}</select>` : ''}
+        <button type="button" class="hb-upsell__add" data-up-add="${a.sized ? '' : a.variants[0].id}" data-value="${a.price}" aria-label="Add ${esc(a.title)}">Add</button>
+      </div>`).join('') + `<p class="hb-upsell__msg" role="status" aria-live="polite"></p>`;
+  }
+
+  function open(trigger?: HTMLElement | null) {
+    if (el.open) return;
+    lastFocus = trigger || (document.activeElement as HTMLElement);
+    el.showModal(); el.classList.add('is-open');
+    document.documentElement.style.overflow = 'hidden';
+    (el.querySelector('#hb-cart-title') as HTMLElement)?.focus();
+  }
+  function close() {
+    el.classList.remove('is-open'); el.close();
+  }
+  // Keep Tab / Shift+Tab cycling inside the open cart.
+  el.addEventListener('keydown', (e) => {
+    if (e.key !== 'Tab') return;
+    const f = [...el.querySelectorAll<HTMLElement>('a[href]:not([tabindex="-1"]), button:not([disabled]), select, [tabindex="0"]')].filter((x) => x.offsetParent !== null);
+    if (!f.length) return;
+    const first = f[0], last = f[f.length - 1], a = document.activeElement;
+    if (e.shiftKey && (a === first || !el.contains(a) || a === el.querySelector('#hb-cart-title'))) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && a === last) { e.preventDefault(); first.focus(); }
+  });
+  el.addEventListener('close', () => { document.documentElement.style.overflow = ''; el.classList.remove('is-open'); lastFocus?.focus(); });
+  el.addEventListener('change', (e) => {
+    const sel = (e.target as HTMLElement).closest('[data-up-sel]') as HTMLSelectElement | null;
+    if (!sel) return;
+    const item = sel.closest('[data-up-item]')!;
+    (item.querySelector('[data-up-add]') as HTMLElement).dataset.upAdd = sel.value;
+    const im = sel.selectedOptions[0]?.dataset.img; if (im) (item.querySelector('[data-up-img]') as HTMLImageElement).src = im;
+  });
+  // After re-rendering the cart, put focus back where the shopper was.
+  function refocus(lineId?: string, role?: string) {
+    const target = (lineId && el.querySelector<HTMLElement>(`[data-q="${CSS.escape(lineId)}"][data-role="${role}"]`)) || el.querySelector<HTMLElement>('#hb-cart-title');
+    target?.focus();
+  }
+  function toast(msg: string) {
+    const t = document.querySelector('[data-toast]') as HTMLElement; t.textContent = msg; t.style.display = 'block';
+    setTimeout(() => (t.style.display = 'none'), 2600);
+  }
+
+  document.addEventListener('click', async (e) => {
+    const t = e.target as HTMLElement;
+    if (t.closest('[data-cart-open]')) { e.preventDefault(); open(t.closest('[data-cart-open]') as HTMLElement); return; }
+    if (t.closest('[data-cart-close]')) { close(); return; }
+    const q = t.closest('[data-q]') as HTMLElement | null;
+    if (q) {
+      q.setAttribute('disabled', '');
+      const lineId = q.dataset.q!, role = q.dataset.role || 'inc', n = parseInt(q.dataset.n!, 10);
+      try { cart = await updateLine(lineId, n); render(); refocus(n > 0 ? lineId : undefined, role === 'dec' && n === 0 ? '' : role); } catch { toast('Could not update the cart. Please try again.'); q.removeAttribute('disabled'); }
+      return;
+    }
+    const up = t.closest('[data-up-add]') as HTMLButtonElement | null;
+    if (up) {
+      if (!up.dataset.upAdd) {
+        const sel = up.closest('[data-up-item]')?.querySelector('select') as HTMLSelectElement | null;
+        const m = el.querySelector('.hb-upsell__msg'); if (m) m.textContent = 'Choose a size first.'; sel?.focus(); return;
+      }
+      up.disabled = true; up.textContent = 'Adding…';
+      try { cart = await addLines([{ merchandiseId: up.dataset.upAdd!, quantity: 1 }]); render(); refocus(); (window as any).nhTrack?.('AddToCart', { content_ids: [up.dataset.upAdd!.split('/').pop()], content_type: 'product', value: parseFloat(up.dataset.value || '0'), currency: 'USD' }); }
+      catch { toast('Could not add to cart. Please try again.'); up.disabled = false; up.textContent = 'Add'; }
+      return;
+    }
+    const add = t.closest('[data-add]') as HTMLButtonElement | null;
+    if (add && !add.disabled && add.getAttribute('aria-disabled') !== 'true') {
+      e.preventDefault();
+      const ids = (add.dataset.add || '').split(',').filter(Boolean);
+      if (!ids.length) return;
+      const label = add.innerHTML; add.disabled = true; add.textContent = 'Adding…';
+      try {
+        cart = await addLines(ids.map((merchandiseId) => ({ merchandiseId, quantity: 1 })));
+        add.disabled = false; add.innerHTML = label;
+        render(); open(add);
+        const value = parseFloat(add.dataset.value || '0');
+        (window as any).nhTrack?.('AddToCart', { content_ids: ids.map((i) => i.split('/').pop()), content_type: 'product', value, currency: 'USD' });
+      } catch { toast('Could not add to cart. Please try again.'); }
+      add.disabled = false; add.innerHTML = label;
+      return;
+    }
+    const co = t.closest('[data-checkout]');
+    if (co && cart) {
+      e.preventDefault();
+      (window as any).nhTrack?.('InitiateCheckout', { value: cart.subtotal, currency: 'USD', num_items: cart.count }, cart.id);
+      window.location.href = cart.checkoutUrl;
+    }
+  });
+  getCart().then((c) => { cart = c; render(); });
+  window.addEventListener('pageshow', (ev) => { if ((ev as PageTransitionEvent).persisted) getCart().then((c) => { cart = c; render(); }); });
+</script>

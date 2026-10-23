@@ -1,0 +1,6 @@
+---
+import Place from '@site/Place.astro';
+import { placePaths } from '@site/paths';
+export async function getStaticPaths() { return placePaths(); }
+---
+<Place {...Astro.props} />
