@@ -5,8 +5,11 @@ Source: Brad's asset dump "Nostalgic Hammond - Image asset dump 102226" (42 iPho
 traced letterforms, small copy re-typeset in matched faces, photos re-screened. All PNGs are 300 dpi with binary alpha,
 and true-vector SVG masters are in `svg/`. Mocks and reference-vs-build QA boards are in `mocks/`.
 
-**Status:** history research is done for every lead (defunct status, live successors). **The federal trademark check is
-still pending for all of them**, because no browser was reachable on 10-22. Nothing is published until it clears.
+**Status:** history research is done for every lead. The federal trademark check ran 10-22 evening (USPTO tmsearch).
+- **Clear:** Toggery Shop, Didi-Wa, Joy Drive-In.
+- **Brad's legal call:** the same word is federally registered on shirts and hats. Casa de Fresa vs FRESA (Reg. 6639523), Magnolia Inn vs MAGNOLIA (Reg. 7250713, Magnolia Business Ventures), Rush's vs RUSH (Reg. 2020507, Rush Productions).
+
+Nothing is published until Brad decides.
 
 | File(s) | Lead | Build | Garment / size |
 |---|---|---|---|
@@ -21,10 +24,10 @@ still pending for all of them**, because no browser was reachable on 10-22. Noth
 | `joy_pass_{ink,card}` | **Joy Drive-In Theatre** (opened 1968, also known as the Galaxy; closed 1992) | The Driver's Courtesy Pass with its slab type traced. "This Pass Not Transferable" is re-typeset in TeX Gyre Schola Bold (GUST). Left off: phone number and the manager's signature. | Natural tee (ink version) or any tee (cream-card version), 9 in |
 | `didiwa_sign_{charcoal,red}` | **Didi-Wa Restaurant** (Southern fried chicken; nothing about it found online) | The roadside sign: photo rectified, letters traced, outline redrawn. SOUTHERN FRIED CHICKEN / HAMMOND, LA. set in League Spartan (OFL). The real colour is unknown because the photo is sepia, so it ships as one ink. | Natural tee, 9.5 in |
 | `magnolia_sign` | **Magnolia Inn** (motel and 24-hour restaurant, 1111 W. Thomas) | The 1970s postcard sign: photo rectified, script, INN and RESTAURANT traced, boards redrawn. The magnolia emblem was too small to trace, so it is redrawn. Four inks. | White tee, 8-9 in |
-| `rushs_ad` | **Rush's Drive-In** (1722 W. Thomas, "Louisiana's Finest Drive In") | The drive-in's own ad. Copy re-typeset in TeX Gyre Schola (GUST) and Jost (OFL); photo re-screened as a 9-cell halftone. Raster master, 10 in. **Provisional:** a live Rush's drive-in chain operates in Columbia, SC. | Natural tee, 10 in |
+| `rushs_ad` | **Rush's Drive-In** (1722 W. Thomas, "Louisiana's Finest Drive In") | The drive-in's own ad. Copy re-typeset in TeX Gyre Schola (GUST) and Jost (OFL); photo re-screened as a 9-cell halftone. Raster master, 10 in. **Brad's call:** RUSH (Reg. 2020507, the band's company) covers T-shirts and hats. A live Rush's drive-in chain also operates in Columbia, SC, with no federal mark. | Natural tee, 10 in |
 
 **Not built:**
-- **Billups:** the founder's descendant holds a live registration (Reg. 4567280, FILL-UP WITH BILLUPS ... YOUR FRIEND, coffee). He also runs "Fill-Up with Billups" restaurants in Mississippi on the retro logo. This is Brad's legal call.
+- **Billups:** the coffee registration (Reg. 4567280) was cancelled in 2025. But Guy C Billups III has a pending application (SN 99538614, filed 2025-12-09) for the Fill-Up with Billups logo on **hats and shirts**. The family also runs "Fill-Up with Billups" restaurants in Mississippi. Not built unless licensed.
 - **Burger Chef:** Hardee's/CKE maintains the mark.
 - **Stevens Esso:** Esso belongs to ExxonMobil.
 - **Danny's Fried Chicken:** still operating in Houma and Morgan City.
