@@ -10,7 +10,8 @@ HHS H v4e (Brad 10-22 13:34 markups): minimal additive/subtractive edits to v4, 
   3 bottom-left : spur stroke's foot UNCUT - MC's full sweep with its own pointed tip runs under the h stem (as it runs under MC's
                   hairline); the h foot's left spur, which collided with it, removed.
   4 bottom-right: leg ends in a ball (same MC J ball) instead of a flat pen cut - the jersey's rounded leg end.
-Shapes are the font's; only scale, rotation, position chosen."""
+Shapes are the font's; only scale, rotation, position chosen.
+v5.2 (Brad 21:00): the leg end is one clean capsule (fitted straight edges + tangent half-circle)."""
 import re, sys, numpy as np, cv2
 from PIL import Image, ImageDraw, ImageFont
 HB = "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/hb"
@@ -144,6 +145,25 @@ def build(P):
         zbig = (xx > ox + P["h_x"] + 390 * k * P["cond"]) & (yy > bcy - P.get("hull_reach", 2.4) * r - 3 * ro)
         opened = cv2.morphologyEx((c & zbig).astype(np.uint8), cv2.MORPH_OPEN, disk(ro)) > 0
         c = np.where(zone, opened, c)
+    if P.get("leg_capsule_prelean", 0):
+        # v5.2 (Brad 21:00): the leg's last stretch rebuilt as one clean capsule - both edges fitted as straight lines over
+        # the leg's lower third, ending in a half-circle tangent to both (no wobble, notch or step where leg meets ball)
+        bcy = row - r * 0.15 + P["ball_dy"]
+        lx0 = ox + P["h_x"] + 390 * k * P["cond"]
+        ytop = int(bcy - P.get("cap_reach", 3.2) * r); yfit1 = int(bcy - 0.25 * r)
+        rows_, L_, R_ = [], [], []
+        for y in range(ytop, yfit1):
+            xs = np.where(c[y, int(lx0):])[0]
+            if len(xs): rows_.append(y); L_.append(lx0 + xs.min()); R_.append(lx0 + xs.max())
+        rows_ = np.array(rows_); pl = np.polyfit(rows_, L_, 1); pr = np.polyfit(rows_, R_, 1)
+        xl_c, xr_c = np.polyval(pl, bcy), np.polyval(pr, bcy)
+        ccx, rr = (xl_c + xr_c) / 2, (xr_c - xl_c) / 2
+        band = (yy >= ytop) & (xx >= lx0 - 2)
+        cap = np.zeros_like(c, dtype=np.uint8)
+        poly = np.array([[np.polyval(pl, ytop), ytop], [np.polyval(pr, ytop), ytop], [xr_c, bcy], [xl_c, bcy]], np.float32)
+        cv2.fillPoly(cap, [np.round(poly * 8).astype(np.int32)], 1, lineType=cv2.LINE_8, shift=3)
+        cap = (cap > 0) | ((xx - ccx) ** 2 + (yy - bcy) ** 2 <= rr * rr)
+        c = np.where(band, cap, c)
     ear_mask = np.zeros_like(c); x0, y0 = int(round(tx - a[0])) + ox, int(round(ty - a[1])) + oy
     ear_mask[y0:y0 + ear.shape[0], x0:x0 + ear.shape[1]] = ear
     c = fillet(c, ear_mask & (cv2.dilate(hm.astype(np.uint8), disk(2)) > 0), int(P["ear_fillet"]), int(3 * P["ear_fillet"]))   # v5: the stem top flows into the hairline
@@ -153,7 +173,44 @@ def build(P):
     poke = Fm & ~(cv2.dilate(hm.astype(np.uint8), disk(1)) > 0) & (xx > np.where(hm.any(0))[0].min() + 60)
     if poke.sum() > 50: print("WARN foot tip pokes past the h stem:", int(poke.sum()), "px")
     c = crop(c); Hh, Ww = c.shape; M = np.float32([[1, P["lean"], max(0, -P["lean"] * Hh)], [0, 1, 0]])
-    return crop(cv2.warpAffine(c.astype(np.uint8), M, (int(Ww + abs(P["lean"]) * Hh) + 2, Hh)) > 0)
+    out = crop(cv2.warpAffine(c.astype(np.uint8), M, (int(Ww + abs(P["lean"]) * Hh) + 2, Hh)) > 0)
+    return leg_capsule(out) if P.get("leg_capsule", 1) else out
+
+def leg_capsule(M, y0f=0.62):
+    """v5.2 (Brad 21:00): rebuild the leg's lower stretch, after the lean, as one clean capsule: its two edges fitted as
+    straight lines, ending in a half-circle tangent to both (cut perpendicular to the leg's axis at the tangent points),
+    so nothing wobbles, notches or steps where the leg meets its round end."""
+    H, W = M.shape; y0 = int(H * y0f)
+    runs = {}
+    for y in range(y0, H):
+        xs = np.where(M[y])[0]
+        if not len(xs): continue
+        # the rightmost run of ink in the row is the leg
+        br = np.where(np.diff(xs) > 1)[0]; start = xs[br[-1] + 1] if len(br) else xs[0]
+        runs[y] = (start, xs[-1])
+    ys = np.array(sorted(runs)); yb = ys.max()
+    L = np.array([runs[y][0] for y in ys], float); R = np.array([runs[y][1] for y in ys], float)
+    w0 = np.median((R - L)[: len(ys) // 2]); r_est = w0 / 2
+    fit = ys < yb - 2.6 * r_est
+    pl = np.polyfit(ys[fit], L[fit], 1); pr = np.polyfit(ys[fit], R[fit], 1)
+    s_ = (pl[0] + pr[0]) / 2                                   # dx/dy of the leg axis
+    th = np.arctan(-s_)                                        # lean angle from vertical (leg tops lean right: s_ < 0)
+    hw = (np.polyval(pr, yb) - np.polyval(pl, yb)) / 2         # half width, horizontal
+    r = hw * np.cos(th)                                        # perpendicular half width = circle radius
+    # centre on the axis, so the circle's lowest point sits on the leg's original bottom
+    cy = yb - r; cx = (np.polyval(pl, cy) + np.polyval(pr, cy)) / 2
+    n = np.array([np.cos(th), np.sin(th)])                     # unit normal to the edges (pointing right)
+    tl = np.array([cx, cy]) - r * n; tr = np.array([cx, cy]) + r * n
+    yy, xx = np.mgrid[:H, :W]
+    zone = np.zeros_like(M)
+    for y, (a, b) in runs.items(): zone[y, a:b + 1] = True
+    zone = (cv2.dilate(zone.astype(np.uint8), np.ones((5, 5), np.uint8)) > 0) & (yy >= y0)
+    out = M & ~zone
+    cap = np.zeros((H, W), np.uint8)
+    poly = np.array([[np.polyval(pl, y0 - 3), y0 - 3], [np.polyval(pr, y0 - 3), y0 - 3], tr, tl], np.float32)
+    cv2.fillPoly(cap, [np.round(poly * 16).astype(np.int32)], 1, shift=4)
+    cv2.circle(cap, (int(round(cx * 16)), int(round(cy * 16))), int(round(r * 16)), 1, -1, shift=4)
+    return out | (cap > 0)
 
 def hs_mask(c, hs, P, ox, oy, k):
     m = np.zeros_like(c); x, y = int(round(P["h_x"])) + ox, int(round(P["h_y"])) + oy
