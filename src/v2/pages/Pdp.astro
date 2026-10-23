@@ -1,7 +1,7 @@
 ---
 import V2Layout from '../V2Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
-import { getCatalog, cdn, srcset, money, storyOf, specsOf, absImg, type V2Product } from '../catalog';
+import { getCatalog, cdn, srcset, money, storyOf, specsOf, shareImg, type V2Product } from '../catalog';
 import { FREE_SHIP, HOLIDAY_CUTOFF, SIZE_CHART, SOCK_CHART, FRAME_SIZE, MEMBER_LABEL, SHIP_MAKE, SHIP_TRANSIT, NOTE_BY_PREFIX, HIDDEN_FROM_GRID, PAIRS, blankFor, START_HERE } from '../data';
 import { clip } from '../clip';
 import { siteConfig } from '../../config/site.config';
@@ -56,7 +56,7 @@ const mateHref = mate ? `/products/${mate.handle}${mateColor ? `?color=${encodeU
 const jsonld = [
   {
     '@context': 'https://schema.org', '@type': 'Product', name: p.baseTitle, description: story.join(' ') || p.title,
-    image: p.images.map((i) => (i.url.startsWith('local:') ? siteConfig.siteUrl + absImg(i.url) : i.url)), brand: { '@type': 'Brand', name: siteConfig.brandName }, url,
+    image: p.images.map((i) => { const s = shareImg(i.url); return s.startsWith('/') ? siteConfig.siteUrl + s : s; }), brand: { '@type': 'Brand', name: siteConfig.brandName }, url,
     category: p.type,
     offers: {
       '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: Math.min(...p.variants.map((v) => v.price)), highPrice: Math.max(...p.variants.map((v) => v.price)),
@@ -79,8 +79,8 @@ const jsonld = [
 const variantsJson = JSON.stringify(p.variants.map((v) => ({ id: v.id, n: v.numericId, a: v.available, p: v.price, o: v.options, i: v.image, ci: v.image ? cdn(v.image, 1080) : undefined })));
 const check = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const desc = clip(story[0] || `${p.baseTitle} from ${siteConfig.brandName}.`);
-// Share images keep the original opaque mockup (transparent images render on black in some apps).
-const ogImg = p.images[0] ? (p.images[0].url.startsWith('local:') ? absImg(p.images[0].url) : p.images[0].url + (p.images[0].url.includes('?') ? '&' : '?') + 'width=1200') : undefined;
+// Share images are opaque JPGs (transparent images render on black in some apps).
+const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
 ---
 <V2Layout title={p.baseTitle} description={desc} image={ogImg} jsonld={jsonld} noindex={HIDDEN_FROM_GRID.has(p.handle)}>
   <div class="hb-wrap">

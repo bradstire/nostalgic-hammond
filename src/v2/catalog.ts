@@ -33,6 +33,9 @@ export function placeFor(handle: string): Place | null {
 // Second image for cards/galleries: a close-up of the actual print art (generated from the print files).
 // Sock mockups re-rendered upright (Printful shows the front sock toe-up).
 const SOCK_FIX = new Set(['old-english-h-gym-socks', 'camelot-music-socks', 'hub-city-drag-raceway-socks', 'albert-speeds-socks']);
+// Mockups left on a Shopify product after its print was repositioned (10-23); they show the old, too-high placement.
+// Safe to delete from this list once the image is removed from the product in Shopify.
+const STALE_IMAGE = /\/4e4a54369e0ab7a00dbff1761aa63849_l\./;
 
 const DETAIL = new Set([
   'beverly-drive-in-theatre-tee', 'beverly-drive-in-theatre-tee-natural', 'hub-city-drag-raceway-tee',
@@ -69,7 +72,7 @@ export async function getCatalog(): Promise<V2Product[]> {
     const type = TYPE_LABEL[n.productType] || 'Other';
     const title = TITLE_OVERRIDE[n.handle] || n.title.replace(/\s+—\s+Framed Poster.*$/, ' Framed Print');
     const goodAlt = (a: string | null) => (a && !/mockup/i.test(a) ? a : null);
-    let images: V2Image[] = n.images.nodes.map((im: any, i: number) => ({ url: im.url, width: im.width, height: im.height, alt: goodAlt(im.altText) || `${title}${i ? `, view ${i + 1}` : ''}` }));
+    let images: V2Image[] = n.images.nodes.filter((im: any) => !STALE_IMAGE.test(im.url)).map((im: any, i: number) => ({ url: im.url, width: im.width, height: im.height, alt: goodAlt(im.altText) || `${title}${i ? `, view ${i + 1}` : ''}` }));
     if (SOCK_FIX.has(n.handle)) images = [{ url: `local:/images/hb/socks/${n.handle}`, width: 1080, height: 1080, alt: `${title}, front and back` }];
     out.push({
       handle: n.handle, title, baseTitle: title.replace(/\s*\((Black|Natural|Dark)\)$/, ''), shopifyTitle: n.title, family: [], lead: true,
@@ -119,6 +122,9 @@ export function srcset(url: string, widths = [360, 540, 720, 1080]): string {
   return widths.map((w) => `${cdn(url, w)} ${w}w`).join(', ');
 }
 export const absImg = (url: string) => { const loc = localFor(url); return loc ? `${loc}-1080.webp` : url; };
+// Share/structured-data image: an opaque JPG on the site's tile colour. Shopify now holds transparent PNG mockups,
+// and transparent images render on black or white unpredictably in link previews.
+export const shareImg = (url: string) => { const loc = localFor(url); return loc ? `${loc}-og.jpg` : url + (url.includes('?') ? '&' : '?') + 'width=1200'; };
 export function money(n: number): string {
   return '$' + (Number.isInteger(n) ? n.toFixed(0) : n.toFixed(2));
 }
