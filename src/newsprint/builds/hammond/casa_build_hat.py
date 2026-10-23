@@ -9,7 +9,7 @@ from build_v3 import prep, fit, smooth, respace, THREAD, DPI, GAP
 from embcheck import check
 D = "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/hm/casa"
 
-L = np.load(f"{D}/panel_letters.npy")
+L = np.load(f"{D}/panel_letters.npy") & ~np.load(f"{D}/mark_red.npy")   # keep the counters (A, R, d, e): red islands inside the letters
 n, lab, st, _ = cv2.connectedComponentsWithStats(L.astype(np.uint8), 8)
 big = [i for i in range(1, n) if st[i, 4] > 5000]
 top = np.isin(lab, [i for i in big if st[i, 1] < 1300])            # CASA de FRESA
@@ -37,6 +37,16 @@ m = fit(name, w_in=4.7)
 m = respace(prep(m), GAP)                 # every letter >= 0.06 in apart (stitch merge), strokes >= 0.05 in
 if m.shape[1] > 5.3 * DPI: m = fit(m, w_in=5.3)
 m = smooth(m); ys, xs = np.where(m); m = m[ys.min():ys.max() + 1, xs.min():xs.max() + 1]
+# counters that stitching would close (the 'e' eye is ~0.047 in): open each to >= 0.065 in, grown evenly from inside
+inv = np.pad(~m, 1, constant_values=True).astype(np.uint8)
+nh, lab, st, _ = cv2.connectedComponentsWithStats(inv, 4); dt = cv2.distanceTransform(inv, cv2.DIST_L2, 5)
+for i in range(1, nh):
+    if lab[0, 0] == i: continue
+    w = 2 * dt[lab == i].max(); need = 0.065 * DPI
+    if w < need:
+        r = int(np.ceil((need - w) / 2)); k = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (2 * r + 1, 2 * r + 1))
+        grow = cv2.dilate((lab == i).astype(np.uint8), k)[1:-1, 1:-1] > 0
+        m = m & ~grow
 s = m.shape[0] / name.shape[0]
 de_h = 203 * (m.shape[1] / name.shape[1]) / DPI; cap_h = 620 * (m.shape[1] / name.shape[1]) / DPI
 r = check(m, "front", [("CASA FRESA", cap_h, m.shape[1] / DPI), ("de", de_h, 0.5)])

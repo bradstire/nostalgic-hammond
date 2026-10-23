@@ -14,9 +14,9 @@ Nothing is published until Brad decides.
 | File(s) | Lead | Build | Garment / size |
 |---|---|---|---|
 | `casa_matchbook_cover_{natural,cream}` | **Casa de Fresa Hotel** (on the depot block; closed 1966, burned 1979, demolished) | The hotel's matchbook cover, traced in its own three inks: red, teal stripes, cream. `natural` leaves the cream to the shirt. | Natural tee (natural version) or any light tee (cream version), 8.5 in |
-| `casa_mark`, `casa_mark_leftchest` | Casa de Fresa | Red panel and ribbon only, no stripes | Natural/white tee, 9 in centre or 3.5 in left chest |
-| `casa_strawberries_{green,red}` | Casa de Fresa | The matchbook's inside cover: headline, HAMMOND, LA. and the Caslon-italic "Down In The Land Of Strawberries", traced. COFFEE SHOP / AND / DINING ROOM is re-typeset in Libre Caslon (OFL) because it sits under a fold. | Natural tee, 10 in |
-| `hats/hat_casadefresa_{red,white}` | Casa de Fresa | The matchbook lettering on one line, 4.73 x 1.28 in. Embroidery check **PASS** (min line 0.06 in, no merges; "de" is 0.29 in). | Red thread #CC3333 on a stone hat, or white thread on a red hat |
+| `casa_mark`, `casa_mark_leftchest` | Casa de Fresa | Red panel and ribbon only, no stripes. **Front of the front/back tee** (Brad 10-22): the back is `casa_strawberries_green` | Natural tee: front 8.5 in (or 3.5 in left chest), back 10 in |
+| `casa_strawberries_{green,red}` | Casa de Fresa | The matchbook's inside cover: headline, HAMMOND, LA. and the Caslon-italic "Down In The Land Of Strawberries", traced. COFFEE SHOP / AND / DINING ROOM / FIVE EFFICIENCY / APARTMENTS is re-typeset in Libre Caslon (OFL) because it sits under a fold. **Back of the front/back tee.** | Natural tee, 10 in |
+| `hats/hat_casadefresa_{red,white}` | Casa de Fresa | The matchbook lettering on one line, 4.74 x 1.28 in, with the counters of the A's, R, d and e open (Brad 10-22; the e's eye opened to 0.065 in so it survives stitching). Embroidery check **PASS** (min line 0.053 in, no merges, no closing counters; "de" is 0.29 in). | Red thread #CC3333 on a stone hat, or white thread on a red hat |
 | `socks/sock_casadefresa_{front,back}` | Casa de Fresa | Cabana stripes full-bleed. Front: the panel and ribbon on a cream keyline. Back: the lettering on the calf. Inside the S/M/L safe-box overlap. | Printful socks 882 |
 | `toggery_sign`, `toggery_sign_1color_wine` | **Toggery Shop** (105 W. Thomas; closed 2002; the 1930s neon sign still hangs) | The projecting Art Deco blade sign, redrawn flat from the colour photo: disc T, O-G-G-E-R-Y, fins, mounting arm, SHOP panel. Letters set in Playfair Display (OFL). | Natural tee, 5 x 11.6 in |
 | `toggery_logo_address_wine`, `toggery_logo_leftchest_wine` | Toggery Shop | "the Toggery Shop" logotype from the store's ad (traced). The small "the" was ink-filled in the newsprint and has been re-opened. Address re-typeset; phone number left off. | Natural/cream tee, 9 in or 3.5 in |
@@ -39,3 +39,33 @@ Nothing is published until Brad decides.
 
 **Image still to fetch:** IMG_7199, the 1960s Casa de Fresa postcard (371 likes, the dump's top post). It is too large
 for the Drive connector. A linen card exists on CardCow (publisher C.B. Mason).
+
+## 10-22 evening, wave 2b (Brad 18:55: fixes + re-assessed dump items)
+
+**Fixes:**
+- **Casa hat and sock back:** the name lettering has its counters back (A, R, d, e). The trace had filled them. `mocks/qa_casa_counters.jpg`.
+- **Casa front/back tee:** `casa_mark` (front) + `casa_strawberries_green` (back). `mocks/mock_casa_frontback.jpg`.
+
+**New from the dump** (items skipped in the first pass):
+
+| File(s) | Lead | Build | Garment / size |
+|---|---|---|---|
+| `casa_ad_dixiehome` | **Casa de Fresa** (IMG_7169) | The hotel's listing ad ("Your Dixie Home", Rates $3.00 up, Hwys 51 & 190). Headline traced; small copy re-set in TeX Gyre Schola (GUST) at the ad's sizes and positions; hotel photo re-screened; double-rule frame redrawn. Left off: the line naming the manager and the chief clerk. Raster master. | Natural tee, 10 in |
+| `galaxy_pass_{card,ink}` | **Galaxy Drive-In** (the Joy's later name; IMG_7188) | The Courtesy Pass with every line traced, including the brush script "galaxy drive in theatre". Phone line left off and closed up; fill-in rules redrawn level. | Black tee (card) or natural tee (ink), 9 in |
+| `rushs_ad_malts` | **Rush's** (IMG_7180) | The second yearbook ad ("We Appreciate Our Ponchatoula Customers", Malts, Sundaes, Shakes, Drinks and Sandwiches). Type traced, photo re-screened, frame redrawn. Raster master. | Natural tee, 10 in |
+| `cavetangi_napkin` | **Cave Tangi Restaurants** (IMG_7198) | The paper napkin: strutting rooster with cane and spats, CAVE TANGI RESTAURANTS, both locations, "Phone Orders Ready To Go In 20 Minutes". Red ink traced. A souvenir mug lies across the napkin in the photo: the rooster's raised wing is closed with one outline stroke along the mug's edge, and the I of TANGI is rebuilt from its own stem. Both phone numbers left off. | White tee, 8.5 × 13.3 in, napkin red |
+| `fiesta_club_logo` | **Fiesta Club**, Town & Country Plaza (IMG_7202) | The club's FIESTA Club lockup (reversed letters in a black block, with swirl ornaments) + "Town & Country Plaza", traced. Left off: the sombrero caricature mascot, the phone number and the band listing. | Bright tee (orange shown), 10 in |
+
+QA: `mocks/qa_wave2b_ads.jpg`, `mocks/qa_wave2b_other.jpg`. Mocks: `mocks/mocks_wave2b_{tees,hats,socks}.jpg`.
+
+**Not built:**
+- **Rush's neon "Rush's" script (IMG_7178):** the rooftop sign is a blurred 3-D channel-letter photo. A clean logo would be a hand redraw, not a trace.
+- **Strawberries Jubilee! cookbook (IMG_7164):** the strawberry drawings are signed by an illustrator (1976). This waits on the book's copyright page.
+- **IMG_7199 (Casa de Fresa 1960s postcard):** not retrievable (owned by another account; too large for the connector).
+
+**Trademark (federal, 10-22):**
+- Clear: Galaxy Drive-In (no filings), Toggery, Didi-Wa, Joy.
+- Brad's ruling: Casa de Fresa, Magnolia Inn and Rush's are GO with differentiation (full historic name + business type + Hammond; never the bare word).
+- Fiesta Club: only dead FIESTA CLUB filings (Mexican liquor marks, cancelled or abandoned).
+- Cave Tangi: no filings (already in the store's line).
+- "Dixie Home": live only for carpets (IC 027), so it doesn't apply.

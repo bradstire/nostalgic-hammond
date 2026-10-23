@@ -2,7 +2,7 @@
 import numpy as np, cv2
 D = "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/hm/casa"
 def name_mask(ang=-7.6):
-    L = np.load(f"{D}/panel_letters.npy")
+    L = np.load(f"{D}/panel_letters.npy") & ~np.load(f"{D}/mark_red.npy")   # keep the counters (A, R, d, e): red islands inside the letters
     n, lab, st, _ = cv2.connectedComponentsWithStats(L.astype(np.uint8), 8)
     top = np.isin(lab, [i for i in range(1, n) if st[i, 4] > 5000 and st[i, 1] < 1300])
     ys, xs = np.where(top); m = top[ys.min() - 50:ys.max() + 51, xs.min() - 50:xs.max() + 51].astype(np.uint8) * 255

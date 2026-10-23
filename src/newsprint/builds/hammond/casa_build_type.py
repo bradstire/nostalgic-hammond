@@ -1,6 +1,6 @@
 """Casa de Fresa — 'Down In The Land Of Strawberries' typographic print, from the matchbook's inside cover (IMG_7196).
 Traced from the Real-ESRGAN x4 scan: headline, HAMMOND, LA., the Caslon-italic slogan (swash w), AIR CONDITIONED, bullet.
-Re-typeset (Pipeline B, small copy partly under a fold/stain): COFFEE SHOP / AND / DINING ROOM in Libre Caslon Text (OFL),
+Re-typeset (Pipeline B, small copy partly under a fold/stain): COFFEE SHOP / AND / DINING ROOM / FIVE EFFICIENCY / APARTMENTS in Libre Caslon Text (OFL),
 cap height and weight matched to the traced AIR CONDITIONED line."""
 import sys, numpy as np, cv2
 sys.path.insert(0, "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/hm/lib")
@@ -31,9 +31,10 @@ def typeset(text, tracking=0.035, wght=600):
     s = cap / a.shape[0]; a = cv2.resize(a, (int(a.shape[1] * s), cap), interpolation=cv2.INTER_AREA)
     a = np.pad(a, 12)
     return roughen(a.astype(np.float32), spread=1.6, grain=0.18)      # letterpress ink spread, to sit with the traced lines
-lines = [typeset("COFFEE SHOP"), typeset("AND"), typeset("DINING ROOM")]
+lines = [typeset("COFFEE SHOP"), typeset("AND"), typeset("DINING ROOM"),
+         typeset("FIVE EFFICIENCY", tracking=0.06), typeset("APARTMENTS", tracking=0.06)]   # below the fold on the matchbook (IMG_7196)
 # vertical rhythm: the original gaps; re-set lines spaced like AIR CONDITIONED -> bullet
-gaps = [bands[i + 1][0] - bands[i][1] + 25 for i in range(len(bands) - 1)] + [190, 130, 130]
+gaps = [bands[i + 1][0] - bands[i][1] + 25 for i in range(len(bands) - 1)] + [190, 130, 130, 230, 130]
 allp = parts + lines
 W = max(p.shape[1] for p in allp) + 200; Hh = sum(p.shape[0] for p in allp) + sum(gaps) + 200
 canvas = np.zeros((Hh, W), bool); y = 100
