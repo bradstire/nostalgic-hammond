@@ -131,6 +131,19 @@ def build(P):
     hm = hc
     c = fillet(c, ball & before, int(P["fillet_ball"]), int(2.5 * P["fillet_ball"]),
                only=(xx > ox + P["h_x"] + 390 * k * P["cond"]) & (yy > oy + P["h_y"] + 700 * k))   # the leg only (h foot flag sits at x<375)
+    if P.get("leg_hull", 1):
+        # v5.1 (Brad 20:34): the leg runs into the ball with no notch or kink - the leg's last stretch and the ball are
+        # wrapped in their convex hull, so both edges meet the ball on a tangent
+        bcy = row - r * 0.15 + P["ball_dy"]
+        zone = (xx > ox + P["h_x"] + 390 * k * P["cond"]) & (yy > bcy - P.get("hull_reach", 2.4) * r)
+        pts = np.column_stack(np.where(c & zone))[:, ::-1].astype(np.int32)
+        hull = np.zeros_like(c, dtype=np.uint8); cv2.fillPoly(hull, [cv2.convexHull(pts)], 1)
+        c = c | ((hull > 0) & zone)
+        # round the one remaining corner (left side, where the leaning leg edge meets the ball)
+        ro = int(round(P.get("leg_round", 0.7) * r))
+        zbig = (xx > ox + P["h_x"] + 390 * k * P["cond"]) & (yy > bcy - P.get("hull_reach", 2.4) * r - 3 * ro)
+        opened = cv2.morphologyEx((c & zbig).astype(np.uint8), cv2.MORPH_OPEN, disk(ro)) > 0
+        c = np.where(zone, opened, c)
     ear_mask = np.zeros_like(c); x0, y0 = int(round(tx - a[0])) + ox, int(round(ty - a[1])) + oy
     ear_mask[y0:y0 + ear.shape[0], x0:x0 + ear.shape[1]] = ear
     c = fillet(c, ear_mask & (cv2.dilate(hm.astype(np.uint8), disk(2)) > 0), int(P["ear_fillet"]), int(3 * P["ear_fillet"]))   # v5: the stem top flows into the hairline
