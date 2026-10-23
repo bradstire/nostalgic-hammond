@@ -100,15 +100,25 @@ export async function getCatalog(): Promise<V2Product[]> {
 
 // Shopify CDN resize (it negotiates WebP/AVIF from the Accept header).
 const LOCAL_W = [360, 540, 800, 1080];
+// Shopify mockups with the background knocked out (transparent WebP), keyed by the image's file name.
+import productImages from './product-images.json';
+const KNOCKOUT = productImages as Record<string, string>;
+export function localFor(url: string): string | null {
+  if (url.startsWith('local:')) return url.slice(6);
+  const base = url.split('?')[0].split('/').pop()!.replace(/\.[a-z]+$/i, '');
+  return KNOCKOUT[base] || null;
+}
 export function cdn(url: string, w: number): string {
-  if (url.startsWith('local:')) return `${url.slice(6)}-${LOCAL_W.find((x) => x >= w) || 1080}.webp`;
+  const loc = localFor(url);
+  if (loc) return `${loc}-${LOCAL_W.find((x) => x >= w) || 1080}.webp`;
   return url + (url.includes('?') ? '&' : '?') + 'width=' + w;
 }
 export function srcset(url: string, widths = [360, 540, 720, 1080]): string {
-  if (url.startsWith('local:')) return LOCAL_W.map((w) => `${url.slice(6)}-${w}.webp ${w}w`).join(', ');
+  const loc = localFor(url);
+  if (loc) return LOCAL_W.map((w) => `${loc}-${w}.webp ${w}w`).join(', ');
   return widths.map((w) => `${cdn(url, w)} ${w}w`).join(', ');
 }
-export const absImg = (url: string) => (url.startsWith('local:') ? `${url.slice(6)}-1080.webp` : url);
+export const absImg = (url: string) => { const loc = localFor(url); return loc ? `${loc}-1080.webp` : url; };
 export function money(n: number): string {
   return '$' + (Number.isInteger(n) ? n.toFixed(0) : n.toFixed(2));
 }

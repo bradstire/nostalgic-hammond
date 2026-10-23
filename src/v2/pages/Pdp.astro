@@ -20,7 +20,9 @@ const chart = p.type === 'Tee' ? SIZE_CHART[blankFor(p.handle)!] : null;
 const multiColor = p.colors.length > 1;
 const isFamily = p.family.length > 1;
 const optName = p.family.some((f) => MEMBER_LABEL[f.handle]) ? 'Style' : 'Color';
-const curOpt = p.family.find((f) => f.handle === p.handle && (!multiColor || f.color === p.colors[0].name));
+// Default colour = the one in the first photo, so the picture and the selected swatch agree.
+const defColor = (multiColor && p.variants.find((v) => v.image === p.images[0]?.url)?.options.Color) || p.colors[0]?.name;
+const curOpt = p.family.find((f) => f.handle === p.handle && (!multiColor || f.color === defColor));
 const isSock = p.type === 'Socks';
 const isHat = p.type === 'Hat';
 const hasSizes = p.sizes.length > 1;
@@ -74,10 +76,11 @@ const jsonld = [
     ],
   },
 ];
-const variantsJson = JSON.stringify(p.variants.map((v) => ({ id: v.id, n: v.numericId, a: v.available, p: v.price, o: v.options, i: v.image })));
+const variantsJson = JSON.stringify(p.variants.map((v) => ({ id: v.id, n: v.numericId, a: v.available, p: v.price, o: v.options, i: v.image, ci: v.image ? cdn(v.image, 1080) : undefined })));
 const check = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const desc = clip(story[0] || `${p.baseTitle} from ${siteConfig.brandName}.`);
-const ogImg = p.images[0] ? (p.images[0].url.startsWith('local:') ? absImg(p.images[0].url) : cdn(p.images[0].url, 1200)) : undefined;
+// Share images keep the original opaque mockup (transparent images render on black in some apps).
+const ogImg = p.images[0] ? (p.images[0].url.startsWith('local:') ? absImg(p.images[0].url) : p.images[0].url + (p.images[0].url.includes('?') ? '&' : '?') + 'width=1200') : undefined;
 ---
 <V2Layout title={p.baseTitle} description={desc} image={ogImg} jsonld={jsonld} noindex={HIDDEN_FROM_GRID.has(p.handle)}>
   <div class="hb-wrap">
@@ -91,12 +94,12 @@ const ogImg = p.images[0] ? (p.images[0].url.startsWith('local:') ? absImg(p.ima
     <div class="hb-pdp" data-pdp data-handle={p.handle} data-variants={variantsJson}>
       <div class="hb-gallery">
         <div class="hb-gallery__main">
-          <img data-main src={imgSrc(images[0], 1080)} srcset={imgSet(images[0])} sizes="(max-width: 900px) 100vw, 640px" width="1080" height="1080" alt={images[0].alt} fetchpriority="high" />
+          <img data-main class={images[0].cdn ? 'hb-cut' : ''} src={imgSrc(images[0], 1080)} srcset={imgSet(images[0])} sizes="(max-width: 900px) 100vw, 640px" width="1080" height="1080" alt={images[0].alt} fetchpriority="high" />
         </div>
         {images.length > 1 && (
           <div class="hb-thumbs" role="group" aria-label="Product images">
             {images.map((im, i) => (
-              <button type="button" data-thumb={imgSrc(im, 1080)} data-thumbset={imgSet(im)} data-alt={im.alt} aria-current={i === 0 ? 'true' : 'false'} aria-label={`Show image ${i + 1} of ${images.length}`}>
+              <button type="button" data-thumb={imgSrc(im, 1080)} data-thumbset={imgSet(im)} data-alt={im.alt} data-cut={im.cdn ? '1' : '0'} aria-current={i === 0 ? 'true' : 'false'} aria-label={`Show image ${i + 1} of ${images.length}`}>
                 <img src={imgSrc(im, 360)} alt="" width="76" height="76" loading="lazy" />
               </button>
             ))}
@@ -114,11 +117,11 @@ const ogImg = p.images[0] ? (p.images[0].url.startsWith('local:') ? absImg(p.ima
 
         {isFamily && (
           <div class="hb-opt">
-            <p class="hb-opt__legend" id="hb-color-l">{optName}: <span data-color-label>{curOpt?.label || p.colors[0]?.name}</span></p>
+            <p class="hb-opt__legend" id="hb-color-l">{optName}: <span data-color-label>{curOpt?.label || defColor}</span></p>
             <ul class="hb-opt__row hb-opt__links" aria-labelledby="hb-color-l">
               {p.family.map((f) => {
                 const here = f.handle === p.handle;
-                const selected = here && (!multiColor || f.color === p.colors[0].name);
+                const selected = here && (!multiColor || f.color === defColor);
                 return (
                   <li><a class="hb-colorbtn" href={`/products/${f.handle}${multiColor || p.family.filter((x) => x.handle === f.handle).length > 1 ? `?color=${encodeURIComponent(f.color)}` : ''}`}
                     aria-current={selected ? 'true' : undefined} aria-label={f.label} title={f.label}
@@ -130,10 +133,10 @@ const ogImg = p.images[0] ? (p.images[0].url.startsWith('local:') ? absImg(p.ima
         )}
         {!isFamily && multiColor && (
           <fieldset class="hb-opt">
-            <legend>Color: <span data-color-label>{p.colors[0].name}</span></legend>
+            <legend>Color: <span data-color-label>{defColor}</span></legend>
             <div class="hb-opt__row" role="radiogroup" aria-label="Color">
               {p.colors.map((c, i) => (
-                <button type="button" class="hb-colorbtn" role="radio" aria-checked={i === 0 ? 'true' : 'false'} data-color={c.name} aria-label={c.name} title={c.name}><span style={`background:${c.hex}`}></span></button>
+                <button type="button" class="hb-colorbtn" role="radio" aria-checked={c.name === defColor ? 'true' : 'false'} data-color={c.name} aria-label={c.name} title={c.name}><span style={`background:${c.hex}`}></span></button>
               ))}
             </div>
           </fieldset>
@@ -270,7 +273,7 @@ const ogImg = p.images[0] ? (p.images[0].url.startsWith('local:') ? absImg(p.ima
 <script>
   const root = document.querySelector('[data-pdp]') as HTMLElement;
   if (root) {
-    type V = { id: string; n: string; a: boolean; p: number; o: Record<string, string>; i?: string };
+    type V = { id: string; n: string; a: boolean; p: number; o: Record<string, string>; i?: string; ci?: string };
     const variants: V[] = JSON.parse(root.dataset.variants || '[]');
     const atc = root.querySelector('[data-atc]') as HTMLButtonElement;
     const pay = root.querySelector('[data-shoppay]') as HTMLAnchorElement;
@@ -324,7 +327,7 @@ const ogImg = p.images[0] ? (p.images[0].url.startsWith('local:') ? absImg(p.ima
       pay.toggleAttribute('aria-disabled', !ready);
       stickyBtn.textContent = ready ? (size ? `Add ${size} to cart` : 'Add to cart') : hasSize && !size ? 'Choose size' : 'Sold out';
       (document.querySelector('[data-sticky-price]') as HTMLElement).textContent = v ? fmt(v.p) : priceEl.textContent || '';
-      if (v?.i && hasColor) { main.src = v.i + (v.i.includes('?') ? '&' : '?') + 'width=1080'; main.srcset = ''; }
+      if (v?.i && hasColor) { main.src = v.ci || (v.i + (v.i.includes('?') ? '&' : '?') + 'width=1080'); main.srcset = ''; main.classList.add('hb-cut'); }
     }
     root.addEventListener('click', (e) => {
       const t = e.target as HTMLElement;
@@ -344,7 +347,7 @@ const ogImg = p.images[0] ? (p.images[0].url.startsWith('local:') ? absImg(p.ima
       }
       const th = t.closest('[data-thumb]') as HTMLElement | null;
       if (th) {
-        main.src = th.dataset.thumb!; main.srcset = th.dataset.thumbset || ''; main.alt = th.dataset.alt || '';
+        main.src = th.dataset.thumb!; main.srcset = th.dataset.thumbset || ''; main.alt = th.dataset.alt || ''; main.classList.toggle('hb-cut', th.dataset.cut === '1');
         root.querySelectorAll('[data-thumb]').forEach((b) => b.setAttribute('aria-current', String(b === th)));
         return;
       }

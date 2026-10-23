@@ -2,6 +2,7 @@
 import { FREE_SHIP } from '../data';
 import { getCatalog, cdn, money } from '../catalog';
 import { FRAME_SIZE } from '../data';
+import productImages from '../product-images.json';
 // Add-ons offered in the cart to close the free-shipping gap. Only items priced at or above the
 // remaining gap are shown, so "ships free" is always true. Each option keeps its own photo.
 const all = await getCatalog();
@@ -16,7 +17,7 @@ const addOns = ['camelot-music-socks', 'hub-city-drag-raceway-socks', 'albert-sp
 // Display names for cart lines, matching the product pages (Shopify titles carry colour/size suffixes).
 const names = Object.fromEntries(all.map((p) => [p.handle, { t: p.baseTitle, c: p.colors.length === 1 ? p.colors[0].name : '', f: FRAME_SIZE[p.handle] || '', place: p.place?.slug || '' }]));
 ---
-<dialog class="hb-drawer" id="hb-cart" aria-labelledby="hb-cart-title" data-addons={JSON.stringify(addOns)} data-names={JSON.stringify(names)}>
+<dialog class="hb-drawer" id="hb-cart" aria-labelledby="hb-cart-title" data-addons={JSON.stringify(addOns)} data-names={JSON.stringify(names)} data-imgs={JSON.stringify(productImages)}>
   <div class="hb-drawer__bg" data-cart-close></div>
   <section class="hb-drawer__panel">
     <div class="hb-drawer__head">
@@ -57,7 +58,12 @@ const names = Object.fromEntries(all.map((p) => [p.handle, { t: p.baseTitle, c: 
   let cart: Cart | null = null;
   const fmt = (n: number) => '$' + (Number.isInteger(n) ? n.toFixed(0) : n.toFixed(2));
   const esc = (s: string) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]!));
-  const img = (u?: string) => (u ? u + (u.includes('?') ? '&' : '?') + 'width=160' : '');
+  const knock: Record<string, string> = JSON.parse(el.dataset.imgs || '{}');
+  const img = (u?: string) => {
+    if (!u) return '';
+    const loc = knock[u.split('?')[0].split('/').pop()!.replace(/\.[a-z]+$/i, '')];
+    return loc ? `${loc}-360.webp` : u + (u.includes('?') ? '&' : '?') + 'width=160';
+  };
 
   function setCount(n: number) {
     document.querySelectorAll('[data-count]').forEach((c) => { c.setAttribute('data-count', String(n)); c.textContent = String(n); });
