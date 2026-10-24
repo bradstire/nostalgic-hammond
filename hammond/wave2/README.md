@@ -69,3 +69,8 @@ QA: `mocks/qa_wave2b_ads.jpg`, `mocks/qa_wave2b_other.jpg`. Mocks: `mocks/mocks_
 - Fiesta Club: only dead FIESTA CLUB filings (Mexican liquor marks, cancelled or abandoned).
 - Cave Tangi: no filings (already in the store's line).
 - "Dixie Home": live only for carpets (IC 027), so it doesn't apply.
+
+## 10-23 night: differentiation edits (Brad 10-22 rule: full historic name + business type + Hammond; never the bare word)
+- `hats/hat_casadefresa_hammond_{red,white}.png`: the passed name lettering + **HAMMOND, LA.** (League Spartan Bold, 0.34 in caps, tracked; small counters opened to 0.065 in). 4.74 x 1.75 in. Embroidery check **PASS** (min line 0.051 in, no merges, no closing counters). Build: `src/newsprint/builds/hammond/casa_hat_locator.py`.
+- `magnolia_sign_hammond.png`: the sign + **1111 W. THOMAS ST. · HAMMOND, LA.** in the sign's black, 5.6 in wide, 0.22 in under the posts. 8.8 x 10.6 in. Build: `src/newsprint/builds/hammond/magnolia_locator.py`.
+These two replace `hat_casadefresa_*` and `magnolia_sign` for production.
