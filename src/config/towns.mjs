@@ -1,7 +1,8 @@
 // One storefront codebase, one Shopify store, many towns.
 // Each town is a separate Vercel project built from this repo with PUBLIC_TOWN=<slug>.
 // Products belong to a town through a Shopify tag: `town:<slug>`.
-// Hammond (the pilot) also shows untagged products, so its catalog never needs retagging.
+// Hammond (the pilot) also shows untagged products, so its catalog never needs retagging; its v2 site also
+// shows `town:hammond-next` (see src/v2/towns/hammond.ts).
 //
 // To add a town: copy the hattiesburg entry, add src/towns/<slug>/About.astro,
 // tag its products `town:<slug>` in Shopify, and create a Vercel project with PUBLIC_TOWN=<slug>.
@@ -19,9 +20,22 @@ export const towns = {
     contactEmail: 'info@nostalgichammond.com',
     // false = noindex + robots disallow (private preview on its vercel.app URL)
     launched: true,
+    // Storefront v2 ("shop by place", src/v2), same as Hattiesburg. The original layout stays in src/legacy.
+    layout: 'v2',
+    // URLs the original layout published that v2 serves elsewhere (static redirect pages; see astro.config.mjs).
+    // The original split the Greetings print's three sizes into pseudo-products; v2 has one product with a size option
+    // (?size= picks it on the product page). Astro URL-encodes the destination itself.
+    redirects: {
+      '/ponchatoula': '/places/cave-tangi',
+      '/products/greetings-from-hammond-8x10': '/products/greetings-from-hammond?size=8″×10″',
+      '/products/greetings-from-hammond-11x14': '/products/greetings-from-hammond?size=11″×14″',
+      '/products/greetings-from-hammond-16x20': '/products/greetings-from-hammond?size=16″×20″',
+    },
     heroImage: '/images/hero-background.jpg',
     heroPosition: 'center 68%',
     popup: { enabled: true, footer: 'Hammond — remembered right.' },
+    // Klaviyo list for v2 email signups (the original popup's list; its welcome flow sends WELCOME15).
+    klaviyoList: 'XdKJkQ',
     footerLinks: [
       { href: '/', label: 'SHOP' },
       { href: '/about', label: 'ABOUT' },
@@ -81,12 +95,14 @@ export const towns = {
     siteUrl: 'https://www.nostalgichattiesburg.com',
     contactEmail: 'info@nostalgichattiesburg.com',
     launched: false,
-    // Storefront v2 ("shop by place", src/v2). Hammond keeps the original layout.
+    // Storefront v2 ("shop by place", src/v2).
     layout: 'v2',
     heroImage: '/images/hattiesburg/hero.jpg',
     heroPosition: 'center 55%',
     // No Klaviyo list for this town yet; the popup stays off until one exists.
     popup: { enabled: false, footer: 'Hattiesburg — remembered right.' },
+    // Klaviyo list for v2 email signups ("Nostalgic Hattiesburg").
+    klaviyoList: 'TtxEMr',
     footerLinks: [
       { href: '/', label: 'SHOP' },
       { href: '/about', label: 'ABOUT' },

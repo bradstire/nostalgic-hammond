@@ -2,8 +2,9 @@
 import V2Layout from '../V2Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { getCatalog } from '../catalog';
-import { PLACES, TYPE_ORDER, TYPE_SLUG, START_HERE } from '../data';
+import { TYPE_ORDER, TYPE_SLUG, START_HERE, COPY, livePlaces, storyCount, numWord } from '../data';
 const all = (await getCatalog()).filter((p) => p.lead);
+const PLACES = livePlaces(all);
 // Story order: place order, then type order; "start here" picks lead their place.
 const placeIdx = (p: any) => PLACES.findIndex((x) => x.slug === p.place?.slug);
 const sorted = [...all].sort((a, b) => placeIdx(a) - placeIdx(b) || TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) || (START_HERE.includes(b.handle) ? 1 : 0) - (START_HERE.includes(a.handle) ? 1 : 0));
@@ -14,12 +15,12 @@ const jsonld = [{
   mainEntity: { '@type': 'ItemList', numberOfItems: sorted.length, itemListElement: sorted.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${siteConfig.siteUrl}/products/${p.handle}`, name: p.baseTitle })) },
 }];
 ---
-<V2Layout title="Shop all" jsonld={jsonld} description="Every Nostalgic Hattiesburg tee, hat, sock and framed print, by place and by type: the Beverly Drive-In, Hub City Drag Raceway, Camelot Music and more.">
+<V2Layout title="Shop all" jsonld={jsonld} description={COPY.shopDesc}>
   <section class="hb-section--tight">
     <div class="hb-wrap">
       <p class="hb-eyebrow">The collection</p>
       <h1 class="hb-h1" style="font-size:clamp(2rem,4vw,3rem)">Shop all</h1>
-      <p class="hb-lede">{all.length} designs from seven Hattiesburg stories. Filter by what you want or by where it came from.</p>
+      <p class="hb-lede">{all.length} designs from {numWord(storyCount(PLACES)).toLowerCase()} {siteConfig.townName} stories. Filter by what you want or by where it came from.</p>
       <div style="margin-top:26px" data-filters>
         <div class="hb-filters" role="group" aria-label="Filter by type">
           <button class="hb-chip" type="button" data-type="" aria-pressed="true">All</button>

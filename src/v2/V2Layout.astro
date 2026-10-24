@@ -4,6 +4,7 @@ import { siteConfig, town } from '../config/site.config';
 import Header from './components/Header.astro';
 import Footer from './components/Footer.astro';
 import CartDrawer from './components/CartDrawer.astro';
+import { COPY } from './data';
 
 interface Props {
   title?: string;
@@ -15,12 +16,12 @@ interface Props {
 }
 const {
   title,
-  description = `Tees, hats, socks and framed prints redrawn and restored from lost ${siteConfig.townName} signs, ads and postcards: the Beverly Drive-In, Camelot Music, Hub City Drag Raceway and more.`,
-  image = '/images/hb/og.jpg',
+  description = COPY.metaDescription,
+  image = COPY.ogImage,
   jsonld = [],
   noindex = false,
 } = Astro.props;
-const fullTitle = title ? `${title} | ${siteConfig.brandName}` : `${siteConfig.brandName}: Hattiesburg tees, hats & prints from the places we remember`;
+const fullTitle = title ? `${title} | ${siteConfig.brandName}` : `${siteConfig.brandName}: ${COPY.homeTitle}`;
 const canonical = new URL(Astro.url.pathname, siteConfig.siteUrl).href;
 const ogImage = new URL(image, siteConfig.siteUrl).href;
 ---

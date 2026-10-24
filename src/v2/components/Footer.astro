@@ -1,14 +1,18 @@
 ---
 import { siteConfig } from '../../config/site.config';
-import { PLACES } from '../data';
+import { COPY, TYPE_ORDER, TYPE_SLUG, typePlural, livePlaces } from '../data';
+import { getCatalog } from '../catalog';
 const year = 2026;
+const all = await getCatalog();
+const places = livePlaces(all);
+const types = TYPE_ORDER.filter((t) => all.some((p) => p.lead && p.type === t));
 ---
 <footer class="hb-foot">
   <div class="hb-wrap">
     <div class="hb-foot__grid">
       <div>
-        <h2>Nostalgic Hattiesburg</h2>
-        <p style="margin:0 0 12px;max-width:30em">Tees, hats, socks and prints for the places Hattiesburg remembers, redrawn and restored from the original signs, ads and postcards. Made to order, one at a time.</p>
+        <h2>{siteConfig.brandName}</h2>
+        <p style="margin:0 0 12px;max-width:30em">{COPY.footerBlurb}</p>
         <p style="margin:0 0 18px">Questions? <a href="/contact">Contact us</a></p>
         <form class="hb-form hb-form--foot" data-signup novalidate>
           <label for="hb-foot-email">Get 15% off your first order</label>
@@ -22,16 +26,13 @@ const year = 2026;
         <h2>Shop</h2>
         <ul>
           <li><a href="/shop">Shop all</a></li>
-          <li><a href="/shop?type=tees">Tees</a></li>
-          <li><a href="/shop?type=hats">Hats</a></li>
-          <li><a href="/shop?type=socks">Socks</a></li>
-          <li><a href="/shop?type=prints">Framed prints</a></li>
+          {types.map((t, i) => <Fragment>{i ? ' ' : ''}<li><a href={`/shop?type=${TYPE_SLUG[t]}`}>{typePlural(t)}</a></li></Fragment>)}
         </ul>
       </div>
       <div>
         <h2>Places</h2>
         <ul>
-          {PLACES.map((p) => <li><a href={`/places/${p.slug}`}>{p.short}</a></li>)}
+          {places.map((p) => <li><a href={`/places/${p.slug}`}>{p.short}</a></li>)}
           <li><a href="/places">All places</a></li>
         </ul>
       </div>
@@ -48,8 +49,8 @@ const year = 2026;
       </div>
     </div>
     <div class="hb-foot__legal">
-      <p style="margin:0">Nostalgic Hattiesburg is an independent tribute shop, not affiliated with or endorsed by the businesses, schools or institutions shown. Archival postcards from the MDAH Cooper Postcard Collection, Mississippi Department of Archives and History.</p>
-      <p style="margin:0">© {year} Nostalgic Hattiesburg · Secure checkout by Shopify</p>
+      <p style="margin:0" set:html={COPY.footerLegalHtml} />
+      <p style="margin:0">© {year} {siteConfig.brandName} · Secure checkout by Shopify</p>
     </div>
   </div>
 </footer>

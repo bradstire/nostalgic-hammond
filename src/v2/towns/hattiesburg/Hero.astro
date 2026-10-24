@@ -1,0 +1,77 @@
+---
+// Hattiesburg home hero: the "Greetings from Hattiesburg" large-letter postcard, a link to a place in every letter.
+import { getCatalog, cdn, srcset, money } from '../../catalog';
+import { FREE_SHIP, SHIP_MAKE } from '../../data';
+import boxes from '../../hero-boxes.json';
+const all = await getCatalog();
+const by = (h: string) => all.find((p) => p.handle === h);
+const LETTER_PLACE: Record<string, string> = {
+  main99: 'postcards', beverly: 'beverly-drive-in', hubcar: 'hub-city-drag-raceway', camelot: 'cloverleaf-mall', speeds: 'albert-speeds',
+  main98: 'postcards', culpepper: 'culpepper-body-paint', checker: 'hub-city-drag-raceway', physed: 'phys-ed', mainR: 'postcards', mainG: 'postcards',
+};
+const LETTER_LABEL: Record<string, string> = {
+  postcards: 'Hattiesburg Postcards', 'beverly-drive-in': 'Beverly Drive-In', 'hub-city-drag-raceway': 'Hub City Drag Raceway', 'cloverleaf-mall': 'Cloverleaf Mall (Camelot)',
+  'albert-speeds': "Albert Speed's", 'culpepper-body-paint': 'Culpepper Body & Paint', 'phys-ed': 'The Old English H',
+};
+const HERO_SIZES = '(min-width: 1240px) 900px, (min-width: 901px) 80vw, calc(100vw - 32px)';
+const picks = ([['beverly-drive-in-theatre-tee', 'Beverly tee'], ['camelot-music-hat', 'Camelot hat'], ['main-street-hattiesburg-framed-poster-18-12', 'Main Street print']] as const)
+  .map(([h, label]) => ({ p: by(h), label })).filter((x) => x.p) as { p: (typeof all)[number]; label: string }[];
+// Legend: one entry per place, letters in word order.
+const legend: { slug: string; letters: string }[] = [];
+for (const b of boxes.wide as any[]) { const slug = LETTER_PLACE[b.key]; const e = legend.find((x) => x.slug === slug); e ? (e.letters += b.ch) : legend.push({ slug, letters: b.ch }); }
+const pct = (v: number) => (v * 100).toFixed(2) + '%';
+const check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+---
+<section class="hb-hero">
+  <div class="hb-wrap hb-hero__grid">
+    <div class="hb-hero__text">
+      <p class="hb-eyebrow">Made-to-order tees, hats, socks &amp; prints</p>
+      <h1 class="hb-h1">Lost Hattiesburg, ready to&nbsp;wear.</h1>
+      <p class="hb-lede">Tees, hats, socks and prints redrawn and restored from old Hattiesburg signs, ads and postcards. For anyone who's called it home, and anyone shopping for&nbsp;them.</p>
+      <div class="hb-hero__ctas">
+        <a class="hb-btn hb-btn--primary" href="/shop">Shop the collection</a>
+        <a class="hb-btn hb-btn--ghost" href="#places">Find your place</a>
+      </div>
+      <ul class="hb-picks" aria-label="Popular picks">
+        {picks.map(({ p, label }) => (
+          <li><a href={`/products/${p.handle}`}>
+            <img class="hb-cut" src={cdn(p.images[0].url, 240)} srcset={srcset(p.images[0].url, [180, 240, 360])} sizes="30vw" width="240" height="240" alt="" decoding="async" />
+            <span class="hb-picks__t">{label}</span>
+            <span class="hb-picks__p">{money(p.price)}</span>
+          </a></li>
+        ))}
+      </ul>
+    </div>
+    <figure class="hb-hero__art">
+      <div class="hb-hero__card">
+        <picture>
+          <source media="(max-width: 900px)" type="image/avif" srcset="/images/hb/hero/stack-600.avif 600w, /images/hb/hero/stack-750.avif 750w, /images/hb/hero/stack-900.avif 900w, /images/hb/hero/stack-1200.avif 1200w" sizes="calc(100vw - 32px)" />
+          <source media="(max-width: 900px)" type="image/webp" srcset="/images/hb/hero/stack-600.webp 600w, /images/hb/hero/stack-750.webp 750w, /images/hb/hero/stack-900.webp 900w, /images/hb/hero/stack-1200.webp 1200w" sizes="calc(100vw - 32px)" />
+          <source type="image/avif" srcset="/images/hb/hero/wide-800.avif 800w, /images/hb/hero/wide-1200.avif 1200w, /images/hb/hero/wide-1600.avif 1600w, /images/hb/hero/wide-2400.avif 2400w" sizes={HERO_SIZES} />
+          <img src="/images/hb/hero/wide-1200.webp" srcset="/images/hb/hero/wide-800.webp 800w, /images/hb/hero/wide-1200.webp 1200w, /images/hb/hero/wide-1600.webp 1600w, /images/hb/hero/wide-2400.webp 2400w" sizes={HERO_SIZES}
+            width="2400" height="1300" fetchpriority="high"
+            alt="A vintage-style 'Greetings from Hattiesburg' large-letter postcard. Each letter of HATTIESBURG holds a lost place: Main Street postcard scenes, a starry drive-in night for the Beverly, a 1966 drag-race photo and a checkered flag for Hub City Drag Raceway, Camelot Music's rainbow arch and stripes, Albert Speed's sign colors, the Culpepper duck, and purple-and-gold gym stripes with the Old English H." />
+        </picture>
+        <nav aria-label="Places in the postcard" class="hb-hots">
+          {boxes.wide.map((b: any) => (
+            <a class="hb-hot hb-hot--wide" href={`/places/${LETTER_PLACE[b.key]}`} style={`left:${pct(b.x)};top:${pct(b.y)};width:${pct(b.w)};height:${pct(b.h)}`} aria-label={`Letter ${b.ch}: ${LETTER_LABEL[LETTER_PLACE[b.key]]}`} data-label={LETTER_LABEL[LETTER_PLACE[b.key]]}></a>
+          ))}
+          {boxes.stack.map((b: any) => (
+            <a class="hb-hot hb-hot--stack" href={`/places/${LETTER_PLACE[b.key]}`} style={`left:${pct(b.x)};top:${pct(b.y)};width:${pct(b.w)};height:${pct(b.h)}`} aria-label={`Letter ${b.ch}: ${LETTER_LABEL[LETTER_PLACE[b.key]]}`}></a>
+          ))}
+        </nav>
+      </div>
+      <figcaption class="hb-hero__cap">
+        <span>Every letter holds a piece of old Hattiesburg. Tap one to see its story.</span>
+        <ul class="hb-legend" aria-label="What's in each letter">
+          {legend.map((e) => <li><a href={`/places/${e.slug}`}><b>{e.letters.split('').join(' ')}</b> {LETTER_LABEL[e.slug]}</a></li>)}
+        </ul>
+      </figcaption>
+    </figure>
+    <ul class="hb-trust">
+      <li><Fragment set:html={check} />Free US shipping on ${FREE_SHIP}+</li>
+      <li><Fragment set:html={check} />Made to order, ships in {SHIP_MAKE} days</li>
+      <li><Fragment set:html={check} />Misprinted or damaged? Free replacement</li>
+    </ul>
+  </div>
+</section>

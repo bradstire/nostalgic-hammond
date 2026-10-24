@@ -309,8 +309,10 @@ p, li, figcaption { text-wrap: pretty; }
 .hb-gallery { display: grid; gap: 10px; }
 .hb-gallery__main { aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; background: var(--tile); border: 1px solid var(--tile-line); }
 .hb-gallery__main img { width: 100%; height: 100%; object-fit: contain; }
-.hb-thumbs { display: flex; gap: 8px; overflow-x: auto; }
-.hb-thumbs button { flex: none; width: 76px; height: 76px; padding: 0; border-radius: 10px; overflow: hidden; border: 2px solid transparent; background: var(--tile); cursor: pointer; }
+/* Thumbs: up to seven a row on wider screens (more wrap into a tidy grid); on phones a strip that scrolls
+   sideways, edge to edge (see the max-width: 520px block). */
+.hb-thumbs { display: grid; grid-template-columns: repeat(7, minmax(0, 76px)); gap: 8px; }
+.hb-thumbs button { flex: none; width: 100%; height: auto; aspect-ratio: 1; padding: 0; border-radius: 10px; overflow: hidden; border: 2px solid transparent; background: var(--tile); cursor: pointer; }
 .hb-thumbs button[aria-current='true'] { border-color: var(--ink); }
 .hb-thumbs img { width: 100%; height: 100%; object-fit: contain; }
 .hb-buy { position: sticky; top: 84px; display: grid; gap: 18px; }
@@ -435,7 +437,10 @@ p, li, figcaption { text-wrap: pretty; }
   .hb-crumbs ol { flex-wrap: nowrap; overflow: hidden; white-space: nowrap; }
   .hb-crumbs li { white-space: nowrap; flex: none; }
   .hb-crumbs li:last-child { flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-  .hb-thumbs button { width: 60px; height: 60px; }
+  .hb-thumbs { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin: -5px calc(var(--gutter) * -1); padding: 5px var(--gutter); scroll-padding: 0 var(--gutter); }   /* 5px: room for the focus ring */
+  .hb-thumbs::-webkit-scrollbar { display: none; }
+  .hb-thumbs button { width: 60px; height: 60px; scroll-snap-align: start; }
   .hb-filters--scroll { flex-wrap: nowrap; overflow-x: auto; margin-left: calc(var(--gutter) * -1); margin-right: calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; scrollbar-width: none; }
   .hb-filters--scroll .hb-chip { flex: none; }
 }

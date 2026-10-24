@@ -1,9 +1,11 @@
 // v2 catalog: one Storefront API call at build time, enriched with place, type and colours.
 import { siteConfig, townSlug } from '../config/site.config';
-import { PLACES, HELD_PREFIXES, TYPE_LABEL, COLOR_HEX, SINGLE_COLOR, FAMILIES, MEMBER_LABEL, TITLE_OVERRIDE, HIDDEN_FROM_GRID, DESC_OVERRIDE, type Place } from './data';
+import { PLACES, HELD_PREFIXES, TYPE_LABEL, COLOR_HEX, SINGLE_COLOR, FAMILIES, MEMBER_LABEL, TITLE_OVERRIDE, HIDDEN_FROM_GRID, DESC_OVERRIDE, TOWN, FALLBACK_PLACE, TYPE_OVERRIDE, PRODUCT_IMAGES, OPAQUE_IMAGES, type Place } from './data';
 
 export type V2Variant = { id: string; numericId: string; title: string; available: boolean; price: number; options: Record<string, string>; image?: string };
-export type V2Image = { url: string; width: number; height: number; alt: string };
+// cut: a transparent cut-out (gets the .hb-cut drop-shadow); false for opaque photos (Printful's lifestyle view).
+// color: the colour option a view shows on a multi-colour product; null = shared by every colour.
+export type V2Image = { url: string; width: number; height: number; alt: string; cut: boolean; color: string | null };
 export type FamilyOpt = { handle: string; color: string; hex: string; label: string; image?: string };
 export type V2Product = {
   handle: string; title: string; baseTitle: string; shopifyTitle: string; description: string; descriptionHtml: string;
@@ -15,11 +17,13 @@ export type V2Product = {
   variants: V2Variant[]; available: boolean; tags: string[];
 };
 
-const Q = `{ products(first: 250, query: "tag:'town:${townSlug}'") { nodes {
+// One Storefront API search per page of 250. Towns that select by tag in code (Hammond keeps untagged products)
+// fetch the whole store and filter with TOWN.includeTags.
+const Q = (after: string | null) => `{ products(first: 250${after ? `, after: "${after}"` : ''}${TOWN.CATALOG_QUERY ? `, query: ${JSON.stringify(TOWN.CATALOG_QUERY)}` : ''}) { pageInfo { hasNextPage endCursor } nodes {
   handle title productType description descriptionHtml tags availableForSale
   options { name optionValues { name } }
   priceRange { minVariantPrice { amount } }
-  images(first: 10) { nodes { url width height altText } }
+  images(first: 30) { nodes { url width height altText } }
   variants(first: 60) { nodes { id title availableForSale price { amount } selectedOptions { name value } image { url } } }
 } } }`;
 
@@ -27,38 +31,33 @@ let cache: V2Product[] | null = null;
 const SIZE_ORDER = ['XS', 'S', 'M', 'L', 'XL', '2XL', '3XL', '4XL', '5XL'];
 
 export function placeFor(handle: string): Place | null {
-  return PLACES.find((p) => p.prefixes.some((pre) => handle.startsWith(pre))) || null;
+  return PLACES.find((p) => p.prefixes.some((pre) => handle.startsWith(pre)))
+    || (FALLBACK_PLACE ? PLACES.find((p) => p.slug === FALLBACK_PLACE) || null : null);
 }
 
-// Second image for cards/galleries: a close-up of the actual print art (generated from the print files).
-// Sock mockups re-rendered upright (Printful shows the front sock toe-up).
-const SOCK_FIX = new Set(['old-english-h-gym-socks', 'camelot-music-socks', 'hub-city-drag-raceway-socks', 'albert-speeds-socks']);
-// Mockups left on a Shopify product after its print was repositioned (10-23); they show the old, too-high placement.
-// Safe to delete from this list once the image is removed from the product in Shopify.
-const STALE_IMAGE = /\/4e4a54369e0ab7a00dbff1761aa63849_l\./;
-
-const DETAIL = new Set([
-  'beverly-drive-in-theatre-tee', 'beverly-drive-in-theatre-tee-natural', 'hub-city-drag-raceway-tee',
-  'camelot-music-1974-bag-tee', 'camelot-music-cloverleaf-sign-tee', 'camelot-music-cloverleaf-sign-tee-black',
-  'camelot-music-tri-stripe-tee', 'culpepper-body-paint-tee', 'culpepper-body-paint-tee-black',
-  'albert-speeds-restaurant-sign-tee', 'albert-speeds-restaurant-sign-tee-black', 'albert-speeds-pylon-tee',
-  'mississippi-britches-tee', 'old-english-h-phys-ed-tee-black', 'old-english-h-hattiesburg-physical-education-tee-black',
-  'old-english-h-pocket-tee', 'old-english-h-pocket-tee-black', 'old-english-h-phys-ed-ringer-tee',
-  'old-english-h-hattiesburg-physical-education-ringer-tee', 'hub-city-drag-raceway-framed-poster-12-12',
-  'main-street-hattiesburg-framed-poster-18-12', 'greetings-from-hattiesburg-framed-poster-12-18',
-]);
+// Second image for cards/galleries (print close-ups), upright sock renders and stale mockups: per town.
+const DETAIL = new Set(TOWN.DETAIL);
+const SOCK_FIX = new Set(TOWN.SOCK_FIX);
+const STALE_IMAGE = TOWN.STALE_IMAGE;
 
 export async function getCatalog(): Promise<V2Product[]> {
   if (cache) return cache;
-  const res = await fetch(`https://${siteConfig.shopifyStoreDomain}/api/2025-01/graphql.json`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': siteConfig.shopifyStorefrontToken },
-    body: JSON.stringify({ query: Q }),
-  });
-  const json = await res.json();
-  if (!json.data) throw new Error('[v2 catalog] Storefront API error: ' + JSON.stringify(json.errors || json).slice(0, 400));
+  const nodes: any[] = [];
+  let after: string | null = null;
+  do {
+    const res = await fetch(`https://${siteConfig.shopifyStoreDomain}/api/2025-01/graphql.json`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'X-Shopify-Storefront-Access-Token': siteConfig.shopifyStorefrontToken },
+      body: JSON.stringify({ query: Q(after) }),
+    });
+    const json = await res.json();
+    if (!json.data) throw new Error('[v2 catalog] Storefront API error: ' + JSON.stringify(json.errors || json).slice(0, 400));
+    nodes.push(...json.data.products.nodes);
+    after = json.data.products.pageInfo.hasNextPage ? json.data.products.pageInfo.endCursor : null;
+  } while (after);
   const out: V2Product[] = [];
-  for (const n of json.data.products.nodes) {
+  for (const n of nodes) {
+    if (!TOWN.includeTags(n.tags || [])) continue;
     if (HELD_PREFIXES.some((p) => n.handle.startsWith(p))) continue;
     const variants: V2Variant[] = n.variants.nodes.map((v: any) => ({
       id: v.id, numericId: v.id.split('/').pop(), title: v.title, available: v.availableForSale,
@@ -69,17 +68,24 @@ export async function getCatalog(): Promise<V2Product[]> {
     const colorOpt = n.options.find((o: any) => o.name === 'Color');
     const sizeOpt = n.options.find((o: any) => o.name === 'Size');
     const colorNames: string[] = colorOpt ? colorOpt.optionValues.map((o: any) => o.name) : (SINGLE_COLOR[n.handle] ? [SINGLE_COLOR[n.handle]] : []);
-    const type = TYPE_LABEL[n.productType] || 'Other';
+    const type = TYPE_OVERRIDE[n.handle] || TYPE_LABEL[n.productType] || 'Other';
     const title = TITLE_OVERRIDE[n.handle] || n.title.replace(/\s+—\s+Framed Poster.*$/, ' Framed Print');
     const goodAlt = (a: string | null) => (a && !/mockup/i.test(a) ? a : null);
-    let images: V2Image[] = n.images.nodes.filter((im: any) => !STALE_IMAGE.test(im.url)).map((im: any, i: number) => ({ url: im.url, width: im.width, height: im.height, alt: goodAlt(im.altText) || `${title}${i ? `, view ${i + 1}` : ''}` }));
-    if (SOCK_FIX.has(n.handle)) images = [{ url: `local:/images/hb/socks/${n.handle}`, width: 1080, height: 1080, alt: `${title}, front and back` }];
+    const colorFor = imageColors(colorNames, variants);
+    let images: V2Image[] = n.images.nodes.filter((im: any) => !STALE_IMAGE?.test(im.url)).map((im: any, i: number) => ({ url: im.url, width: im.width, height: im.height, alt: goodAlt(im.altText) || `${title}${i ? `, view ${i + 1}` : ''}`, cut: isCut(im.url), color: colorFor(im.url) }));
+    // The first photo is the card image and sets the product page's default colour. Printful lists a multi-view
+    // product colour by colour with the 3/4 view first (hats), so lead with the main colour's variant photo (its front).
+    const leadColor = TOWN.MAIN_COLOR?.[n.handle] || images[0]?.color || null;
+    const leadUrl = (variants.find((v) => v.image && (!leadColor || v.options.Color === leadColor)) || variants.find((v) => v.image))?.image?.split('?')[0];
+    const lead = leadUrl ? images.findIndex((im) => im.url.split('?')[0] === leadUrl) : -1;
+    if (lead > 0) images.unshift(...images.splice(lead, 1));
+    if (SOCK_FIX.has(n.handle)) images = [{ url: `local:${TOWN.SOCK_DIR}/${n.handle}`, width: 1080, height: 1080, alt: `${title}, front and back`, cut: true, color: null }];
     out.push({
       handle: n.handle, title, baseTitle: title.replace(/\s*\((Black|Natural|Dark)\)$/, ''), shopifyTitle: n.title, family: [], lead: true,
       description: (DESC_OVERRIDE[n.handle] || n.description).replace(/Postcard from the 1910s/, 'Postcard from about 1915–20').replace(/(\d)—(\d)/g, '$1–$2'), descriptionHtml: n.descriptionHtml,
       type, productType: n.productType, place: placeFor(n.handle),
       price: parseFloat(n.priceRange.minVariantPrice.amount), images,
-      detail: DETAIL.has(n.handle) ? `/images/hb/detail/${n.handle}` : null,
+      detail: DETAIL.has(n.handle) ? `${TOWN.DETAIL_DIR}/${n.handle}` : null,
       colors: colorNames.map((c) => ({ name: c, hex: COLOR_HEX[c] || '#cccccc' })),
       sizes: sizeOpt ? sizeOpt.optionValues.map((o: any) => o.name).sort((a: string, b: string) => SIZE_ORDER.indexOf(a) - SIZE_ORDER.indexOf(b)) : [],
       variants, available: n.availableForSale, tags: n.tags,
@@ -101,16 +107,42 @@ export async function getCatalog(): Promise<V2Product[]> {
   return out;
 }
 
+// Which colour each view shows, for multi-colour products (Printful publishes every view for every colour).
+// Printful file names carry the colour slug ("...-tee-vintage-white-front-3-<id>.png"); the longest slug is tried
+// first so "white" doesn't claim "vintage-white". A file name without a colour falls back to the variant that uses
+// the image; anything else is shared by all colours.
+const slugify = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+function imageColors(colorNames: string[], variants: V2Variant[]): (url: string) => string | null {
+  if (colorNames.length < 2) return () => null;
+  const slugs = colorNames.map((c) => ({ c, s: slugify(c) })).filter((x) => x.s).sort((a, b) => b.s.length - a.s.length);
+  const byVariant = new Map<string, Set<string>>();
+  for (const v of variants) if (v.image && v.options.Color) {
+    const b = baseName(v.image);
+    byVariant.set(b, (byVariant.get(b) || new Set()).add(v.options.Color));
+  }
+  return (url) => {
+    const b = baseName(url);
+    const padded = `-${b.toLowerCase()}-`;
+    const hit = slugs.find((x) => padded.includes(`-${x.s}-`));
+    if (hit) return hit.c;
+    const vc = byVariant.get(b);
+    return vc && vc.size === 1 ? [...vc][0] : null;
+  };
+}
+
 // Shopify CDN resize (it negotiates WebP/AVIF from the Accept header).
 const LOCAL_W = [360, 540, 800, 1080];
-// Shopify mockups with the background knocked out (transparent WebP), keyed by the image's file name.
-import productImages from './product-images.json';
-const KNOCKOUT = productImages as Record<string, string>;
+// Shopify mockups with the background knocked out (transparent WebP), keyed by the image's file name (per town).
+const KNOCKOUT = PRODUCT_IMAGES;
+const baseName = (url: string) => url.split('?')[0].split('/').pop()!.replace(/\.[a-z]+$/i, '');
 export function localFor(url: string): string | null {
   if (url.startsWith('local:')) return url.slice(6);
-  const base = url.split('?')[0].split('/').pop()!.replace(/\.[a-z]+$/i, '');
-  return KNOCKOUT[base] || null;
+  return KNOCKOUT[baseName(url)] || null;
 }
+// Opaque photos on Shopify (the lifestyle view has a studio background), by file name, per town; written by
+// scripts/opaque_images.py. They don't get the cut-out drop-shadow. A local knock-out above is transparent, so it wins.
+const OPAQUE = new Set<string>(OPAQUE_IMAGES);
+export const isCut = (url: string) => !!localFor(url) || !OPAQUE.has(baseName(url));
 export function cdn(url: string, w: number): string {
   const loc = localFor(url);
   if (loc) return `${loc}-${LOCAL_W.find((x) => x >= w) || 1080}.webp`;

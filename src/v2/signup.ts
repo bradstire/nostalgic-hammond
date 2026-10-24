@@ -1,6 +1,9 @@
-// Email signup -> Klaviyo list "Nostalgic Hattiesburg" (client subscriptions API, public key only).
+// Email signup -> the town's Klaviyo list (client subscriptions API, public key only).
+// The list id and source label come from src/config/towns.mjs (klaviyoList), replaced at build time (astro.config.mjs).
+// Hattiesburg: list "Nostalgic Hattiesburg". Hammond: the newsletter list the original site's popup used (its welcome
+// flow sends WELCOME15).
 const COMPANY = 'X6vHTB';
-const LIST = 'TtxEMr';
+const LIST = import.meta.env.PUBLIC_KLAVIYO_LIST;
 const CODE = 'WELCOME15';
 
 export function signup(form: HTMLFormElement) {
@@ -21,8 +24,8 @@ export function signup(form: HTMLFormElement) {
         method: 'POST',
         headers: { 'Content-Type': 'application/vnd.api+json', revision: '2024-10-15' },
         body: JSON.stringify({ data: { type: 'subscription', attributes: {
-          custom_source: 'Nostalgic Hattiesburg site',
-          profile: { data: { type: 'profile', attributes: { email, properties: { town: 'hattiesburg' } } } },
+          custom_source: import.meta.env.PUBLIC_SIGNUP_SOURCE,
+          profile: { data: { type: 'profile', attributes: { email, properties: { town: import.meta.env.PUBLIC_TOWN } } } },
         }, relationships: { list: { data: { type: 'list', id: LIST } } } } }),
       });
       if (!r.ok && r.status !== 202) throw new Error(String(r.status));
