@@ -1,0 +1,23 @@
+---
+// Hammond /about body. The opening reuses the pilot site's About copy (src/towns/hammond/About.astro), trimmed.
+import { getCatalog } from '../../catalog';
+import { livePlaces } from '../../data';
+import { siteConfig } from '../../../config/site.config';
+const email = siteConfig.contactEmail;
+const places = livePlaces(await getCatalog());
+---
+<p class="hb-lede">Hammond's history wasn't made in boardrooms. It was made down the highway at the Cave Tangi on a Friday night, at Strawberry Stadium on a Saturday afternoon, and in the hallways of Hammond High. Nostalgic Hammond brings those places back on tees, hats and framed prints.</p>
+<h2>How we work</h2>
+<p>We start with the record: postcards, old newspaper ads, photos of the signs, and the stories people share about these places. We restore the scan or redraw the lettering so it prints sharp, and we keep the details that made it look like itself.</p>
+<p>Each place page lists where its art comes from: the postcard and its publisher, the ad, or the photo we worked from. Where nothing more is on the record, we say so.</p>
+<h2>Where the images come from</h2>
+<ul>
+  <li><strong>Postcards.</strong> Our Greetings from Hammond print is a large-letter linen postcard published by Curt Teich &amp; Co. in 1946. Our Strawberry Stadium print is a 1940 linen postcard from the same publisher.</li>
+  <li><strong>Signs, ads and keepsakes.</strong> Some designs start from a photo of an old sign, an ad, a matchbook or a napkin. We redraw the lettering and leave off phone numbers and names.</li>
+  <li><strong>Photos shared by locals.</strong> Many of the old pictures we worked from were shared by people who remember these places. Thank you. If one of them is yours and you'd like a credit line, <a href="/contact">tell us</a>.</li>
+</ul>
+<h2>The places</h2>
+<ul>{places.map((p) => <li><a href={`/places/${p.slug}`}>{p.name}</a>{p.era && ` (${p.era})`}</li>)}</ul>
+<h2>Who we are</h2>
+<p>Nostalgic Hammond is a small independent shop. We are not affiliated with or endorsed by the businesses, schools or institutions we honor.</p>
+<p>Remember a place we should bring back? Email <a href={`mailto:${email}`}>{email}</a>. We read everything.</p>

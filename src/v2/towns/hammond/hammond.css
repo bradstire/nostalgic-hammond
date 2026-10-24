@@ -1,0 +1,40 @@
+/* Hammond-only home styles: the full-bleed photo hero and the Greetings band.
+   Imported by src/v2/towns/hammond/Hero.astro, so no other town's pages carry them. */
+.hm-hero { position: relative; isolation: isolate; display: flex; align-items: center; min-height: clamp(500px, 74vh, 720px); color: #fff8ec; overflow: hidden; background: #2a211b; }
+.hm-hero__bg, .hm-hero__bg img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.hm-hero__bg img { object-fit: cover; object-position: center 68%; z-index: -2; }
+/* Scrim: darkest behind the headline, lifting toward the floor medallion at the bottom of the photo. */
+.hm-hero__scrim { position: absolute; inset: 0; z-index: -1;
+  background:
+    radial-gradient(ellipse 70% 62% at 50% 44%, rgba(18, 13, 9, .58), rgba(18, 13, 9, 0) 72%),
+    linear-gradient(180deg, rgba(18, 13, 9, .62) 0%, rgba(18, 13, 9, .66) 48%, rgba(18, 13, 9, .46) 78%, rgba(18, 13, 9, .30) 100%); }
+.hm-hero__in { position: relative; width: 100%; padding-top: clamp(40px, 7vw, 88px); padding-bottom: clamp(56px, 8vw, 104px); }
+.hm-hero__text { max-width: 760px; margin: 0 auto; text-align: center; }
+.hm-hero .hb-eyebrow { color: #f2c46d; }
+.hm-hero .hb-h1 { color: #fff; font-size: clamp(2.3rem, 5vw, 3.9rem); text-shadow: 0 2px 18px rgba(0, 0, 0, .45); }
+.hm-hero .hb-lede { color: #f6efe3; margin-left: auto; margin-right: auto; max-width: 40em; text-shadow: 0 1px 10px rgba(0, 0, 0, .5); }
+.hm-hero .hb-hero__ctas { justify-content: center; }
+.hm-btn--light { background: rgba(18, 13, 9, .35); color: #fff; border-color: rgba(255, 255, 255, .9); }
+.hm-btn--light:hover { background: #fff; color: var(--ink); }
+.hm-hero__cap { position: absolute; right: var(--gutter); bottom: 14px; margin: 0; font-size: 12.5px; color: #f1e7d6; text-shadow: 0 1px 6px rgba(0, 0, 0, .7); }
+.hm-trust { justify-content: center; margin: 18px 0 0; }
+@media (max-width: 700px) {
+  .hm-hero { min-height: 600px; align-items: flex-end; }
+  .hm-hero__scrim { background: linear-gradient(180deg, rgba(18, 13, 9, .28) 0%, rgba(18, 13, 9, .52) 24%, rgba(18, 13, 9, .80) 44%, rgba(18, 13, 9, .86) 100%); }
+  .hm-hero__in { padding-bottom: 44px; }
+  .hm-hero__text { text-align: left; }
+  .hm-hero .hb-lede { font-size: 1rem; }
+  .hm-hero .hb-hero__ctas { justify-content: flex-start; }
+  .hm-hero__cap { left: var(--gutter); right: auto; bottom: 12px; }
+  .hm-trust { justify-content: flex-start; }
+}
+
+.hm-band { background: var(--paper-2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.hm-band__in { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 4vw, 56px); align-items: center; }
+.hm-band__card { display: block; transform: rotate(-1.5deg); border-radius: 4px; overflow: hidden; border: 10px solid #f7f2e6; box-shadow: 0 2px 4px rgba(30, 26, 22, .12), 0 18px 40px rgba(30, 26, 22, .22); transition: transform .2s ease; }
+.hm-band__card:hover { transform: rotate(-.5deg) scale(1.01); }
+.hm-band__card img { width: 100%; height: auto; }
+.hm-band__txt p { color: var(--ink-2); max-width: 34em; }
+.hm-band__sizes { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; margin: 18px 0 0; padding: 0; }
+.hm-band__more { margin: 16px 0 0; }
+@media (max-width: 860px) { .hm-band__in { grid-template-columns: 1fr; } .hm-band__card { transform: none; } }
