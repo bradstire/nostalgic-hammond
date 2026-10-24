@@ -348,7 +348,7 @@ export const hammond: TownContent = {
   // Print close-ups: the pilot's hand-made close-up shots (public/images/*-06.png), resized.
   DETAIL: ['cave-tangi-tee-black', 'cave-tangi-tee-white', 'cave-tangi-tee-cream', 'tornadoes-crew-neck-sweatshirt'],
   DETAIL_DIR: '/images/hm/detail',
-  SOCK_FIX: [], SOCK_DIR: '/images/hm/socks',
+  SOCK_FIX: ['casa-de-fresa-hotel-socks'], SOCK_DIR: '/images/hm/socks',
   STALE_IMAGE: null,
   PLACE_DIR: '/images/hm/places',
   ADD_ONS: ['cave-tangi-dad-hat-black', 'cave-tangi-dad-hat-khaki', 'cave-tangi-dad-hat-forest', 'cave-tangi-tee-black', 'hammond-phys-ed-ringer-tee', 'greetings-from-hammond', 'strawberry-stadium-framed-poster-12-16'],
