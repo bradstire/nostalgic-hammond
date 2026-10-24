@@ -1,0 +1,70 @@
+---
+import V2Layout from '../V2Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCatalog } from '../catalog';
+import { PLACES, TYPE_ORDER, TYPE_SLUG, START_HERE } from '../data';
+const all = (await getCatalog()).filter((p) => p.lead);
+// Story order: place order, then type order; "start here" picks lead their place.
+const placeIdx = (p: any) => PLACES.findIndex((x) => x.slug === p.place?.slug);
+const sorted = [...all].sort((a, b) => placeIdx(a) - placeIdx(b) || TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) || (START_HERE.includes(b.handle) ? 1 : 0) - (START_HERE.includes(a.handle) ? 1 : 0));
+const types = TYPE_ORDER.filter((t) => all.some((p) => p.type === t));
+import { siteConfig } from '../../config/site.config';
+const jsonld = [{
+  '@context': 'https://schema.org', '@type': 'CollectionPage', name: 'Shop all', url: `${siteConfig.siteUrl}/shop`,
+  mainEntity: { '@type': 'ItemList', numberOfItems: sorted.length, itemListElement: sorted.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${siteConfig.siteUrl}/products/${p.handle}`, name: p.baseTitle })) },
+}];
+---
+<V2Layout title="Shop all" jsonld={jsonld} description="Every Nostalgic Hattiesburg tee, hat, sock and framed print, by place and by type: the Beverly Drive-In, Hub City Drag Raceway, Camelot Music and more.">
+  <section class="hb-section--tight">
+    <div class="hb-wrap">
+      <p class="hb-eyebrow">The collection</p>
+      <h1 class="hb-h1" style="font-size:clamp(2rem,4vw,3rem)">Shop all</h1>
+      <p class="hb-lede">{all.length} designs from seven Hattiesburg stories. Filter by what you want or by where it came from.</p>
+      <div style="margin-top:26px" data-filters>
+        <div class="hb-filters" role="group" aria-label="Filter by type">
+          <button class="hb-chip" type="button" data-type="" aria-pressed="true">All</button>
+          {types.map((t) => <button class="hb-chip" type="button" data-type={TYPE_SLUG[t]} aria-pressed="false">{t === 'Framed print' ? 'Framed prints' : t === 'Socks' ? 'Socks' : t + 's'}</button>)}
+        </div>
+        <div class="hb-filters hb-filters--scroll" role="group" aria-label="Filter by place">
+          <button class="hb-chip" type="button" data-place="" aria-pressed="true">Every place</button>
+          {PLACES.map((pl) => <button class="hb-chip" type="button" data-place={pl.slug} aria-pressed="false">{pl.short}</button>)}
+        </div>
+      </div>
+      <p class="hb-count" data-count-out aria-live="polite">{all.length} designs</p>
+      <div class="hb-grid" data-grid>
+        {sorted.map((p, i) => (
+          <div data-item data-t={TYPE_SLUG[p.type]} data-p={p.place?.slug || ''}><ProductCard p={p} eager={i < 4} /></div>
+        ))}
+      </div>
+      <div class="hb-zero" data-zero hidden>
+        <p><strong>Nothing in that combination yet.</strong> Try another place or type.</p>
+        <button class="hb-btn hb-btn--ghost" type="button" data-reset>Clear filters</button>
+      </div>
+    </div>
+  </section>
+</V2Layout>
+<script>
+  const params = new URLSearchParams(location.search);
+  let type = params.get('type') || '', place = params.get('place') || '';
+  const items = [...document.querySelectorAll<HTMLElement>('[data-item]')];
+  const out = document.querySelector('[data-count-out]') as HTMLElement;
+  function apply() {
+    let n = 0;
+    items.forEach((it) => { const on = (!type || it.dataset.t === type) && (!place || it.dataset.p === place); it.hidden = !on; if (on) n++; });
+    out.textContent = n === 1 ? '1 design' : `${n} designs`;
+    (document.querySelector('[data-zero]') as HTMLElement).hidden = n > 0;
+    document.querySelectorAll('[data-type]').forEach((b) => b.setAttribute('aria-pressed', String((b as HTMLElement).dataset.type === type)));
+    document.querySelectorAll('[data-place]').forEach((b) => b.setAttribute('aria-pressed', String((b as HTMLElement).dataset.place === place)));
+    const q = new URLSearchParams(); if (type) q.set('type', type); if (place) q.set('place', place);
+    history.replaceState(null, '', location.pathname + (q.toString() ? '?' + q : ''));
+  }
+  document.querySelector('[data-reset]')!.addEventListener('click', () => { type = ''; place = ''; apply(); (document.querySelector('[data-type=""]') as HTMLElement)?.focus(); });
+  document.querySelector('[data-filters]')!.addEventListener('click', (e) => {
+    const b = (e.target as HTMLElement).closest('button') as HTMLElement | null; if (!b) return;
+    if ('reset' in b.dataset) { type = ''; place = ''; apply(); return; }
+    if ('type' in b.dataset) type = b.dataset.type || '';
+    if ('place' in b.dataset) place = b.dataset.place || '';
+    apply();
+  });
+  apply();
+</script>

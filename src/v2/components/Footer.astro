@@ -1,0 +1,64 @@
+---
+import { siteConfig } from '../../config/site.config';
+import { PLACES } from '../data';
+const year = 2026;
+---
+<footer class="hb-foot">
+  <div class="hb-wrap">
+    <div class="hb-foot__grid">
+      <div>
+        <h2>Nostalgic Hattiesburg</h2>
+        <p style="margin:0 0 12px;max-width:30em">Tees, hats, socks and prints for the places Hattiesburg remembers, redrawn and restored from the original signs, ads and postcards. Made to order, one at a time.</p>
+        <p style="margin:0 0 18px">Questions? <a href="/contact">Contact us</a></p>
+        <form class="hb-form hb-form--foot" data-signup novalidate>
+          <label for="hb-foot-email">Get 15% off your first order</label>
+          <input class="hb-input" id="hb-foot-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
+          <button class="hb-btn hb-btn--primary" type="submit">Sign up</button>
+          <p class="hb-form__msg" role="status" aria-live="polite"></p>
+          <p class="hb-form__legal">Unsubscribe anytime. <a href="https://checkout.shopify.com/97765622131/policies/50774835571.html?locale=en" rel="nofollow">Privacy policy</a></p>
+        </form>
+      </div>
+      <div>
+        <h2>Shop</h2>
+        <ul>
+          <li><a href="/shop">Shop all</a></li>
+          <li><a href="/shop?type=tees">Tees</a></li>
+          <li><a href="/shop?type=hats">Hats</a></li>
+          <li><a href="/shop?type=socks">Socks</a></li>
+          <li><a href="/shop?type=prints">Framed prints</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Places</h2>
+        <ul>
+          {PLACES.map((p) => <li><a href={`/places/${p.slug}`}>{p.short}</a></li>)}
+          <li><a href="/places">All places</a></li>
+        </ul>
+      </div>
+      <div>
+        <h2>Help</h2>
+        <ul>
+          <li><a href="/faq">FAQ</a></li>
+          <li><a href="/contact">Contact</a></li>
+          <li><a href="/shipping-returns">Shipping & returns</a></li>
+          <li><a href="/about">Our story & sources</a></li>
+          <li><a href="https://checkout.shopify.com/97765622131/policies/50774835571.html?locale=en" rel="nofollow">Privacy policy</a></li>
+          <li><a href="/terms">Terms</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="hb-foot__legal">
+      <p style="margin:0">Nostalgic Hattiesburg is an independent tribute shop, not affiliated with or endorsed by the businesses, schools or institutions shown. Archival postcards from the MDAH Cooper Postcard Collection, Mississippi Department of Archives and History.</p>
+      <p style="margin:0">© {year} Nostalgic Hattiesburg · Secure checkout by Shopify</p>
+    </div>
+  </div>
+</footer>
+<script>
+  import { signup } from '../signup';
+  document.querySelectorAll<HTMLFormElement>('.hb-foot [data-signup]').forEach((f) => signup(f));
+  document.addEventListener('click', (e) => {
+    const l = (e.target as HTMLElement).closest('[data-focus-signup]'); if (!l) return;
+    e.preventDefault(); const i = document.getElementById('hb-foot-email') as HTMLInputElement | null;
+    i?.scrollIntoView({ behavior: 'smooth', block: 'center' }); setTimeout(() => i?.focus({ preventScroll: true }), 400);
+  });
+</script>

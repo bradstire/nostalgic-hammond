@@ -1,0 +1,8 @@
+---
+import Info from '../pages/Info.astro';
+import Shop from '../pages/Shop.astro';
+import Places from '../pages/Places.astro';
+import NotFound from '../pages/NotFound.astro';
+const { page } = Astro.props;
+---
+{page === 'shop' ? <Shop /> : page === 'places' ? <Places /> : page === '404' ? <NotFound /> : <Info page={page} />}

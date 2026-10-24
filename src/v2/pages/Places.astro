@@ -1,0 +1,54 @@
+---
+import V2Layout from '../V2Layout.astro';
+import { getCatalog } from '../catalog';
+import { PLACES } from '../data';
+import { siteConfig } from '../../config/site.config';
+import { nw } from '../nw';
+const all = (await getCatalog()).filter((p) => p.lead);
+const count = (slug: string) => all.filter((p) => p.place?.slug === slug).length;
+const placeCta = (slug: string) => {
+  const items = all.filter((p) => p.place?.slug === slug);
+  return items.length === 1 ? `Shop the ${items[0].type.toLowerCase()}${items[0].family.length > 1 ? ` · ${items[0].family.length} colors` : ''}` : `Shop ${items.length} designs`;
+};
+const jsonld = [{
+  '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
+    { '@type': 'ListItem', position: 1, name: 'Home', item: siteConfig.siteUrl + '/' },
+    { '@type': 'ListItem', position: 2, name: 'Places', item: `${siteConfig.siteUrl}/places` },
+  ],
+}];
+---
+<V2Layout title="Shop by place" description="Seven lost Hattiesburg stories, from the Beverly Drive-In to Camelot Music at Cloverleaf Mall, each with its story, sources and collection." jsonld={jsonld}>
+  <div class="hb-wrap">
+    <nav class="hb-crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li aria-current="page">Places</li></ol></nav>
+  </div>
+  <section class="hb-section--tight">
+    <div class="hb-wrap">
+      <p class="hb-eyebrow">Shop by place</p>
+      <h1 class="hb-h1 hb-h1--page">Seven Hattiesburg stories people still talk&nbsp;about</h1>
+      <p class="hb-lede">Each one has its own story, sources and collection. Grew up here, went to school here, or just love a good old sign? Start anywhere.</p>
+      <div class="hb-places" style="margin-top:28px">
+        {PLACES.map((pl) => (
+          <a class="hb-place" href={`/places/${pl.slug}`}>
+            <div class="hb-place__media" style={`background:${pl.tone}`}>
+              <picture>
+                <source type="image/avif" srcset={`/images/hb/places/${pl.tile}-600.avif 600w, /images/hb/places/${pl.tile}-900.avif 900w`} sizes="(max-width: 1000px) 50vw, 300px" />
+                <img src={`/images/hb/places/${pl.tile}-600.webp`} srcset={`/images/hb/places/${pl.tile}-600.webp 600w, /images/hb/places/${pl.tile}-900.webp 900w`} sizes="(max-width: 1000px) 50vw, 300px" alt="" width="600" height="450" decoding="async" />
+              </picture>
+            </div>
+            <div class="hb-place__txt">
+              <div class="hb-place__era">{pl.era}</div>
+              <h2 class="hb-place__name" set:html={nw(pl.name)} />
+              <p class="hb-place__line" set:html={nw(pl.line)} />
+              <span class="hb-place__go">{placeCta(pl.slug)} <span aria-hidden="true">→</span></span>
+            </div>
+          </a>
+        ))}
+        <a class="hb-place hb-place--all" href="/shop">
+          <h2 class="hb-place__name">Shop everything</h2>
+          <p>All {all.length} designs, filterable by tees, hats, socks and prints.</p>
+          <span class="hb-place__go">Shop all <span aria-hidden="true">→</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+</V2Layout>

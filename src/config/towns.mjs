@@ -81,6 +81,8 @@ export const towns = {
     siteUrl: 'https://www.nostalgichattiesburg.com',
     contactEmail: 'info@nostalgichattiesburg.com',
     launched: false,
+    // Storefront v2 ("shop by place", src/v2). Hammond keeps the original layout.
+    layout: 'v2',
     heroImage: '/images/hattiesburg/hero.jpg',
     heroPosition: 'center 55%',
     // No Klaviyo list for this town yet; the popup stays off until one exists.
