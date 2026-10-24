@@ -2,7 +2,7 @@
 import V2Layout from '../V2Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { getCatalog, cdn, srcset, money, storyOf, specsOf, shareImg, type V2Product } from '../catalog';
-import { FREE_SHIP, HOLIDAY_CUTOFF, SIZE_CHART, SOCK_CHART, FRAME_SIZE, MEMBER_LABEL, SHIP_MAKE, SHIP_TRANSIT, NOTE_BY_PREFIX, HIDDEN_FROM_GRID, PAIRS, blankFor, START_HERE } from '../data';
+import { FREE_SHIP, HOLIDAY_CUTOFF, SIZE_CHART, SOCK_CHART, FRAME_SIZE, MEMBER_LABEL, SHIP_MAKE, SHIP_TRANSIT, NOTE_BY_PREFIX, HIDDEN_FROM_GRID, PAIRS, blankFor, START_HERE, MATE_FALLBACK } from '../data';
 import { clip } from '../clip';
 import { siteConfig } from '../../config/site.config';
 import { nw } from '../nw';
@@ -16,7 +16,8 @@ const alsoLike = START_HERE.map((h) => all.find((x) => x.handle === h)!).filter(
 // Story text without the not-affiliated sentence (shown once, from the place note).
 const story = storyOf(p).map((s) => s.replace(/\s*Not affiliated[^.]*\./gi, '').trim()).filter(Boolean);
 const specs = specsOf(p);
-const chart = p.type === 'Tee' ? SIZE_CHART[blankFor(p.handle)!] : null;
+const blank = p.type === 'Tee' ? blankFor(p.handle, p.images[0]?.url) : null;
+const chart = blank ? SIZE_CHART[blank] : null;
 const multiColor = p.colors.length > 1;
 const isFamily = p.family.length > 1;
 const optName = p.family.some((f) => MEMBER_LABEL[f.handle]) ? 'Style' : 'Color';
@@ -40,13 +41,14 @@ const brand = p.handle.split('-').slice(0, 2).join('-');                 // e.g.
 const findMate = (type: string) => all.find((x) => x.lead && x.type === type && x.handle.startsWith(brand))
   || all.find((x) => x.lead && x.type === type && x.place?.slug === p.place?.slug);
 const mateHandle = pairDef?.items.find((it) => !famHandles.has(it.h))?.h
-  || (p.type === 'Tee' ? findMate('Hat')?.handle || 'hub-city-drag-raceway-hat'
-    : p.type === 'Hat' ? findMate('Tee')?.handle || 'beverly-drive-in-theatre-tee'
-    : p.type === 'Framed print' ? findMate('Socks')?.handle || 'hub-city-drag-raceway-socks' : null);
+  || (p.type === 'Tee' || p.type === 'Sweatshirt' ? findMate('Hat')?.handle || MATE_FALLBACK[p.type]
+    : p.type === 'Hat' ? findMate('Tee')?.handle || MATE_FALLBACK.Hat
+    : p.type === 'Framed print' ? findMate('Socks')?.handle || MATE_FALLBACK['Framed print'] : null);
 const mate = mateHandle ? all.find((x) => x.handle === mateHandle) : null;
 // pictured colour: the pair's pinned colour, else the colour of the mate's first photo
 const mateColor = pairDef?.items.find((it) => it.h === mateHandle)?.color
   || (mate && mate.colors.length > 1 ? mate.variants.find((v) => v.image === mate.images[0]?.url)?.options.Color : undefined);
+const mateShown = mateColor || pairDef?.items.find((it) => it.h === mateHandle)?.label;
 const mateSized = !!mate && mate.sizes.length > 1;
 const mateVariant = mate && !mateSized ? (mate.variants.find((v) => v.available && (!mateColor || v.options.Color === mateColor)) || mate.variants.find((v) => v.available)) : null;
 const mateSizes = mate && mateSized ? Object.fromEntries(mate.variants.filter((v) => v.available && (!mateColor || v.options.Color === mateColor)).map((v) => [v.options.Size, v.id])) : null;
@@ -109,7 +111,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
 
       <div class="hb-buy">
         <div>
-          {p.place && <p class="hb-eyebrow" style="margin-bottom:8px"><a href={`/places/${p.place.slug}`} style="text-decoration:none">{p.place.name} · <span class="hb-era">{p.place.era}</span></a></p>}
+          {p.place && <p class="hb-eyebrow" style="margin-bottom:8px"><a href={`/places/${p.place.slug}`} style="text-decoration:none">{p.place.name}{p.place.era && <Fragment> · <span class="hb-era">{p.place.era}</span></Fragment>}</a></p>}
           <h1 class="hb-h2 hb-pdp__title" set:html={nw(p.baseTitle)} />
           <p class="hb-buy__price" style="margin:12px 0 0" data-price>{money(p.price)}</p>
           <p class="hb-buy__ship">Free US shipping on orders ${FREE_SHIP}+{isHat ? ' · One size, adjustable strap' : ''}{p.type === 'Framed print' && FRAME_SIZE[p.handle] ? ` · ${FRAME_SIZE[p.handle]}` : ''}</p>
@@ -170,7 +172,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
             <div class="hb-mate__row">
               <a href={mateHref} class="hb-mate__img" tabindex="-1" aria-hidden="true"><img src={cdn(mateImg, 160)} srcset={srcset(mateImg, [120, 160, 240])} sizes="64px" width="64" height="64" alt="" loading="lazy" /></a>
               <div class="hb-mate__t">
-                <a href={mateHref} set:html={nw(mate.baseTitle + (mateColor ? `, ${mateColor}` : ''))} />
+                <a href={mateHref} set:html={nw(mate.baseTitle + (mateShown ? `, ${mateShown}` : ''))} />
                 <span>+{money(mate.price)} · both for {money(together)}</span>
                 {mateSizes && (
                   <label class="hb-mate__size"><span class="hb-sr">Size for {mate.baseTitle}</span>
@@ -194,7 +196,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
           <div class="hb-storybox">
             <p class="hb-eyebrow" style="margin-bottom:6px">The story</p>
             {story.map((s) => <p>{s}</p>)}
-            {p.place && <p><a class="hb-link" href={`/places/${p.place.slug}`}>More about {p.place.short}</a></p>}
+            {p.place && !p.place.catchAll && <p><a class="hb-link" href={`/places/${p.place.slug}`}>More about {p.place.short}</a></p>}
             {note && <p class="hb-note">{note}</p>}
           </div>
         )}
@@ -250,7 +252,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
   {samePlace.length > 0 && (
     <section class="hb-section--tight" aria-labelledby="rel-h" style="border-top:1px solid var(--line)">
       <div class="hb-wrap">
-        <div class="hb-head"><h2 class="hb-h2 hb-h2--sm" id="rel-h">More from {p.place!.short}</h2><a class="hb-link" href={`/places/${p.place!.slug}`}>The story of {p.place!.short}</a></div>
+        <div class="hb-head"><h2 class="hb-h2 hb-h2--sm" id="rel-h">More from {p.place!.catchAll ? p.place!.short.replace(/^Around/, 'around') : p.place!.short}</h2><a class="hb-link" href={`/places/${p.place!.slug}`}>{p.place!.catchAll ? 'See them all' : `The story of ${p.place!.short}`}</a></div>
         <div class="hb-grid">{samePlace.map((r) => <ProductCard p={r} />)}</div>
       </div>
     </section>
@@ -258,7 +260,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
   {alsoLike.length > 0 && (
     <section class="hb-section--tight" aria-labelledby="also-h" style="border-top:1px solid var(--line)">
       <div class="hb-wrap">
-        <div class="hb-head"><h2 class="hb-h2 hb-h2--sm" id="also-h">From other Hattiesburg places</h2><a class="hb-link" href="/shop">Shop all</a></div>
+        <div class="hb-head"><h2 class="hb-h2 hb-h2--sm" id="also-h">From other {siteConfig.townName} places</h2><a class="hb-link" href="/shop">Shop all</a></div>
         <div class="hb-grid">{alsoLike.map((r) => <ProductCard p={r} />)}</div>
       </div>
     </section>

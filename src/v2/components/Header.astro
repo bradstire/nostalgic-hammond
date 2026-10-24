@@ -1,5 +1,6 @@
 ---
 import { FREE_SHIP, HOLIDAY_CUTOFF } from '../data';
+import { siteConfig } from '../../config/site.config';
 const links = [
   { href: '/shop', label: 'Shop all' },
   { href: '/places', label: 'Shop by place' },
@@ -12,9 +13,9 @@ const links = [
 </aside>
 <header class="hb-header">
   <div class="hb-wrap hb-header__in">
-    <a class="hb-logo" href="/" aria-label="Nostalgic Hattiesburg, home">
+    <a class="hb-logo" href="/" aria-label={`${siteConfig.brandName}, home`}>
       <small>Nostalgic</small>
-      <span>Hattiesburg</span>
+      <span>{siteConfig.townName}</span>
     </a>
     <nav class="hb-nav" aria-label="Main">
       {links.map((l) => <a href={l.href}>{l.label}</a>)}

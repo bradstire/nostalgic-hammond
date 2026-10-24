@@ -22,6 +22,8 @@ export const towns = {
     heroImage: '/images/hero-background.jpg',
     heroPosition: 'center 68%',
     popup: { enabled: true, footer: 'Hammond — remembered right.' },
+    // Klaviyo list for v2 email signups (the original popup's list; its welcome flow sends WELCOME15).
+    klaviyoList: 'XdKJkQ',
     footerLinks: [
       { href: '/', label: 'SHOP' },
       { href: '/about', label: 'ABOUT' },
@@ -81,12 +83,14 @@ export const towns = {
     siteUrl: 'https://www.nostalgichattiesburg.com',
     contactEmail: 'info@nostalgichattiesburg.com',
     launched: false,
-    // Storefront v2 ("shop by place", src/v2). Hammond keeps the original layout.
+    // Storefront v2 ("shop by place", src/v2).
     layout: 'v2',
     heroImage: '/images/hattiesburg/hero.jpg',
     heroPosition: 'center 55%',
     // No Klaviyo list for this town yet; the popup stays off until one exists.
     popup: { enabled: false, footer: 'Hattiesburg — remembered right.' },
+    // Klaviyo list for v2 email signups ("Nostalgic Hattiesburg").
+    klaviyoList: 'TtxEMr',
     footerLinks: [
       { href: '/', label: 'SHOP' },
       { href: '/about', label: 'ABOUT' },

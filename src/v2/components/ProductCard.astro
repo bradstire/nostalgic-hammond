@@ -2,6 +2,7 @@
 import type { V2Product } from '../catalog';
 import { cdn, srcset, money } from '../catalog';
 import { nw } from '../nw';
+import { siteConfig } from '../../config/site.config';
 interface Props { p: V2Product; eager?: boolean; sizes?: string; badge?: string; heading?: 'h3' | 'span' }
 const { p, eager = false, sizes = '(max-width: 760px) 50vw, (max-width: 1080px) 33vw, 300px', badge } = Astro.props;
 // Cards lead with the cut-out product (transparent background); the print close-up shows on hover.
@@ -34,7 +35,7 @@ const swLabel = swatches.length > 1 ? `${swatches.length} colors: ${swatches.map
     ) : null}
   </div>
   <div class="hb-card__body">
-    <span class="hb-card__place">{p.place ? p.place.short : 'Hattiesburg'} · {typeLabel}</span>
+    <span class="hb-card__place">{p.place ? p.place.short : siteConfig.townName} · {typeLabel}</span>
     <span class="hb-card__title" set:html={nw(p.baseTitle)} />
     <div class="hb-card__meta">
       <span class="hb-card__price">{money(p.price)}</span>
