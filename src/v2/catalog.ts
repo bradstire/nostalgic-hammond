@@ -73,6 +73,12 @@ export async function getCatalog(): Promise<V2Product[]> {
     const goodAlt = (a: string | null) => (a && !/mockup/i.test(a) ? a : null);
     const colorFor = imageColors(colorNames, variants);
     let images: V2Image[] = n.images.nodes.filter((im: any) => !STALE_IMAGE?.test(im.url)).map((im: any, i: number) => ({ url: im.url, width: im.width, height: im.height, alt: goodAlt(im.altText) || `${title}${i ? `, view ${i + 1}` : ''}`, cut: isCut(im.url), color: colorFor(im.url) }));
+    // The first photo is the card image and sets the product page's default colour. Printful lists a multi-view
+    // product colour by colour with the 3/4 view first (hats), so lead with the main colour's variant photo (its front).
+    const leadColor = TOWN.MAIN_COLOR?.[n.handle] || images[0]?.color || null;
+    const leadUrl = (variants.find((v) => v.image && (!leadColor || v.options.Color === leadColor)) || variants.find((v) => v.image))?.image?.split('?')[0];
+    const lead = leadUrl ? images.findIndex((im) => im.url.split('?')[0] === leadUrl) : -1;
+    if (lead > 0) images.unshift(...images.splice(lead, 1));
     if (SOCK_FIX.has(n.handle)) images = [{ url: `local:${TOWN.SOCK_DIR}/${n.handle}`, width: 1080, height: 1080, alt: `${title}, front and back`, cut: true, color: null }];
     out.push({
       handle: n.handle, title, baseTitle: title.replace(/\s*\((Black|Natural|Dark)\)$/, ''), shopifyTitle: n.title, family: [], lead: true,

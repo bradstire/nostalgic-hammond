@@ -98,6 +98,8 @@ export type TownContent = {
   DETAIL: string[]; DETAIL_DIR: string;      // print close-ups: <DETAIL_DIR>/<handle>-(360|540|800).webp
   SOCK_FIX: string[]; SOCK_DIR: string;
   STALE_IMAGE: RegExp | null;
+  // Colour whose photo leads a multi-colour product (card image, default swatch); else the first photo's colour.
+  MAIN_COLOR?: Record<string, string>;
   PLACE_DIR: string;
   ADD_ONS: string[];                         // cart drawer: items offered to close the free-shipping gap
   MATE_FALLBACK: Record<string, string | null>;  // product page "complete the pair" defaults by type

@@ -279,6 +279,12 @@ export const hattiesburg: TownContent = {
   // Mockups left on a Shopify product after its print was repositioned (10-23); they show the old, too-high placement.
   // Safe to delete once the image is removed from the product in Shopify.
   STALE_IMAGE: /\/4e4a54369e0ab7a00dbff1761aa63849_l\./,
+  // Hats keep the colour they launched with as the lead photo (Printful now lists another colour's 3/4 view first).
+  MAIN_COLOR: {
+    'hub-city-drag-raceway-hat': 'Stone', 'camelot-music-hat': 'White', 'camelot-music-hat-dark': 'Black',
+    'mississippi-britches-hat': 'Cranberry', 'albert-speeds-hat': 'Stone', 'old-english-h-hat': 'Stone',
+    'culpepper-body-paint-hat': 'Stone',
+  },
   PLACE_DIR: '/images/hb/places',
   ADD_ONS: ['camelot-music-socks', 'hub-city-drag-raceway-socks', 'albert-speeds-socks', 'hub-city-drag-raceway-hat', 'camelot-music-hat', 'albert-speeds-hat', 'hub-city-drag-raceway-tee', 'camelot-music-1974-bag-tee', 'beverly-drive-in-theatre-tee', 'hub-city-drag-raceway-framed-poster-12-12'],
   MATE_FALLBACK: { Tee: 'hub-city-drag-raceway-hat', Hat: 'beverly-drive-in-theatre-tee', 'Framed print': 'hub-city-drag-raceway-socks' },
