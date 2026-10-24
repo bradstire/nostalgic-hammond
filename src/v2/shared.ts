@@ -94,6 +94,7 @@ export type TownContent = {
   CATALOG_QUERY: string | null;
   includeTags: (tags: string[]) => boolean;
   PRODUCT_IMAGES: Record<string, string>;   // Shopify image basename -> local cut-out base path
+  OPAQUE_IMAGES: string[];                   // Shopify image basenames that are opaque photos (no cut-out shadow); scripts/opaque_images.py
   DETAIL: string[]; DETAIL_DIR: string;      // print close-ups: <DETAIL_DIR>/<handle>-(360|540|800).webp
   SOCK_FIX: string[]; SOCK_DIR: string;
   STALE_IMAGE: RegExp | null;

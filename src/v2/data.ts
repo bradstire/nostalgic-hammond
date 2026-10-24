@@ -14,7 +14,7 @@ if (!TOWN) throw new Error(`[v2] No storefront v2 content for town "${townSlug}"
 export const {
   PLACES, FALLBACK_PLACE, HIDE_EMPTY_PLACES, HELD_PREFIXES, SINGLE_COLOR, TYPE_OVERRIDE, blankFor,
   START_HERE, AUTO_START, NOTE_BY_PREFIX, DESC_OVERRIDE, PAIRS, FAMILIES, MEMBER_LABEL, TITLE_OVERRIDE, FRAME_SIZE, FAQ,
-  PRODUCT_IMAGES, PLACE_DIR, ADD_ONS, MATE_FALLBACK, TYPE_IMG, COPY,
+  PRODUCT_IMAGES, OPAQUE_IMAGES, PLACE_DIR, ADD_ONS, MATE_FALLBACK, TYPE_IMG, COPY,
 } = TOWN;
 
 // Near-duplicates kept in the store but left out of grids (their pages still work). Brad has the final call.

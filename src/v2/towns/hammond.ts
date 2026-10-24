@@ -9,6 +9,7 @@
 // anything about violence or crime connected with the Cave Tangi or its era.
 import { FREE_SHIP, HOLIDAY_CUTOFF, type Place, type Pair, type Faq, type TownContent, type Blank } from '../shared';
 import productImages from './hammond-product-images.json';
+import opaqueImages from './hammond-opaque-images.json';
 
 const PLACES: Place[] = [
   {
@@ -343,6 +344,7 @@ export const hammond: TownContent = {
     return t.length === 0 || t.includes('town:hammond') || t.includes('town:hammond-next');
   },
   PRODUCT_IMAGES: productImages as Record<string, string>,
+  OPAQUE_IMAGES: opaqueImages,
   // Print close-ups: the pilot's hand-made close-up shots (public/images/*-06.png), resized.
   DETAIL: ['cave-tangi-tee-black', 'cave-tangi-tee-white', 'cave-tangi-tee-cream', 'tornadoes-crew-neck-sweatshirt'],
   DETAIL_DIR: '/images/hm/detail',

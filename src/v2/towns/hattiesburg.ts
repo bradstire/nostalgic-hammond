@@ -2,6 +2,7 @@
 // Every history line here is sourced; sources are listed on each place page and in /about.
 import { FREE_SHIP, HOLIDAY_CUTOFF, type Place, type Pair, type Faq, type TownContent, type Blank } from '../shared';
 import productImages from '../product-images.json';
+import opaqueImages from '../opaque-images.json';
 
 const PLACES: Place[] = [
   {
@@ -271,6 +272,7 @@ export const hattiesburg: TownContent = {
   CATALOG_QUERY: "tag:'town:hattiesburg'",
   includeTags: () => true,
   PRODUCT_IMAGES: productImages as Record<string, string>,
+  OPAQUE_IMAGES: opaqueImages,
   DETAIL, DETAIL_DIR: '/images/hb/detail',
   // Sock mockups re-rendered upright (Printful shows the front sock toe-up).
   SOCK_FIX: ['old-english-h-gym-socks', 'camelot-music-socks', 'hub-city-drag-raceway-socks', 'albert-speeds-socks'], SOCK_DIR: '/images/hb/socks',

@@ -1,9 +1,11 @@
 // v2 catalog: one Storefront API call at build time, enriched with place, type and colours.
 import { siteConfig, townSlug } from '../config/site.config';
-import { PLACES, HELD_PREFIXES, TYPE_LABEL, COLOR_HEX, SINGLE_COLOR, FAMILIES, MEMBER_LABEL, TITLE_OVERRIDE, HIDDEN_FROM_GRID, DESC_OVERRIDE, TOWN, FALLBACK_PLACE, TYPE_OVERRIDE, PRODUCT_IMAGES, type Place } from './data';
+import { PLACES, HELD_PREFIXES, TYPE_LABEL, COLOR_HEX, SINGLE_COLOR, FAMILIES, MEMBER_LABEL, TITLE_OVERRIDE, HIDDEN_FROM_GRID, DESC_OVERRIDE, TOWN, FALLBACK_PLACE, TYPE_OVERRIDE, PRODUCT_IMAGES, OPAQUE_IMAGES, type Place } from './data';
 
 export type V2Variant = { id: string; numericId: string; title: string; available: boolean; price: number; options: Record<string, string>; image?: string };
-export type V2Image = { url: string; width: number; height: number; alt: string };
+// cut: a transparent cut-out (gets the .hb-cut drop-shadow); false for opaque photos (Printful's lifestyle view).
+// color: the colour option a view shows on a multi-colour product; null = shared by every colour.
+export type V2Image = { url: string; width: number; height: number; alt: string; cut: boolean; color: string | null };
 export type FamilyOpt = { handle: string; color: string; hex: string; label: string; image?: string };
 export type V2Product = {
   handle: string; title: string; baseTitle: string; shopifyTitle: string; description: string; descriptionHtml: string;
@@ -21,7 +23,7 @@ const Q = (after: string | null) => `{ products(first: 250${after ? `, after: "$
   handle title productType description descriptionHtml tags availableForSale
   options { name optionValues { name } }
   priceRange { minVariantPrice { amount } }
-  images(first: 10) { nodes { url width height altText } }
+  images(first: 30) { nodes { url width height altText } }
   variants(first: 60) { nodes { id title availableForSale price { amount } selectedOptions { name value } image { url } } }
 } } }`;
 
@@ -69,8 +71,9 @@ export async function getCatalog(): Promise<V2Product[]> {
     const type = TYPE_OVERRIDE[n.handle] || TYPE_LABEL[n.productType] || 'Other';
     const title = TITLE_OVERRIDE[n.handle] || n.title.replace(/\s+—\s+Framed Poster.*$/, ' Framed Print');
     const goodAlt = (a: string | null) => (a && !/mockup/i.test(a) ? a : null);
-    let images: V2Image[] = n.images.nodes.filter((im: any) => !STALE_IMAGE?.test(im.url)).map((im: any, i: number) => ({ url: im.url, width: im.width, height: im.height, alt: goodAlt(im.altText) || `${title}${i ? `, view ${i + 1}` : ''}` }));
-    if (SOCK_FIX.has(n.handle)) images = [{ url: `local:${TOWN.SOCK_DIR}/${n.handle}`, width: 1080, height: 1080, alt: `${title}, front and back` }];
+    const colorFor = imageColors(colorNames, variants);
+    let images: V2Image[] = n.images.nodes.filter((im: any) => !STALE_IMAGE?.test(im.url)).map((im: any, i: number) => ({ url: im.url, width: im.width, height: im.height, alt: goodAlt(im.altText) || `${title}${i ? `, view ${i + 1}` : ''}`, cut: isCut(im.url), color: colorFor(im.url) }));
+    if (SOCK_FIX.has(n.handle)) images = [{ url: `local:${TOWN.SOCK_DIR}/${n.handle}`, width: 1080, height: 1080, alt: `${title}, front and back`, cut: true, color: null }];
     out.push({
       handle: n.handle, title, baseTitle: title.replace(/\s*\((Black|Natural|Dark)\)$/, ''), shopifyTitle: n.title, family: [], lead: true,
       description: (DESC_OVERRIDE[n.handle] || n.description).replace(/Postcard from the 1910s/, 'Postcard from about 1915–20').replace(/(\d)—(\d)/g, '$1–$2'), descriptionHtml: n.descriptionHtml,
@@ -98,15 +101,42 @@ export async function getCatalog(): Promise<V2Product[]> {
   return out;
 }
 
+// Which colour each view shows, for multi-colour products (Printful publishes every view for every colour).
+// Printful file names carry the colour slug ("...-tee-vintage-white-front-3-<id>.png"); the longest slug is tried
+// first so "white" doesn't claim "vintage-white". A file name without a colour falls back to the variant that uses
+// the image; anything else is shared by all colours.
+const slugify = (s: string) => s.toLowerCase().normalize('NFKD').replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+function imageColors(colorNames: string[], variants: V2Variant[]): (url: string) => string | null {
+  if (colorNames.length < 2) return () => null;
+  const slugs = colorNames.map((c) => ({ c, s: slugify(c) })).filter((x) => x.s).sort((a, b) => b.s.length - a.s.length);
+  const byVariant = new Map<string, Set<string>>();
+  for (const v of variants) if (v.image && v.options.Color) {
+    const b = baseName(v.image);
+    byVariant.set(b, (byVariant.get(b) || new Set()).add(v.options.Color));
+  }
+  return (url) => {
+    const b = baseName(url);
+    const padded = `-${b.toLowerCase()}-`;
+    const hit = slugs.find((x) => padded.includes(`-${x.s}-`));
+    if (hit) return hit.c;
+    const vc = byVariant.get(b);
+    return vc && vc.size === 1 ? [...vc][0] : null;
+  };
+}
+
 // Shopify CDN resize (it negotiates WebP/AVIF from the Accept header).
 const LOCAL_W = [360, 540, 800, 1080];
 // Shopify mockups with the background knocked out (transparent WebP), keyed by the image's file name (per town).
 const KNOCKOUT = PRODUCT_IMAGES;
+const baseName = (url: string) => url.split('?')[0].split('/').pop()!.replace(/\.[a-z]+$/i, '');
 export function localFor(url: string): string | null {
   if (url.startsWith('local:')) return url.slice(6);
-  const base = url.split('?')[0].split('/').pop()!.replace(/\.[a-z]+$/i, '');
-  return KNOCKOUT[base] || null;
+  return KNOCKOUT[baseName(url)] || null;
 }
+// Opaque photos on Shopify (the lifestyle view has a studio background), by file name, per town; written by
+// scripts/opaque_images.py. They don't get the cut-out drop-shadow. A local knock-out above is transparent, so it wins.
+const OPAQUE = new Set<string>(OPAQUE_IMAGES);
+export const isCut = (url: string) => !!localFor(url) || !OPAQUE.has(baseName(url));
 export function cdn(url: string, w: number): string {
   const loc = localFor(url);
   if (loc) return `${loc}-${LOCAL_W.find((x) => x >= w) || 1080}.webp`;
