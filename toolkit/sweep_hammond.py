@@ -10,7 +10,7 @@ PROD = [   # production masters after the 10-25 S9 pass (v1 kept beside each unt
     ('casa F/B tee - front', 'casa_mark_v2.png', 8.5, [], 'casa_mark.png'),
     ('casa F/B tee - back', 'casa_strawberries_v2_green.png', 10, [], 'casa_strawberries_green.png'),
     ('casa Dixie Home ad tee', 'casa_ad_dixiehome_v2.png', 9.5, [], 'casa_ad_dixiehome.png'),
-    ('toggery merged tee - front (left chest)', 'toggery_logo_leftchest_wine_v2.png', 3.5, [], 'toggery_logo_leftchest_wine.png'),
+    ('toggery merged tee - front (left chest)', 'toggery_logo_leftchest_wine_v3.png', 3.5, [], 'toggery_logo_leftchest_wine.png'),
     ('toggery merged tee - back (blade sign)', 'toggery_sign_1color_wine_v2.png', 5.0, [], 'toggery_sign_1color_wine.png'),
     ('joy courtesy pass tee', 'joy_pass_ink_v3.png', 9, [], 'joy_pass_ink.png'),
     ('galaxy courtesy pass card tee', 'galaxy_pass_card_v2.png', 9, [], 'galaxy_pass_card.png'),
@@ -20,7 +20,7 @@ PROD = [   # production masters after the 10-25 S9 pass (v1 kept beside each unt
     ('fiesta club tee', 'fiesta_club_logo_v3.png', 10, [], 'fiesta_club_logo.png'),
     ('magnolia inn sign tee', 'magnolia_sign_hammond_v5.png', 8.8, [], 'magnolia_sign_hammond.png'),
     ('casa hat (embroidery) - v1 kept', 'hats/hat_casadefresa_hammond_red.png', 4.74, [], None),
-    ('toggery hat (embroidery)', 'hats/hat_toggery_maroon_v2.png', 3.67, [], 'hats/hat_toggery_maroon.png'),
+    ('toggery hat (embroidery) - v1 kept, slant held', 'hats/hat_toggery_maroon.png', 3.67, [], None),
     ('casa socks - front (v1 kept)', 'socks/sock_casadefresa_front.png', 1347 / 300, [], None),
     ('casa socks - back (v1 kept)', 'socks/sock_casadefresa_back.png', 1347 / 300, [], None),
 ]

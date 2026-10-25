@@ -7,7 +7,12 @@ nearly closed.
 1. Level: rotate by the measured baseline tilt (round o's of Toggery and Shop, T foot, h foot; least squares).
 2. Corner-preserving smoothing at full resolution (traced letterforms kept).
 3. Downscale to 3.5 in (1050 px); at that print size open counters to 0.026 in and separate near-touching letters.
-Usage: toggery_logo_v2_build.py IN_9in.png OUT_leftchest.png
+Usage: toggery_logo_v2_build.py IN_9in.png OUT_leftchest.png [--keep-slant]
+v3 (10-25 07:35, Brad): --keep-slant skips step 1. Brad's call: the logotype's ~5.8 deg rise reads as a deliberate
+style on the product (one decisive angle, unlike the small graduated drifts levelled elsewhere), so it holds.
+Record: the ad's typeset address under the logo rises at about the same angle in the source photo, so the source
+alone can't prove intent; the slant is kept as a design decision (logged exemption), not as source evidence.
+Steps 2-3 (cleanup, counters, gaps) still apply.
 """
 import sys, os, json
 import numpy as np
@@ -18,7 +23,7 @@ from vec import smooth_mask_corners, open_counters, widen_gaps  # noqa: E402
 WINE = (110, 30, 42)
 
 
-def main(src, dst):
+def main(src, dst, level=True):
     a = np.asarray(Image.open(src).convert('RGBA'))
     H, W = a.shape[:2]
     op = a[..., 3] > 128
@@ -41,7 +46,8 @@ def main(src, dst):
     print('baseline points', base, 'tilt %.2f deg' % ang)
     SS = 2
     big = Image.fromarray((logo * 255).astype(np.uint8)).resize((W * SS, H * SS), Image.BILINEAR)
-    big = big.rotate(ang, resample=Image.BICUBIC, expand=True)      # tilt<0 rises right -> rotate clockwise
+    if level:
+        big = big.rotate(ang, resample=Image.BICUBIC, expand=True)      # tilt<0 rises right -> rotate clockwise
     rot = np.asarray(big.resize((big.width // SS, big.height // SS), Image.LANCZOS)) >= 128
     ys_, xs_ = np.nonzero(rot)
     rot = rot[ys_.min():ys_.max() + 1, xs_.min():xs_.max() + 1]
@@ -58,11 +64,14 @@ def main(src, dst):
     small = widen_gaps(small, ppi)
     out = np.zeros((*small.shape, 4), np.uint8); out[small] = (*WINE, 255)
     Image.fromarray(out).save(dst, dpi=(300, 300))
-    json.dump({'typeset': [], 'exempt': [[[0, 0, small.shape[1], small.shape[0]],
-               'Toggery logotype - hand-drawn display lettering (flared stems, wedge feet, swash curls are the design): traced from the store ad, levelled in the build by direct measurement (%+.2f deg, o/T/h feet), close/open r6 + corner-preserving smoothing s14; edges verified by eye' % -ang]]},
+    why = ('levelled in the build by direct measurement (%+.2f deg, o/T/h feet)' % -ang if level else
+           'slant of %.1f deg rising right HELD as a design choice (Brad 10-25 07:35: one decisive angle across the whole '
+           'logotype reads as style, unlike graduated capture drift)' % abs(ang))
+    json.dump({'typeset': [], 'redrawn': [], 'exempt': [[[0, 0, small.shape[1], small.shape[0]],
+               'Toggery logotype - hand-drawn display lettering (flared stems, wedge feet, swash curls are the design): traced from the store ad, ' + why + ', close/open r6 + corner-preserving smoothing s14; edges verified by eye']]},
               open(os.path.splitext(dst)[0] + '.prov.json', 'w'), indent=1)
     print('wrote', dst, small.shape)
 
 
 if __name__ == '__main__':
-    main(sys.argv[1], sys.argv[2])
+    main(sys.argv[1], sys.argv[2], level='--keep-slant' not in sys.argv[3:])
