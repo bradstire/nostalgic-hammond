@@ -30,6 +30,10 @@ export const towns = {
       '/products/greetings-from-hammond-8x10': '/products/greetings-from-hammond?size=8″×10″',
       '/products/greetings-from-hammond-11x14': '/products/greetings-from-hammond?size=11″×14″',
       '/products/greetings-from-hammond-16x20': '/products/greetings-from-hammond?size=16″×20″',
+      // Wave-2 listings Brad pulled 10-25 (archived in Shopify): each goes to what replaced it.
+      '/products/casa-de-fresa-hotel-matchbook-tee': '/products/casa-de-fresa-hotel-front-back-tee',   // same mark, on the front
+      '/products/toggery-shop-blade-sign-tee': '/products/toggery-shop-logo-tee',                     // sign merged onto the back
+      '/products/cave-tangi-restaurants-napkin-tee': '/places/cave-tangi',
     },
     heroImage: '/images/hero-background.jpg',
     heroPosition: 'center 68%',
