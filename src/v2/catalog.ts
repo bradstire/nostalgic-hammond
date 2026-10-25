@@ -142,7 +142,8 @@ export function localFor(url: string): string | null {
 // Opaque photos on Shopify (the lifestyle view has a studio background), by file name, per town; written by
 // scripts/opaque_images.py. They don't get the cut-out drop-shadow. A local knock-out above is transparent, so it wins.
 const OPAQUE = new Set<string>(OPAQUE_IMAGES);
-export const isCut = (url: string) => !!localFor(url) || !OPAQUE.has(baseName(url));
+const PHOTO = new Set<string>(TOWN.PHOTO_IMAGES || []);
+export const isCut = (url: string) => (!!localFor(url) && !PHOTO.has(baseName(url))) || !OPAQUE.has(baseName(url));
 export function cdn(url: string, w: number): string {
   const loc = localFor(url);
   if (loc) return `${loc}-${LOCAL_W.find((x) => x >= w) || 1080}.webp`;

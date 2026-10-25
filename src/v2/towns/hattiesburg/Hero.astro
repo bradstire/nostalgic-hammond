@@ -1,8 +1,11 @@
 ---
 // Hattiesburg home hero: the "Greetings from Hattiesburg" large-letter postcard, a link to a place in every letter.
+// On hover/focus (fine pointers) the letter lifts off the card and the postcard's own ribbon names the place;
+// the sprites and ribbon captions are cut from the same render (hbsite/hero/make_hero_hover.py) and load on first hover.
 import { getCatalog, cdn, srcset, money } from '../../catalog';
 import { FREE_SHIP, SHIP_MAKE } from '../../data';
 import boxes from '../../hero-boxes.json';
+import hover from '../../hero-hover.json';
 const all = await getCatalog();
 const by = (h: string) => all.find((p) => p.handle === h);
 const LETTER_PLACE: Record<string, string> = {
@@ -16,10 +19,9 @@ const LETTER_LABEL: Record<string, string> = {
 const HERO_SIZES = '(min-width: 1240px) 900px, (min-width: 901px) 80vw, calc(100vw - 32px)';
 const picks = ([['beverly-drive-in-theatre-tee', 'Beverly tee'], ['camelot-music-hat', 'Camelot hat'], ['main-street-hattiesburg-framed-poster-18-12', 'Main Street print']] as const)
   .map(([h, label]) => ({ p: by(h), label })).filter((x) => x.p) as { p: (typeof all)[number]; label: string }[];
-// Legend: one entry per place, letters in word order.
-const legend: { slug: string; letters: string }[] = [];
-for (const b of boxes.wide as any[]) { const slug = LETTER_PLACE[b.key]; const e = legend.find((x) => x.slug === slug); e ? (e.letters += b.ch) : legend.push({ slug, letters: b.ch }); }
-const pct = (v: number) => (v * 100).toFixed(2) + '%';
+const SLUGS = Object.keys(LETTER_LABEL);
+const pct = (v: number) => (v * 100).toFixed(3) + '%';
+const at = (r: number[]) => `left:${pct(r[0])};top:${pct(r[1])};width:${pct(r[2])};height:${pct(r[3])}`;
 const check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 ---
 <section class="hb-hero">
@@ -52,21 +54,21 @@ const check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" strok
             width="2400" height="1300" fetchpriority="high"
             alt="A vintage-style 'Greetings from Hattiesburg' large-letter postcard. Each letter of HATTIESBURG holds a lost place: Main Street postcard scenes, a starry drive-in night for the Beverly, a 1966 drag-race photo and a checkered flag for Hub City Drag Raceway, Camelot Music's rainbow arch and stripes, Albert Speed's sign colors, the Culpepper duck, and purple-and-gold gym stripes with the Old English H." />
         </picture>
+        {(['wide', 'stack'] as const).map((L) => (
+          <div class={`hb-pop hb-pop--${L}`} aria-hidden="true">
+            {SLUGS.map((s) => <img class="hb-pop__cap" data-place={s} data-src={`/images/hb/hero/hover/t-${L}-${s}.webp`} style={at(hover[L].text)} alt="" />)}
+            {hover[L].letters.map((r: number[], i: number) => <img class="hb-pop__l" data-i={i} data-src={`/images/hb/hero/hover/l-${L}-${i}.webp`} style={at(r)} alt="" />)}
+          </div>
+        ))}
         <nav aria-label="Places in the postcard" class="hb-hots">
-          {boxes.wide.map((b: any) => (
-            <a class="hb-hot hb-hot--wide" href={`/places/${LETTER_PLACE[b.key]}`} style={`left:${pct(b.x)};top:${pct(b.y)};width:${pct(b.w)};height:${pct(b.h)}`} aria-label={`Letter ${b.ch}: ${LETTER_LABEL[LETTER_PLACE[b.key]]}`} data-label={LETTER_LABEL[LETTER_PLACE[b.key]]}></a>
+          {boxes.wide.map((b: any, i: number) => (
+            <a class="hb-hot hb-hot--wide" href={`/places/${LETTER_PLACE[b.key]}`} style={`left:${pct(b.x)};top:${pct(b.y)};width:${pct(b.w)};height:${pct(b.h)}`} aria-label={`Letter ${b.ch}: ${LETTER_LABEL[LETTER_PLACE[b.key]]}`} data-i={i} data-place={LETTER_PLACE[b.key]}></a>
           ))}
-          {boxes.stack.map((b: any) => (
-            <a class="hb-hot hb-hot--stack" href={`/places/${LETTER_PLACE[b.key]}`} style={`left:${pct(b.x)};top:${pct(b.y)};width:${pct(b.w)};height:${pct(b.h)}`} aria-label={`Letter ${b.ch}: ${LETTER_LABEL[LETTER_PLACE[b.key]]}`}></a>
+          {boxes.stack.map((b: any, i: number) => (
+            <a class="hb-hot hb-hot--stack" href={`/places/${LETTER_PLACE[b.key]}`} style={`left:${pct(b.x)};top:${pct(b.y)};width:${pct(b.w)};height:${pct(b.h)}`} aria-label={`Letter ${b.ch}: ${LETTER_LABEL[LETTER_PLACE[b.key]]}`} data-i={i} data-place={LETTER_PLACE[b.key]}></a>
           ))}
         </nav>
       </div>
-      <figcaption class="hb-hero__cap">
-        <span>Every letter holds a piece of old Hattiesburg. Tap one to see its story.</span>
-        <ul class="hb-legend" aria-label="What's in each letter">
-          {legend.map((e) => <li><a href={`/places/${e.slug}`}><b>{e.letters.split('').join(' ')}</b> {LETTER_LABEL[e.slug]}</a></li>)}
-        </ul>
-      </figcaption>
     </figure>
     <ul class="hb-trust">
       <li><Fragment set:html={check} />Free US shipping on ${FREE_SHIP}+</li>
@@ -75,3 +77,30 @@ const check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" strok
     </ul>
   </div>
 </section>
+<script>
+  // Letter hover: lift the letter, swap the ribbon to the place's name. Fine pointers + keyboard focus only;
+  // touch taps go straight to the place page.
+  const card = document.querySelector<HTMLElement>('.hb-hero__card');
+  if (card) {
+    let loaded = false;
+    const load = () => { if (loaded) return; loaded = true; card.querySelectorAll<HTMLImageElement>('.hb-pop img[data-src]').forEach((im) => { im.src = im.dataset.src!; }); };
+    const layout = (a: Element) => (a.classList.contains('hb-hot--stack') ? 'stack' : 'wide');
+    const set = (a: HTMLElement | null) => {
+      card.querySelectorAll('.hb-pop .is-on').forEach((el) => el.classList.remove('is-on'));
+      card.classList.toggle('is-pointing', !!a);
+      if (!a) return;
+      const pop = card.querySelector(`.hb-pop--${layout(a)}`);
+      pop?.querySelector(`.hb-pop__l[data-i="${a.dataset.i}"]`)?.classList.add('is-on');
+      pop?.querySelector(`.hb-pop__cap[data-place="${a.dataset.place}"]`)?.classList.add('is-on');
+    };
+    const fine = matchMedia('(hover: hover) and (pointer: fine)');
+    card.addEventListener('pointerenter', () => { if (fine.matches) load(); });
+    card.querySelectorAll<HTMLElement>('.hb-hot').forEach((a) => {
+      a.addEventListener('pointerenter', (e) => { if ((e as PointerEvent).pointerType === 'mouse' || fine.matches) set(a); });
+      a.addEventListener('pointerleave', () => { if (document.activeElement !== a) set(null); });
+      a.addEventListener('focus', () => { if (a.matches(':focus-visible')) { load(); set(a); } });
+      a.addEventListener('blur', () => set(null));
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') set(null); });
+  }
+</script>

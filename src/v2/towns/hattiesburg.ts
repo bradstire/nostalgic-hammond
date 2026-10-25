@@ -185,7 +185,7 @@ const START_HERE = [
   'main-street-hattiesburg-framed-poster-18-12',
   'hub-city-drag-raceway-tee',
   'camelot-music-hat',
-  'albert-speeds-restaurant-sign-tee',
+  'albert-speeds-restaurant-sign-tee-black',
   'culpepper-body-paint-tee',
 ];
 // Not-affiliated line for a product, when it differs from its place's line.
@@ -211,9 +211,10 @@ const PAIRS: Pair[] = [
 // "family": one card in grids, linked colour swatches on the product page. First handle leads.
 const FAMILIES: string[][] = [
   ['beverly-drive-in-theatre-tee', 'beverly-drive-in-theatre-tee-natural'],
-  ['camelot-music-cloverleaf-sign-tee', 'camelot-music-cloverleaf-sign-tee-black'],
+  // Black leads these two so their cards differ from the white/natural tee beside them (Brad 10-24).
+  ['camelot-music-cloverleaf-sign-tee-black', 'camelot-music-cloverleaf-sign-tee'],
   ['culpepper-body-paint-tee', 'culpepper-body-paint-tee-black'],
-  ['albert-speeds-restaurant-sign-tee', 'albert-speeds-restaurant-sign-tee-black'],
+  ['albert-speeds-restaurant-sign-tee-black', 'albert-speeds-restaurant-sign-tee'],
   ['old-english-h-pocket-tee', 'old-english-h-pocket-tee-black'],
   ['camelot-music-hat', 'camelot-music-hat-dark'],
   ['old-english-h-hat', 'old-english-h-hat-black'],
@@ -273,6 +274,8 @@ export const hattiesburg: TownContent = {
   includeTags: () => true,
   PRODUCT_IMAGES: productImages as Record<string, string>,
   OPAQUE_IMAGES: opaqueImages,
+  // Old English H hat on-model shots, kept local so the thread colour matches the corrected product views.
+  PHOTO_IMAGES: ['classic-dad-hat-stone-right-6adc6f66ccea8', 'classic-dad-hat-white-right-6adc6f66ccced'],
   DETAIL, DETAIL_DIR: '/images/hb/detail',
   // Sock mockups re-rendered upright (Printful shows the front sock toe-up).
   SOCK_FIX: ['old-english-h-gym-socks', 'camelot-music-socks', 'hub-city-drag-raceway-socks', 'albert-speeds-socks'], SOCK_DIR: '/images/hb/socks',
