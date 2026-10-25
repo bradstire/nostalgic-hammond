@@ -1,0 +1,51 @@
+{
+ "typeset": [
+  [
+   [
+    421,
+    -100,
+    2240,
+    343
+   ],
+   "TeX Gyre Pagella Bold"
+  ],
+  [
+   [
+    430,
+    469,
+    2240,
+    731
+   ],
+   "TeX Gyre Pagella Bold"
+  ],
+  [
+   [
+    21,
+    712,
+    385,
+    948
+   ],
+   "TeX Gyre Pagella Bold"
+  ],
+  [
+   [
+    22,
+    943,
+    533,
+    1185
+   ],
+   "TeX Gyre Pagella Bold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    63,
+    202,
+    2575,
+    689
+   ],
+   "brush script \"galaxy drive in theatre\" - hand lettering (traced, smoothed, levelled +0.75 deg)"
+  ]
+ ]
+}
