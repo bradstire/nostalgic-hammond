@@ -1,0 +1,62 @@
+{
+ "exempt": [
+  [
+   [
+    1592,
+    0,
+    2281,
+    689
+   ],
+   "Magnolia flower emblem - illustration (petals are not text)"
+  ]
+ ],
+ "typeset": [
+  [
+   [
+    150,
+    2220,
+    2500,
+    2680
+   ],
+   "Bevan (RESTAURANT)"
+  ],
+  [
+   [
+    1470,
+    1370,
+    2330,
+    1795
+   ],
+   "Bevan (INN)"
+  ],
+  [
+   [
+    470,
+    3095,
+    2180,
+    3174
+   ],
+   "League Spartan 600 (address)"
+  ]
+ ],
+ "redrawn": [
+  [
+   [
+    194,
+    694,
+    2488,
+    1616
+   ],
+   "'Magnolia' script: traced letters cleaned, levelled as one unit, i-dot restored to the traced area (letters move by design)"
+  ],
+  [
+   [
+    1592,
+    0,
+    2281,
+    689
+   ],
+   "flower: v4 returned to the traced petal geometry after the v2 redraw deviated (Brad 10-25, judgement call); outlines cleaned"
+  ]
+ ]
+}

@@ -6,7 +6,9 @@ v1 traced every line from a curled card: serif lines up to 1.1 deg off level vs 
 2. The brush script 'galaxy drive in theatre' is hand lettering: traced letterforms kept, outline-smoothed,
    and levelled as one unit (principal-axis tilt).
 3. Fill-in rules redrawn: same y / weight / end, starting 0.05 in after each label, round caps.
-Cream card layer kept as is.
+Cream card layer kept as is. Same build makes the ink-only master (natural tee): no card layer in, none out.
+10-25 fix: re-set lines are cropped tight and asserted on-canvas (the first run pasted COURTESY PASS at a negative
+offset on the ink-only master, so it was never painted - caught at visual sign-off; the gate now checks declarations).
 Usage: galaxy_v2_build.py IN.png OUT.png
 """
 import sys, os, json
@@ -35,7 +37,8 @@ def render_line(text, font, cap_px, target_w, track_frac=0.03):
     d = ImageDraw.Draw(L); x = size * 0.5
     for ch in text:
         d.text((x, base), ch, font=f, fill=255, anchor='ls'); x += f.getlength(ch) + track
-    bb = L.getbbox(); L = L.crop((bb[0], 0, bb[2], L.height))
+    bb = L.getbbox(); L = L.crop(bb); base -= bb[1]      # tight crop: base = baseline from the crop's top edge
+                                                          # (a full-height canvas put lines near the top at a negative offset)
     sx = min(max(target_w * SS / L.width, 0.9), 1.06) if L.width > target_w * SS else min(target_w * SS / L.width, 1.06)
     L = L.resize((int(L.width * sx), L.height), Image.LANCZOS)
     return np.asarray(L.resize((L.width // SS, L.height // SS), Image.LANCZOS)) >= 128, base // SS
@@ -54,7 +57,8 @@ def main(src, dst):
         h = sl[0].stop - sl[0].start; w = sl[1].stop - sl[1].start
         if w > 8 * h:
             comp = lab == j
-            rules.append(((sl[0].start + sl[0].stop) / 2, int(round(comp.sum() / w)), sl[1].stop))
+            rules.append(((sl[0].start + sl[0].stop) / 2, int(round(comp.sum() / w)), sl[1].stop,
+                          [int(sl[1].start), int(sl[0].start), int(sl[1].stop), int(sl[0].stop)]))
             text &= ~comp
     rows = text.any(1); bands = []; y = 0
     while y < H:
@@ -83,7 +87,7 @@ def main(src, dst):
     assert len(BANDS) == 5, bands
     out = np.zeros_like(a)
     out[card_full] = CARD
-    prov = {'typeset': [], 'exempt': []}
+    prov = {'typeset': [], 'exempt': [], 'redrawn': []}
     specs = [('COURTESY PASS', 'c', 0), (None, 'script', None), ('309 Natchez St. • Hammond, LA', 'c', 0),
              ('Expires', 'l', 0), ('Approved', 'l', 0)]
     for ((y0, y1), src_m), (txt, al, ref) in zip(BANDS, specs):
@@ -102,8 +106,9 @@ def main(src, dst):
             rot = np.asarray(big.resize((W, H), Image.LANCZOS)) >= 128
             rot = smooth_mask(rot, 0.008 * ppi)
             out[rot] = INK
-            prov['exempt'].append([[int(xs.min()) - 20, int(y0) - 30, int(xs.max()) + 20, int(y1) + 30],
-                                   'brush script "galaxy drive in theatre" - hand lettering (traced, smoothed, levelled %+.2f deg)' % -ang])
+            sbox = [int(xs.min()) - 20, int(y0) - 30, int(xs.max()) + 20, int(y1) + 30]
+            prov['exempt'].append([sbox, 'brush script "galaxy drive in theatre" - hand lettering (traced, smoothed, levelled %+.2f deg)' % -ang])
+            prov['redrawn'].append([sbox, 'brush script levelled %+.2f deg as one unit + outline smoothing (letters move by design)' % -ang])
             print('script levelled %+.2f deg' % -ang)
             continue
         lab2, _ = ndimage.label(m)
@@ -115,12 +120,15 @@ def main(src, dst):
         lh, lw = mm.shape
         ox = int((x0 + x1) / 2 - lw / 2) if al == 'c' else int(x0)
         oy = int(base_y - base_in)
-        sub = out[oy:oy + lh, ox:ox + lw]; sub[mm[:sub.shape[0], :sub.shape[1]]] = INK
-        prov['typeset'].append([[ox, oy, ox + lw, oy + lh], 'TeX Gyre Pagella Bold'])
+        assert oy >= 0 and ox >= 0 and oy + lh <= H and ox + lw <= W, ('line off canvas', txt, ox, oy, lw, lh)
+        out[oy:oy + lh, ox:ox + lw][mm] = INK
+        # the declaration covers the new line AND the traced line it replaces
+        prov['typeset'].append([[int(min(ox, x0)), int(min(oy, y0)), int(max(ox + lw, x1 + 1)), int(max(oy + lh, y1))], 'TeX Gyre Pagella Bold'])
         print(f'{txt!r:36s} cap {cap}px ({cap / ppi:.3f} in) width {x1 - x0}->{lw}')
         if al == 'l':
             r_ = min(rules, key=lambda r: abs(r[0] - base_y))
-            yc, th, xe = r_
+            yc, th, xe, rbox = r_
+            prov['redrawn'].append([rbox, 'fill-in rule redrawn: same y / weight / end, starts 0.08 in after the label, round caps'])
             xs_l = ox + int(np.nonzero(mm.any(0))[0].max()) + int(0.08 * ppi)
             Lr = Image.new('L', (W * 2, H * 2), 0); dr = ImageDraw.Draw(Lr)
             dr.line([(xs_l * 2, yc * 2), (xe * 2, yc * 2)], fill=255, width=th * 2)

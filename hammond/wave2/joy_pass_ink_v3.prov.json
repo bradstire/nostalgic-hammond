@@ -65,13 +65,42 @@
   ],
   [
    [
-    597,
+    489,
     1549,
-    2102,
+    2241,
     1718
    ],
    "arvo-latin-700-normal"
   ]
  ],
- "exempt": []
+ "exempt": [],
+ "redrawn": [
+  [
+   [
+    766,
+    1028,
+    2434,
+    1036
+   ],
+   "fill-in rule redrawn: same y / weight / end, starts 0.05 in after the label, round caps"
+  ],
+  [
+   [
+    848,
+    1211,
+    2434,
+    1220
+   ],
+   "fill-in rule redrawn: same y / weight / end, starts 0.05 in after the label, round caps"
+  ],
+  [
+   [
+    428,
+    1493,
+    2434,
+    1501
+   ],
+   "fill-in rule redrawn: same y / weight / end, starts 0.05 in after the label, round caps"
+  ]
+ ]
 }

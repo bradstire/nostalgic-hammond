@@ -26,10 +26,16 @@ Every exemption is printed in the report and overlay.
 --typeset x0,y0,x1,y1:Font   (repeatable) declares a line rendered directly from a font (never screened,
 traced or textured); EDGES is skipped there (a font outline is clean by construction; bracketed serifs
 otherwise read as wobble). Everything else still applies. The build script that renders it is the record.
-A sidecar MASTER.prov.json {"exempt": [[box, reason]], "typeset": [[box, font]]} is read automatically.
---compare PREVIOUS.png        (rebuilds) SURVIVAL check: fails if a shape of the previous master was lost, split
-into pieces or shrank > 20 % without a re-set/redraw declared over it (a cleanup that passes every metric but
-eats letter parts - 10-25 socks - is caught here). Same canvas size required; otherwise skipped with a WARN.
+A sidecar MASTER.prov.json {"exempt": [[box, reason]], "typeset": [[box, font]], "redrawn": [[box, how]]} is read
+automatically. "redrawn" marks shapes deliberately moved or rebuilt (a levelled line, rebuilt sign geometry, redrawn
+rules): SURVIVAL skips them and every one is printed as a WARN for the eye check. Declarations are the record of
+what changed; each typeset/redrawn box must cover the OLD shapes it replaces as well as the new ones.
+--compare PREVIOUS.png        (rebuilds; REQUIRED for any changed master) SURVIVAL check: fails if a shape of the
+previous master was lost, split into pieces or shrank > 20 % without a re-set/redraw declared over it (a cleanup
+that passes every metric but eats letter parts - 10-25 socks - is caught here). Same canvas size required;
+otherwise skipped with a WARN. Declared TYPESET boxes are verified either way: inside the canvas, holding ink,
+and (with --compare) at least half the previous master's ink in that box (10-25 Galaxy natural lost its
+re-set COURTESY PASS line behind its own declaration).
 Writes NAME_qa.json + NAME_qa.png (overlay: red counters, magenta gaps, blue thin strokes,
 green/red baselines with angle, orange boxes = wobbly lines).
 Exit code 0 = PASS, 1 = FAIL. WARNs never fail the gate but must be looked at.
@@ -331,10 +337,18 @@ def thin_strokes(m, ppi, excl):
 
 
 def survival(prev_path, cur_rgba, ppi, declared):
-    """Per ink colour: every shape of the previous master must still be there (>= 80 % area, not split)."""
+    """Per ink colour: every shape of the previous master must still be there (>= 80 % area, not split).
+    A shape counts as declared (re-set / redrawn) when >= 80 % of its pixels fall inside a declared box.
+    Pieces smaller than 0.01 in square (single-pixel corner tips) don't count as a split."""
     pa = np.asarray(Image.open(prev_path).convert('RGBA'))
     if pa.shape[:2] != cur_rgba.shape[:2]:
         return None
+    H, W = pa.shape[:2]
+    dmask = np.zeros((H, W), bool)
+    for b in declared:
+        x0, y0, x1, y1 = [int(v) for v in b]
+        dmask[max(0, y0 - 5):max(0, y1 + 5), max(0, x0 - 5):max(0, x1 + 5)] = True
+    speck = (0.01 * ppi) ** 2
     _, players = ink_layers(pa)
     bad = []
     for col, pm in players:
@@ -345,23 +359,25 @@ def survival(prev_path, cur_rgba, ppi, declared):
             a0 = reg.sum()
             if a0 < (0.03 * ppi) ** 2 or a0 > 0.25 * pm.size:     # skip specks and full-bleed grounds
                 continue
-            y0, x0 = sl[0].start, sl[1].start
-            if any(x0 >= b[0] - 5 and y0 >= b[1] - 5 and sl[1].stop <= b[2] + 5 and sl[0].stop <= b[3] + 5 for b in declared):
+            if (dmask[sl] & reg).sum() >= 0.8 * a0:
                 continue                  # inside a declared re-set / redraw
+            y0, x0 = sl[0].start, sl[1].start
             now = cm[sl] & reg
             a1 = now.sum()
-            pieces = ndimage.label(now)[1]
+            pl, pn = ndimage.label(now)
+            pieces = int(sum(1 for j in range(1, pn + 1) if (pl == j).sum() >= speck))
             if a1 < 0.8 * a0 or pieces > 1:
-                bad.append(dict(layer=str(col), x=int(x0), y=int(y0), area_kept=round(float(a1) / a0, 2), pieces=int(pieces)))
+                bad.append(dict(layer=str(col), x=int(x0), y=int(y0), area_kept=round(float(a1) / a0, 2), pieces=pieces))
     return bad
 
 
-def run(path, width_in, out_dir, name=None, exempt=(), typeset=(), compare=None):
+def run(path, width_in, out_dir, name=None, exempt=(), typeset=(), compare=None, redrawn=()):
     side = os.path.splitext(path)[0] + '.prov.json'
     if os.path.exists(side):
         pv = json.load(open(side))
         exempt = list(exempt) + [(tuple(b), r) for b, r in pv.get('exempt', [])]
         typeset = list(typeset) + [(tuple(b), f) for b, f in pv.get('typeset', [])]
+        redrawn = list(redrawn) + [(tuple(b), h) for b, h in pv.get('redrawn', [])]
     name = name or os.path.splitext(os.path.basename(path))[0]
     im = Image.open(path).convert('RGBA')
     a = np.asarray(im)
@@ -373,7 +389,8 @@ def run(path, width_in, out_dir, name=None, exempt=(), typeset=(), compare=None)
                layers=[c for c, _ in layers], halftone_area_pct=round(100 * excl.mean() / max(op.mean(), 1e-9), 1),
                counters=[], gaps=[], lines=[], strokes={}, verdict='PASS', fails=[], warns=[],
                exemptions=[dict(box=list(b), reason=r) for b, r in exempt],
-               typeset=[dict(box=list(b), font=f) for b, f in typeset])
+               typeset=[dict(box=list(b), font=f) for b, f in typeset],
+               redrawn=[dict(box=list(b), how=h) for b, h in redrawn])
     over_red = np.zeros((H, W), bool); over_mag = np.zeros((H, W), bool)
     over_blue = np.zeros((H, W), bool); over_lb = np.zeros((H, W), bool)
     min_area = (0.025 * ppi) ** 2
@@ -478,8 +495,29 @@ def run(path, width_in, out_dir, name=None, exempt=(), typeset=(), compare=None)
         rep['warns'].append(f"STROKES: {rep['strokes']['warn_pct']}% of linework < {LIMITS['stroke_warn_in']} in")
     if not rep['lines']:
         rep['warns'].append('No text lines detected: LEVEL/EDGES did not run - sign-off must check lettering by eye')
+    # TYPESET declarations must be real: inside the canvas and holding ink (10-25: a re-set line pasted at a
+    # negative offset was never painted, and its declaration hid the loss from SURVIVAL)
+    prev_op = None
     if compare:
-        sv = survival(compare, a, ppi, [b for b, _ in typeset])
+        pa_ = np.asarray(Image.open(compare).convert('RGBA'))
+        if pa_.shape[:2] == (H, W):
+            prev_op = pa_[..., 3] > 128
+    for b, f in typeset:
+        x0, y0, x1, y1 = [int(v) for v in b]
+        if x0 < -5 or y0 < -5 or x1 > W + 5 or y1 > H + 5:
+            rep['fails'].append(f'TYPESET: declared line {f} {list(b)} runs off the canvas - text clipped or never painted')
+        cx0, cy0, cx1, cy1 = max(0, x0), max(0, y0), min(W, x1), min(H, y1)
+        ink_now = int(op[cy0:cy1, cx0:cx1].sum()) if cx1 > cx0 and cy1 > cy0 else 0
+        if ink_now < (0.03 * ppi) ** 2:
+            rep['fails'].append(f'TYPESET: declared line {f} {list(b)} holds no ink')
+        elif prev_op is not None:
+            ink_prev = int(prev_op[cy0:cy1, cx0:cx1].sum())
+            if ink_prev > (0.05 * ppi) ** 2 and ink_now < 0.5 * ink_prev:
+                rep['fails'].append(f'TYPESET: declared line {f} {list(b)} has {ink_now / ink_prev:.0%} of the previous master\'s ink there - a re-set must replace the line, not drop it')
+    if compare:
+        sv = survival(compare, a, ppi, [b for b, _ in typeset] + [b for b, _ in redrawn])
+        for b, h in redrawn:
+            rep['warns'].append(f'REDRAWN {list(b)}: {h} - survival not checked there; compare to the previous master by eye')
         if sv is None:
             rep['warns'].append('SURVIVAL skipped: previous master has a different canvas size - compare by eye')
         else:

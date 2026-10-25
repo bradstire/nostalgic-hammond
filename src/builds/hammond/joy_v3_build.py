@@ -111,7 +111,8 @@ def main(src, dst):
         if w_ > 8 * h_ and w_ < 0.9 * W and sl_[0].start > 0.25 * H and sl_[0].stop < bands[-1][0]:
             comp = rl_ == j
             th = int(round(comp.sum() / w_))
-            rules.append(((sl_[0].start + sl_[0].stop) / 2, th, sl_[1].stop))
+            rules.append(((sl_[0].start + sl_[0].stop) / 2, th, sl_[1].stop,
+                          [int(sl_[1].start), int(sl_[0].start), int(sl_[1].stop), int(sl_[0].stop)]))
             struct &= ~comp
     out = np.zeros_like(a)
     # border rule thickening: struct pixels on the border ring get dilated to 0.03 in where thinner
@@ -120,7 +121,7 @@ def main(src, dst):
     thick = ndimage.binary_dilation(struct, iterations=max(0, int(round((0.03 * ppi - 2 * dt[struct].mean()) / 2))))
     struct2 = struct | (thick & ndimage.binary_dilation(ring, iterations=3))
     out[struct2] = ink
-    prov = {'typeset': [], 'exempt': []}
+    prov = {'typeset': [], 'exempt': [], 'redrawn': []}
     for (y0, y1), (txt, font, al, ref) in zip(bands, LINES):
         m = text[y0 - 8:y1 + 8] if txt.startswith('\u2014') else text[y0:y1]
         yo = y0 - 8 if txt.startswith('\u2014') else y0
@@ -135,6 +136,7 @@ def main(src, dst):
             cap = sls[ref][0].stop - sls[ref][0].start
             base_y = yo + sls[ref][0].stop
         xs = np.nonzero(m.any(0))[0]; x0, x1 = xs.min(), xs.max()
+        src_box = [int(x0), int(yo), int(x1) + 1, int(yo + m.shape[0])]      # the traced line being replaced
         if txt.startswith('\u2014'):
             # the card sets this line compact: ~59 % of the border width (source photo), natural spacing
             border_w = W - 2 * int(0.45 * ppi)
@@ -146,13 +148,16 @@ def main(src, dst):
         lh, lw = mm.shape
         ox = int((x0 + x1) / 2 - lw / 2) if al == 'c' else int(x0)
         oy = int(base_y - base_in)
-        sub = out[oy:oy + lh, ox:ox + lw]
-        sub[mm[:sub.shape[0], :sub.shape[1]]] = ink
-        prov['typeset'].append([[ox, oy, ox + lw, oy + lh], os.path.basename(font).replace('.woff', '')])
+        assert oy >= 0 and ox >= 0 and oy + lh <= H and ox + lw <= W, ('line off canvas', txt)
+        out[oy:oy + lh, ox:ox + lw][mm] = ink
+        # the declaration covers the new line AND the traced line it replaces
+        prov['typeset'].append([[min(ox, src_box[0]), min(oy, src_box[1]), max(ox + lw, src_box[2]), max(oy + lh, src_box[3])],
+                                os.path.basename(font).replace('.woff', '')])
         if al == 'l':   # fill-in rule redrawn: starts 0.05 in after the label, round caps, original y/weight/end
             r_ = min(rules, key=lambda r: abs(r[0] - base_y)) if rules else None
             if r_ and abs(r_[0] - base_y) < 0.15 * ppi:
-                yc, th, xe = r_
+                yc, th, xe, rbox = r_
+                prov['redrawn'].append([rbox, 'fill-in rule redrawn: same y / weight / end, starts 0.05 in after the label, round caps'])
                 xs_l = ox + int(np.nonzero(mm.any(0))[0].max()) + int(0.05 * ppi)
                 Lr = Image.new('L', (W * 2, H * 2), 0); dr = ImageDraw.Draw(Lr)
                 dr.line([(xs_l * 2, yc * 2), (xe * 2, yc * 2)], fill=255, width=th * 2)
@@ -161,7 +166,6 @@ def main(src, dst):
                 rm = np.asarray(Lr.resize((W, H), Image.LANCZOS)) >= 128
                 out[rm] = ink
         print(f'{txt!r:32s} cap {cap}px ({cap / ppi:.3f} in)  width {x1 - x0}->{lw}  sx {sx:.3f}')
-    # keep the bottom line's provenance (Schola, from v2's sidecar)
     Image.fromarray(out).save(dst, optimize=True)
     json.dump(prov, open(os.path.splitext(dst)[0] + '.prov.json', 'w'), indent=1)
     print('wrote', dst)

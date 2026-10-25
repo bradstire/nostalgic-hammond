@@ -3,36 +3,36 @@
   [
    [
     421,
-    -100,
-    2240,
-    343
+    21,
+    2241,
+    191
    ],
    "TeX Gyre Pagella Bold"
   ],
   [
    [
     430,
-    469,
+    539,
     2240,
-    731
+    661
    ],
    "TeX Gyre Pagella Bold"
   ],
   [
    [
     21,
-    712,
+    782,
     385,
-    948
+    895
    ],
    "TeX Gyre Pagella Bold"
   ],
   [
    [
     22,
-    943,
+    1013,
     533,
-    1185
+    1131
    ],
    "TeX Gyre Pagella Bold"
   ]
@@ -46,6 +46,35 @@
     689
    ],
    "brush script \"galaxy drive in theatre\" - hand lettering (traced, smoothed, levelled +0.75 deg)"
+  ]
+ ],
+ "redrawn": [
+  [
+   [
+    63,
+    202,
+    2575,
+    689
+   ],
+   "brush script levelled +0.75 deg as one unit + outline smoothing (letters move by design)"
+  ],
+  [
+   [
+    462,
+    869,
+    2679,
+    880
+   ],
+   "fill-in rule redrawn: same y / weight / end, starts 0.08 in after the label, round caps"
+  ],
+  [
+   [
+    586,
+    1104,
+    2679,
+    1115
+   ],
+   "fill-in rule redrawn: same y / weight / end, starts 0.08 in after the label, round caps"
   ]
  ]
 }

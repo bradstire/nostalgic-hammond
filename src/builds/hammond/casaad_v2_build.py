@@ -1,6 +1,7 @@
-"""Casa de Fresa Dixie Home ad v2 (HQ 2026-10-25, S9). Changes from v1: small copy crisp (no roughen) in Schola Bold
-at 1.4x the ad, re-set in TeX Gyre Bonum Bold (Bookman; Century hairlines fail the print floor)'s sizes (at the 9.5 in print v1's Schola Regular hairlines were ~0.006 in, under Printful's 0.015 in
-minimum); traced headline re-set in League Spartan 800 fitted to the traced line; outer frame rule 0.02 in.
+"""Casa de Fresa Dixie Home ad v2 (HQ 2026-10-25, S9). Changes from v1: small copy rendered crisp from the font (v1 was
+roughened) and re-set in TeX Gyre Bonum Bold / Bold Italic (Bookman) at 1.4x the ad's sizes - v1's Century hairlines
+were ~0.006 in at the 9.5 in print, under HQ's 0.015 in break-up floor (Gooten publishes 0.033 in as its line target);
+traced headline re-set in League Spartan 800 fitted to the traced line; layout re-spaced; outer frame rule 0.02 in.
 v1 notes: Casa de Fresa Hotel - the hotel's own listing ad ("Your Dixie Home", IMG_7169) rebuilt as a print. Pipeline B:
 Real-ESRGAN x4plus -> the headline CASA de FRESA, Hammond, La. traced (the ad's own bold grotesque); the small copy, which
 the newsprint scan has broken up, re-typeset in TeX Gyre Schola (GUST, Century-family roman/bold/bold italic) at the ad's

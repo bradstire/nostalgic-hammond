@@ -47,7 +47,7 @@ def emb_check(m, ppi):
     return dict(min_stroke_in=round(float(np.percentile(w, 1)) / ppi, 3), min_counter_in=round(hmin / ppi, 3))
 
 
-def run(name, width_in, out_dir, pts=None, do_clean=False):
+def run(name, width_in, out_dir, pts=None, do_clean=False, exempt=None):
     a = np.asarray(Image.open(os.path.join(W2, name)).convert('RGBA'))
     m = a[..., 3] > 128; col = a[m][:, :3].mean(0).astype(np.uint8)
     ppi = a.shape[1] / width_in
@@ -59,6 +59,9 @@ def run(name, width_in, out_dir, pts=None, do_clean=False):
     out = np.zeros((*m.shape, 4), np.uint8); out[m] = (*col, 255)
     stem = os.path.join(out_dir, name.replace('.png', '_v2.png'))
     Image.fromarray(out).save(stem, dpi=(300, 300))
+    if exempt:
+        json.dump({'typeset': [], 'exempt': [[[0, 0, out.shape[1], out.shape[0]], exempt % -ang]], 'redrawn': []},
+                  open(os.path.splitext(stem)[0] + '.prov.json', 'w'), indent=1)
     w_in = m.shape[1] / ppi; h_in = m.shape[0] / ppi
     ec = emb_check(m, ppi)
     print(f'{name}: levelled {-ang:+.2f} deg; {w_in:.2f} x {h_in:.2f} in; embroidery {ec}')
@@ -68,8 +71,11 @@ def run(name, width_in, out_dir, pts=None, do_clean=False):
 if __name__ == '__main__':
     out = sys.argv[1]
     # Toggery: feet of T, o, h, o (x centre, bottom) from the v1 master
-    run('hat_toggery_maroon.png', 3.67, out, pts=[(84.5, 423), (160.5, 411), (771, 360), (967, 328)])
-    run('hat_toggery_white.png', 3.67, out, pts=[(84.5, 423), (160.5, 411), (771, 360), (967, 328)])
+    TOG = ('Toggery logotype - hand-drawn display lettering (flared stems, wedge feet, swash curls are the design), as on '
+           'the left-chest logo: traced from the store ad, levelled in the build by direct measurement (%+.2f deg, T/o/h/o '
+           'feet); the knockout "line" the gate reads is the g/g/y descender loops, not text; stitch floors checked by emb_check')
+    run('hat_toggery_maroon.png', 3.67, out, pts=[(84.5, 423), (160.5, 411), (771, 360), (967, 328)], exempt=TOG)
+    run('hat_toggery_white.png', 3.67, out, pts=[(84.5, 423), (160.5, 411), (771, 360), (967, 328)], exempt=TOG)
     # Casa hat: v1 kept (level already; trace micro-lumps don't survive digitizing, and cleanup thinned the
     # thinnest stroke under the 0.05 in stitch floor) - measured here for the record only
     for n_ in ('hat_casadefresa_hammond_red.png',):
