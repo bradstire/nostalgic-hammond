@@ -9,13 +9,17 @@ const { p, eager = false, sizes = '(max-width: 760px) 50vw, (max-width: 1080px) 
 const detailFirst = false;
 const main = p.images[0];
 const sib = p.family.find((f) => f.handle !== p.handle && f.image);
-const alt2 = p.detail ? null : sib?.image ? { url: sib.image } : p.images[1];
+// No close-up and no sibling colourway (hats, socks): hover turns the same product to its next view
+// (same-colour 3/4), never another colour's photo layered over the first.
+const alt2 = p.detail ? null : sib?.image ? { url: sib.image } : (p.images.find((im, i) => i > 0 && im.color === main?.color) || p.images[1]);
+// A transparent cut-out can't cover the main image, so the card cross-fades (hb-card__media--swap).
+const altCut = !p.detail && alt2 ? isCut(alt2.url) : false;
 const typeLabel = p.type === 'Framed print' ? 'Print' : p.type;
 const swatches = p.family.length > 1 ? p.family.map((f) => ({ name: f.label, hex: f.hex })) : p.colors;
 const swLabel = swatches.length > 1 ? `${swatches.length} colors: ${swatches.map((c) => c.name).join(', ')}` : '';
 ---
 <a class="hb-card" href={`/products/${p.handle}`}>
-  <div class="hb-card__media">
+  <div class={`hb-card__media${altCut ? ' hb-card__media--swap' : ''}`}>
     {badge && <span class="hb-badge">{badge}</span>}
     {detailFirst ? (
       <Fragment>

@@ -166,7 +166,7 @@ p, li, figcaption { text-wrap: pretty; }
 .hb-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity .25s ease, transform .4s ease; }
 .hb-cut { filter: drop-shadow(0 10px 14px rgba(40, 30, 15, .16)); }
 .hb-card__media img.hb-card__alt { opacity: 0; }
-@media (hover: hover) { .hb-card:hover .hb-card__media img.hb-card__alt { opacity: 1; } .hb-card:hover .hb-card__media img { transform: scale(1.02); } }
+@media (hover: hover) { .hb-card:hover .hb-card__media img.hb-card__alt { opacity: 1; } .hb-card:hover .hb-card__media img { transform: scale(1.02); } .hb-card:hover .hb-card__media--swap img:not(.hb-card__alt) { opacity: 0; } }
 .hb-badge { position: absolute; left: 10px; top: 10px; z-index: 2; background: rgba(255,253,248,.95); border: 1px solid var(--line); color: var(--ink); font: 650 11px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; padding: 6px 8px; border-radius: 999px; }
 .hb-card__body { padding: 12px 2px 0; display: grid; gap: 4px; }
 .hb-card__place { font: 600 11.5px/1.2 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
