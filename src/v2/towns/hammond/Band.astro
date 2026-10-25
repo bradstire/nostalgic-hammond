@@ -1,0 +1,32 @@
+---
+// Hammond home: the postcard idea from Hattiesburg's hero, as a band for the 1946 "Greetings from Hammond" card
+// (one Shopify product, three frame sizes; each size links to the product page with that size picked).
+import { getCatalog, money } from '../../catalog';
+const p = (await getCatalog()).find((x) => x.handle === 'greetings-from-hammond');
+const sizes = p ? p.variants.filter((v) => v.options.Size).map((v) => ({
+  label: v.options.Size.replace(/″/g, '') + ' in', price: money(v.price), available: v.available,
+  href: `/products/${p.handle}?size=${encodeURIComponent(v.options.Size)}`,
+})) : [];
+const B = '/images/hm/band/greetings';
+---
+{p && (
+  <section class="hb-section--tight hm-band" aria-labelledby="greet-h">
+    <div class="hb-wrap hm-band__in">
+      <a class="hm-band__card" href={`/products/${p.handle}`} tabindex="-1" aria-hidden="true">
+        <picture>
+          <source type="image/avif" srcset={`${B}-600.avif 600w, ${B}-900.avif 900w, ${B}-1200.avif 1200w`} sizes="(max-width: 860px) calc(100vw - 48px), 560px" />
+          <img src={`${B}-900.webp`} srcset={`${B}-600.webp 600w, ${B}-900.webp 900w, ${B}-1200.webp 1200w`} sizes="(max-width: 860px) calc(100vw - 48px), 560px" width="1200" height="772" alt="" loading="lazy" decoding="async" />
+        </picture>
+      </a>
+      <div class="hm-band__txt">
+        <p class="hb-eyebrow">The 1946 postcard</p>
+        <h2 class="hb-h2" id="greet-h">Greetings from Hammond</h2>
+        <p>A large-letter linen postcard published by Curt Teich &amp; Co. in 1946. The back of the card calls Hammond “the strawberry capital of the world.” Framed and ready to hang.</p>
+        <ul class="hm-band__sizes" aria-label="Frame sizes">
+          {sizes.map((s) => <li><a class="hb-chip" href={s.href}>{s.label} · {s.price}{!s.available && ' (sold out)'}</a></li>)}
+        </ul>
+        <p class="hm-band__more"><a class="hb-link" href="/places/greetings-from-hammond">About the card</a></p>
+      </div>
+    </div>
+  </section>
+)}

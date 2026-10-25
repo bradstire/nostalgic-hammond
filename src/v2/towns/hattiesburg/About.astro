@@ -1,0 +1,22 @@
+---
+// Hattiesburg /about body: how we work and where every image comes from.
+import { PLACES } from '../../data';
+import { siteConfig } from '../../../config/site.config';
+const email = siteConfig.contactEmail;
+---
+{' '}<p class="hb-lede">Every town has places it never stops talking about. Nostalgic Hattiesburg brings back the ones the Hub City remembers, on tees, hats, socks and framed prints.</p>
+<h2>How we work</h2>
+<p>We start with the record: archive postcards, old newspaper ads, photos of the signs, and the stories people share about these places. We restore or redraw each logo, sign or ad so it prints sharp, and we keep the details that made it look like itself, down to the newsprint grain.</p>
+<p>Each place page lists where its art comes from: the archive, the ad and its date, or the photo we worked from.</p>
+<h2>Where the images come from</h2>
+<ul>
+  <li><strong>Postcards.</strong> Our Main Street and Pansy postcard prints, and the old street scenes inside the letters of our "Greetings from Hattiesburg" postcard, come from the Cooper Postcard Collection at the <a href="https://www.flickr.com/people/mississippi-dept-of-archives-and-history/" rel="nofollow noopener">Mississippi Department of Archives and History</a>, which lists them as having no known copyright restrictions.</li>
+  <li><strong>Ads and signs.</strong> Hub City Drag Raceway (1966), Culpepper Body &amp; Paint (1968), Mississippi Britches (1987) and Albert Speed's (1966 photo) are restored and redrawn from period newspaper ads and photographs.</li>
+  <li><strong>Lettering.</strong> The Beverly Drive-In script follows the theatre's marquee. Camelot Music follows its 1974 Cloverleaf storefront sign and the chain's 1970s rainbow bag.</li>
+  <li><strong>Clippings.</strong> Several of the old ads we worked from were shared by members of local-history groups. Thank you. If one of them is yours and you'd like a credit line, <a href="/contact">tell us</a>.</li>
+</ul>
+<h2>The places</h2>
+<ul>{PLACES.map((p) => <li><a href={`/places/${p.slug}`}>{p.name}</a> ({p.era})</li>)}</ul>
+<h2>Who we are</h2>
+<p>Nostalgic Hattiesburg is a small independent shop. We are not affiliated with or endorsed by the businesses, schools or institutions we honor.</p>
+<p>Remember a place we should bring back? Email <a href={`mailto:${email}`}>{email}</a>. We read everything.</p>{' '}

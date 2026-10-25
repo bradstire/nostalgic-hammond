@@ -1,8 +1,8 @@
 ---
 import V2Layout from '../V2Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
-import { getCatalog, cdn, srcset, money, storyOf, specsOf, shareImg, type V2Product } from '../catalog';
-import { FREE_SHIP, HOLIDAY_CUTOFF, SIZE_CHART, SOCK_CHART, FRAME_SIZE, MEMBER_LABEL, SHIP_MAKE, SHIP_TRANSIT, NOTE_BY_PREFIX, HIDDEN_FROM_GRID, PAIRS, blankFor, START_HERE } from '../data';
+import { getCatalog, cdn, srcset, money, storyOf, specsOf, shareImg, type V2Product, type V2Image } from '../catalog';
+import { FREE_SHIP, HOLIDAY_CUTOFF, SIZE_CHART, SOCK_CHART, FRAME_SIZE, MEMBER_LABEL, SHIP_MAKE, SHIP_TRANSIT, NOTE_BY_PREFIX, HIDDEN_FROM_GRID, PAIRS, blankFor, START_HERE, MATE_FALLBACK } from '../data';
 import { clip } from '../clip';
 import { siteConfig } from '../../config/site.config';
 import { nw } from '../nw';
@@ -16,20 +16,34 @@ const alsoLike = START_HERE.map((h) => all.find((x) => x.handle === h)!).filter(
 // Story text without the not-affiliated sentence (shown once, from the place note).
 const story = storyOf(p).map((s) => s.replace(/\s*Not affiliated[^.]*\./gi, '').trim()).filter(Boolean);
 const specs = specsOf(p);
-const chart = p.type === 'Tee' ? SIZE_CHART[blankFor(p.handle)!] : null;
+const blank = p.type === 'Tee' ? blankFor(p.handle, p.images[0]?.url) : null;
+const chart = blank ? SIZE_CHART[blank] : null;
 const multiColor = p.colors.length > 1;
 const isFamily = p.family.length > 1;
 const optName = p.family.some((f) => MEMBER_LABEL[f.handle]) ? 'Style' : 'Color';
 // Default colour = the one in the first photo, so the picture and the selected swatch agree.
-const defColor = (multiColor && p.variants.find((v) => v.image === p.images[0]?.url)?.options.Color) || p.colors[0]?.name;
+const defColor = (multiColor && (p.variants.find((v) => v.image === p.images[0]?.url)?.options.Color || p.images[0]?.color)) || p.colors[0]?.name;
 const curOpt = p.family.find((f) => f.handle === p.handle && (!multiColor || f.color === defColor));
 const isSock = p.type === 'Socks';
 const isHat = p.type === 'Hat';
 const hasSizes = p.sizes.length > 1;
 const single = !hasSizes && !multiColor;
 const defaultVariant = single ? p.variants[0] : null;
-const images = p.images.map((im) => ({ src: im.url, alt: im.alt, cdn: true }));
-if (p.detail) images.push({ src: p.detail, alt: `${p.title}, close-up of the print artwork`, cdn: false });
+// Gallery: each colour's views (its variant photo first), then the views every colour shares, then the print close-up.
+// A multi-colour product renders every colour's thumbs and shows the selected colour's (data-color) plus the shared ones.
+type GImg = { src: string; alt: string; cdn: boolean; cut: boolean; color: string | null };
+const toG = (im: V2Image): GImg => ({ src: im.url, alt: im.alt, cdn: true, cut: im.cut, color: im.color });
+const noQ = (u?: string) => u?.split('?')[0];
+const viewsOf = (c: string) => {
+  const own = p.images.filter((im) => im.color === c);
+  const vi = noQ(p.variants.find((v) => v.options.Color === c && v.image)?.image);
+  return own.filter((im) => noQ(im.url) === vi).concat(own.filter((im) => noQ(im.url) !== vi));
+};
+const images: GImg[] = (multiColor ? p.colors.flatMap((c) => viewsOf(c.name)) : []).concat(p.images.filter((im) => !im.color)).map(toG);
+if (p.detail) images.push({ src: p.detail, alt: `${p.title}, close-up of the print artwork`, cdn: false, cut: false, color: null });
+const shownFor = (c: string | null) => images.filter((im) => !im.color || im.color === c);
+const shown = shownFor(multiColor ? defColor : null);
+const first = shown[0] || images[0];
 const imgSrc = (im: { src: string; cdn: boolean }, w: number) => (im.cdn ? cdn(im.src, w) : `${im.src}-${w <= 360 ? 360 : w <= 540 ? 540 : 800}.webp`);
 const imgSet = (im: { src: string; cdn: boolean }) => (im.cdn ? srcset(im.src, [540, 720, 1080, 1440]) : `${im.src}-540.webp 540w, ${im.src}-800.webp 800w`);
 const url = `${siteConfig.siteUrl}/products/${p.handle}`;
@@ -40,13 +54,14 @@ const brand = p.handle.split('-').slice(0, 2).join('-');                 // e.g.
 const findMate = (type: string) => all.find((x) => x.lead && x.type === type && x.handle.startsWith(brand))
   || all.find((x) => x.lead && x.type === type && x.place?.slug === p.place?.slug);
 const mateHandle = pairDef?.items.find((it) => !famHandles.has(it.h))?.h
-  || (p.type === 'Tee' ? findMate('Hat')?.handle || 'hub-city-drag-raceway-hat'
-    : p.type === 'Hat' ? findMate('Tee')?.handle || 'beverly-drive-in-theatre-tee'
-    : p.type === 'Framed print' ? findMate('Socks')?.handle || 'hub-city-drag-raceway-socks' : null);
+  || (p.type === 'Tee' || p.type === 'Sweatshirt' ? findMate('Hat')?.handle || MATE_FALLBACK[p.type]
+    : p.type === 'Hat' ? findMate('Tee')?.handle || MATE_FALLBACK.Hat
+    : p.type === 'Framed print' ? findMate('Socks')?.handle || MATE_FALLBACK['Framed print'] : null);
 const mate = mateHandle ? all.find((x) => x.handle === mateHandle) : null;
 // pictured colour: the pair's pinned colour, else the colour of the mate's first photo
 const mateColor = pairDef?.items.find((it) => it.h === mateHandle)?.color
   || (mate && mate.colors.length > 1 ? mate.variants.find((v) => v.image === mate.images[0]?.url)?.options.Color : undefined);
+const mateShown = mateColor || pairDef?.items.find((it) => it.h === mateHandle)?.label;
 const mateSized = !!mate && mate.sizes.length > 1;
 const mateVariant = mate && !mateSized ? (mate.variants.find((v) => v.available && (!mateColor || v.options.Color === mateColor)) || mate.variants.find((v) => v.available)) : null;
 const mateSizes = mate && mateSized ? Object.fromEntries(mate.variants.filter((v) => v.available && (!mateColor || v.options.Color === mateColor)).map((v) => [v.options.Size, v.id])) : null;
@@ -56,7 +71,7 @@ const mateHref = mate ? `/products/${mate.handle}${mateColor ? `?color=${encodeU
 const jsonld = [
   {
     '@context': 'https://schema.org', '@type': 'Product', name: p.baseTitle, description: story.join(' ') || p.title,
-    image: p.images.map((i) => { const s = shareImg(i.url); return s.startsWith('/') ? siteConfig.siteUrl + s : s; }), brand: { '@type': 'Brand', name: siteConfig.brandName }, url,
+    image: p.images.slice(0, 6).map((i) => { const s = shareImg(i.url); return s.startsWith('/') ? siteConfig.siteUrl + s : s; }), brand: { '@type': 'Brand', name: siteConfig.brandName }, url,
     category: p.type,
     offers: {
       '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: Math.min(...p.variants.map((v) => v.price)), highPrice: Math.max(...p.variants.map((v) => v.price)),
@@ -94,22 +109,26 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
     <div class="hb-pdp" data-pdp data-handle={p.handle} data-variants={variantsJson}>
       <div class="hb-gallery">
         <div class="hb-gallery__main">
-          <img data-main class={images[0].cdn ? 'hb-cut' : ''} src={imgSrc(images[0], 1080)} srcset={imgSet(images[0])} sizes="(max-width: 900px) 100vw, 640px" width="1080" height="1080" alt={images[0].alt} fetchpriority="high" />
+          <img data-main class={first.cut ? 'hb-cut' : ''} src={imgSrc(first, 1080)} srcset={imgSet(first)} sizes="(max-width: 900px) 100vw, 640px" width="1080" height="1080" alt={first.alt} fetchpriority="high" />
         </div>
         {images.length > 1 && (
-          <div class="hb-thumbs" role="group" aria-label="Product images">
-            {images.map((im, i) => (
-              <button type="button" data-thumb={imgSrc(im, 1080)} data-thumbset={imgSet(im)} data-alt={im.alt} data-cut={im.cdn ? '1' : '0'} aria-current={i === 0 ? 'true' : 'false'} aria-label={`Show image ${i + 1} of ${images.length}`}>
-                <img src={imgSrc(im, 360)} alt="" width="76" height="76" loading="lazy" />
-              </button>
-            ))}
+          <div class="hb-thumbs" role="group" aria-label="Product images" data-thumbs hidden={shown.length < 2}>
+            {images.map((im) => {
+              const set = im.color ? shownFor(im.color) : shown;
+              return (
+                <button type="button" data-thumb={imgSrc(im, 1080)} data-thumbset={imgSet(im)} data-alt={im.alt} data-cut={im.cut ? '1' : '0'} data-color={im.color || undefined}
+                  hidden={!!im.color && im.color !== defColor} aria-current={im === first ? 'true' : 'false'} aria-label={`Show image ${set.indexOf(im) + 1} of ${set.length}`}>
+                  <img src={imgSrc(im, 360)} alt="" width="76" height="76" loading="lazy" />
+                </button>
+              );
+            })}
           </div>
         )}
       </div>
 
       <div class="hb-buy">
         <div>
-          {p.place && <p class="hb-eyebrow" style="margin-bottom:8px"><a href={`/places/${p.place.slug}`} style="text-decoration:none">{p.place.name} · <span class="hb-era">{p.place.era}</span></a></p>}
+          {p.place && <p class="hb-eyebrow" style="margin-bottom:8px"><a href={`/places/${p.place.slug}`} style="text-decoration:none">{p.place.name}{p.place.era && <Fragment> · <span class="hb-era">{p.place.era}</span></Fragment>}</a></p>}
           <h1 class="hb-h2 hb-pdp__title" set:html={nw(p.baseTitle)} />
           <p class="hb-buy__price" style="margin:12px 0 0" data-price>{money(p.price)}</p>
           <p class="hb-buy__ship">Free US shipping on orders ${FREE_SHIP}+{isHat ? ' · One size, adjustable strap' : ''}{p.type === 'Framed print' && FRAME_SIZE[p.handle] ? ` · ${FRAME_SIZE[p.handle]}` : ''}</p>
@@ -170,7 +189,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
             <div class="hb-mate__row">
               <a href={mateHref} class="hb-mate__img" tabindex="-1" aria-hidden="true"><img src={cdn(mateImg, 160)} srcset={srcset(mateImg, [120, 160, 240])} sizes="64px" width="64" height="64" alt="" loading="lazy" /></a>
               <div class="hb-mate__t">
-                <a href={mateHref} set:html={nw(mate.baseTitle + (mateColor ? `, ${mateColor}` : ''))} />
+                <a href={mateHref} set:html={nw(mate.baseTitle + (mateShown ? `, ${mateShown}` : ''))} />
                 <span>+{money(mate.price)} · both for {money(together)}</span>
                 {mateSizes && (
                   <label class="hb-mate__size"><span class="hb-sr">Size for {mate.baseTitle}</span>
@@ -194,7 +213,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
           <div class="hb-storybox">
             <p class="hb-eyebrow" style="margin-bottom:6px">The story</p>
             {story.map((s) => <p>{s}</p>)}
-            {p.place && <p><a class="hb-link" href={`/places/${p.place.slug}`}>More about {p.place.short}</a></p>}
+            {p.place && !p.place.catchAll && <p><a class="hb-link" href={`/places/${p.place.slug}`}>More about {p.place.short}</a></p>}
             {note && <p class="hb-note">{note}</p>}
           </div>
         )}
@@ -250,7 +269,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
   {samePlace.length > 0 && (
     <section class="hb-section--tight" aria-labelledby="rel-h" style="border-top:1px solid var(--line)">
       <div class="hb-wrap">
-        <div class="hb-head"><h2 class="hb-h2 hb-h2--sm" id="rel-h">More from {p.place!.short}</h2><a class="hb-link" href={`/places/${p.place!.slug}`}>The story of {p.place!.short}</a></div>
+        <div class="hb-head"><h2 class="hb-h2 hb-h2--sm" id="rel-h">More from {p.place!.catchAll ? p.place!.short.replace(/^Around/, 'around') : p.place!.short}</h2><a class="hb-link" href={`/places/${p.place!.slug}`}>{p.place!.catchAll ? 'See them all' : `The story of ${p.place!.short}`}</a></div>
         <div class="hb-grid">{samePlace.map((r) => <ProductCard p={r} />)}</div>
       </div>
     </section>
@@ -258,7 +277,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
   {alsoLike.length > 0 && (
     <section class="hb-section--tight" aria-labelledby="also-h" style="border-top:1px solid var(--line)">
       <div class="hb-wrap">
-        <div class="hb-head"><h2 class="hb-h2 hb-h2--sm" id="also-h">From other Hattiesburg places</h2><a class="hb-link" href="/shop">Shop all</a></div>
+        <div class="hb-head"><h2 class="hb-h2 hb-h2--sm" id="also-h">From other {siteConfig.townName} places</h2><a class="hb-link" href="/shop">Shop all</a></div>
         <div class="hb-grid">{alsoLike.map((r) => <ProductCard p={r} />)}</div>
       </div>
     </section>
@@ -282,9 +301,12 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
     const priceEl = root.querySelector('[data-price]') as HTMLElement;
     const sticky = document.querySelector('[data-sticky]') as HTMLElement;
     const stickyBtn = document.querySelector('[data-sticky-btn]') as HTMLButtonElement;
-    const hasColor = !!root.querySelector('[data-color]');
+    const SW = '.hb-colorbtn[data-color]';   // colour swatches (gallery thumbs carry data-color too)
+    const strip = root.querySelector('[data-thumbs]') as HTMLElement | null;
+    const thumbs = [...root.querySelectorAll<HTMLElement>('[data-thumb]')];
+    const hasColor = !!root.querySelector(SW);
     const hasSize = !!root.querySelector('[data-size]');
-    let color = (root.querySelector('[data-color][aria-checked="true"], [data-color][aria-current="true"]') as HTMLElement)?.dataset.color || null;
+    let color = (root.querySelector(`${SW}[aria-checked="true"], ${SW}[aria-current="true"]`) as HTMLElement)?.dataset.color || null;
     let size: string | null = null;
     const fmt = (n: number) => '$' + (Number.isInteger(n) ? n.toFixed(0) : n.toFixed(2));
     const domain = 'nostalgic-towns.myshopify.com';
@@ -296,14 +318,29 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
       const first = root.querySelector('[data-size]') as HTMLElement; first?.focus();
       document.getElementById('hb-size')?.classList.add('is-nudge'); setTimeout(() => document.getElementById('hb-size')?.classList.remove('is-nudge'), 700);
     }
+    function showImage(th: HTMLElement) {
+      main.src = th.dataset.thumb!; main.srcset = th.dataset.thumbset || ''; main.alt = th.dataset.alt || ''; main.classList.toggle('hb-cut', th.dataset.cut === '1');
+      thumbs.forEach((b) => b.setAttribute('aria-current', String(b === th)));
+    }
+    // The colour's own views plus the shared ones and the print close-up; the main image becomes its first view.
+    function showColor(c: string) {
+      const vis = thumbs.filter((b) => !b.dataset.color || b.dataset.color === c);
+      thumbs.forEach((b) => { b.hidden = !vis.includes(b); });
+      vis.forEach((b, i) => b.setAttribute('aria-label', `Show image ${i + 1} of ${vis.length}`));
+      if (strip) { strip.hidden = vis.length < 2; strip.scrollLeft = 0; }
+      if (vis[0]) { showImage(vis[0]); return; }
+      const v = variants.find((x) => x.o.Color === c && x.ci);   // no views at all: fall back to the variant photo
+      if (v) { main.src = v.ci!; main.srcset = ''; main.classList.add('hb-cut'); }
+    }
     function pickColor(c: HTMLElement) {
       color = c.dataset.color!;
-      root.querySelectorAll('[data-color]').forEach((b) => {
+      root.querySelectorAll(SW).forEach((b) => {
         if (b.getAttribute('role') === 'radio') b.setAttribute('aria-checked', String(b === c));
         else b === c ? b.setAttribute('aria-current', 'true') : b.removeAttribute('aria-current');
       });
       (root.querySelector('[data-color-label]') as HTMLElement).textContent = c.dataset.label || color;
       const q = new URLSearchParams(location.search); q.set('color', color); history.replaceState(null, '', location.pathname + '?' + q);
+      showColor(color);
       sync();
     }
     function current(): V | undefined {
@@ -327,11 +364,10 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
       pay.toggleAttribute('aria-disabled', !ready);
       stickyBtn.textContent = ready ? (size ? `Add ${size} to cart` : 'Add to cart') : hasSize && !size ? 'Choose size' : 'Sold out';
       (document.querySelector('[data-sticky-price]') as HTMLElement).textContent = v ? fmt(v.p) : priceEl.textContent || '';
-      if (v?.i && hasColor) { main.src = v.ci || (v.i + (v.i.includes('?') ? '&' : '?') + 'width=1080'); main.srcset = ''; main.classList.add('hb-cut'); }
     }
     root.addEventListener('click', (e) => {
       const t = e.target as HTMLElement;
-      const c = t.closest('[data-color]') as HTMLElement | null;
+      const c = t.closest(SW) as HTMLElement | null;
       if (c) { e.preventDefault(); pickColor(c); return; }
       const cur = t.closest('.hb-opt__links a[aria-current]');
       if (cur) { e.preventDefault(); return; }
@@ -346,11 +382,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
         sync(); return;
       }
       const th = t.closest('[data-thumb]') as HTMLElement | null;
-      if (th) {
-        main.src = th.dataset.thumb!; main.srcset = th.dataset.thumbset || ''; main.alt = th.dataset.alt || ''; main.classList.toggle('hb-cut', th.dataset.cut === '1');
-        root.querySelectorAll('[data-thumb]').forEach((b) => b.setAttribute('aria-current', String(b === th)));
-        return;
-      }
+      if (th) { showImage(th); return; }
       const mb = t.closest('[data-mate-add]') as HTMLElement | null;
       if (mb) {
         const box = mb.closest('[data-mate]') as HTMLElement;
@@ -382,7 +414,7 @@ const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
     // preselect ?color= and ?size= (sizes carry across colour/style switches)
     const qs = new URLSearchParams(location.search);
     const want = qs.get('color');
-    const wantEl = want ? [...root.querySelectorAll<HTMLElement>('[data-color]')].find((b) => b.dataset.color === want) : null;
+    const wantEl = want ? [...root.querySelectorAll<HTMLElement>(SW)].find((b) => b.dataset.color === want) : null;
     if (wantEl) pickColor(wantEl);
     const wantSize = qs.get('size');
     const sizeEl = wantSize ? root.querySelector<HTMLElement>(`[data-size="${CSS.escape(wantSize)}"]`) : null;

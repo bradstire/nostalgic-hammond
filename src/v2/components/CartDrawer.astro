@@ -1,12 +1,11 @@
 ---
 import { FREE_SHIP } from '../data';
 import { getCatalog, cdn, money } from '../catalog';
-import { FRAME_SIZE } from '../data';
-import productImages from '../product-images.json';
+import { FRAME_SIZE, ADD_ONS, PRODUCT_IMAGES as productImages } from '../data';
 // Add-ons offered in the cart to close the free-shipping gap. Only items priced at or above the
 // remaining gap are shown, so "ships free" is always true. Each option keeps its own photo.
 const all = await getCatalog();
-const addOns = ['camelot-music-socks', 'hub-city-drag-raceway-socks', 'albert-speeds-socks', 'hub-city-drag-raceway-hat', 'camelot-music-hat', 'albert-speeds-hat', 'hub-city-drag-raceway-tee', 'camelot-music-1974-bag-tee', 'beverly-drive-in-theatre-tee', 'hub-city-drag-raceway-framed-poster-12-12']
+const addOns = ADD_ONS
   .map((h) => all.find((p) => p.handle === h)).filter(Boolean)
   .map((p) => ({ handle: p!.handle, title: p!.baseTitle, price: p!.price, img: cdn(p!.images[0].url, 160), type: p!.type, place: p!.place?.slug || '',
     sized: p!.sizes.length > 1,

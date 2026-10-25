@@ -116,17 +116,20 @@ p, li, figcaption { text-wrap: pretty; }
 .hb-hero__art { position: relative; margin: 0; }
 .hb-hero__card { position: relative; border-radius: 6px; box-shadow: 0 2px 4px rgba(30,26,22,.12), 0 18px 44px rgba(30,26,22,.20); background: #f7f2e6; }
 .hb-hero__card img { width: 100%; height: auto; border-radius: 6px; }
-.hb-hero__card a.hb-hot { position: absolute; border-radius: 10px; }
-.hb-hero__card a.hb-hot:hover, .hb-hero__card a.hb-hot:focus-visible { box-shadow: 0 0 0 3px rgba(255,255,255,.9), 0 0 0 6px var(--brick); }
-.hb-hero__cap { margin: 14px 0 0; font-size: 13.5px; color: var(--ink-2); text-align: center; }
-.hb-legend { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 8px; margin: 10px 0 0; padding: 0; }
-.hb-legend a { display: inline-flex; align-items: center; gap: 7px; min-height: 30px; padding: 3px 10px 3px 4px; border-radius: 999px; background: var(--card); border: 1px solid var(--line); text-decoration: none; font-size: 13px; font-weight: 550; color: var(--ink); white-space: nowrap; }
-.hb-legend a:hover { border-color: var(--ink); }
-.hb-legend b { font: 800 11px/1 var(--sans); letter-spacing: .08em; background: var(--ink); color: var(--card); padding: 5px 7px; border-radius: 999px; }
-@media (hover: hover) and (min-width: 901px) {
-  .hb-hero__card a.hb-hot::after { content: attr(data-label); position: absolute; left: 50%; bottom: calc(100% + 10px); transform: translateX(-50%); white-space: nowrap; background: var(--ink); color: var(--card); font: 600 13px/1 var(--sans); padding: 8px 11px; border-radius: 8px; opacity: 0; pointer-events: none; transition: opacity .15s; }
-  .hb-hero__card a.hb-hot:hover::after, .hb-hero__card a.hb-hot:focus-visible::after { opacity: 1; }
-}
+/* Postcard letters: hovering (fine pointer) or focusing a letter lifts it off the card and the ribbon names its place.
+   No tooltip chrome; touch taps go straight to the place. The keyboard focus ring is the card's own ink. */
+.hb-hero__card a.hb-hot { position: absolute; z-index: 3; border-radius: 12px; outline: none; }
+.hb-hero__card a.hb-hot:focus-visible { box-shadow: 0 0 0 2px var(--card), 0 0 0 4px var(--ink); }
+.hb-pop { position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.hb-pop img { position: absolute; display: block; opacity: 0; max-width: none; border-radius: 0; }
+.hb-pop img:not([src]) { visibility: hidden; }
+.hb-pop__l { transform-origin: 50% 85%; transition: opacity .12s ease, transform .2s cubic-bezier(.2,.7,.3,1.2), filter .2s ease; }
+.hb-pop__l.is-on { opacity: 1; transform: translateY(-3.5%) scale(1.06) rotate(-1.2deg); filter: drop-shadow(0 10px 10px rgba(22, 30, 58, .38)) saturate(1.08); }
+.hb-pop__cap { transition: opacity .18s ease; }
+.hb-pop__cap.is-on { opacity: 1; }
+.hb-pop--stack { display: none; }
+@media (max-width: 900px) { .hb-pop--wide { display: none; } .hb-pop--stack { display: block; } }
+@media (prefers-reduced-motion: reduce) { .hb-pop__l, .hb-pop__l.is-on { transition: opacity .12s ease; transform: none; } }
 .hb-hero__ctas { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
 .hb-trust { display: flex; flex-wrap: wrap; gap: 10px 22px; margin: 26px 0 0; padding: 0; list-style: none; font-size: 14px; color: var(--ink-2); }
 .hb-trust li { display: flex; align-items: center; gap: 8px; }
@@ -142,10 +145,7 @@ p, li, figcaption { text-wrap: pretty; }
   .hb-picks img { width: 100%; aspect-ratio: 1; object-fit: contain; border-radius: 10px; background: var(--tile); border: 1px solid var(--tile-line); }
   .hb-picks__t { color: var(--ink-2); font-weight: 600; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
   .hb-picks__p { font-weight: 700; font-size: 13px; }
-  .hb-hero__cap { text-align: left; }
   .hb-hero__card { transform: none; }
-  .hb-hero__cap { margin-top: 10px; }
-  .hb-legend { justify-content: flex-start; }
   .hb-hero__ctas { margin-top: 18px; gap: 10px; }
   .hb-hero__ctas .hb-btn { min-height: 48px; padding: 0 18px; font-size: 15.5px; }
   .hb-lede { margin-top: 10px; }
@@ -166,7 +166,7 @@ p, li, figcaption { text-wrap: pretty; }
 .hb-card__media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; transition: opacity .25s ease, transform .4s ease; }
 .hb-cut { filter: drop-shadow(0 10px 14px rgba(40, 30, 15, .16)); }
 .hb-card__media img.hb-card__alt { opacity: 0; }
-@media (hover: hover) { .hb-card:hover .hb-card__media img.hb-card__alt { opacity: 1; } .hb-card:hover .hb-card__media img { transform: scale(1.02); } }
+@media (hover: hover) { .hb-card:hover .hb-card__media img.hb-card__alt { opacity: 1; } .hb-card:hover .hb-card__media img { transform: scale(1.02); } .hb-card:hover .hb-card__media--swap img:not(.hb-card__alt) { opacity: 0; } }
 .hb-badge { position: absolute; left: 10px; top: 10px; z-index: 2; background: rgba(255,253,248,.95); border: 1px solid var(--line); color: var(--ink); font: 650 11px/1 var(--sans); letter-spacing: .08em; text-transform: uppercase; padding: 6px 8px; border-radius: 999px; }
 .hb-card__body { padding: 12px 2px 0; display: grid; gap: 4px; }
 .hb-card__place { font: 600 11.5px/1.2 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--ink-3); }
@@ -309,8 +309,10 @@ p, li, figcaption { text-wrap: pretty; }
 .hb-gallery { display: grid; gap: 10px; }
 .hb-gallery__main { aspect-ratio: 1; border-radius: var(--radius); overflow: hidden; background: var(--tile); border: 1px solid var(--tile-line); }
 .hb-gallery__main img { width: 100%; height: 100%; object-fit: contain; }
-.hb-thumbs { display: flex; gap: 8px; overflow-x: auto; }
-.hb-thumbs button { flex: none; width: 76px; height: 76px; padding: 0; border-radius: 10px; overflow: hidden; border: 2px solid transparent; background: var(--tile); cursor: pointer; }
+/* Thumbs: up to seven a row on wider screens (more wrap into a tidy grid); on phones a strip that scrolls
+   sideways, edge to edge (see the max-width: 520px block). */
+.hb-thumbs { display: grid; grid-template-columns: repeat(7, minmax(0, 76px)); gap: 8px; }
+.hb-thumbs button { flex: none; width: 100%; height: auto; aspect-ratio: 1; padding: 0; border-radius: 10px; overflow: hidden; border: 2px solid transparent; background: var(--tile); cursor: pointer; }
 .hb-thumbs button[aria-current='true'] { border-color: var(--ink); }
 .hb-thumbs img { width: 100%; height: 100%; object-fit: contain; }
 .hb-buy { position: sticky; top: 84px; display: grid; gap: 18px; }
@@ -435,7 +437,10 @@ p, li, figcaption { text-wrap: pretty; }
   .hb-crumbs ol { flex-wrap: nowrap; overflow: hidden; white-space: nowrap; }
   .hb-crumbs li { white-space: nowrap; flex: none; }
   .hb-crumbs li:last-child { flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-  .hb-thumbs button { width: 60px; height: 60px; }
+  .hb-thumbs { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
+    margin: -5px calc(var(--gutter) * -1); padding: 5px var(--gutter); scroll-padding: 0 var(--gutter); }   /* 5px: room for the focus ring */
+  .hb-thumbs::-webkit-scrollbar { display: none; }
+  .hb-thumbs button { width: 60px; height: 60px; scroll-snap-align: start; }
   .hb-filters--scroll { flex-wrap: nowrap; overflow-x: auto; margin-left: calc(var(--gutter) * -1); margin-right: calc(var(--gutter) * -1); padding: 0 var(--gutter) 4px; scrollbar-width: none; }
   .hb-filters--scroll .hb-chip { flex: none; }
 }

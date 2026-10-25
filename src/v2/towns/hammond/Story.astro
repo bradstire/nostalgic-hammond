@@ -1,0 +1,25 @@
+---
+// Hammond home: "From the record" (source artifacts behind the designs).
+import { siteConfig } from '../../../config/site.config';
+const S = '/images/hm/story';
+const figs = [
+  { img: 'greetings', alt: 'Large-letter linen postcard reading Greetings from Hammond, Louisiana, with scenes of town inside each letter and strawberries along the bottom', title: 'Greetings from Hammond, 1946', cap: 'A large-letter linen postcard by Curt Teich & Co. The back calls Hammond “the strawberry capital of the world.”' },
+  { img: 'stadium', alt: 'Linen postcard of Strawberry Stadium at Southeastern Louisiana College: full stands, goalposts and a sunset sky', title: 'Strawberry Stadium, 1940', cap: 'A linen postcard of the stadium, built in 1937 as a WPA project and named for the area’s strawberry farmers.' },
+  { img: 'medallion', alt: 'Terrazzo floor medallion inlaid CAVE TANGI 1938 OCT-1, with a bass drum lettered THE ROCKS behind it', title: 'The Cave Tangi floor', cap: 'The inlaid medallion reads “Cave Tangi 1938 Oct-1.” The roadhouse opened that October on Highway 51.' },
+];
+---
+<section class="hb-section hb-story" aria-labelledby="story-h">
+  <div class="hb-wrap">
+    <p class="hb-eyebrow">From the record</p>
+    <h2 class="hb-h2" id="story-h">Real places. Real sources. Restored from the&nbsp;originals.</h2>
+    <div class="hb-story__grid">
+      {figs.map((f) => (
+        <figure class="hb-artifact">
+          <div class="hb-artifact__img"><picture><source type="image/avif" srcset={`${S}/${f.img}-600.avif 600w, ${S}/${f.img}-900.avif 900w`} sizes="(max-width: 900px) 100vw, 380px" /><img src={`${S}/${f.img}-600.webp`} srcset={`${S}/${f.img}-600.webp 600w, ${S}/${f.img}-900.webp 900w`} sizes="(max-width: 900px) 100vw, 380px" width="600" height="450" alt={f.alt} loading="lazy" /></picture></div>
+          <figcaption><strong>{f.title}</strong>{f.cap}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="hb-story__note">We start with what's on the record: old postcards, newspaper ads, photos of the signs people still remember. Then we restore the scan or redraw the lettering so it prints sharp and still looks like itself. Our sources are listed on every place page. Have a photo of a Hammond place we should bring back? <a href={`mailto:${siteConfig.contactEmail}?subject=A%20place%20to%20remember`} style="color:#fff">Send it our way</a>.</p>
+  </div>
+</section>
