@@ -2,7 +2,8 @@
 // The list id and source label come from src/config/towns.mjs (klaviyoList), replaced at build time (astro.config.mjs).
 // Hattiesburg: list "Nostalgic Hattiesburg". Hammond: the newsletter list the original site's popup used (its welcome
 // flow sends WELCOME15).
-const COMPANY = 'X6vHTB';
+// Each town can have its own Klaviyo account (public site ID), set as klaviyoCompany in towns.mjs.
+const COMPANY = import.meta.env.PUBLIC_KLAVIYO_COMPANY;
 const LIST = import.meta.env.PUBLIC_KLAVIYO_LIST;
 const CODE = 'WELCOME15';
 

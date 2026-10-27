@@ -39,6 +39,7 @@ export const towns = {
     heroPosition: 'center 68%',
     popup: { enabled: true, footer: 'Hammond — remembered right.' },
     // Klaviyo list for v2 email signups (the original popup's list; its welcome flow sends WELCOME15).
+    klaviyoCompany: 'X6vHTB',
     klaviyoList: 'XdKJkQ',
     footerLinks: [
       { href: '/', label: 'SHOP' },
@@ -105,8 +106,9 @@ export const towns = {
     heroPosition: 'center 55%',
     // No Klaviyo list for this town yet; the popup stays off until one exists.
     popup: { enabled: false, footer: 'Hattiesburg — remembered right.' },
-    // Klaviyo list for v2 email signups ("Nostalgic Hattiesburg").
-    klaviyoList: 'TtxEMr',
+    // Its own Klaviyo account (Nostalgic Hattiesburg, public site ID XH3hzS), list "Email List".
+    klaviyoCompany: 'XH3hzS',
+    klaviyoList: 'TmFHnz',
     footerLinks: [
       { href: '/', label: 'SHOP' },
       { href: '/about', label: 'ABOUT' },

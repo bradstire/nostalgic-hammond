@@ -55,6 +55,7 @@ export default defineConfig({
       'import.meta.env.PUBLIC_TOWN': JSON.stringify(townSlug),
       // Email signup (src/v2/signup.ts): the town's Klaviyo list and the source label on new profiles.
       'import.meta.env.PUBLIC_KLAVIYO_LIST': JSON.stringify(town.klaviyoList || ''),
+      'import.meta.env.PUBLIC_KLAVIYO_COMPANY': JSON.stringify(town.klaviyoCompany || 'X6vHTB'),
       'import.meta.env.PUBLIC_SIGNUP_SOURCE': JSON.stringify(`${town.brandName} site`),
     },
     build: {
