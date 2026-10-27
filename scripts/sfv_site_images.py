@@ -1,7 +1,7 @@
 """Build public/images/sfv/* (hero, story, place tiles, og) from the SFV print + art masters in print-assets."""
 import os
 from PIL import Image
-PA = '/home/claude/print-assets/sfv'
+PA = os.environ.get('SFV_ART_DIR', '/home/claude/print-assets/sfv')  # print-assets branch, sfv/
 OUT = os.path.join(os.path.dirname(__file__), '..', 'public', 'images', 'sfv')
 MAT = (242, 235, 220)
 
