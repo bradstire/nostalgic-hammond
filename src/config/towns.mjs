@@ -98,7 +98,7 @@ export const towns = {
     brandName: 'Nostalgic Hattiesburg',
     siteUrl: 'https://www.nostalgichattiesburg.com',
     contactEmail: 'info@nostalgichattiesburg.com',
-    launched: false,
+    launched: true,
     // Storefront v2 ("shop by place", src/v2).
     layout: 'v2',
     heroImage: '/images/hattiesburg/hero.jpg',
