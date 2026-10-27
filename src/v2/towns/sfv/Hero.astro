@@ -1,0 +1,39 @@
+---
+// SFV home hero: the c.1908 Lankershim & Van Nuys Ranchos advertising postcard (CSUN SFVH 2320, "Public domain."),
+// full-bleed under the headline, the same treatment as Hammond's photo hero. The card is also a framed print.
+import { FREE_SHIP, SHIP_MAKE } from '../../data';
+import './sfv.css';
+const check = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+const WIDE = '/images/sfv/hero/ranchos-wide';
+const TALL = '/images/sfv/hero/ranchos-tall';
+---
+<section class="hm-hero" aria-labelledby="hm-hero-h">
+  <picture class="hm-hero__bg">
+    <source media="(max-width: 700px)" type="image/avif" srcset={`${TALL}-600.avif 600w, ${TALL}-900.avif 900w, ${TALL}-1200.avif 1200w`} sizes="100vw" />
+    <source media="(max-width: 700px)" type="image/webp" srcset={`${TALL}-600.webp 600w, ${TALL}-900.webp 900w, ${TALL}-1200.webp 1200w`} sizes="100vw" />
+    <source type="image/avif" srcset={`${WIDE}-800.avif 800w, ${WIDE}-1200.avif 1200w, ${WIDE}-1600.avif 1600w, ${WIDE}-2400.avif 2400w`} sizes="100vw" />
+    <img src={`${WIDE}-1600.webp`} srcset={`${WIDE}-800.webp 800w, ${WIDE}-1200.webp 1200w, ${WIDE}-1600.webp 1600w, ${WIDE}-2400.webp 2400w`} sizes="100vw"
+      width="2400" height="1200" fetchpriority="high"
+      alt="A painted bird's-eye postcard from about 1908: the San Fernando Valley seen from the Pacific over the Santa Monica Mountains, with the Lankershim and Van Nuys Ranchos laid out in pale squares." />
+  </picture>
+  <div class="hm-hero__scrim" aria-hidden="true"></div>
+  <div class="hb-wrap hm-hero__in">
+    <div class="hm-hero__text">
+      <p class="hb-eyebrow">Made-to-order tees, hats &amp; prints</p>
+      <h1 class="hb-h1" id="hm-hero-h">The Valley we remember, ready to&nbsp;wear.</h1>
+      <p class="hb-lede">Tees, hats and prints redrawn and restored from the San Fernando Valley's old postcards, labels and landmarks, from the orchard ranchos to cruise night on Van Nuys. For anyone who's called it home, and anyone shopping for&nbsp;them.</p>
+      <div class="hb-hero__ctas">
+        <a class="hb-btn hb-btn--primary" href="/shop">Shop the collection</a>
+        <a class="hb-btn hm-btn--light" href="#places">Find your place</a>
+      </div>
+    </div>
+    <p class="hm-hero__cap"><a href="/products/lankershim-van-nuys-ranchos-postcard-framed-print" style="color:inherit">Lankershim &amp; Van Nuys Ranchos postcard, about 1908</a></p>
+  </div>
+</section>
+<div class="hb-wrap">
+  <ul class="hb-trust hm-trust">
+    <li><Fragment set:html={check} />Free US shipping on ${FREE_SHIP}+</li>
+    <li><Fragment set:html={check} />Made to order, ships in {SHIP_MAKE} days</li>
+    <li><Fragment set:html={check} />Misprinted or damaged? Free replacement</li>
+  </ul>
+</div>

@@ -1,0 +1,21 @@
+---
+// SFV /about body: how we work and where every image comes from.
+import { PLACES } from '../../data';
+import { siteConfig } from '../../../config/site.config';
+const email = siteConfig.contactEmail;
+---
+{' '}<p class="hb-lede">Every place has things it never stops talking about. Nostalgic San Fernando Valley brings back the ones the Valley remembers, on tees, hats and framed prints.</p>
+<h2>How we work</h2>
+<p>We start with the record: archive postcards, can and crate labels, old ads, and the stories people share about these places. We restore each scan or set the lettering fresh so it prints sharp, and we keep the details that made it look like itself.</p>
+<p>Each place page lists where its art comes from.</p>
+<h2>Where the images come from</h2>
+<ul>
+  <li><strong>Postcards and labels.</strong> Our Lankershim &amp; Van Nuys Ranchos and "A Little Land and a Living" prints come from the <a href="https://digital-collections.csun.edu/digital/collection/SFVH" rel="nofollow noopener">San Fernando Valley History Digital Library</a> at CSUN's Oviatt Library (originals at the West Valley Museum), which lists them as public domain. The Burbank Brand peach label comes from the same library (original at the Burbank Historical Society).</li>
+  <li><strong>Lettering.</strong> Our Greetings tee sets the copy of a 1950s Valley greetings postcard in our own lettering. The Valley Music Theatre dome is drawn fresh.</li>
+  <li><strong>Our own designs.</strong> Cruise Night, San Fernando Raceway and the Phys. Ed. shirts are original lockups. Their stories are sourced on each place page.</li>
+</ul>
+<h2>The places</h2>
+<ul>{PLACES.map((p) => <li><a href={`/places/${p.slug}`}>{p.name}</a>{p.era ? ` (${p.era})` : ''}</li>)}</ul>
+<h2>Who we are</h2>
+<p>Nostalgic San Fernando Valley is a small independent shop. We are not affiliated with or endorsed by the businesses, schools or institutions we honor.</p>
+<p>Remember a place we should bring back? Email <a href={`mailto:${email}`}>{email}</a>. We read everything.</p>{' '}

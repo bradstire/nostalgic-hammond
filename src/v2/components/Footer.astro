@@ -6,6 +6,8 @@ const year = 2026;
 const all = await getCatalog();
 const places = livePlaces(all);
 const types = TYPE_ORDER.filter((t) => all.some((p) => p.lead && p.type === t));
+// Towns without a Klaviyo list yet show no email signup.
+const HAS_SIGNUP = !!import.meta.env.PUBLIC_KLAVIYO_LIST;
 ---
 <footer class="hb-foot">
   <div class="hb-wrap">
@@ -14,6 +16,7 @@ const types = TYPE_ORDER.filter((t) => all.some((p) => p.lead && p.type === t));
         <h2>{siteConfig.brandName}</h2>
         <p style="margin:0 0 12px;max-width:30em">{COPY.footerBlurb}</p>
         <p style="margin:0 0 18px">Questions? <a href="/contact">Contact us</a></p>
+        {HAS_SIGNUP && (
         <form class="hb-form hb-form--foot" data-signup novalidate>
           <label for="hb-foot-email">Get 15% off your first order</label>
           <input class="hb-input" id="hb-foot-email" type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
@@ -21,6 +24,7 @@ const types = TYPE_ORDER.filter((t) => all.some((p) => p.lead && p.type === t));
           <p class="hb-form__msg" role="status" aria-live="polite"></p>
           <p class="hb-form__legal">Unsubscribe anytime. <a href="https://checkout.shopify.com/97765622131/policies/50774835571.html?locale=en" rel="nofollow">Privacy policy</a></p>
         </form>
+        )}
       </div>
       <div>
         <h2>Shop</h2>

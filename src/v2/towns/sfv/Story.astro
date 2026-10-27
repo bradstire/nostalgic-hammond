@@ -1,0 +1,25 @@
+---
+// SFV home: "From the record" (three archival pieces, all reproduced as framed prints).
+import { siteConfig } from '../../../config/site.config';
+const A = '/images/sfv/story';
+const items = [
+  { img: 'ranchos', alt: 'Painted bird\'s-eye postcard of the Lankershim and Van Nuys Ranchos in the San Fernando Valley, about 1908', t: 'Lankershim & Van Nuys Ranchos, c. 1908', c: 'An advertising postcard from the Lankershim Development Company. From the San Fernando Valley History Digital Library at CSUN, which lists it as public domain.' },
+  { img: 'littlefarms', alt: 'Sepia postcard of a small farmhouse with a vegetable garden, captioned A Little Land and a Living in California, about 1919', t: '“A Little Land and a Living,” c. 1919', c: 'A postcard for Little Farms Magazine of Los Angeles, from the years the Valley was sold as small farms.' },
+  { img: 'burbank', alt: 'Red Burbank Brand peach can label with a glass bowl of yellow cling peaches, McKeon Canning Company, Burbank, about 1922', t: 'Burbank Brand peaches, c. 1922', c: 'A can label from the McKeon Canning Company of Burbank, which opened in 1922. Cleaned of dust, never repainted.' },
+];
+---
+<section class="hb-section hb-story" aria-labelledby="story-h">
+  <div class="hb-wrap">
+    <p class="hb-eyebrow">From the record</p>
+    <h2 class="hb-h2" id="story-h">Real places. Real sources. Restored from the&nbsp;originals.</h2>
+    <div class="hb-story__grid">
+      {items.map((x) => (
+        <figure class="hb-artifact">
+          <div class="hb-artifact__img"><picture><source type="image/avif" srcset={`${A}/${x.img}-600.avif 600w, ${A}/${x.img}-900.avif 900w`} sizes="(max-width: 900px) 100vw, 380px" /><img src={`${A}/${x.img}-600.webp`} srcset={`${A}/${x.img}-600.webp 600w, ${A}/${x.img}-900.webp 900w`} sizes="(max-width: 900px) 100vw, 380px" width="600" height="450" alt={x.alt} loading="lazy" /></picture></div>
+          <figcaption><strong>{x.t}</strong>{x.c}</figcaption>
+        </figure>
+      ))}
+    </div>
+    <p class="hb-story__note">We start with what's on the record: archive postcards, labels, old ads and the stories people tell about these places. Then we restore the scan or set the lettering fresh so it prints sharp and still looks like itself. Our sources are listed on every place page. Remember a Valley place we should bring back? <a href={`mailto:${siteConfig.contactEmail}?subject=A%20place%20to%20remember`} style="color:#fff">Send it our way</a>.</p>
+  </div>
+</section>

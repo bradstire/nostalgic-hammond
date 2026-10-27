@@ -41,9 +41,11 @@ const placeCta = (slug: string) => {
 };
 
 const jsonld = [
-  { '@context': 'https://schema.org', '@type': 'Organization', name: siteConfig.brandName, url: siteConfig.siteUrl, logo: siteConfig.siteUrl + '/images/hb/apple-touch-icon.png', email: siteConfig.contactEmail },
+  { '@context': 'https://schema.org', '@type': 'Organization', name: siteConfig.brandName, url: siteConfig.siteUrl, logo: siteConfig.siteUrl + siteConfig.iconDir + '/apple-touch-icon.png', email: siteConfig.contactEmail },
   { '@context': 'https://schema.org', '@type': 'WebSite', name: siteConfig.brandName, url: siteConfig.siteUrl },
 ];
+// Towns without a Klaviyo list yet (towns.mjs klaviyoList empty) show no email signup.
+const HAS_SIGNUP = !!import.meta.env.PUBLIC_KLAVIYO_LIST;
 ---
 <V2Layout jsonld={jsonld}>
   <Fragment slot="head">
@@ -170,6 +172,7 @@ const jsonld = [
     </div>
   </section>
 
+  {HAS_SIGNUP && (
   <section class="hb-section--tight hb-email" aria-labelledby="email-h">
     <div class="hb-wrap hb-email__in">
       <div>
@@ -185,6 +188,7 @@ const jsonld = [
       </form>
     </div>
   </section>
+  )}
 
   <section class="hb-section" aria-labelledby="faq-h">
     <div class="hb-wrap">

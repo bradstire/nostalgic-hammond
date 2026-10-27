@@ -15,6 +15,8 @@ export const siteConfig = {
   brandName: town.brandName,
   siteUrl: town.siteUrl,
   contactEmail: town.contactEmail,
+  // Folder holding favicon.svg + apple-touch-icon.png (v2 layout). Hattiesburg's set is the default.
+  iconDir: (town as any).iconDir || '/images/hb',
   // Single source of truth for the free-shipping threshold (banner + cart maths read this).
   // Live store has shown $60 since launch; Shopify shipping rates must match this value.
   freeShippingThreshold: 60,

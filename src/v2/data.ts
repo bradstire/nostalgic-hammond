@@ -4,10 +4,11 @@ import { townSlug } from '../config/site.config';
 import type { TownContent, Place } from './shared';
 import { hattiesburg } from './towns/hattiesburg';
 import { hammond } from './towns/hammond';
+import { sfv } from './towns/sfv';
 
 export * from './shared';
 
-const TOWNS: Record<string, TownContent> = { hattiesburg, hammond };
+const TOWNS: Record<string, TownContent> = { hattiesburg, hammond, sfv };
 export const TOWN: TownContent = TOWNS[townSlug];
 if (!TOWN) throw new Error(`[v2] No storefront v2 content for town "${townSlug}" (add src/v2/towns/${townSlug}.ts)`);
 

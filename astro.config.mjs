@@ -18,7 +18,7 @@ const siteDir = town.layout === 'v2' ? './src/v2/site' : './src/legacy/site';
 // Town-specific v2 components (hero, story band, about page body): src/v2/towns/<slug>/.
 const townDir = `./src/v2/towns/${townSlug}`;
 // Image folders under public/ that belong to one town only; other towns' builds leave them out of dist.
-const TOWN_ONLY_ASSETS = { hammond: 'images/hm' };
+const TOWN_ONLY_ASSETS = { hammond: 'images/hm', sfv: 'images/sfv' };
 // v2 builds its 404 at /404/ (a param route); publish it as /404.html for Vercel. No-op for other layouts.
 const v2NotFound = {
   name: 'v2-404',
@@ -26,6 +26,14 @@ const v2NotFound = {
     'astro:build:done': async ({ dir }) => {
       for (const [slug, rel] of Object.entries(TOWN_ONLY_ASSETS)) {
         if (slug !== townSlug) fs.rmSync(new URL(rel, dir), { recursive: true, force: true });
+      }
+      // strictAssets towns: keep only their own image folder, swap in their favicon, drop other sites' verification files.
+      if (town.strictAssets && TOWN_ONLY_ASSETS[townSlug]) {
+        const imgs = new URL('images/', dir), own = TOWN_ONLY_ASSETS[townSlug].split('/')[1];
+        for (const e of fs.readdirSync(imgs)) if (e !== own) fs.rmSync(new URL(e, imgs), { recursive: true, force: true });
+        for (const e of fs.readdirSync(dir)) if (/^google[0-9a-f]+\.html$/.test(e) || e === 'favicon.svg') fs.rmSync(new URL(e, dir), { force: true });
+        const ico = new URL(TOWN_ONLY_ASSETS[townSlug] + '/favicon.ico', dir);
+        if (fs.existsSync(ico)) fs.copyFileSync(ico, new URL('favicon.ico', dir));
       }
       if (town.layout !== 'v2') return;
       const src = new URL('404/index.html', dir);

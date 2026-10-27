@@ -35,8 +35,8 @@ const ogImage = new URL(image, siteConfig.siteUrl).href;
     <link rel="canonical" href={canonical} />
     {(!town.launched || noindex) && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#1f3d2e" />
-    <link rel="icon" href="/images/hb/favicon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="/images/hb/apple-touch-icon.png" />
+    <link rel="icon" href={`${siteConfig.iconDir}/favicon.svg`} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={`${siteConfig.iconDir}/apple-touch-icon.png`} />
     <meta property="og:site_name" content={siteConfig.brandName} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />

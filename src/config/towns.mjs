@@ -117,6 +117,35 @@ export const towns = {
     featured: [],
     sortOrder: [],
   },
+
+  sfv: {
+    slug: 'sfv',
+    townName: 'San Fernando Valley',
+    stateName: 'California',
+    tagline: 'San Fernando Valley, California',
+    brandName: 'Nostalgic San Fernando Valley',
+    // Working URL until a domain is bought (Brad's call); switch siteUrl + contactEmail together then.
+    siteUrl: 'https://nostalgic-sfv.vercel.app',
+    contactEmail: 'stire.brad@gmail.com',
+    // Own icons; and the build ships only images/sfv (none of the shared legacy files).
+    iconDir: '/images/sfv',
+    strictAssets: true,
+    launched: false,
+    layout: 'v2',
+    heroImage: '/images/sfv/hero/ranchos-wide-1600.webp',
+    heroPosition: 'center 50%',
+    popup: { enabled: false, footer: 'San Fernando Valley — remembered right.' },
+    // No Klaviyo account for this town yet: the site shows no email signup until klaviyoList is set.
+    klaviyoCompany: '',
+    klaviyoList: '',
+    footerLinks: [
+      { href: '/', label: 'SHOP' },
+      { href: '/about', label: 'ABOUT' },
+    ],
+    collections: [],
+    featured: [],
+    sortOrder: [],
+  },
 };
 
 // Unknown slugs fail the build rather than silently shipping Hammond under another name.
