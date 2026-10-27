@@ -6,7 +6,7 @@ import { HIDDEN_FROM_GRID } from '../../v2/data';
 // Google Merchant Center product feed (RSS 2.0 + g: namespace), one item per variant.
 // Links point at this town's own site, not the Shopify storefront (which is password-protected).
 // Merchant Center fetches it on a schedule: <siteUrl>/feeds/google.xml
-// Shipping is set in Merchant Center's account settings (free over $60), not per item.
+// Shipping per item mirrors the store's Printful flat rates (US): free at $60+.
 
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const abs = (u: string) => (u.startsWith('http') ? u : town.siteUrl + (u.startsWith('/') ? u : '/' + u));
@@ -19,6 +19,15 @@ function category(p: V2Product): { id: number; apparel: boolean } {
   if (/\bhats?\b|\bcaps?\b/.test(t)) return { id: 173, apparel: true };          // Clothing Accessories > Hats
   if (/sweatshirt|hoodie|crew neck/.test(t)) return { id: 5388, apparel: true };     // Clothing > Activewear > Sweatshirts
   return { id: 212, apparel: true };                                      // Clothing > Shirts & Tops
+}
+
+// US flat rates from the Shopify shipping profiles (Printful), 10-26.
+function shipRate(p: V2Product, v: V2Variant, cat: { id: number }): number {
+  if (v.price >= 60) return 0;
+  if (cat.id === 500044) return /16\D*20|medium/i.test(`${v.title} ${p.title}`) ? 14.49 : 10.89;
+  if (cat.id === 5388) return 8.79;
+  if (cat.id === 173 || cat.id === 209) return 4.69;
+  return 4.95;
 }
 
 function itemXml(p: V2Product, v: V2Variant): string {
@@ -54,6 +63,7 @@ function itemXml(p: V2Product, v: V2Variant): string {
     size ? `<g:size>${esc(size)}</g:size>` : '',
     cat.apparel ? `<g:gender>unisex</g:gender>` : '',
     cat.apparel ? `<g:age_group>adult</g:age_group>` : '',
+    `<g:shipping><g:country>US</g:country><g:price>${shipRate(p, v, cat).toFixed(2)} USD</g:price></g:shipping>`,
   ].filter(Boolean);
   return `<item>\n  ${lines.join('\n  ')}\n</item>`;
 }
