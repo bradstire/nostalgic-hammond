@@ -1,0 +1,214 @@
+{
+ "file": "sfv_cruise_gold.png",
+ "print_width_in": 9.313,
+ "ppi": 300.0,
+ "layers": [
+  [
+   184,
+   134,
+   11
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(184, 134, 11)",
+   "box": [
+    74,
+    40,
+    2754,
+    717
+   ],
+   "letters": 6,
+   "cap_in": 1.417,
+   "tilt_deg": -0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 1.3,
+   "peaks_per_cap": 4.62,
+   "rise_in": 0.0,
+   "wobble_limit": 3.6,
+   "typeset": "Pacifico-Regular.ttf 485px",
+   "flags": []
+  },
+  {
+   "layer": "(184, 134, 11)",
+   "box": [
+    48,
+    936,
+    2605,
+    1208
+   ],
+   "letters": 11,
+   "cap_in": 0.88,
+   "tilt_deg": -0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 0.7,
+   "peaks_per_cap": 3.39,
+   "rise_in": 0.0,
+   "wobble_limit": 3.7,
+   "typeset": "Oswald[wght].ttf 327px",
+   "flags": []
+  },
+  {
+   "layer": "(184, 134, 11)",
+   "box": [
+    653,
+    270,
+    1384,
+    498
+   ],
+   "letters": 3,
+   "cap_in": 0.76,
+   "tilt_deg": 0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 1.5,
+   "peaks_per_cap": 2.38,
+   "rise_in": 0.0,
+   "wobble_limit": 3.7,
+   "typeset": "Pacifico-Regular.ttf 485px",
+   "flags": []
+  },
+  {
+   "layer": "(184, 134, 11)",
+   "box": [
+    72,
+    1371,
+    2746,
+    1495
+   ],
+   "letters": 21,
+   "cap_in": 0.407,
+   "tilt_deg": -0.01,
+   "jitter": 0.006,
+   "inflect_per_in": 2.7,
+   "peaks_per_cap": 4.01,
+   "rise_in": 0.002,
+   "wobble_limit": 4.0,
+   "flags": []
+  },
+  {
+   "layer": "(184, 134, 11)",
+   "box": [
+    223,
+    1583,
+    1892,
+    1682
+   ],
+   "letters": 17,
+   "cap_in": 0.323,
+   "tilt_deg": -0.02,
+   "jitter": 0.006,
+   "inflect_per_in": 2.3,
+   "peaks_per_cap": 3.26,
+   "rise_in": 0.002,
+   "wobble_limit": 4.2,
+   "typeset": "Oswald[wght].ttf 120px",
+   "flags": []
+  },
+  {
+   "layer": "(184, 134, 11)",
+   "box": [
+    2120,
+    1583,
+    2502,
+    1682
+   ],
+   "letters": 5,
+   "cap_in": 0.323,
+   "tilt_deg": -0.08,
+   "jitter": 0.007,
+   "inflect_per_in": 1.9,
+   "peaks_per_cap": 3.89,
+   "rise_in": 0.002,
+   "wobble_limit": 4.2,
+   "typeset": "Oswald[wght].ttf 120px",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.02,
+  "warn_pct": 0.17
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [],
+ "exemptions": [],
+ "typeset": [
+  {
+   "box": [
+    36,
+    34,
+    2761,
+    723
+   ],
+   "font": "Pacifico-Regular.ttf 485px"
+  },
+  {
+   "box": [
+    34,
+    757,
+    2746,
+    783
+   ],
+   "font": "rule"
+  },
+  {
+   "box": [
+    34,
+    930,
+    2784,
+    1214
+   ],
+   "font": "Oswald[wght].ttf 327px"
+  },
+  {
+   "box": [
+    34,
+    1258,
+    2746,
+    1284
+   ],
+   "font": "rule"
+  },
+  {
+   "box": [
+    241,
+    1365,
+    2577,
+    1501
+   ],
+   "font": "Oswald[wght].ttf 150px"
+  },
+  {
+   "box": [
+    61,
+    1363,
+    201,
+    1503
+   ],
+   "font": "star (drawn polygon)"
+  },
+  {
+   "box": [
+    2617,
+    1363,
+    2757,
+    1503
+   ],
+   "font": "star (drawn polygon)"
+  },
+  {
+   "box": [
+    212,
+    1577,
+    2603,
+    1688
+   ],
+   "font": "Oswald[wght].ttf 120px"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

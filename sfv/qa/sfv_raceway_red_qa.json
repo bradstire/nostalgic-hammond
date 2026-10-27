@@ -1,0 +1,141 @@
+{
+ "file": "sfv_raceway_red.png",
+ "print_width_in": 8.937,
+ "ppi": 300.0,
+ "layers": [
+  [
+   139,
+   0,
+   0
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    48,
+    682,
+    2635,
+    1021
+   ],
+   "letters": 7,
+   "cap_in": 1.09,
+   "tilt_deg": -0.03,
+   "jitter": 0.002,
+   "inflect_per_in": 1.2,
+   "peaks_per_cap": 5.84,
+   "rise_in": 0.005,
+   "wobble_limit": 3.6,
+   "typeset": "AlfaSlabOne-Regular.ttf 420px",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    47,
+    40,
+    2631,
+    253
+   ],
+   "letters": 11,
+   "cap_in": 0.683,
+   "tilt_deg": -0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 1.7,
+   "peaks_per_cap": 5.21,
+   "rise_in": 0.0,
+   "wobble_limit": 3.8,
+   "typeset": "AlfaSlabOne-Regular.ttf 264px",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    104,
+    1122,
+    1600,
+    1222
+   ],
+   "letters": 16,
+   "cap_in": 0.327,
+   "tilt_deg": -0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 2.0,
+   "peaks_per_cap": 3.81,
+   "rise_in": 0.0,
+   "wobble_limit": 4.2,
+   "typeset": "Oswald[wght].ttf 120px",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    1846,
+    1122,
+    2573,
+    1223
+   ],
+   "letters": 8,
+   "cap_in": 0.333,
+   "tilt_deg": 0.0,
+   "jitter": 0.007,
+   "inflect_per_in": 2.4,
+   "peaks_per_cap": 3.99,
+   "rise_in": 0.0,
+   "wobble_limit": 4.1,
+   "typeset": "Oswald[wght].ttf 120px",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.1
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [],
+ "exemptions": [],
+ "typeset": [
+  {
+   "box": [
+    38,
+    33,
+    2657,
+    259
+   ],
+   "font": "AlfaSlabOne-Regular.ttf 264px"
+  },
+  {
+   "box": [
+    34,
+    281,
+    2646,
+    537
+   ],
+   "font": "checker (drawn squares)"
+  },
+  {
+   "box": [
+    34,
+    676,
+    2671,
+    1027
+   ],
+   "font": "AlfaSlabOne-Regular.ttf 420px"
+  },
+  {
+   "box": [
+    93,
+    1116,
+    2613,
+    1244
+   ],
+   "font": "Oswald[wght].ttf 120px"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

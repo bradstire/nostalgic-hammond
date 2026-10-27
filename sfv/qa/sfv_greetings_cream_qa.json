@@ -1,0 +1,150 @@
+{
+ "file": "sfv_greetings_cream.png",
+ "print_width_in": 10.937,
+ "ppi": 300.0,
+ "layers": [
+  [
+   244,
+   236,
+   221
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    49,
+    309,
+    3232,
+    677
+   ],
+   "letters": 17,
+   "cap_in": 1.2,
+   "tilt_deg": -0.02,
+   "jitter": 0.001,
+   "inflect_per_in": 0.8,
+   "peaks_per_cap": 4.04,
+   "rise_in": 0.003,
+   "wobble_limit": 3.6,
+   "typeset": "LeagueGothic[wdth].ttf 490px",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    817,
+    40,
+    2461,
+    182
+   ],
+   "letters": 13,
+   "cap_in": 0.46,
+   "tilt_deg": 0.02,
+   "jitter": 0.004,
+   "inflect_per_in": 2.3,
+   "peaks_per_cap": 4.05,
+   "rise_in": 0.002,
+   "wobble_limit": 3.9,
+   "typeset": "Oswald[wght].ttf 170px",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    2735,
+    765,
+    3169,
+    890
+   ],
+   "letters": 5,
+   "cap_in": 0.403,
+   "tilt_deg": -0.14,
+   "jitter": 0.006,
+   "inflect_per_in": 1.5,
+   "peaks_per_cap": 4.11,
+   "rise_in": 0.004,
+   "wobble_limit": 4.0,
+   "typeset": "Oswald[wght].ttf 150px",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    46,
+    1034,
+    3232,
+    1157
+   ],
+   "letters": 33,
+   "cap_in": 0.4,
+   "tilt_deg": 0.01,
+   "jitter": 0.003,
+   "inflect_per_in": 2.0,
+   "peaks_per_cap": 3.91,
+   "rise_in": 0.001,
+   "wobble_limit": 4.0,
+   "typeset": "Oswald[wght].ttf 148px",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.0
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [],
+ "exemptions": [],
+ "typeset": [
+  {
+   "box": [
+    802,
+    34,
+    2514,
+    188
+   ],
+   "font": "Oswald[wght].ttf 170px"
+  },
+  {
+   "box": [
+    34,
+    303,
+    3250,
+    683
+   ],
+   "font": "LeagueGothic[wdth].ttf 490px"
+  },
+  {
+   "box": [
+    2722,
+    759,
+    3267,
+    896
+   ],
+   "font": "Oswald[wght].ttf 150px"
+  },
+  {
+   "box": [
+    34,
+    920,
+    3246,
+    948
+   ],
+   "font": "rule"
+  },
+  {
+   "box": [
+    37,
+    1028,
+    3257,
+    1163
+   ],
+   "font": "Oswald[wght].ttf 148px"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

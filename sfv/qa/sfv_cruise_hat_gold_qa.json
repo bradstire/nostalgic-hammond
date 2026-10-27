@@ -1,0 +1,104 @@
+{
+ "file": "sfv_cruise_hat_gold.png",
+ "print_width_in": 5.36,
+ "ppi": 300.0,
+ "layers": [
+  [
+   255,
+   204,
+   0
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(255, 204, 0)",
+   "box": [
+    30,
+    30,
+    1578,
+    395
+   ],
+   "letters": 6,
+   "cap_in": 0.767,
+   "tilt_deg": -0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 2.2,
+   "peaks_per_cap": 3.67,
+   "rise_in": 0.0,
+   "wobble_limit": 3.7,
+   "typeset": "Pacifico-Regular.ttf 262px",
+   "flags": []
+  },
+  {
+   "layer": "(255, 204, 0)",
+   "box": [
+    361,
+    154,
+    784,
+    277
+   ],
+   "letters": 3,
+   "cap_in": 0.41,
+   "tilt_deg": -0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 1.6,
+   "peaks_per_cap": 2.07,
+   "rise_in": 0.0,
+   "wobble_limit": 4.0,
+   "typeset": "Pacifico-Regular.ttf 262px",
+   "flags": []
+  },
+  {
+   "layer": "(255, 204, 0)",
+   "box": [
+    223,
+    458,
+    1304,
+    565
+   ],
+   "letters": 11,
+   "cap_in": 0.347,
+   "tilt_deg": -0.01,
+   "jitter": 0.001,
+   "inflect_per_in": 1.9,
+   "peaks_per_cap": 3.26,
+   "rise_in": 0.0,
+   "wobble_limit": 4.1,
+   "typeset": "Oswald[wght].ttf 128px",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.0
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [],
+ "exemptions": [],
+ "typeset": [
+  {
+   "box": [
+    6,
+    23,
+    1588,
+    402
+   ],
+   "font": "Pacifico-Regular.ttf 262px"
+  },
+  {
+   "box": [
+    214,
+    452,
+    1390,
+    571
+   ],
+   "font": "Oswald[wght].ttf 128px"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

@@ -1,0 +1,182 @@
+{
+ "file": "sfv_vmt_cream.png",
+ "print_width_in": 9.947,
+ "ppi": 300.0,
+ "layers": [
+  [
+   244,
+   236,
+   221
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    51,
+    1125,
+    2919,
+    1292
+   ],
+   "letters": 18,
+   "cap_in": 0.557,
+   "tilt_deg": 0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 1.9,
+   "peaks_per_cap": 6.77,
+   "rise_in": 0.0,
+   "wobble_limit": 3.8,
+   "typeset": "Graduate-Regular.ttf 222px",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    113,
+    1395,
+    1605,
+    1519
+   ],
+   "letters": 13,
+   "cap_in": 0.403,
+   "tilt_deg": -0.02,
+   "jitter": 0.003,
+   "inflect_per_in": 1.2,
+   "peaks_per_cap": 3.25,
+   "rise_in": 0.002,
+   "wobble_limit": 4.0,
+   "typeset": "Oswald[wght].ttf 150px",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    1863,
+    1395,
+    2872,
+    1519
+   ],
+   "letters": 10,
+   "cap_in": 0.405,
+   "tilt_deg": -0.04,
+   "jitter": 0.007,
+   "inflect_per_in": 1.3,
+   "peaks_per_cap": 4.01,
+   "rise_in": 0.002,
+   "wobble_limit": 4.0,
+   "typeset": "Oswald[wght].ttf 150px",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    40,
+    1601,
+    1762,
+    1700
+   ],
+   "letters": 17,
+   "cap_in": 0.323,
+   "tilt_deg": 0.01,
+   "jitter": 0.002,
+   "inflect_per_in": 2.3,
+   "peaks_per_cap": 3.44,
+   "rise_in": 0.001,
+   "wobble_limit": 4.2,
+   "typeset": "Oswald[wght].ttf 120px",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    1994,
+    1601,
+    2944,
+    1700
+   ],
+   "letters": 10,
+   "cap_in": 0.323,
+   "tilt_deg": 0.01,
+   "jitter": 0.001,
+   "inflect_per_in": 2.1,
+   "peaks_per_cap": 3.35,
+   "rise_in": 0.001,
+   "wobble_limit": 4.2,
+   "typeset": "Oswald[wght].ttf 120px",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (244, 236, 221)",
+   "box": [
+    280,
+    1411,
+    545,
+    1503
+   ],
+   "letters": 3,
+   "cap_in": 0.307,
+   "tilt_deg": -0.24,
+   "jitter": 0.0,
+   "inflect_per_in": 0.0,
+   "peaks_per_cap": 2.45,
+   "rise_in": 0.004,
+   "wobble_limit": 4.2,
+   "typeset": "Oswald[wght].ttf 150px",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.62,
+  "warn_pct": 1.18
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [362, 20, 2622, 1030]: illustration: our own drawn dome, not lettering"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    362,
+    20,
+    2622,
+    1030
+   ],
+   "reason": "illustration: our own drawn dome, not lettering"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    41,
+    1119,
+    2951,
+    1298
+   ],
+   "font": "Graduate-Regular.ttf 222px"
+  },
+  {
+   "box": [
+    102,
+    1389,
+    2917,
+    1525
+   ],
+   "font": "Oswald[wght].ttf 150px"
+  },
+  {
+   "box": [
+    32,
+    1595,
+    2987,
+    1706
+   ],
+   "font": "Oswald[wght].ttf 120px"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

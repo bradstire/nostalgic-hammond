@@ -1,0 +1,43 @@
+{
+ "typeset": [
+  [
+   [
+    41,
+    1119,
+    2951,
+    1298
+   ],
+   "Graduate-Regular.ttf 222px"
+  ],
+  [
+   [
+    102,
+    1389,
+    2917,
+    1525
+   ],
+   "Oswald[wght].ttf 150px"
+  ],
+  [
+   [
+    32,
+    1595,
+    2987,
+    1706
+   ],
+   "Oswald[wght].ttf 120px"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    362,
+    20,
+    2622,
+    1030
+   ],
+   "illustration: our own drawn dome, not lettering"
+  ]
+ ],
+ "redrawn": []
+}

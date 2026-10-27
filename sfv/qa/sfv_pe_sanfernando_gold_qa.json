@@ -1,0 +1,78 @@
+{
+ "file": "sfv_pe_sanfernando_gold.png",
+ "print_width_in": 10.243,
+ "ppi": 300.0,
+ "layers": [
+  [
+   184,
+   134,
+   9
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(184, 134, 9)",
+   "box": [
+    818,
+    848,
+    2190,
+    1047
+   ],
+   "letters": 10,
+   "cap_in": 0.647,
+   "tilt_deg": -0.02,
+   "jitter": 0.002,
+   "inflect_per_in": 1.1,
+   "peaks_per_cap": 3.93,
+   "rise_in": 0.001,
+   "wobble_limit": 3.8,
+   "typeset": "Oswald[wght].ttf 240px",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.0
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [29, 29, 3044, 462]: LEVEL only: deliberate arch (Graduate set on a circle; house PE lockup)"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    29,
+    29,
+    3044,
+    462
+   ],
+   "reason": "LEVEL only: deliberate arch (Graduate set on a circle; house PE lockup)"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    661,
+    516,
+    2413,
+    762
+   ],
+   "font": "plate (drawn polygons)"
+  },
+  {
+   "box": [
+    797,
+    842,
+    2291,
+    1053
+   ],
+   "font": "Oswald[wght].ttf 240px"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}
