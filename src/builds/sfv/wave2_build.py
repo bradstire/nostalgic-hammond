@@ -457,7 +457,7 @@ def duttons():
     cap, _ = T('NORTH HOLLYWOOD  ·  1961', 'Jost[wght].ttf', cap=92, var=[600], track=0.16)
     cap = move(cap, cx=PW / 2, y=PH + 140)
     a.add(cap, 'typeset', 'Jost SemiBold')
-    a.ink = 'red'
+    a.ink = 'green'
     return a
 
 
@@ -1006,7 +1006,7 @@ def pass_club():
     cap, _ = T('SANTA SUSANA PASS  ·  1963', 'Jost[wght].ttf', cap=30 * k, var=[600], track=0.18)
     cap = move(cap, cx=500 * k, y=680 * k)
     a.add(cap, 'typeset', 'Jost SemiBold')
-    a.ink = 'green'
+    a.ink = 'cream'
     return a
 
 
@@ -1129,7 +1129,7 @@ def sugar_shack():
     ad, _ = T('12458 MAGNOLIA BLVD.  ·  NORTH HOLLYWOOD', 'Jost[wght].ttf', cap=88, var=[600], track=0.14)
     ad = move(ad, cx=cx, y=d2.bounds[3] + 120)
     a.add(ad, 'typeset', 'Jost SemiBold')
-    a.ink = 'purple'
+    a.ink = 'charcoal'
     a.clean = True
     return a
 

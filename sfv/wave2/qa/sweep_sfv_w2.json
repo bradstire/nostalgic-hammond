@@ -1,0 +1,1561 @@
+[
+ [
+  "sfv_devonshire_downs.png",
+  8.7,
+  "#8B0000",
+  "PASS",
+  [],
+  [
+   "EXEMPT [130, 1869, 2480, 2221]: LEVEL only: Damion is a casual brush script whose letters ride the baseline unevenly by design (set from the font on a level baseline)",
+   "STROKES: 4.53% of linework < 0.03 in"
+  ],
+  [
+   {
+    "box": [
+     130,
+     1869,
+     2480,
+     2221
+    ],
+    "reason": "LEVEL only: Damion is a casual brush script whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
+   }
+  ],
+  [
+   {
+    "box": [
+     739,
+     398,
+     1871,
+     561
+    ],
+    "font": "Libre Caslon Text Bold"
+   },
+   {
+    "box": [
+     970,
+     565,
+     1640,
+     717
+    ],
+    "font": "Libre Caslon Text Bold"
+   },
+   {
+    "box": [
+     130,
+     1869,
+     2480,
+     2025
+    ],
+    "font": "Damion"
+   },
+   {
+    "box": [
+     447,
+     2073,
+     2331,
+     2221
+    ],
+    "font": "Damion"
+   },
+   {
+    "box": [
+     24,
+     2359,
+     2586,
+     2451
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     513,
+     9,
+     2115,
+     1797
+    ],
+    "how": "sign: our own drawing after the flyer illustration"
+   }
+  ]
+ ],
+ [
+  "sfv_dons.png",
+  10.503,
+  "#262220",
+  "PASS",
+  [],
+  [
+   "EXEMPT [307, 25, 2770, 1235]: hand lettering + chef illustration from the menu cover (traced, cleaned)",
+   "STROKES: 3.02% of linework < 0.03 in"
+  ],
+  [
+   {
+    "box": [
+     307,
+     25,
+     2770,
+     1235
+    ],
+    "reason": "hand lettering + chef illustration from the menu cover (traced, cleaned)"
+   }
+  ],
+  [
+   {
+    "box": [
+     942,
+     1363,
+     2210,
+     1554
+    ],
+    "font": "Oswald SemiBold"
+   },
+   {
+    "box": [
+     1447,
+     1599,
+     1705,
+     1721
+    ],
+    "font": "Oswald SemiBold"
+   },
+   {
+    "box": [
+     912,
+     1765,
+     2240,
+     1957
+    ],
+    "font": "Oswald SemiBold"
+   },
+   {
+    "box": [
+     25,
+     2048,
+     3126,
+     2155
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  []
+ ],
+ [
+  "sfv_duttons_books.png",
+  10.2,
+  "#006B3F",
+  "PASS",
+  [],
+  [
+   "EXEMPT [2156, 190, 2886, 406]: LEVEL only: the small AND sits raised before ART as on the sign (the gate reads a line through their counters)"
+  ],
+  [
+   {
+    "box": [
+     2156,
+     190,
+     2886,
+     406
+    ],
+    "reason": "LEVEL only: the small AND sits raised before ART as on the sign (the gate reads a line through their counters)"
+   }
+  ],
+  [
+   {
+    "box": [
+     174,
+     169,
+     2127,
+     406
+    ],
+    "font": "Kameron Bold (x0.67)"
+   },
+   {
+    "box": [
+     2156,
+     240,
+     2402,
+     350
+    ],
+    "font": "Kameron Bold (x0.67)"
+   },
+   {
+    "box": [
+     2430,
+     190,
+     2886,
+     406
+    ],
+    "font": "Kameron Bold (x0.67)"
+   },
+   {
+    "box": [
+     203,
+     584,
+     897,
+     721
+    ],
+    "font": "Fredoka SemiBold"
+   },
+   {
+    "box": [
+     280,
+     784,
+     820,
+     920
+    ],
+    "font": "Fredoka SemiBold"
+   },
+   {
+    "box": [
+     2222,
+     584,
+     2798,
+     754
+    ],
+    "font": "Fredoka SemiBold"
+   },
+   {
+    "box": [
+     2250,
+     784,
+     2770,
+     921
+    ],
+    "font": "Fredoka SemiBold"
+   },
+   {
+    "box": [
+     366,
+     1224,
+     2694,
+     1338
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     24,
+     24,
+     3036,
+     1096
+    ],
+    "how": "sign panel + inner rule: constructed"
+   },
+   {
+    "box": [
+     1004,
+     531,
+     2034,
+     980
+    ],
+    "how": "books + bookends: our own drawing of the sign motif"
+   }
+  ]
+ ],
+ [
+  "sfv_encino_bowl.png",
+  9.733,
+  "#F4ECDD",
+  "PASS",
+  [],
+  [],
+  [],
+  [
+   {
+    "box": [
+     196,
+     973,
+     624,
+     1415
+    ],
+    "font": "Kameron Bold"
+   },
+   {
+    "box": [
+     878,
+     964,
+     1342,
+     1424
+    ],
+    "font": "Kameron Bold"
+   },
+   {
+    "box": [
+     1473,
+     970,
+     2147,
+     1418
+    ],
+    "font": "Kameron Bold"
+   },
+   {
+    "box": [
+     2325,
+     973,
+     2695,
+     1415
+    ],
+    "font": "Kameron Bold"
+   },
+   {
+    "box": [
+     785,
+     590,
+     2135,
+     780
+    ],
+    "font": "Kameron Bold"
+   },
+   {
+    "box": [
+     1305,
+     109,
+     1632,
+     311
+    ],
+    "font": "Kameron Bold (EB monogram, letters overlapped as on the drum)"
+   },
+   {
+    "box": [
+     726,
+     1913,
+     2194,
+     2247
+    ],
+    "font": "Lobster"
+   }
+  ],
+  [
+   {
+    "box": [
+     24,
+     4,
+     2896,
+     2346
+    ],
+    "how": "sign: our own drawing after the VRM photo"
+   }
+  ]
+ ],
+ [
+  "sfv_fantasy_faire_1967.png",
+  10.167,
+  "#8B0000",
+  "PASS",
+  [],
+  [
+   "EXEMPT [88, 24, 2962, 880]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned",
+   "EXEMPT [25, 918, 3025, 1667]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned",
+   "EXEMPT [302, 1775, 2748, 1985]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
+  ],
+  [
+   {
+    "box": [
+     88,
+     24,
+     2962,
+     880
+    ],
+    "reason": "hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
+   },
+   {
+    "box": [
+     25,
+     918,
+     3025,
+     1667
+    ],
+    "reason": "hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
+   },
+   {
+    "box": [
+     302,
+     1775,
+     2748,
+     1985
+    ],
+    "reason": "hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
+   }
+  ],
+  [
+   {
+    "box": [
+     191,
+     2093,
+     2859,
+     2235
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  []
+ ],
+ [
+  "sfv_fm_station.png",
+  10.4,
+  "#F4ECDD",
+  "PASS",
+  [],
+  [
+   "EXEMPT [926, 76, 2126, 891]: hand-brushed FM: redrawn as brush strokes along the sign letters"
+  ],
+  [
+   {
+    "box": [
+     926,
+     76,
+     2126,
+     891
+    ],
+    "reason": "hand-brushed FM: redrawn as brush strokes along the sign letters"
+   }
+  ],
+  [
+   {
+    "box": [
+     621,
+     1320,
+     2499,
+     1639
+    ],
+    "font": "Oswald SemiBold"
+   },
+   {
+    "box": [
+     334,
+     1712,
+     2786,
+     1960
+    ],
+    "font": "Oswald SemiBold"
+   },
+   {
+    "box": [
+     651,
+     2033,
+     2469,
+     2220
+    ],
+    "font": "Oswald SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     576,
+     25,
+     2544,
+     994
+    ],
+    "how": "box sign: constructed"
+   },
+   {
+    "box": [
+     54,
+     1166,
+     3066,
+     2358
+    ],
+    "how": "marquee board: constructed"
+   }
+  ]
+ ],
+ [
+  "sfv_gemco_membership.png",
+  10.2,
+  "#003366",
+  "PASS",
+  [],
+  [
+   "EXEMPT [430, 601, 2976, 1866]: LEVEL only: band lettering runs on the card's printed diagonal (deliberate angle)"
+  ],
+  [
+   {
+    "box": [
+     430,
+     601,
+     2976,
+     1866
+    ],
+    "reason": "LEVEL only: band lettering runs on the card's printed diagonal (deliberate angle)"
+   }
+  ],
+  [
+   {
+    "box": [
+     321,
+     506,
+     1659,
+     754
+    ],
+    "font": "Libre Caslon Text Bold"
+   },
+   {
+    "box": [
+     1127,
+     777,
+     2871,
+     1766
+    ],
+    "font": "Jost Bold (rotated with the band)"
+   },
+   {
+    "box": [
+     568,
+     601,
+     2768,
+     1723
+    ],
+    "font": "Jost Medium (rotated with the band)"
+   },
+   {
+    "box": [
+     481,
+     2044,
+     2579,
+     2162
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     24,
+     24,
+     3036,
+     1926
+    ],
+    "how": "card outline: constructed"
+   }
+  ]
+ ],
+ [
+  "sfv_jolly_roger.png",
+  10.24,
+  "#262220",
+  "PASS",
+  [],
+  [
+   "EXEMPT [150, 24, 2915, 3670]: illustration + hand-cut lettering: the menu's linocut, traced from the 3000 px scan and print-cleaned",
+   "STROKES: 7.09% of linework < 0.03 in"
+  ],
+  [
+   {
+    "box": [
+     150,
+     24,
+     2915,
+     3670
+    ],
+    "reason": "illustration + hand-cut lettering: the menu's linocut, traced from the 3000 px scan and print-cleaned"
+   }
+  ],
+  [
+   {
+    "box": [
+     24,
+     3768,
+     3048,
+     3891
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  []
+ ],
+ [
+  "sfv_june_ellens.png",
+  10.503,
+  "#F4ECDD",
+  "PASS",
+  [],
+  [
+   "EXEMPT [163, 24, 2988, 614]: LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
+  ],
+  [
+   {
+    "box": [
+     163,
+     24,
+     2988,
+     614
+    ],
+    "reason": "LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
+   }
+  ],
+  [
+   {
+    "box": [
+     163,
+     24,
+     2988,
+     614
+    ],
+    "font": "Pacifico (the Cruise Night script)"
+   },
+   {
+    "box": [
+     969,
+     711,
+     2182,
+     936
+    ],
+    "font": "Oswald Bold"
+   },
+   {
+    "box": [
+     25,
+     1092,
+     3127,
+     1205
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  []
+ ],
+ [
+  "sfv_leons.png",
+  7.68,
+  "#8B0000",
+  "PASS",
+  [],
+  [
+   "EXEMPT [321, 122, 793, 558]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
+   "EXEMPT [321, 518, 793, 954]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
+   "EXEMPT [321, 914, 793, 1350]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
+   "EXEMPT [321, 1310, 793, 1746]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
+   "EXEMPT [321, 1706, 793, 2142]: LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  ],
+  [
+   {
+    "box": [
+     321,
+     122,
+     793,
+     558
+    ],
+    "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+   },
+   {
+    "box": [
+     321,
+     518,
+     793,
+     954
+    ],
+    "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+   },
+   {
+    "box": [
+     321,
+     914,
+     793,
+     1350
+    ],
+    "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+   },
+   {
+    "box": [
+     321,
+     1310,
+     793,
+     1746
+    ],
+    "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+   },
+   {
+    "box": [
+     321,
+     1706,
+     793,
+     2142
+    ],
+    "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+   }
+  ],
+  [
+   {
+    "box": [
+     473,
+     208,
+     641,
+     484
+    ],
+    "font": "Lilita One"
+   },
+   {
+    "box": [
+     471,
+     601,
+     641,
+     879
+    ],
+    "font": "Lilita One"
+   },
+   {
+    "box": [
+     432,
+     996,
+     682,
+     1276
+    ],
+    "font": "Lilita One"
+   },
+   {
+    "box": [
+     444,
+     1393,
+     670,
+     1672
+    ],
+    "font": "Lilita One"
+   },
+   {
+    "box": [
+     458,
+     1788,
+     649,
+     2068
+    ],
+    "font": "Lilita One"
+   },
+   {
+    "box": [
+     1076,
+     627,
+     1908,
+     903
+    ],
+    "font": "Oswald SemiBold"
+   },
+   {
+    "box": [
+     1076,
+     1156,
+     1908,
+     1414
+    ],
+    "font": "Oswald SemiBold"
+   },
+   {
+    "box": [
+     547,
+     2454,
+     1287,
+     2653
+    ],
+    "font": "Knewave"
+   },
+   {
+    "box": [
+     651,
+     2696,
+     1223,
+     2900
+    ],
+    "font": "Knewave"
+   },
+   {
+    "box": [
+     25,
+     3254,
+     2279,
+     3363
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     321,
+     2284,
+     1513,
+     3016
+    ],
+    "how": "COFFEE SHOP panel: our own drawing of the sign shape"
+   }
+  ]
+ ],
+ [
+  "sfv_mikes_pizza.png",
+  10.503,
+  "#8B0000",
+  "PASS",
+  [],
+  [
+   "EXEMPT [285, 363, 2866, 3563]: illustration: the menu chef (traced, one-colour)",
+   "EXEMPT [306, 25, 1490, 370]: hand lettering: the menu's 'Mike's' script (traced)"
+  ],
+  [
+   {
+    "box": [
+     285,
+     363,
+     2866,
+     3563
+    ],
+    "reason": "illustration: the menu chef (traced, one-colour)"
+   },
+   {
+    "box": [
+     306,
+     25,
+     1490,
+     370
+    ],
+    "reason": "hand lettering: the menu's 'Mike's' script (traced)"
+   }
+  ],
+  [
+   {
+    "box": [
+     1563,
+     92,
+     2565,
+     343
+    ],
+    "font": "League Spartan Black (x0.92)"
+   },
+   {
+    "box": [
+     1039,
+     3421,
+     2076,
+     3500
+    ],
+    "font": "Jost Bold"
+   },
+   {
+    "box": [
+     25,
+     3676,
+     3126,
+     3781
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  []
+ ],
+ [
+  "sfv_moby_disc.png",
+  10.213,
+  "#003366",
+  "PASS",
+  [],
+  [
+   "EXEMPT [109, 254, 2954, 3797]: illustration: whale, record, waves, splash traced from the sleeve (cleaned)",
+   "EXEMPT [25, 25, 3036, 2152]: LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
+  ],
+  [
+   {
+    "box": [
+     109,
+     254,
+     2954,
+     3797
+    ],
+    "reason": "illustration: whale, record, waves, splash traced from the sleeve (cleaned)"
+   },
+   {
+    "box": [
+     25,
+     25,
+     3036,
+     2152
+    ],
+    "reason": "LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
+   }
+  ],
+  [
+   {
+    "box": [
+     170,
+     2502,
+     952,
+     2650
+    ],
+    "font": "Fraunces Black Italic Soft"
+   },
+   {
+    "box": [
+     222,
+     2700,
+     1179,
+     2884
+    ],
+    "font": "Fraunces Black Italic Soft"
+   },
+   {
+    "box": [
+     30,
+     3905,
+     3039,
+     4026
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  []
+ ],
+ [
+  "sfv_pass_club.png",
+  10.293,
+  "#F4ECDD",
+  "PASS",
+  [],
+  [
+   "STROKES: 6.06% of linework < 0.03 in"
+  ],
+  [],
+  [
+   {
+    "box": [
+     319,
+     25,
+     2769,
+     263
+    ],
+    "font": "Rye"
+   },
+   {
+    "box": [
+     337,
+     1885,
+     2751,
+     1997
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     38,
+     265,
+     3050,
+     1807
+    ],
+    "how": "club house + hill: our own drawing after the 1963 photo"
+   }
+  ]
+ ],
+ [
+  "sfv_phils_diner.png",
+  10.503,
+  "#8B0000",
+  "PASS",
+  [],
+  [
+   "EXEMPT [1365, 77, 1893, 402]: LEVEL only: italic (sheared) sign lettering; baselines are level"
+  ],
+  [
+   {
+    "box": [
+     1365,
+     77,
+     1893,
+     402
+    ],
+    "reason": "LEVEL only: italic (sheared) sign lettering; baselines are level"
+   }
+  ],
+  [
+   {
+    "box": [
+     552,
+     1386,
+     1465,
+     1668
+    ],
+    "font": "Oswald Bold"
+   },
+   {
+    "box": [
+     1773,
+     1390,
+     2627,
+     1664
+    ],
+    "font": "Oswald Bold"
+   },
+   {
+    "box": [
+     1365,
+     77,
+     1859,
+     226
+    ],
+    "font": "Oswald Bold, sheared 10 deg"
+   },
+   {
+    "box": [
+     1390,
+     257,
+     1893,
+     402
+    ],
+    "font": "Oswald Bold, sheared 10 deg"
+   },
+   {
+    "box": [
+     24,
+     1914,
+     3126,
+     2009
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     233,
+     -5,
+     2802,
+     1809
+    ],
+    "how": "dining car + sign: our own drawing after the 1950s photo"
+   }
+  ]
+ ],
+ [
+  "sfv_rustys_hacienda.png",
+  10.503,
+  "#8B0000",
+  "PASS",
+  [],
+  [
+   "EXEMPT [79, 24, 3072, 1343]: LEVEL only: Knewave is a brush italic whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
+  ],
+  [
+   {
+    "box": [
+     79,
+     24,
+     3072,
+     1343
+    ],
+    "reason": "LEVEL only: Knewave is a brush italic whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
+   }
+  ],
+  [
+   {
+    "box": [
+     117,
+     24,
+     1922,
+     243
+    ],
+    "font": "Knewave"
+   },
+   {
+    "box": [
+     79,
+     317,
+     3072,
+     748
+    ],
+    "font": "Knewave"
+   },
+   {
+    "box": [
+     115,
+     898,
+     3036,
+     1098
+    ],
+    "font": "Knewave"
+   },
+   {
+    "box": [
+     753,
+     1143,
+     2398,
+     1343
+    ],
+    "font": "Knewave"
+   },
+   {
+    "box": [
+     25,
+     1522,
+     3126,
+     1620
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  []
+ ],
+ [
+  "sfv_sasch.png",
+  9.267,
+  "#B8860B",
+  "PASS",
+  [],
+  [
+   "EXEMPT [55, 56, 2724, 1482]: hand lettering from the matchbook (traced); the word rises ~15 deg by design",
+   "EXEMPT [636, 1039, 2455, 1592]: LEVEL only: the tagline runs on the matchbook's 15-deg script angle",
+   "STROKES: 11.18% of linework < 0.03 in"
+  ],
+  [
+   {
+    "box": [
+     55,
+     56,
+     2724,
+     1482
+    ],
+    "reason": "hand lettering from the matchbook (traced); the word rises ~15 deg by design"
+   },
+   {
+    "box": [
+     636,
+     1039,
+     2455,
+     1592
+    ],
+    "reason": "LEVEL only: the tagline runs on the matchbook's 15-deg script angle"
+   }
+  ],
+  [
+   {
+    "box": [
+     636,
+     1039,
+     2455,
+     1592
+    ],
+    "font": "TeX Gyre Heros (rotated on the script angle)"
+   },
+   {
+    "box": [
+     454,
+     1780,
+     2326,
+     1914
+    ],
+    "font": "TeX Gyre Heros"
+   },
+   {
+    "box": [
+     984,
+     1972,
+     1796,
+     2143
+    ],
+    "font": "TeX Gyre Heros"
+   }
+  ],
+  [
+   {
+    "box": [
+     24,
+     25,
+     2755,
+     1513
+    ],
+    "how": "keyline: true offset of the traced letters (rebuilt, not traced)"
+   }
+  ]
+ ],
+ [
+  "sfv_sugar_shack.png",
+  10.503,
+  "#262220",
+  "PASS",
+  [],
+  [
+   "EXEMPT [637, 378, 2514, 1535]: hand lettering: the wood-plank logo from the 1970s coupon (traced)",
+   "STROKES: 18.39% of linework < 0.03 in"
+  ],
+  [
+   {
+    "box": [
+     637,
+     378,
+     2514,
+     1535
+    ],
+    "reason": "hand lettering: the wood-plank logo from the 1970s coupon (traced)"
+   }
+  ],
+  [
+   {
+    "box": [
+     864,
+     26,
+     2287,
+     168
+    ],
+    "font": "TeX Gyre Schola Bold"
+   },
+   {
+    "box": [
+     852,
+     192,
+     2299,
+     334
+    ],
+    "font": "TeX Gyre Schola Bold"
+   },
+   {
+    "box": [
+     620,
+     429,
+     894,
+     519
+    ],
+    "font": "TeX Gyre Schola Bold"
+   },
+   {
+    "box": [
+     576,
+     1627,
+     2576,
+     1740
+    ],
+    "font": "Righteous"
+   },
+   {
+    "box": [
+     798,
+     1806,
+     2354,
+     1914
+    ],
+    "font": "TeX Gyre Schola Bold"
+   },
+   {
+    "box": [
+     26,
+     2005,
+     3126,
+     2098
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  []
+ ],
+ [
+  "sfv_valley_plaza.png",
+  9.2,
+  "#F4ECDD",
+  "PASS",
+  [],
+  [],
+  [],
+  [
+   {
+    "box": [
+     180,
+     3095,
+     2580,
+     3212
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     24,
+     24,
+     2736,
+     2877
+    ],
+    "how": "sign panel: constructed geometry after the LAist photo"
+   },
+   {
+    "box": [
+     162,
+     304,
+     2598,
+     2738
+    ],
+    "how": "double inline border: constructed (two 0.08 in lines, 0.10 in apart)"
+   },
+   {
+    "box": [
+     394,
+     721,
+     2366,
+     1543
+    ],
+    "how": "VALLEY: monoline channel letters constructed from the sign photo (not traced)"
+   },
+   {
+    "box": [
+     519,
+     1774,
+     2241,
+     2596
+    ],
+    "how": "PLAZA: monoline channel letters constructed from the sign photo (not traced)"
+   }
+  ]
+ ],
+ [
+  "sfv_webers_place.png",
+  10.203,
+  "#F4ECDD",
+  "PASS",
+  [],
+  [],
+  [],
+  [
+   {
+    "box": [
+     36,
+     175,
+     2966,
+     753
+    ],
+    "font": "TeX Gyre Bonum Bold Italic"
+   },
+   {
+    "box": [
+     1106,
+     866,
+     2036,
+     1054
+    ],
+    "font": "TeX Gyre Bonum Bold"
+   },
+   {
+    "box": [
+     233,
+     1365,
+     2829,
+     1480
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     25,
+     25,
+     3037,
+     1257
+    ],
+    "how": "oval panel + PLACE box: constructed"
+   }
+  ]
+ ],
+ [
+  "sfv_white_front.png",
+  10.503,
+  "#8B0000",
+  "PASS",
+  [],
+  [],
+  [],
+  [
+   {
+    "box": [
+     107,
+     639,
+     291,
+     808
+    ],
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   },
+   {
+    "box": [
+     269,
+     425,
+     471,
+     627
+    ],
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   },
+   {
+    "box": [
+     537,
+     275,
+     674,
+     441
+    ],
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   },
+   {
+    "box": [
+     808,
+     143,
+     960,
+     318
+    ],
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   },
+   {
+    "box": [
+     1146,
+     76,
+     1306,
+     244
+    ],
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   },
+   {
+    "box": [
+     1845,
+     75,
+     2004,
+     236
+    ],
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   },
+   {
+    "box": [
+     2165,
+     143,
+     2321,
+     327
+    ],
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   },
+   {
+    "box": [
+     2471,
+     281,
+     2618,
+     436
+    ],
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   },
+   {
+    "box": [
+     2680,
+     425,
+     2881,
+     619
+    ],
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   },
+   {
+    "box": [
+     2862,
+     639,
+     3043,
+     804
+    ],
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   },
+   {
+    "box": [
+     648,
+     1172,
+     2502,
+     1589
+    ],
+    "font": "Yellowtail"
+   },
+   {
+    "box": [
+     167,
+     1680,
+     2983,
+     1782
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     25,
+     260,
+     3126,
+     1113
+    ],
+    "how": "entrance shell, ribs, footings: our own drawing after the photo"
+   }
+  ]
+ ],
+ [
+  "sfv_zodys.png",
+  9.52,
+  "#F4ECDD",
+  "PASS",
+  [],
+  [],
+  [],
+  [
+   {
+    "box": [
+     129,
+     318,
+     431,
+     830
+    ],
+    "font": "Kameron Bold (narrowed to the box, max x0.78)"
+   },
+   {
+    "box": [
+     703,
+     308,
+     1005,
+     840
+    ],
+    "font": "Kameron Bold (narrowed to the box, max x0.78)"
+   },
+   {
+    "box": [
+     1277,
+     317,
+     1579,
+     831
+    ],
+    "font": "Kameron Bold (narrowed to the box, max x0.78)"
+   },
+   {
+    "box": [
+     1851,
+     318,
+     2153,
+     830
+    ],
+    "font": "Kameron Bold (narrowed to the box, max x0.78)"
+   },
+   {
+    "box": [
+     2425,
+     308,
+     2727,
+     840
+    ],
+    "font": "Kameron Bold (narrowed to the box, max x0.78)"
+   },
+   {
+    "box": [
+     383,
+     1224,
+     2473,
+     1347
+    ],
+    "font": "Jost SemiBold"
+   }
+  ],
+  [
+   {
+    "box": [
+     24,
+     24,
+     2832,
+     1116
+    ],
+    "how": "hexagon boxes: constructed geometry after the LAPL photo"
+   }
+  ]
+ ]
+]
