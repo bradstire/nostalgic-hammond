@@ -1,0 +1,74 @@
+{
+ "typeset": [
+  [
+   [
+    739,
+    398,
+    1871,
+    561
+   ],
+   "Libre Caslon Text Bold"
+  ],
+  [
+   [
+    970,
+    565,
+    1640,
+    717
+   ],
+   "Libre Caslon Text Bold"
+  ],
+  [
+   [
+    130,
+    1869,
+    2480,
+    2025
+   ],
+   "Damion"
+  ],
+  [
+   [
+    447,
+    2073,
+    2331,
+    2221
+   ],
+   "Damion"
+  ],
+  [
+   [
+    24,
+    2359,
+    2586,
+    2451
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    130,
+    1869,
+    2480,
+    2221
+   ],
+   "LEVEL only: Damion is a casual brush script whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
+  ]
+ ],
+ "redrawn": [
+  [
+   [
+    513,
+    9,
+    2115,
+    1797
+   ],
+   "sign: our own drawing after the flyer illustration"
+  ]
+ ],
+ "ink": "#8B0000",
+ "print_width_in": 8.7,
+ "print_height_in": 8.25
+}

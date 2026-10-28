@@ -643,6 +643,92 @@ def jolly_roger():
     return a
 
 
+# ------------------------------------------------------------------ C07 Devonshire Downs
+@build
+def devonshire_downs():
+    """Devonshire Downs, 18000 Devonshire St, Northridge (harness track 1946; SFV Fair grounds; San Fernando
+    Valley State College from the 1960s; Newport '69; razed 2001). Source: the 1960-65 rental flyer, CSUN
+    Special Collections scan 1553 x 2083 (src/C07; same image as VRM's post). Our own drawing of the
+    pediment sign (tapered panel, cornice, finial, display case, posts); 'Devonshire Downs' re-set in Libre
+    Caslon Text Bold; the flyer's script line re-set in Damion."""
+    a = Art('sfv_devonshire_downs')
+    k = 3.0
+    def P(pts):
+        return Polygon([(x * k, y * k) for x, y in pts])
+    lw = 14 * 1.0
+    panel = P([(285, 130), (740, 130), (688, 512), (337, 512)])
+    a.add(ring(panel, lw * 2.0, inner_offset=-lw * 2.0))
+    # pediment: cornice band rising to the finial
+    ped_out = P([(258, 135), (515, 62), (770, 135), (770, 150), (515, 80), (258, 150)])
+    a.add(ped_out)
+    a.add(Point(515 * k, 50 * k).buffer(25 * k, resolution=64))
+    a.cut(Point(509 * k, 44 * k).buffer(8 * k, resolution=32))            # highlight on the ball
+    # display case
+    case = box(380 * k, 272 * k, 635 * k, 486 * k)
+    a.add(ring(case, 5 * k, inner_offset=0))
+    a.add(ring(case.buffer(-12 * k, join_style=2), 3.4 * k, inner_offset=0))
+    a.add(Point(392 * k, 302 * k).buffer(5 * k))                          # latch
+    # glass glints
+    for x0, y0, x1, y1 in ((430, 320, 470, 280 + 20), (455, 380, 545, 300), (500, 440, 600, 340)):
+        a.add(stroke_line([(x0 * k, y0 * k), (x1 * k, y1 * k)], 3.2 * k).intersection(case.buffer(-16 * k)))
+    # base moulding + posts
+    a.add(box(330 * k, 505 * k, 695 * k, 524 * k))
+    for px in (410, 614):
+        a.add(box((px - 9) * k, 524 * k, (px + 9) * k, 610 * k))
+    a.declare('redrawn', box(250 * k, 20 * k, 780 * k, 612 * k), 'sign: our own drawing after the flyer illustration')
+    t1, _ = T('Devonshire', 'LibreCaslonText[wght].ttf', cap=46 * k, var=[700], track=0.035)
+    t2, _ = T('Downs', 'LibreCaslonText[wght].ttf', cap=46 * k, var=[700], track=0.035)
+    t1 = move(t1, cx=512 * k, bottom=200 * k)
+    t2 = move(t2, cx=512 * k, bottom=252 * k)
+    a.add(t1, 'typeset', 'Libre Caslon Text Bold')
+    a.add(t2, 'typeset', 'Libre Caslon Text Bold')
+    sT, advT = T('T', 'Damion-Regular.ttf', cap=36 * k)
+    sR, _ = T("he San Fernando Valley's only complete", 'Damion-Regular.ttf', cap=36 * k, track=0.025)
+    s1 = unary_union([sT, affinity.translate(sR, advT + 40, 0)])     # the T bar clears the h
+    s2, _ = T('fair grounds and exhibit facility!', 'Damion-Regular.ttf', cap=36 * k, track=0.025)
+    s1 = move(s1, cx=512 * k, y=640 * k)
+    s2 = move(s2, cx=540 * k, y=s1.bounds[3] + 20 * k)
+    a.add(s1, 'typeset', 'Damion')
+    a.add(s2, 'typeset', 'Damion')
+    a.declare('exempt', unary_union([s1, s2]).envelope, 'LEVEL only: Damion is a casual brush script whose letters ride the baseline unevenly by design (set from the font on a level baseline)')
+    cap, _ = T('18000 DEVONSHIRE ST.  ·  NORTHRIDGE', 'Jost[wght].ttf', cap=24 * k, var=[600], track=0.16)
+    cap = move(cap, cx=512 * k, y=s2.bounds[3] + 50 * k)
+    a.add(cap, 'typeset', 'Jost SemiBold')
+    a.ink = 'red'
+    return a
+
+
+# ------------------------------------------------------------------ C40 Fantasy Faire 1967
+@build
+def fantasy_faire():
+    """Fantasy Faire and Magic Music Festival, July 15-16 1967, at Devonshire Downs ('Devonshire Meadows' on
+    the poster), Northridge. Source: the 1967 poster (Penny Havard / The Gates of Eden; Circle Printing, LA),
+    PAE lot 13574, 1999 x 2804 (src/C40). No copyright notice appears on the poster (1909 Act: published
+    without notice). Only the hand lettering is used, traced from the red plate and lightly cleaned (hand
+    lettering: exempt); no band names (live marks), no figures, no times. Caption set in Jost."""
+    a = Art('sfv_fantasy_faire_1967')
+    sc = 1.9
+    ys = 0.0
+    blocks = []
+    for name, gap in (('A', -10), ('B', 60), ('C', 0)):
+        g = mask_geom(WORK + f'/ff_{name}.png', smooth=2.5)
+        g = affinity.scale(g, sc, sc, origin=(0, 0))
+        blocks.append((g, gap))
+    W = max(width(g) for g, _ in blocks)
+    y = 0
+    for g, gap in blocks:
+        g = move(g, cx=W / 2, y=y)
+        a.add(g)
+        a.declare('exempt', g.envelope, 'hand lettering from the 1967 poster: traced from the red plate, lightly cleaned')
+        y = g.bounds[3] + gap + 60
+    cap, _ = T('NORTHRIDGE, CALIF.  ·  1967', 'Jost[wght].ttf', cap=100, var=[600], track=0.18)
+    cap = move(cap, cx=W / 2, y=y + 60)
+    a.add(cap, 'typeset', 'Jost SemiBold')
+    a.ink = 'red'
+    a.clean = True
+    return a
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for name, fn in BUILDS.items():

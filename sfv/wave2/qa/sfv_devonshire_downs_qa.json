@@ -1,0 +1,192 @@
+{
+ "file": "sfv_devonshire_downs.png",
+ "print_width_in": 8.7,
+ "ppi": 300.0,
+ "layers": [
+  [
+   139,
+   0,
+   0
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    745,
+    404,
+    1865,
+    555
+   ],
+   "letters": 10,
+   "cap_in": 0.33,
+   "tilt_deg": -0.03,
+   "jitter": 0.014,
+   "inflect_per_in": 2.4,
+   "peaks_per_cap": 2.53,
+   "rise_in": 0.002,
+   "wobble_limit": 4.2,
+   "typeset": "Libre Caslon Text Bold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    976,
+    571,
+    1634,
+    711
+   ],
+   "letters": 5,
+   "cap_in": 0.33,
+   "tilt_deg": 0.07,
+   "jitter": 0.008,
+   "inflect_per_in": 2.4,
+   "peaks_per_cap": 2.48,
+   "rise_in": 0.003,
+   "wobble_limit": 4.2,
+   "typeset": "Libre Caslon Text Bold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    30,
+    2365,
+    1473,
+    2444
+   ],
+   "letters": 17,
+   "cap_in": 0.25,
+   "tilt_deg": -0.02,
+   "jitter": 0.011,
+   "inflect_per_in": 2.2,
+   "peaks_per_cap": 2.7,
+   "rise_in": 0.002,
+   "wobble_limit": 4.4,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    1774,
+    2365,
+    2580,
+    2443
+   ],
+   "letters": 10,
+   "cap_in": 0.24,
+   "tilt_deg": -0.08,
+   "jitter": 0.007,
+   "inflect_per_in": 2.3,
+   "peaks_per_cap": 2.68,
+   "rise_in": 0.004,
+   "wobble_limit": 4.4,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (139, 0, 0)",
+   "box": [
+    187,
+    2380,
+    381,
+    2429
+   ],
+   "letters": 3,
+   "cap_in": 0.163,
+   "tilt_deg": 0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 0.0,
+   "peaks_per_cap": 1.16,
+   "rise_in": 0.0,
+   "wobble_limit": 4.9,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.3,
+  "warn_pct": 4.53
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [130, 1869, 2480, 2221]: LEVEL only: Damion is a casual brush script whose letters ride the baseline unevenly by design (set from the font on a level baseline)",
+  "STROKES: 4.53% of linework < 0.03 in"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    130,
+    1869,
+    2480,
+    2221
+   ],
+   "reason": "LEVEL only: Damion is a casual brush script whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    739,
+    398,
+    1871,
+    561
+   ],
+   "font": "Libre Caslon Text Bold"
+  },
+  {
+   "box": [
+    970,
+    565,
+    1640,
+    717
+   ],
+   "font": "Libre Caslon Text Bold"
+  },
+  {
+   "box": [
+    130,
+    1869,
+    2480,
+    2025
+   ],
+   "font": "Damion"
+  },
+  {
+   "box": [
+    447,
+    2073,
+    2331,
+    2221
+   ],
+   "font": "Damion"
+  },
+  {
+   "box": [
+    24,
+    2359,
+    2586,
+    2451
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [
+  {
+   "box": [
+    513,
+    9,
+    2115,
+    1797
+   ],
+   "how": "sign: our own drawing after the flyer illustration"
+  }
+ ],
+ "substrate_layers": []
+}
