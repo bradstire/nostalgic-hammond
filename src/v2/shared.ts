@@ -1,7 +1,8 @@
 // Storefront v2 constants and types shared by every town. Town content lives in src/v2/towns/<slug>.ts.
 
 export const FREE_SHIP = 60;
-export const HOLIDAY_CUTOFF = 'Dec 11'; // Printful 2026 holiday guide: US standard shipping, US-fulfilled apparel
+// Printful's 2026 holiday guide is not out yet (Dec 11 was the 2025 date). Keep this soft until it is, then set the exact date.
+export const HOLIDAY_CUTOFF = 'early December';
 // Printful: fulfillment 2–5 business days; US standard shipping 3–4 business days after fulfillment.
 export const SHIP_MAKE = '2–5'; export const SHIP_TRANSIT = '3–4';
 
