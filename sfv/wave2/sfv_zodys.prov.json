@@ -1,0 +1,73 @@
+{
+ "typeset": [
+  [
+   [
+    129,
+    318,
+    431,
+    830
+   ],
+   "Kameron Bold (narrowed to the box, max x0.78)"
+  ],
+  [
+   [
+    703,
+    308,
+    1005,
+    840
+   ],
+   "Kameron Bold (narrowed to the box, max x0.78)"
+  ],
+  [
+   [
+    1277,
+    317,
+    1579,
+    831
+   ],
+   "Kameron Bold (narrowed to the box, max x0.78)"
+  ],
+  [
+   [
+    1851,
+    318,
+    2153,
+    830
+   ],
+   "Kameron Bold (narrowed to the box, max x0.78)"
+  ],
+  [
+   [
+    2425,
+    308,
+    2727,
+    840
+   ],
+   "Kameron Bold (narrowed to the box, max x0.78)"
+  ],
+  [
+   [
+    383,
+    1224,
+    2473,
+    1347
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [],
+ "redrawn": [
+  [
+   [
+    24,
+    24,
+    2832,
+    1116
+   ],
+   "hexagon boxes: constructed geometry after the LAPL photo"
+  ]
+ ],
+ "ink": "#F4ECDD",
+ "print_width_in": 9.52,
+ "print_height_in": 4.57
+}

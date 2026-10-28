@@ -1,0 +1,125 @@
+{
+ "file": "sfv_gemco_membership.png",
+ "print_width_in": 10.2,
+ "ppi": 300.0,
+ "layers": [
+  [
+   0,
+   51,
+   102
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(0, 51, 102)",
+   "box": [
+    488,
+    2051,
+    2572,
+    2155
+   ],
+   "letters": 17,
+   "cap_in": 0.33,
+   "tilt_deg": -0.04,
+   "jitter": 0.015,
+   "inflect_per_in": 2.0,
+   "peaks_per_cap": 2.99,
+   "rise_in": 0.005,
+   "wobble_limit": 4.2,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (0, 51, 102)",
+   "box": [
+    327,
+    512,
+    1653,
+    748
+   ],
+   "letters": 5,
+   "cap_in": 0.787,
+   "tilt_deg": 0.07,
+   "jitter": 0.002,
+   "inflect_per_in": 1.3,
+   "peaks_per_cap": 4.1,
+   "rise_in": 0.005,
+   "wobble_limit": 3.7,
+   "typeset": "Libre Caslon Text Bold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.47
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [430, 601, 2976, 1866]: LEVEL only: band lettering runs on the card's printed diagonal (deliberate angle)"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    430,
+    601,
+    2976,
+    1866
+   ],
+   "reason": "LEVEL only: band lettering runs on the card's printed diagonal (deliberate angle)"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    321,
+    506,
+    1659,
+    754
+   ],
+   "font": "Libre Caslon Text Bold"
+  },
+  {
+   "box": [
+    1127,
+    777,
+    2871,
+    1766
+   ],
+   "font": "Jost Bold (rotated with the band)"
+  },
+  {
+   "box": [
+    568,
+    601,
+    2768,
+    1723
+   ],
+   "font": "Jost Medium (rotated with the band)"
+  },
+  {
+   "box": [
+    481,
+    2044,
+    2579,
+    2162
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [
+  {
+   "box": [
+    24,
+    24,
+    3036,
+    1926
+   ],
+   "how": "card outline: constructed"
+  }
+ ],
+ "substrate_layers": []
+}

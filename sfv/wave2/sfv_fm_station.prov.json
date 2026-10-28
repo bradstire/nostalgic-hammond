@@ -1,0 +1,65 @@
+{
+ "typeset": [
+  [
+   [
+    621,
+    1320,
+    2499,
+    1639
+   ],
+   "Oswald SemiBold"
+  ],
+  [
+   [
+    334,
+    1712,
+    2786,
+    1960
+   ],
+   "Oswald SemiBold"
+  ],
+  [
+   [
+    651,
+    2033,
+    2469,
+    2220
+   ],
+   "Oswald SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    926,
+    76,
+    2126,
+    891
+   ],
+   "hand-brushed FM: redrawn as brush strokes along the sign letters"
+  ]
+ ],
+ "redrawn": [
+  [
+   [
+    576,
+    25,
+    2544,
+    994
+   ],
+   "box sign: constructed"
+  ],
+  [
+   [
+    54,
+    1166,
+    3066,
+    2358
+   ],
+   "marquee board: constructed"
+  ]
+ ],
+ "ink": "#F4ECDD",
+ "print_width_in": 10.4,
+ "print_height_in": 8.043
+}

@@ -1,0 +1,182 @@
+{
+ "file": "sfv_fm_station.png",
+ "print_width_in": 10.4,
+ "ppi": 300.0,
+ "layers": [
+  [
+   244,
+   236,
+   221
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    2332,
+    1752,
+    2732,
+    1920
+   ],
+   "letters": 3,
+   "cap_in": 0.56,
+   "tilt_deg": -0.32,
+   "jitter": 0.0,
+   "inflect_per_in": 0.5,
+   "peaks_per_cap": 3.21,
+   "rise_in": 0.007,
+   "wobble_limit": 3.8,
+   "typeset": "Oswald SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (244, 236, 221)",
+   "box": [
+    627,
+    1326,
+    2493,
+    1633
+   ],
+   "letters": 9,
+   "cap_in": 1.0,
+   "tilt_deg": 0.02,
+   "jitter": 0.001,
+   "inflect_per_in": 1.8,
+   "peaks_per_cap": 4.38,
+   "rise_in": 0.002,
+   "wobble_limit": 3.6,
+   "typeset": "Oswald SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (244, 236, 221)",
+   "box": [
+    340,
+    1718,
+    2780,
+    1954
+   ],
+   "letters": 14,
+   "cap_in": 0.767,
+   "tilt_deg": 0.02,
+   "jitter": 0.002,
+   "inflect_per_in": 0.9,
+   "peaks_per_cap": 3.49,
+   "rise_in": 0.003,
+   "wobble_limit": 3.7,
+   "typeset": "Oswald SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (244, 236, 221)",
+   "box": [
+    657,
+    2039,
+    1705,
+    2214
+   ],
+   "letters": 9,
+   "cap_in": 0.567,
+   "tilt_deg": 0.16,
+   "jitter": 0.005,
+   "inflect_per_in": 2.1,
+   "peaks_per_cap": 4.16,
+   "rise_in": 0.01,
+   "wobble_limit": 3.8,
+   "typeset": "Oswald SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (244, 236, 221)",
+   "box": [
+    2049,
+    2039,
+    2463,
+    2214
+   ],
+   "letters": 4,
+   "cap_in": 0.575,
+   "tilt_deg": 0.31,
+   "jitter": 0.01,
+   "inflect_per_in": 1.2,
+   "peaks_per_cap": 4.41,
+   "rise_in": 0.007,
+   "wobble_limit": 3.8,
+   "typeset": "Oswald SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.15,
+  "warn_pct": 0.52
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [926, 76, 2126, 891]: hand-brushed FM: redrawn as brush strokes along the sign letters"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    926,
+    76,
+    2126,
+    891
+   ],
+   "reason": "hand-brushed FM: redrawn as brush strokes along the sign letters"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    621,
+    1320,
+    2499,
+    1639
+   ],
+   "font": "Oswald SemiBold"
+  },
+  {
+   "box": [
+    334,
+    1712,
+    2786,
+    1960
+   ],
+   "font": "Oswald SemiBold"
+  },
+  {
+   "box": [
+    651,
+    2033,
+    2469,
+    2220
+   ],
+   "font": "Oswald SemiBold"
+  }
+ ],
+ "redrawn": [
+  {
+   "box": [
+    576,
+    25,
+    2544,
+    994
+   ],
+   "how": "box sign: constructed"
+  },
+  {
+   "box": [
+    54,
+    1166,
+    3066,
+    2358
+   ],
+   "how": "marquee board: constructed"
+  }
+ ],
+ "substrate_layers": []
+}

@@ -1,0 +1,155 @@
+{
+ "typeset": [
+  [
+   [
+    473,
+    208,
+    641,
+    484
+   ],
+   "Lilita One"
+  ],
+  [
+   [
+    471,
+    601,
+    641,
+    879
+   ],
+   "Lilita One"
+  ],
+  [
+   [
+    432,
+    996,
+    682,
+    1276
+   ],
+   "Lilita One"
+  ],
+  [
+   [
+    444,
+    1393,
+    670,
+    1672
+   ],
+   "Lilita One"
+  ],
+  [
+   [
+    458,
+    1788,
+    649,
+    2068
+   ],
+   "Lilita One"
+  ],
+  [
+   [
+    1076,
+    627,
+    1908,
+    903
+   ],
+   "Oswald SemiBold"
+  ],
+  [
+   [
+    1076,
+    1156,
+    1908,
+    1414
+   ],
+   "Oswald SemiBold"
+  ],
+  [
+   [
+    547,
+    2454,
+    1287,
+    2653
+   ],
+   "Knewave"
+  ],
+  [
+   [
+    651,
+    2696,
+    1223,
+    2900
+   ],
+   "Knewave"
+  ],
+  [
+   [
+    25,
+    3254,
+    2279,
+    3363
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    321,
+    122,
+    793,
+    558
+   ],
+   "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  ],
+  [
+   [
+    321,
+    518,
+    793,
+    954
+   ],
+   "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  ],
+  [
+   [
+    321,
+    914,
+    793,
+    1350
+   ],
+   "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  ],
+  [
+   [
+    321,
+    1310,
+    793,
+    1746
+   ],
+   "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  ],
+  [
+   [
+    321,
+    1706,
+    793,
+    2142
+   ],
+   "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  ]
+ ],
+ "redrawn": [
+  [
+   [
+    321,
+    2284,
+    1513,
+    3016
+   ],
+   "COFFEE SHOP panel: our own drawing of the sign shape"
+  ]
+ ],
+ "ink": "#8B0000",
+ "print_width_in": 7.68,
+ "print_height_in": 11.293
+}

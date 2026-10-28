@@ -1,0 +1,168 @@
+{
+ "file": "sfv_valley_plaza.png",
+ "print_width_in": 9.2,
+ "ppi": 300.0,
+ "layers": [
+  [
+   244,
+   236,
+   221
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    565,
+    1820,
+    2186,
+    2551
+   ],
+   "letters": 5,
+   "cap_in": 2.437,
+   "tilt_deg": 0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 0.5,
+   "peaks_per_cap": 4.99,
+   "rise_in": 0.0,
+   "wobble_limit": 3.5,
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    448,
+    767,
+    2312,
+    1498
+   ],
+   "letters": 6,
+   "cap_in": 2.437,
+   "tilt_deg": 0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 0.4,
+   "peaks_per_cap": 4.22,
+   "rise_in": 0.0,
+   "wobble_limit": 3.5,
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    186,
+    3102,
+    1879,
+    3205
+   ],
+   "letters": 14,
+   "cap_in": 0.317,
+   "tilt_deg": -0.01,
+   "jitter": 0.002,
+   "inflect_per_in": 1.7,
+   "peaks_per_cap": 2.09,
+   "rise_in": 0.001,
+   "wobble_limit": 4.2,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    2230,
+    3104,
+    2574,
+    3202
+   ],
+   "letters": 4,
+   "cap_in": 0.322,
+   "tilt_deg": 0.12,
+   "jitter": 0.009,
+   "inflect_per_in": 2.1,
+   "peaks_per_cap": 2.79,
+   "rise_in": 0.002,
+   "wobble_limit": 4.2,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (244, 236, 221)",
+   "box": [
+    1549,
+    3122,
+    1859,
+    3185
+   ],
+   "letters": 3,
+   "cap_in": 0.21,
+   "tilt_deg": -0.44,
+   "jitter": 0.0,
+   "inflect_per_in": 0.0,
+   "peaks_per_cap": 0.78,
+   "rise_in": 0.008,
+   "wobble_limit": 4.6,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.01,
+  "warn_pct": 0.13
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [],
+ "exemptions": [],
+ "typeset": [
+  {
+   "box": [
+    180,
+    3095,
+    2580,
+    3212
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [
+  {
+   "box": [
+    24,
+    24,
+    2736,
+    2877
+   ],
+   "how": "sign panel: constructed geometry after the LAist photo"
+  },
+  {
+   "box": [
+    162,
+    304,
+    2598,
+    2738
+   ],
+   "how": "double inline border: constructed (two 0.08 in lines, 0.10 in apart)"
+  },
+  {
+   "box": [
+    394,
+    721,
+    2366,
+    1543
+   ],
+   "how": "VALLEY: monoline channel letters constructed from the sign photo (not traced)"
+  },
+  {
+   "box": [
+    519,
+    1774,
+    2241,
+    2596
+   ],
+   "how": "PLAZA: monoline channel letters constructed from the sign photo (not traced)"
+  }
+ ],
+ "substrate_layers": []
+}

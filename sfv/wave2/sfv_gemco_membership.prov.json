@@ -1,0 +1,65 @@
+{
+ "typeset": [
+  [
+   [
+    321,
+    506,
+    1659,
+    754
+   ],
+   "Libre Caslon Text Bold"
+  ],
+  [
+   [
+    1127,
+    777,
+    2871,
+    1766
+   ],
+   "Jost Bold (rotated with the band)"
+  ],
+  [
+   [
+    568,
+    601,
+    2768,
+    1723
+   ],
+   "Jost Medium (rotated with the band)"
+  ],
+  [
+   [
+    481,
+    2044,
+    2579,
+    2162
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    430,
+    601,
+    2976,
+    1866
+   ],
+   "LEVEL only: band lettering runs on the card's printed diagonal (deliberate angle)"
+  ]
+ ],
+ "redrawn": [
+  [
+   [
+    24,
+    24,
+    3036,
+    1926
+   ],
+   "card outline: constructed"
+  ]
+ ],
+ "ink": "#003366",
+ "print_width_in": 10.2,
+ "print_height_in": 7.287
+}

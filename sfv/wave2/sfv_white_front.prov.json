@@ -1,0 +1,127 @@
+{
+ "typeset": [
+  [
+   [
+    107,
+    639,
+    291,
+    808
+   ],
+   "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+  ],
+  [
+   [
+    269,
+    425,
+    471,
+    627
+   ],
+   "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+  ],
+  [
+   [
+    537,
+    275,
+    674,
+    441
+   ],
+   "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+  ],
+  [
+   [
+    808,
+    143,
+    960,
+    318
+   ],
+   "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+  ],
+  [
+   [
+    1146,
+    76,
+    1306,
+    244
+   ],
+   "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+  ],
+  [
+   [
+    1845,
+    75,
+    2004,
+    236
+   ],
+   "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+  ],
+  [
+   [
+    2165,
+    143,
+    2321,
+    327
+   ],
+   "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+  ],
+  [
+   [
+    2471,
+    281,
+    2618,
+    436
+   ],
+   "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+  ],
+  [
+   [
+    2680,
+    425,
+    2881,
+    619
+   ],
+   "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+  ],
+  [
+   [
+    2862,
+    639,
+    3043,
+    804
+   ],
+   "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+  ],
+  [
+   [
+    648,
+    1172,
+    2502,
+    1589
+   ],
+   "Yellowtail"
+  ],
+  [
+   [
+    167,
+    1680,
+    2983,
+    1782
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [],
+ "redrawn": [
+  [
+   [
+    25,
+    260,
+    3126,
+    1113
+   ],
+   "entrance shell, ribs, footings: our own drawing after the photo"
+  ]
+ ],
+ "ink": "#8B0000",
+ "print_width_in": 10.503,
+ "print_height_in": 6.023
+}

@@ -1,0 +1,149 @@
+{
+ "file": "sfv_zodys.png",
+ "print_width_in": 9.52,
+ "ppi": 300.0,
+ "layers": [
+  [
+   244,
+   236,
+   221
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    389,
+    1231,
+    1682,
+    1340
+   ],
+   "letters": 10,
+   "cap_in": 0.347,
+   "tilt_deg": -0.12,
+   "jitter": 0.008,
+   "inflect_per_in": 1.6,
+   "peaks_per_cap": 2.77,
+   "rise_in": 0.009,
+   "wobble_limit": 4.1,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    2064,
+    1234,
+    2467,
+    1338
+   ],
+   "letters": 4,
+   "cap_in": 0.34,
+   "tilt_deg": 0.15,
+   "jitter": 0.009,
+   "inflect_per_in": 1.8,
+   "peaks_per_cap": 2.24,
+   "rise_in": 0.004,
+   "wobble_limit": 4.1,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (244, 236, 221)",
+   "box": [
+    135,
+    314,
+    2721,
+    834
+   ],
+   "letters": 5,
+   "cap_in": 1.673,
+   "tilt_deg": 0.1,
+   "jitter": 0.009,
+   "inflect_per_in": 1.3,
+   "peaks_per_cap": 6.46,
+   "rise_in": 0.015,
+   "wobble_limit": 3.5,
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.02,
+  "warn_pct": 0.02
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [],
+ "exemptions": [],
+ "typeset": [
+  {
+   "box": [
+    129,
+    318,
+    431,
+    830
+   ],
+   "font": "Kameron Bold (narrowed to the box, max x0.78)"
+  },
+  {
+   "box": [
+    703,
+    308,
+    1005,
+    840
+   ],
+   "font": "Kameron Bold (narrowed to the box, max x0.78)"
+  },
+  {
+   "box": [
+    1277,
+    317,
+    1579,
+    831
+   ],
+   "font": "Kameron Bold (narrowed to the box, max x0.78)"
+  },
+  {
+   "box": [
+    1851,
+    318,
+    2153,
+    830
+   ],
+   "font": "Kameron Bold (narrowed to the box, max x0.78)"
+  },
+  {
+   "box": [
+    2425,
+    308,
+    2727,
+    840
+   ],
+   "font": "Kameron Bold (narrowed to the box, max x0.78)"
+  },
+  {
+   "box": [
+    383,
+    1224,
+    2473,
+    1347
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [
+  {
+   "box": [
+    24,
+    24,
+    2832,
+    1116
+   ],
+   "how": "hexagon boxes: constructed geometry after the LAPL photo"
+  }
+ ],
+ "substrate_layers": []
+}

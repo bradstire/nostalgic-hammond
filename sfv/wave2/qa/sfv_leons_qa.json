@@ -1,0 +1,312 @@
+{
+ "file": "sfv_leons.png",
+ "print_width_in": 7.68,
+ "ppi": 300.0,
+ "layers": [
+  [
+   139,
+   0,
+   0
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    31,
+    3261,
+    1599,
+    3357
+   ],
+   "letters": 14,
+   "cap_in": 0.293,
+   "tilt_deg": 0.01,
+   "jitter": 0.002,
+   "inflect_per_in": 1.8,
+   "peaks_per_cap": 2.08,
+   "rise_in": 0.001,
+   "wobble_limit": 4.3,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    1924,
+    3263,
+    2273,
+    3354
+   ],
+   "letters": 4,
+   "cap_in": 0.297,
+   "tilt_deg": 0.35,
+   "jitter": 0.006,
+   "inflect_per_in": 2.9,
+   "peaks_per_cap": 3.24,
+   "rise_in": 0.007,
+   "wobble_limit": 4.2,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (139, 0, 0)",
+   "box": [
+    957,
+    610,
+    1902,
+    920
+   ],
+   "letters": 6,
+   "cap_in": 0.86,
+   "tilt_deg": -0.2,
+   "jitter": 0.004,
+   "inflect_per_in": 1.0,
+   "peaks_per_cap": 3.82,
+   "rise_in": 0.011,
+   "wobble_limit": 3.7,
+   "flags": []
+  },
+  {
+   "layer": "knockout in (139, 0, 0)",
+   "box": [
+    957,
+    1130,
+    1902,
+    1440
+   ],
+   "letters": 6,
+   "cap_in": 0.815,
+   "tilt_deg": 0.01,
+   "jitter": 0.0,
+   "inflect_per_in": 0.8,
+   "peaks_per_cap": 3.39,
+   "rise_in": 0.001,
+   "wobble_limit": 3.7,
+   "flags": []
+  },
+  {
+   "layer": "knockout in (139, 0, 0)",
+   "box": [
+    657,
+    2702,
+    1217,
+    2894
+   ],
+   "letters": 4,
+   "cap_in": 0.628,
+   "tilt_deg": 0.58,
+   "jitter": 0.005,
+   "inflect_per_in": 1.8,
+   "peaks_per_cap": 3.22,
+   "rise_in": 0.019,
+   "wobble_limit": 3.8,
+   "typeset": "Knewave",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (139, 0, 0)",
+   "box": [
+    553,
+    2460,
+    1281,
+    2647
+   ],
+   "letters": 6,
+   "cap_in": 0.612,
+   "tilt_deg": 0.17,
+   "jitter": 0.01,
+   "inflect_per_in": 3.3,
+   "peaks_per_cap": 3.55,
+   "rise_in": 0.007,
+   "wobble_limit": 3.8,
+   "typeset": "Knewave",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (139, 0, 0)",
+   "box": [
+    1293,
+    3279,
+    1581,
+    3337
+   ],
+   "letters": 3,
+   "cap_in": 0.193,
+   "tilt_deg": -0.24,
+   "jitter": 0.0,
+   "inflect_per_in": 0.0,
+   "peaks_per_cap": 0.77,
+   "rise_in": 0.004,
+   "wobble_limit": 4.7,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.1
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [321, 122, 793, 558]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
+  "EXEMPT [321, 518, 793, 954]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
+  "EXEMPT [321, 914, 793, 1350]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
+  "EXEMPT [321, 1310, 793, 1746]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
+  "EXEMPT [321, 1706, 793, 2142]: LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    321,
+    122,
+    793,
+    558
+   ],
+   "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  },
+  {
+   "box": [
+    321,
+    518,
+    793,
+    954
+   ],
+   "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  },
+  {
+   "box": [
+    321,
+    914,
+    793,
+    1350
+   ],
+   "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  },
+  {
+   "box": [
+    321,
+    1310,
+    793,
+    1746
+   ],
+   "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  },
+  {
+   "box": [
+    321,
+    1706,
+    793,
+    2142
+   ],
+   "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    473,
+    208,
+    641,
+    484
+   ],
+   "font": "Lilita One"
+  },
+  {
+   "box": [
+    471,
+    601,
+    641,
+    879
+   ],
+   "font": "Lilita One"
+  },
+  {
+   "box": [
+    432,
+    996,
+    682,
+    1276
+   ],
+   "font": "Lilita One"
+  },
+  {
+   "box": [
+    444,
+    1393,
+    670,
+    1672
+   ],
+   "font": "Lilita One"
+  },
+  {
+   "box": [
+    458,
+    1788,
+    649,
+    2068
+   ],
+   "font": "Lilita One"
+  },
+  {
+   "box": [
+    1076,
+    627,
+    1908,
+    903
+   ],
+   "font": "Oswald SemiBold"
+  },
+  {
+   "box": [
+    1076,
+    1156,
+    1908,
+    1414
+   ],
+   "font": "Oswald SemiBold"
+  },
+  {
+   "box": [
+    547,
+    2454,
+    1287,
+    2653
+   ],
+   "font": "Knewave"
+  },
+  {
+   "box": [
+    651,
+    2696,
+    1223,
+    2900
+   ],
+   "font": "Knewave"
+  },
+  {
+   "box": [
+    25,
+    3254,
+    2279,
+    3363
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [
+  {
+   "box": [
+    321,
+    2284,
+    1513,
+    3016
+   ],
+   "how": "COFFEE SHOP panel: our own drawing of the sign shape"
+  }
+ ],
+ "substrate_layers": []
+}

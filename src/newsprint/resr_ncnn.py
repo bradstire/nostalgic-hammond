@@ -1,6 +1,6 @@
 """Real-ESRGAN via ncnn on CPU, tiled. Usage: python3 resr.py in.png out.png [model] [scale] [tile]"""
 import sys, time, numpy as np, cv2, ncnn
-MD = "/tmp/claude-0/-home-claude/2883d029-23a6-5e8e-ac19-37b93b8bd372/scratchpad/sr/resr/models"
+MD = "/home/claude/sfv/sr/rs/models"
 inp, outp = sys.argv[1], sys.argv[2]
 model = sys.argv[3] if len(sys.argv) > 3 else "realesrgan-x4plus-anime"
 scale = int(sys.argv[4]) if len(sys.argv) > 4 else 4

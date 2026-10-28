@@ -1,0 +1,110 @@
+{
+ "typeset": [
+  [
+   [
+    174,
+    169,
+    2127,
+    406
+   ],
+   "Kameron Bold (x0.67)"
+  ],
+  [
+   [
+    2156,
+    240,
+    2402,
+    350
+   ],
+   "Kameron Bold (x0.67)"
+  ],
+  [
+   [
+    2430,
+    190,
+    2886,
+    406
+   ],
+   "Kameron Bold (x0.67)"
+  ],
+  [
+   [
+    203,
+    584,
+    897,
+    721
+   ],
+   "Fredoka SemiBold"
+  ],
+  [
+   [
+    280,
+    784,
+    820,
+    920
+   ],
+   "Fredoka SemiBold"
+  ],
+  [
+   [
+    2222,
+    584,
+    2798,
+    754
+   ],
+   "Fredoka SemiBold"
+  ],
+  [
+   [
+    2250,
+    784,
+    2770,
+    921
+   ],
+   "Fredoka SemiBold"
+  ],
+  [
+   [
+    366,
+    1224,
+    2694,
+    1338
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    2156,
+    190,
+    2886,
+    406
+   ],
+   "LEVEL only: the small AND sits raised before ART as on the sign (the gate reads a line through their counters)"
+  ]
+ ],
+ "redrawn": [
+  [
+   [
+    24,
+    24,
+    3036,
+    1096
+   ],
+   "sign panel + inner rule: constructed"
+  ],
+  [
+   [
+    1004,
+    531,
+    2034,
+    980
+   ],
+   "books + bookends: our own drawing of the sign motif"
+  ]
+ ],
+ "ink": "#8B0000",
+ "print_width_in": 10.2,
+ "print_height_in": 4.54
+}

@@ -1,0 +1,46 @@
+{
+ "typeset": [
+  [
+   [
+    36,
+    175,
+    2966,
+    753
+   ],
+   "TeX Gyre Bonum Bold Italic"
+  ],
+  [
+   [
+    1106,
+    866,
+    2036,
+    1054
+   ],
+   "TeX Gyre Bonum Bold"
+  ],
+  [
+   [
+    233,
+    1365,
+    2829,
+    1480
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [],
+ "redrawn": [
+  [
+   [
+    25,
+    25,
+    3037,
+    1257
+   ],
+   "oval panel + PLACE box: constructed"
+  ]
+ ],
+ "ink": "#F4ECDD",
+ "print_width_in": 10.203,
+ "print_height_in": 5.013
+}

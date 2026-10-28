@@ -1,0 +1,284 @@
+{
+ "file": "sfv_duttons_books.png",
+ "print_width_in": 10.2,
+ "ppi": 300.0,
+ "layers": [
+  [
+   139,
+   0,
+   0
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    180,
+    192,
+    2121,
+    400
+   ],
+   "letters": 12,
+   "cap_in": 0.677,
+   "tilt_deg": 0.05,
+   "jitter": 0.013,
+   "inflect_per_in": 1.6,
+   "peaks_per_cap": 4.69,
+   "rise_in": 0.006,
+   "wobble_limit": 3.8,
+   "typeset": "Kameron Bold (x0.67)",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    286,
+    790,
+    814,
+    914
+   ],
+   "letters": 5,
+   "cap_in": 0.29,
+   "tilt_deg": -0.03,
+   "jitter": 0.001,
+   "inflect_per_in": 2.8,
+   "peaks_per_cap": 2.81,
+   "rise_in": 0.001,
+   "wobble_limit": 4.3,
+   "typeset": "Fredoka SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    2257,
+    790,
+    2764,
+    915
+   ],
+   "letters": 5,
+   "cap_in": 0.41,
+   "tilt_deg": -0.2,
+   "jitter": 0.005,
+   "inflect_per_in": 2.6,
+   "peaks_per_cap": 3.38,
+   "rise_in": 0.006,
+   "wobble_limit": 4.0,
+   "typeset": "Fredoka SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    209,
+    590,
+    891,
+    715
+   ],
+   "letters": 6,
+   "cap_in": 0.398,
+   "tilt_deg": -0.04,
+   "jitter": 0.003,
+   "inflect_per_in": 1.8,
+   "peaks_per_cap": 2.39,
+   "rise_in": 0.001,
+   "wobble_limit": 4.0,
+   "typeset": "Fredoka SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    2228,
+    590,
+    2792,
+    748
+   ],
+   "letters": 6,
+   "cap_in": 0.385,
+   "tilt_deg": -0.05,
+   "jitter": 0.002,
+   "inflect_per_in": 2.8,
+   "peaks_per_cap": 3.34,
+   "rise_in": 0.002,
+   "wobble_limit": 4.0,
+   "typeset": "Fredoka SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    372,
+    1231,
+    2012,
+    1331
+   ],
+   "letters": 14,
+   "cap_in": 0.307,
+   "tilt_deg": -0.01,
+   "jitter": 0.002,
+   "inflect_per_in": 1.7,
+   "peaks_per_cap": 2.06,
+   "rise_in": 0.001,
+   "wobble_limit": 4.2,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    2352,
+    1233,
+    2688,
+    1328
+   ],
+   "letters": 4,
+   "cap_in": 0.312,
+   "tilt_deg": 0.12,
+   "jitter": 0.01,
+   "inflect_per_in": 1.8,
+   "peaks_per_cap": 2.38,
+   "rise_in": 0.002,
+   "wobble_limit": 4.2,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (139, 0, 0)",
+   "box": [
+    1692,
+    1250,
+    1993,
+    1311
+   ],
+   "letters": 3,
+   "cap_in": 0.203,
+   "tilt_deg": -0.23,
+   "jitter": 0.0,
+   "inflect_per_in": 0.0,
+   "peaks_per_cap": 0.67,
+   "rise_in": 0.004,
+   "wobble_limit": 4.6,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.0
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [2156, 190, 2886, 406]: LEVEL only: the small AND sits raised before ART as on the sign (the gate reads a line through their counters)"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    2156,
+    190,
+    2886,
+    406
+   ],
+   "reason": "LEVEL only: the small AND sits raised before ART as on the sign (the gate reads a line through their counters)"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    174,
+    169,
+    2127,
+    406
+   ],
+   "font": "Kameron Bold (x0.67)"
+  },
+  {
+   "box": [
+    2156,
+    240,
+    2402,
+    350
+   ],
+   "font": "Kameron Bold (x0.67)"
+  },
+  {
+   "box": [
+    2430,
+    190,
+    2886,
+    406
+   ],
+   "font": "Kameron Bold (x0.67)"
+  },
+  {
+   "box": [
+    203,
+    584,
+    897,
+    721
+   ],
+   "font": "Fredoka SemiBold"
+  },
+  {
+   "box": [
+    280,
+    784,
+    820,
+    920
+   ],
+   "font": "Fredoka SemiBold"
+  },
+  {
+   "box": [
+    2222,
+    584,
+    2798,
+    754
+   ],
+   "font": "Fredoka SemiBold"
+  },
+  {
+   "box": [
+    2250,
+    784,
+    2770,
+    921
+   ],
+   "font": "Fredoka SemiBold"
+  },
+  {
+   "box": [
+    366,
+    1224,
+    2694,
+    1338
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [
+  {
+   "box": [
+    24,
+    24,
+    3036,
+    1096
+   ],
+   "how": "sign panel + inner rule: constructed"
+  },
+  {
+   "box": [
+    1004,
+    531,
+    2034,
+    980
+   ],
+   "how": "books + bookends: our own drawing of the sign motif"
+  }
+ ],
+ "substrate_layers": []
+}
