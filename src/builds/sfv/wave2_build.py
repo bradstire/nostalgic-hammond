@@ -1010,6 +1010,91 @@ def pass_club():
     return a
 
 
+# ------------------------------------------------------------------ C48 Phil's Diner
+def italic(g, deg=10):
+    b = g.bounds
+    return affinity.skew(g, xs=-deg, origin=(b[0], b[3]))
+
+
+@build
+def phils_diner():
+    """Phil's Diner, 11138 Chandler Blvd, North Hollywood (a 1926 dining car beside the Lankershim depot;
+    opened 1928; LA Historic-Cultural Monument; moved to Lankershim & Weddington; VRM shows its replica neon).
+    Source: VRM's Mar 2026 post of the 1950s photo at Chandler Blvd (src/C48 + Brad's screenshot) and the
+    roadarch 2012 photos. Our own side elevation of the car (barrel roof, monitor, scalloped awning, windows,
+    lettered panels, end steps) and the pole sign; lettering set in Oswald Bold (car panels, as painted)
+    and Oswald Bold sheared 10 deg (pole sign)."""
+    a = Art('sfv_phils_diner')
+    k = 3.0
+    x0, x1 = 120.0, 900.0
+    yb, yw0, yr = 620.0, 470.0, 372.0          # bottom of body, top of lower panels, eave line
+    body = box(x0 * k, yw0 * k, x1 * k, yb * k)
+    a.add(ring(body, 7 * k, inner_offset=-7 * k))
+    win = box(x0 * k, yr * k, x1 * k, yw0 * k)
+    a.add(ring(win, 6 * k, inner_offset=-6 * k))
+    n = 14
+    for i in range(1, n):
+        x = x0 + (x1 - x0) * i / n
+        a.add(box(x * k - 3 * k, yr * k, x * k + 3 * k, yw0 * k))
+    # barrel roof: low arch, rounded at both ends
+    rise = 46.0
+    pts = [((x0 - 14) * k, yr * k)]
+    for t in [i / 120 for i in range(121)]:
+        x = x0 - 14 + (x1 - x0 + 28) * t
+        e = min(t, 1 - t) / 0.07
+        y = yr - rise * (math.sqrt(max(0, 1 - (1 - min(e, 1)) ** 2)))
+        pts.append((x * k, y * k))
+    pts.append(((x1 + 14) * k, yr * k))
+    roof = Polygon(pts).buffer(0)
+    a.add(ring(roof, 7 * k, inner_offset=-7 * k))
+    mon = box((x0 + 110) * k, (yr - rise - 22) * k, (x1 - 110) * k, (yr - rise + 2) * k)
+    a.add(ring(mon, 5 * k, inner_offset=-5 * k))
+    for i in range(1, 12):
+        x = x0 + 110 + (x1 - x0 - 220) * i / 12
+        a.add(box(x * k - 2 * k, (yr - rise - 20) * k, x * k + 2 * k, (yr - rise) * k))
+    # scalloped awning over the windows
+    aw_y = yr + 2
+    aw = box(x0 * k, aw_y * k, x1 * k, (aw_y + 14) * k)
+    sc = []
+    m = 26
+    for i in range(m):
+        cx = x0 + (x1 - x0) * (i + 0.5) / m
+        sc.append(Point(cx * k, (aw_y + 14) * k).buffer((x1 - x0) / m / 2 * k, resolution=24).intersection(box(0, (aw_y + 14) * k, 1e5, 1e5)))
+    a.add(unary_union([aw] + sc))
+    # lettered panels PHIL'S | DINER, with the door between
+    door = box(500 * k, (yw0 + 8) * k, 560 * k, (yb - 6) * k)
+    a.add(ring(door, 5 * k, inner_offset=-5 * k))
+    words = [("PHIL'S", x0 + 30, 480), ('DINER', 580, x1 - 30)]
+    gs = [T(w_, 'Oswald[wght].ttf', cap=100 * k, var=[700], track=0.05)[0] for w_, _, _ in words]
+    f = min(1.0, min((lx1 - lx0) * k / width(g) for g, (_, lx0, lx1) in zip(gs, words)))
+    base = (yw0 + yb) / 2 * k + 50 * k * f
+    for g, (_, lx0, lx1) in zip(gs, words):
+        g = affinity.scale(g, f, f, origin=(0, 0))        # same size for both words, one shared baseline
+        g = affinity.translate(g, (lx0 + lx1) / 2 * k - (g.bounds[0] + g.bounds[2]) / 2, base)
+        a.add(g, 'typeset', 'Oswald Bold')
+    # skirt + wheels-free base and end steps
+    a.add(box((x0 - 10) * k, (yb - 2) * k, (x1 + 10) * k, (yb + 14) * k))
+    for i in range(3):                     # end steps (solid stair profile)
+        a.add(box((x0 - 24 - i * 20) * k, (yb - 34 + i * 16) * k, x0 * k, (yb + 14) * k))
+    # pole sign
+    px = 520.0
+    a.add(box((px - 7) * k, 170 * k, (px + 7) * k, (yr - rise - 22) * k))
+    sg = rrect((px - 150) * k, 30 * k, (px + 150) * k, 175 * k, 14 * k)
+    a.add(ring(sg, 7 * k, inner_offset=-7 * k))
+    s1, _ = T("PHIL'S", 'Oswald[wght].ttf', cap=46 * k, var=[700], track=0.06)
+    s2, _ = T('DINER', 'Oswald[wght].ttf', cap=46 * k, var=[700], track=0.12)
+    s1 = italic(move(s1, cx=px * k, y=48 * k)); s2 = italic(move(s2, cx=(px + 10) * k, y=110 * k))
+    a.add(s1, 'typeset', 'Oswald Bold, sheared 10 deg')
+    a.add(s2, 'typeset', 'Oswald Bold, sheared 10 deg')
+    a.declare('exempt', unary_union([s1, s2]).envelope, 'LEVEL only: italic (sheared) sign lettering; baselines are level')
+    a.declare('redrawn', box((x0 - 70) * k, 20 * k, (x1 + 30) * k, (yb + 20) * k), 'dining car + sign: our own drawing after the 1950s photo')
+    cap, _ = T('11138 CHANDLER BLVD.  ·  NORTH HOLLYWOOD', 'Jost[wght].ttf', cap=26 * k, var=[600], track=0.14)
+    cap = move(cap, cx=(x0 + x1) / 2 * k, y=(yb + 60) * k)
+    a.add(cap, 'typeset', 'Jost SemiBold')
+    a.ink = 'red'
+    return a
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for name, fn in BUILDS.items():

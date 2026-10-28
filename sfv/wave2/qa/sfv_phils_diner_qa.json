@@ -1,0 +1,189 @@
+{
+ "file": "sfv_phils_diner.png",
+ "print_width_in": 10.503,
+ "ppi": 300.0,
+ "layers": [
+  [
+   139,
+   0,
+   0
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    558,
+    1392,
+    2621,
+    1662
+   ],
+   "letters": 10,
+   "cap_in": 0.873,
+   "tilt_deg": -0.01,
+   "jitter": 0.001,
+   "inflect_per_in": 0.8,
+   "peaks_per_cap": 3.91,
+   "rise_in": 0.001,
+   "wobble_limit": 3.7,
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    30,
+    1920,
+    1491,
+    2003
+   ],
+   "letters": 17,
+   "cap_in": 0.253,
+   "tilt_deg": 0.0,
+   "jitter": 0.001,
+   "inflect_per_in": 2.4,
+   "peaks_per_cap": 3.07,
+   "rise_in": 0.0,
+   "wobble_limit": 4.4,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    1803,
+    1921,
+    3120,
+    2003
+   ],
+   "letters": 14,
+   "cap_in": 0.25,
+   "tilt_deg": -0.01,
+   "jitter": 0.003,
+   "inflect_per_in": 2.1,
+   "peaks_per_cap": 2.31,
+   "rise_in": 0.001,
+   "wobble_limit": 4.4,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (139, 0, 0)",
+   "box": [
+    459,
+    1075,
+    2691,
+    1292
+   ],
+   "letters": 14,
+   "cap_in": 0.723,
+   "tilt_deg": 0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 2.0,
+   "peaks_per_cap": 3.31,
+   "rise_in": 0.0,
+   "wobble_limit": 3.7,
+   "flags": []
+  },
+  {
+   "layer": "knockout in (139, 0, 0)",
+   "box": [
+    2862,
+    1937,
+    3104,
+    1986
+   ],
+   "letters": 3,
+   "cap_in": 0.163,
+   "tilt_deg": -0.28,
+   "jitter": 0.0,
+   "inflect_per_in": 0.0,
+   "peaks_per_cap": 1.64,
+   "rise_in": 0.004,
+   "wobble_limit": 4.9,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.01
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [1365, 77, 1893, 402]: LEVEL only: italic (sheared) sign lettering; baselines are level"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    1365,
+    77,
+    1893,
+    402
+   ],
+   "reason": "LEVEL only: italic (sheared) sign lettering; baselines are level"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    552,
+    1386,
+    1465,
+    1668
+   ],
+   "font": "Oswald Bold"
+  },
+  {
+   "box": [
+    1773,
+    1390,
+    2627,
+    1664
+   ],
+   "font": "Oswald Bold"
+  },
+  {
+   "box": [
+    1365,
+    77,
+    1859,
+    226
+   ],
+   "font": "Oswald Bold, sheared 10 deg"
+  },
+  {
+   "box": [
+    1390,
+    257,
+    1893,
+    402
+   ],
+   "font": "Oswald Bold, sheared 10 deg"
+  },
+  {
+   "box": [
+    24,
+    1914,
+    3126,
+    2009
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [
+  {
+   "box": [
+    233,
+    -5,
+    2802,
+    1809
+   ],
+   "how": "dining car + sign: our own drawing after the 1950s photo"
+  }
+ ],
+ "substrate_layers": []
+}

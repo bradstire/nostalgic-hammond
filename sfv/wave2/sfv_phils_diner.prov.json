@@ -1,0 +1,74 @@
+{
+ "typeset": [
+  [
+   [
+    552,
+    1386,
+    1465,
+    1668
+   ],
+   "Oswald Bold"
+  ],
+  [
+   [
+    1773,
+    1390,
+    2627,
+    1664
+   ],
+   "Oswald Bold"
+  ],
+  [
+   [
+    1365,
+    77,
+    1859,
+    226
+   ],
+   "Oswald Bold, sheared 10 deg"
+  ],
+  [
+   [
+    1390,
+    257,
+    1893,
+    402
+   ],
+   "Oswald Bold, sheared 10 deg"
+  ],
+  [
+   [
+    24,
+    1914,
+    3126,
+    2009
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    1365,
+    77,
+    1893,
+    402
+   ],
+   "LEVEL only: italic (sheared) sign lettering; baselines are level"
+  ]
+ ],
+ "redrawn": [
+  [
+   [
+    233,
+    -5,
+    2802,
+    1809
+   ],
+   "dining car + sign: our own drawing after the 1950s photo"
+  ]
+ ],
+ "ink": "#8B0000",
+ "print_width_in": 10.503,
+ "print_height_in": 6.78
+}
