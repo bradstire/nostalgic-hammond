@@ -1,7 +1,7 @@
 ---
 import V2Layout from '../V2Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
-import { getCatalog, cdn, srcset, money, storyOf, specsOf, shareImg, type V2Product, type V2Image } from '../catalog';
+import { getCatalog, cdn, srcset, money, storyOf, specsOf, shareImg, localFor, isCut, type V2Product, type V2Image } from '../catalog';
 import { FREE_SHIP, HOLIDAY_CUTOFF, SIZE_CHART, SOCK_CHART, FRAME_SIZE, MEMBER_LABEL, SHIP_MAKE, SHIP_TRANSIT, NOTE_BY_PREFIX, HIDDEN_FROM_GRID, PAIRS, blankFor, START_HERE, MATE_FALLBACK } from '../data';
 import { clip } from '../clip';
 import { siteConfig } from '../../config/site.config';
@@ -94,8 +94,10 @@ const jsonld = [
 const variantsJson = JSON.stringify(p.variants.map((v) => ({ id: v.id, n: v.numericId, a: v.available, p: v.price, o: v.options, i: v.image, ci: v.image ? cdn(v.image, 1080) : undefined })));
 const check = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
 const desc = clip(story[0] || `${p.baseTitle} from ${siteConfig.brandName}.`);
-// Share images are opaque JPGs (transparent images render on black in some apps).
-const ogImg = p.images[0] ? shareImg(p.images[0].url) : undefined;
+// Share images are opaque JPGs (transparent images render on black in some apps). Without a local -og.jpg copy
+// (towns that read Shopify's CDN directly), use the first opaque Shopify image instead, e.g. the lifestyle photo.
+const ogSrc = p.images.find((i) => localFor(i.url)) || p.images.find((i) => !isCut(i.url)) || p.images[0];
+const ogImg = ogSrc ? shareImg(ogSrc.url) : undefined;
 ---
 <V2Layout title={p.baseTitle} description={desc} image={ogImg} jsonld={jsonld} noindex={HIDDEN_FROM_GRID.has(p.handle)}>
   <div class="hb-wrap">

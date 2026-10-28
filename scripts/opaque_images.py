@@ -12,6 +12,7 @@ A local knock-out (src/v2/product-images.json) still wins over this list in the 
 Usage (from the repo root; re-run after new mockups are published to Shopify):
   python3 scripts/opaque_images.py                  # Hattiesburg: writes src/v2/opaque-images.json
   python3 scripts/opaque_images.py --town hammond   # Hammond: writes src/v2/towns/hammond-opaque-images.json
+  python3 scripts/opaque_images.py --town sfv       # San Fernando Valley: writes src/v2/towns/sfv-opaque-images.json
   python3 scripts/opaque_images.py --dry-run        # prints the list only
 """
 import argparse
@@ -42,6 +43,11 @@ TOWNS = {
         'include': lambda tags: (lambda t: not t or 'town:hammond' in t or 'town:hammond-next' in t)(
             [x.strip().lower() for x in tags if x.strip().lower().startswith('town:')]),
         'out': 'src/v2/towns/hammond-opaque-images.json',
+    },
+    'sfv': {
+        'query': "tag:'town:sfv'",
+        'include': lambda tags: True,
+        'out': 'src/v2/towns/sfv-opaque-images.json',
     },
 }
 

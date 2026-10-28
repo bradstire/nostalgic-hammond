@@ -82,7 +82,7 @@ const PLACES: Place[] = [
     era: '1964',
     line: 'Theater in the round under a dome in Woodland Hills.',
     story: [
-      'The Valley Music Theatre opened on July 6, 1964, at 20600 Ventura Boulevard in Woodland Hills: a 2,865-seat theater in the round under a concrete dome, backed by Bob Hope and Art Linkletter.',
+      'The Valley Music Theatre opened on July 6, 1964, at 20600 Ventura Boulevard in Woodland Hills: a 2,865-seat theater in the round under a concrete dome.',
       'The Doors, the Byrds and Buffalo Springfield shared its stage on February 22, 1967. By the 1970s it had become an assembly hall, and it was torn down in 2007.',
       'Our dome is drawn fresh and the name is set in period lettering.',
     ],
@@ -135,7 +135,7 @@ const PLACES: Place[] = [
     era: '1928–2003',
     line: 'Leon\'s, Phil\'s, Don\'s, Mike\'s and more.',
     story: [
-      'Phil\'s Diner, a 1926 dining car called the oldest in California, opened beside the Lankershim depot in 1928 and is now a Los Angeles Historic-Cultural Monument. Leon Grown opened Leon\'s Steak House and Coffee Shop at Victory and Vineland in 1945; it closed in July 2003. Don\'s in Burbank started as a drive-in in 1947 and closed in 2002.',
+      'Phil\'s Diner, a 1926 dining car called the oldest in California, opened beside the Lankershim depot in 1928 and is now a Los Angeles Historic-Cultural Monument. Leon\'s Steak House and Coffee Shop opened at Victory and Vineland in 1945 and closed in July 2003. Don\'s in Burbank started as a drive-in in 1947 and closed in 2002.',
       'Mike\'s Pizza in Panorama City was "serving since 1954" until 1993. The Jolly Roger served the Sherman Oaks Fashion Square under a linocut galleon, Rusty\'s Hacienda poured margaritas on Lankershim, and Encino Bowl kept a coffee shop next to the lanes from 1962 to 1986.',
       'Each design is redrawn from the place\'s own menu or sign, with the lettering re-set.',
     ],
@@ -188,7 +188,7 @@ const PLACES: Place[] = [
     line: 'Moby Disc and Dutton\'s.',
     story: [
       'Moby Disc Records grew from a store on Victory Boulevard in the early 1970s into a small chain, with stores at 14410 Ventura in Sherman Oaks and on Topanga Canyon in Canoga Park, and closed in 2001. Its sleeves carried a whale spouting a record: "A Whale of a Store!"',
-      'Bill and Thelma Dutton opened Dutton\'s Books at Laurel Canyon and Magnolia in North Hollywood on New Year\'s Day 1961, selling books and art, "New-Old & Rare, Bought & Sold," as the rooftop sign said. The North Hollywood store closed in 2006.',
+      'Dutton\'s Books opened at Laurel Canyon and Magnolia in North Hollywood on New Year\'s Day 1961, selling books and art, "New-Old & Rare, Bought & Sold," as the rooftop sign said. The North Hollywood store closed in 2006.',
     ],
     facts: [{ k: 'Dutton\'s, North Hollywood', v: '1961–2006' }, { k: 'Moby Disc', v: 'early 1970s–2001' }],
     sources: [
