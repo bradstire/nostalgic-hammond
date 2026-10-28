@@ -54,8 +54,15 @@ export async function addLines(lines: { merchandiseId: string; quantity: number 
     if (d.cartLinesAdd.cart) return shape(d.cartLinesAdd.cart)!;
     store(null);
   }
+  // Town + first-touch source ride on the cart as attributes and land on the Shopify order
+  // ("Additional details"), so every order can be mapped to its town and source. "hq" marks internal carts.
+  const attributes = [{ key: 'town', value: String(import.meta.env.PUBLIC_TOWN || '') }];
+  try {
+    const src = sessionStorage.getItem('nt_src'); if (src) attributes.push({ key: 'source', value: src });
+    if ((window as any).NT_HQ) attributes.push({ key: 'hq', value: '1' });
+  } catch { /* storage blocked */ }
   const d = await gql(`mutation($input: CartInput!) { cartCreate(input: $input) { cart { ${CART_FIELDS} } userErrors { message } } }`,
-    { input: { lines, buyerIdentity: { countryCode: 'US' } } });
+    { input: { lines, attributes, buyerIdentity: { countryCode: 'US' } } });
   const c = shape(d.cartCreate.cart);
   if (!c) throw new Error(d.cartCreate.userErrors?.[0]?.message || 'Could not create cart');
   store(c.id);

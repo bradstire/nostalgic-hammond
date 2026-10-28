@@ -46,9 +46,28 @@ const ogImage = new URL(image, siteConfig.siteUrl).href;
     <meta name="twitter:card" content="summary_large_image" />
     <slot name="head" />
     {jsonld.map((j) => <script type="application/ld+json" set:html={JSON.stringify(j)} />)}
-    <script is:inline>window.nhTrack = window.nhTrack || function () {};</script>
+    <script is:inline>
+      window.nhTrack = window.nhTrack || function () {};
+      /* Internal-traffic flag + first-touch source (NT goal ledger).
+         ?hq=1 marks this browser as HQ/QA (no pixel events, carts tagged "hq"); ?hq=0 clears it.
+         Headless/automated browsers are treated as internal too. */
+      (function () {
+        try {
+          var q = new URLSearchParams(location.search), ls = window.localStorage, ss = window.sessionStorage;
+          if (q.get('hq') === '1') ls.setItem('nt_hq', '1'); else if (q.get('hq') === '0') ls.removeItem('nt_hq');
+          window.NT_HQ = !!ls.getItem('nt_hq') || !!navigator.webdriver || /HeadlessChrome|Lighthouse/.test(navigator.userAgent);
+          if (!ss.getItem('nt_src')) {
+            var ref = ''; try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) {}
+            if (ref === location.hostname) ref = '';
+            var src = [q.get('utm_source') || (ref || 'direct'), q.get('utm_medium') || '', q.get('utm_campaign') || '', location.pathname].join('|');
+            ss.setItem('nt_src', src.slice(0, 250));
+          }
+        } catch (e) { window.NT_HQ = false; }
+      })();
+    </script>
     {siteConfig.metaPixelId && (
       <script is:inline define:vars={{ pixelId: siteConfig.metaPixelId }}>
+        if (!window.NT_HQ) {
         !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
         n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
         n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
@@ -58,6 +77,7 @@ const ogImage = new URL(image, siteConfig.siteUrl).href;
         window.nhTrack = function (name, params, eventID) {
           try { window.fbq && window.fbq('track', name, params || {}, eventID ? { eventID: eventID } : undefined); } catch (e) {}
         };
+        }
       </script>
     )}
   </head>
