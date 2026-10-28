@@ -63,6 +63,9 @@ const ogImage = new URL(image, siteConfig.siteUrl).href;
             ss.setItem('nt_src', src.slice(0, 250));
           }
         } catch (e) { window.NT_HQ = false; }
+        /* Vercel Web Analytics (free tier): human sessions per town. Not loaded for internal browsers. */
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        if (!window.NT_HQ) { var s = document.createElement('script'); s.defer = true; s.src = '/_vercel/insights/script.js'; document.head.appendChild(s); }
       })();
     </script>
     {siteConfig.metaPixelId && (
