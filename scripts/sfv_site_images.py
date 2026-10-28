@@ -55,6 +55,15 @@ tiles = {
     'valley-music-theatre': contain(art('sfv_vmt_cream'), 900, 675, hex2('#14171c'), 0.1),
     'phys-ed': contain(art('sfv_pe_vannuys_crimson'), 900, 675, hex2('#f3ecdd'), 0.1),
 }
+# wave 2 places (masters in print-assets sfv/wave2)
+w2 = lambda n: Image.open(f'{PA}/wave2/{n}.png').convert('RGBA')
+tiles.update({
+    'shopping': contain(w2('sfv_valley_plaza'), 900, 675, hex2('#161a20'), 0.1),
+    'coffee-shops': contain(w2('sfv_phils_diner'), 900, 675, hex2('#f3ecdd'), 0.1),
+    'after-dark': contain(w2('sfv_fm_station'), 900, 675, hex2('#0e0e0e'), 0.1),
+    'records-books': contain(w2('sfv_moby_disc'), 900, 675, hex2('#a9dff6'), 0.08),
+    'devonshire-downs': contain(w2('sfv_devonshire_downs'), 900, 675, hex2('#f3ecdd'), 0.1),
+})
 for n, im in tiles.items(): save(im, f'places/{n}', [900, 600], jpg=900)
 cover(ranchos, 1200, 630, fy=0.55).save(os.path.join(OUT, 'og.jpg'), quality=85)
 print('done')
