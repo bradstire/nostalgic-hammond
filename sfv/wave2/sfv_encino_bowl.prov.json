@@ -2,81 +2,94 @@
  "typeset": [
   [
    [
-    196,
-    973,
-    624,
-    1415
-   ],
-   "Kameron Bold"
-  ],
-  [
-   [
-    878,
-    964,
-    1342,
-    1424
-   ],
-   "Kameron Bold"
-  ],
-  [
-   [
-    1473,
-    970,
-    2147,
-    1418
-   ],
-   "Kameron Bold"
-  ],
-  [
-   [
-    2325,
-    973,
-    2695,
-    1415
-   ],
-   "Kameron Bold"
-  ],
-  [
-   [
-    785,
-    590,
-    2135,
-    780
-   ],
-   "Kameron Bold"
-  ],
-  [
-   [
-    1305,
+    1352,
     109,
-    1632,
-    311
+    1714,
+    287
    ],
-   "Kameron Bold (EB monogram, letters overlapped as on the drum)"
+   "Michroma (EB drum monogram, R21 reason a)"
   ],
   [
    [
-    726,
-    1913,
-    2194,
-    2247
+    110,
+    2578,
+    2974,
+    2696
    ],
-   "Lobster"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
- "exempt": [],
+ "exempt": [
+  [
+   [
+    130,
+    1069,
+    2923,
+    1555
+   ],
+   "BOWL: the sign letters traced (R21)"
+  ],
+  [
+   [
+    921,
+    656,
+    2110,
+    834
+   ],
+   "ENCINO: the sign letters traced (R21); broken C jaw mirrored from its upper jaw"
+  ],
+  [
+   [
+    1520,
+    1992,
+    2701,
+    2336
+   ],
+   "Coffee Shop: the sign lettering traced, each word levelled on its own face (R21)"
+  ]
+ ],
  "redrawn": [
   [
    [
     24,
-    4,
-    2896,
-    2346
+    979,
+    3060,
+    1626
    ],
-   "sign: our own drawing after the VRM photo"
+   "BOWL boxes: four pointy-top hexagons at the measured outline (regularised to equal width)"
+  ],
+  [
+   [
+    767,
+    609,
+    2272,
+    870
+   ],
+   "ENCINO box face: constructed at the measured outline"
+  ],
+  [
+   [
+    1192,
+    24,
+    1848,
+    372
+   ],
+   "EB drum: constructed"
+  ],
+  [
+   [
+    1382,
+    1959,
+    2962,
+    2419
+   ],
+   "Coffee Shop oval: constructed (pointed lozenge) at the measured position"
   ]
  ],
+ "rules": [
+  "R21"
+ ],
  "ink": "#F4ECDD",
- "print_width_in": 9.733,
- "print_height_in": 7.867
+ "print_width_in": 10.28,
+ "print_height_in": 9.067
 }

@@ -2,41 +2,23 @@
  "typeset": [
   [
    [
-    621,
-    1320,
-    2499,
-    1639
+    184,
+    1318,
+    2936,
+    1587
    ],
-   "Oswald SemiBold"
-  ],
-  [
-   [
-    334,
-    1712,
-    2786,
-    1960
-   ],
-   "Oswald SemiBold"
-  ],
-  [
-   [
-    651,
-    2033,
-    2469,
-    2220
-   ],
-   "Oswald SemiBold"
+   "Oswald SemiBold (house locator line on the marquee, R21 rule 4)"
   ]
  ],
  "exempt": [
   [
    [
-    926,
-    76,
-    2126,
-    891
+    945,
+    87,
+    2067,
+    875
    ],
-   "hand-brushed FM: redrawn as brush strokes along the sign letters"
+   "hand-brushed FM: traced from the sign (R21)"
   ]
  ],
  "redrawn": [
@@ -54,12 +36,15 @@
     54,
     1166,
     3066,
-    2358
+    1738
    ],
-   "marquee board: constructed"
+   "marquee board: constructed; v1 rows FM STATION / NORTH HOLLYWOOD / LIVE MUSIC 1976 retired (R21 rule 4)"
   ]
+ ],
+ "rules": [
+  "R21"
  ],
  "ink": "#F4ECDD",
  "print_width_in": 10.4,
- "print_height_in": 8.043
+ "print_height_in": 5.977
 }

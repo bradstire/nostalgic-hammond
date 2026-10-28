@@ -38,6 +38,7 @@ and (with --compare) at least half the previous master's ink in that box (10-25 
 re-set COURTESY PASS line behind its own declaration).
 Writes NAME_qa.json + NAME_qa.png (overlay: red counters, magenta gaps, blue thin strokes,
 green/red baselines with angle, orange boxes = wobbly lines).
+SOURCE (R21): when the sidecar carries rules ["R21"], every typeset line must give its R21 reason or FAIL.
 Exit code 0 = PASS, 1 = FAIL. WARNs never fail the gate but must be looked at.
 Visual sign-off (S9 part B) is still required: the overlay + print-zoom tiles vs the source.
 """
@@ -378,6 +379,9 @@ def run(path, width_in, out_dir, name=None, exempt=(), typeset=(), compare=None,
         exempt = list(exempt) + [(tuple(b), r) for b, r in pv.get('exempt', [])]
         typeset = list(typeset) + [(tuple(b), f) for b, f in pv.get('typeset', [])]
         redrawn = list(redrawn) + [(tuple(b), h) for b, h in pv.get('redrawn', [])]
+        r21 = 'R21' in pv.get('rules', [])
+    else:
+        r21 = False
     name = name or os.path.splitext(os.path.basename(path))[0]
     im = Image.open(path).convert('RGBA')
     a = np.asarray(im)
@@ -514,6 +518,13 @@ def run(path, width_in, out_dir, name=None, exempt=(), typeset=(), compare=None,
             ink_prev = int(prev_op[cy0:cy1, cx0:cx1].sum())
             if ink_prev > (0.05 * ppi) ** 2 and ink_now < 0.5 * ink_prev:
                 rep['fails'].append(f'TYPESET: declared line {f} {list(b)} has {ink_now / ink_prev:.0%} of the previous master\'s ink there - a re-set must replace the line, not drop it')
+    # SOURCE (R21, 10-28): under trace-first, a re-set line must say why it was not traced: below the trace floor
+    # (reason a), the exact face as printed (b), a trace that fails the gate (c), or the one house locator line (rule 4)
+    if r21:
+        ok = ('R21 reason a', 'R21 reason b', 'R21 reason c', 'R21 reasons', 'R21 rule 4')
+        for b, f in typeset:
+            if not any(k in f for k in ok):
+                rep['fails'].append(f'SOURCE: re-set line {f} {list(b)} gives no R21 reason (trace-first: trace it, or log why not)')
     if compare:
         sv = survival(compare, a, ppi, [b for b, _ in typeset] + [b for b, _ in redrawn])
         for b, h in redrawn:

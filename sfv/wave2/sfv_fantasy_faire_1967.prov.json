@@ -1,15 +1,5 @@
 {
- "typeset": [
-  [
-   [
-    191,
-    2093,
-    2859,
-    2235
-   ],
-   "Jost SemiBold"
-  ]
- ],
+ "typeset": [],
  "exempt": [
   [
    [
@@ -40,7 +30,10 @@
   ]
  ],
  "redrawn": [],
+ "rules": [
+  "R21"
+ ],
  "ink": "#8B0000",
  "print_width_in": 10.167,
- "print_height_in": 7.533
+ "print_height_in": 6.697
 }

@@ -1,0 +1,134 @@
+[
+ {
+  "wobble_mil": 0.83,
+  "wobble_p90": 3.13,
+  "infl_per_in": 4.48,
+  "outline_in": 39.5,
+  "speck_n": 1,
+  "town": "Hattiesburg",
+  "design": "Hub City 1966 ad",
+  "what": "HUB CITY DRAG RACEWAY",
+  "kind": "print scan, SR"
+ },
+ {
+  "wobble_mil": 1.72,
+  "wobble_p90": 4.79,
+  "infl_per_in": 5.29,
+  "outline_in": 34.9,
+  "speck_n": 1,
+  "town": "Hattiesburg",
+  "design": "Hub City 1966 ad",
+  "what": "by popular demand: FORD vs. CHEVY!",
+  "kind": "print scan, SR"
+ },
+ {
+  "wobble_mil": 0.5,
+  "wobble_p90": 2.24,
+  "infl_per_in": 7.67,
+  "outline_in": 145.6,
+  "speck_n": 119,
+  "town": "Hattiesburg",
+  "design": "Culpepper 1968 ad",
+  "what": "CULPEPPER BODY & PAINT SHOP",
+  "kind": "print scan"
+ },
+ {
+  "wobble_mil": 0.69,
+  "wobble_p90": 2.78,
+  "infl_per_in": 10.29,
+  "outline_in": 37.2,
+  "speck_n": 60,
+  "town": "Hattiesburg",
+  "design": "Culpepper 1968 ad",
+  "what": "113 N. Tipton",
+  "kind": "print scan"
+ },
+ {
+  "wobble_mil": 1.12,
+  "wobble_p90": 3.68,
+  "infl_per_in": 8.51,
+  "outline_in": 35.6,
+  "speck_n": 17,
+  "town": "Hattiesburg",
+  "design": "Sack's 1980 ad",
+  "what": "SACK'S ARMY STORE",
+  "kind": "print scan"
+ },
+ {
+  "wobble_mil": 0.38,
+  "wobble_p90": 1.97,
+  "infl_per_in": 3.35,
+  "outline_in": 74.4,
+  "speck_n": 2,
+  "town": "Hattiesburg",
+  "design": "Beverly Drive-In",
+  "what": "Beverly script",
+  "kind": "sign/print script"
+ },
+ {
+  "wobble_mil": 0.48,
+  "wobble_p90": 2.38,
+  "infl_per_in": 6.24,
+  "outline_in": 96.9,
+  "speck_n": 0,
+  "town": "Hammond v2",
+  "design": "Casa de Fresa mark",
+  "what": "CASA de FRESA / hotel",
+  "kind": "matchbook"
+ },
+ {
+  "wobble_mil": 1.02,
+  "wobble_p90": 2.97,
+  "infl_per_in": 7.33,
+  "outline_in": 47.3,
+  "speck_n": 0,
+  "town": "Hammond v2",
+  "design": "Casa strawberries",
+  "what": "CASA de FRESA HOTEL headline",
+  "kind": "matchbook"
+ },
+ {
+  "wobble_mil": 0.76,
+  "wobble_p90": 3.72,
+  "infl_per_in": 6.69,
+  "outline_in": 52.9,
+  "speck_n": 1,
+  "town": "Hammond v2",
+  "design": "Fiesta Club v4",
+  "what": "FIESTA block",
+  "kind": "print"
+ },
+ {
+  "wobble_mil": 1.23,
+  "wobble_p90": 6.01,
+  "infl_per_in": 5.35,
+  "outline_in": 74.1,
+  "speck_n": 0,
+  "town": "Hammond v2",
+  "design": "Galaxy pass",
+  "what": "galaxy drive in theatre script",
+  "kind": "print script"
+ },
+ {
+  "wobble_mil": 0.83,
+  "wobble_p90": 3.17,
+  "infl_per_in": 4.26,
+  "outline_in": 42.2,
+  "speck_n": 0,
+  "town": "Hammond v2",
+  "design": "Magnolia v5",
+  "what": "Magnolia script",
+  "kind": "sign script"
+ },
+ {
+  "wobble_mil": 1.52,
+  "wobble_p90": 4.86,
+  "infl_per_in": 6.13,
+  "outline_in": 37.4,
+  "speck_n": 0,
+  "town": "Hammond v2",
+  "design": "Toggery logo v3",
+  "what": "Toggery logotype",
+  "kind": "print"
+ }
+]

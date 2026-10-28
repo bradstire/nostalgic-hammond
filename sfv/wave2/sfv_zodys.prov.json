@@ -2,72 +2,40 @@
  "typeset": [
   [
    [
-    129,
-    318,
-    431,
-    830
-   ],
-   "Kameron Bold (narrowed to the box, max x0.78)"
-  ],
-  [
-   [
-    703,
-    308,
-    1005,
-    840
-   ],
-   "Kameron Bold (narrowed to the box, max x0.78)"
-  ],
-  [
-   [
-    1277,
-    317,
-    1579,
-    831
-   ],
-   "Kameron Bold (narrowed to the box, max x0.78)"
-  ],
-  [
-   [
-    1851,
-    318,
-    2153,
-    830
-   ],
-   "Kameron Bold (narrowed to the box, max x0.78)"
-  ],
-  [
-   [
-    2425,
-    308,
-    2727,
-    840
-   ],
-   "Kameron Bold (narrowed to the box, max x0.78)"
-  ],
-  [
-   [
-    383,
+    225,
     1224,
-    2473,
+    2315,
     1347
    ],
-   "Jost SemiBold"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
- "exempt": [],
+ "exempt": [
+  [
+   [
+    24,
+    24,
+    2516,
+    1116
+   ],
+   "ZODYS: the canopy letters traced, one rectified box at a time (R21)"
+  ]
+ ],
  "redrawn": [
   [
    [
     24,
     24,
-    2832,
+    2516,
     1116
    ],
-   "hexagon boxes: constructed geometry after the LAPL photo"
+   "hexagon boxes: constructed in the photo proportions (plain faces; v1 keylines retired)"
   ]
  ],
+ "rules": [
+  "R21"
+ ],
  "ink": "#F4ECDD",
- "print_width_in": 9.52,
+ "print_width_in": 8.467,
  "print_height_in": 4.57
 }

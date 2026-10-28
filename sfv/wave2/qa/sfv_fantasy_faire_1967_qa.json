@@ -12,75 +12,18 @@
  "halftone_area_pct": 0.0,
  "counters": [],
  "gaps": [],
- "lines": [
-  {
-   "layer": "(139, 0, 0)",
-   "box": [
-    194,
-    2097,
-    1342,
-    2211
-   ],
-   "letters": 10,
-   "cap_in": 0.337,
-   "tilt_deg": -0.19,
-   "jitter": 0.014,
-   "inflect_per_in": 2.1,
-   "peaks_per_cap": 2.99,
-   "rise_in": 0.013,
-   "wobble_limit": 4.1,
-   "typeset": "Jost SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "(139, 0, 0)",
-   "box": [
-    1522,
-    2096,
-    2001,
-    2207
-   ],
-   "letters": 5,
-   "cap_in": 0.333,
-   "tilt_deg": -0.35,
-   "jitter": 0.007,
-   "inflect_per_in": 3.2,
-   "peaks_per_cap": 3.56,
-   "rise_in": 0.01,
-   "wobble_limit": 4.1,
-   "typeset": "Jost SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "(139, 0, 0)",
-   "box": [
-    2449,
-    2102,
-    2856,
-    2207
-   ],
-   "letters": 4,
-   "cap_in": 0.348,
-   "tilt_deg": 0.3,
-   "jitter": 0.006,
-   "inflect_per_in": 3.1,
-   "peaks_per_cap": 2.56,
-   "rise_in": 0.007,
-   "wobble_limit": 4.1,
-   "typeset": "Jost SemiBold",
-   "flags": []
-  }
- ],
+ "lines": [],
  "strokes": {
   "fail_pct": 0.0,
-  "warn_pct": 0.06
+  "warn_pct": 0.05
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
   "EXEMPT [88, 24, 2962, 880]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned",
   "EXEMPT [25, 918, 3025, 1667]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned",
-  "EXEMPT [302, 1775, 2748, 1985]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
+  "EXEMPT [302, 1775, 2748, 1985]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned",
+  "No text lines detected: LEVEL/EDGES did not run - sign-off must check lettering by eye"
  ],
  "exemptions": [
   {
@@ -111,17 +54,7 @@
    "reason": "hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
   }
  ],
- "typeset": [
-  {
-   "box": [
-    191,
-    2093,
-    2859,
-    2235
-   ],
-   "font": "Jost SemiBold"
-  }
- ],
+ "typeset": [],
  "redrawn": [],
  "substrate_layers": []
 }

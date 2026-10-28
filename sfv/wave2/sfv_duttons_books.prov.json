@@ -7,7 +7,7 @@
     2127,
     406
    ],
-   "Kameron Bold (x0.67)"
+   "Kameron Bold (x0.67); R21 reason a: sign letters ~10-12 px cap in the photo"
   ],
   [
    [
@@ -16,7 +16,7 @@
     2402,
     350
    ],
-   "Kameron Bold (x0.67)"
+   "Kameron Bold (x0.67); R21 reason a: sign letters ~10-12 px cap in the photo"
   ],
   [
    [
@@ -25,7 +25,7 @@
     2886,
     406
    ],
-   "Kameron Bold (x0.67)"
+   "Kameron Bold (x0.67); R21 reason a: sign letters ~10-12 px cap in the photo"
   ],
   [
    [
@@ -34,7 +34,7 @@
     897,
     721
    ],
-   "Fredoka SemiBold"
+   "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
   ],
   [
    [
@@ -43,7 +43,7 @@
     820,
     920
    ],
-   "Fredoka SemiBold"
+   "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
   ],
   [
    [
@@ -52,7 +52,7 @@
     2798,
     754
    ],
-   "Fredoka SemiBold"
+   "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
   ],
   [
    [
@@ -61,7 +61,7 @@
     2770,
     921
    ],
-   "Fredoka SemiBold"
+   "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
   ],
   [
    [
@@ -70,7 +70,7 @@
     2694,
     1338
    ],
-   "Jost SemiBold"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
  "exempt": [
@@ -103,6 +103,9 @@
    ],
    "books + bookends: our own drawing of the sign motif"
   ]
+ ],
+ "rules": [
+  "R21"
  ],
  "ink": "#006B3F",
  "print_width_in": 10.2,

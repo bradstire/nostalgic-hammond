@@ -7,7 +7,7 @@
     2769,
     263
    ],
-   "Rye"
+   "Rye; R21 reason a: no lettering in any source (the 1963 photo shows no sign text)"
   ],
   [
    [
@@ -16,7 +16,7 @@
     2751,
     1997
    ],
-   "Jost SemiBold"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
  "exempt": [],
@@ -30,6 +30,9 @@
    ],
    "club house + hill: our own drawing after the 1963 photo"
   ]
+ ],
+ "rules": [
+  "R21"
  ],
  "ink": "#F4ECDD",
  "print_width_in": 10.293,

@@ -2,54 +2,39 @@
  "typeset": [
   [
    [
-    942,
-    1363,
-    2210,
-    1554
+    66,
+    2324,
+    2638,
+    2416
    ],
-   "Oswald SemiBold"
-  ],
-  [
-   [
-    1447,
-    1599,
-    1705,
-    1721
-   ],
-   "Oswald SemiBold"
-  ],
-  [
-   [
-    912,
-    1765,
-    2240,
-    1957
-   ],
-   "Oswald SemiBold"
-  ],
-  [
-   [
-    25,
-    2048,
-    3126,
-    2155
-   ],
-   "Jost SemiBold"
+   "Jost SemiBold (the menu address line, its own words, re-set); R21 reason a: ~8 px cap in the pull"
   ]
  ],
  "exempt": [
   [
    [
-    307,
     25,
-    2770,
-    1235
+    24,
+    2686,
+    1332
    ],
    "hand lettering + chef illustration from the menu cover (traced, cleaned)"
+  ],
+  [
+   [
+    720,
+    1545,
+    1985,
+    2186
+   ],
+   "hand lettering from the menu cover: RESTAURANT AND COFFEE SHOP (traced, R21)"
   ]
  ],
  "redrawn": [],
+ "rules": [
+  "R21"
+ ],
  "ink": "#262220",
- "print_width_in": 10.503,
- "print_height_in": 7.267
+ "print_width_in": 9.037,
+ "print_height_in": 8.137
 }

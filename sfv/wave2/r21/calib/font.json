@@ -1,0 +1,46 @@
+[
+ {
+  "sw_in": 0.069,
+  "rough_pct": 2.5,
+  "infl_100sw": 97.4,
+  "wobble_p90_mil": 2.46,
+  "outline_in": 24.4,
+  "town": "font",
+  "design": "v1 GEMCO",
+  "what": "Libre Caslon Bold (typeset)",
+  "knockout": true
+ },
+ {
+  "sw_in": 0.22,
+  "rough_pct": 7.1,
+  "infl_100sw": 739.5,
+  "wobble_p90_mil": 4.27,
+  "outline_in": 48.1,
+  "town": "font",
+  "design": "v1 Rusty",
+  "what": "Knewave Rusty's Hacienda",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.101,
+  "rough_pct": 4.0,
+  "infl_100sw": 249.9,
+  "wobble_p90_mil": 2.97,
+  "outline_in": 29.2,
+  "town": "font",
+  "design": "v1 Dons",
+  "what": "Oswald RESTAURANT",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.144,
+  "rough_pct": 6.1,
+  "infl_100sw": 416.9,
+  "wobble_p90_mil": 4.42,
+  "outline_in": 24.1,
+  "town": "font",
+  "design": "v1 Leons",
+  "what": "Knewave COFFEE SHOP (knockout)",
+  "knockout": true
+ }
+]

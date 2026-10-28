@@ -7,7 +7,7 @@
     1465,
     1668
    ],
-   "Oswald Bold"
+   "Oswald Bold; R21 reason a: sign letters ~15-18 px cap in the photo"
   ],
   [
    [
@@ -16,7 +16,7 @@
     2627,
     1664
    ],
-   "Oswald Bold"
+   "Oswald Bold; R21 reason a: sign letters ~15-18 px cap in the photo"
   ],
   [
    [
@@ -25,7 +25,7 @@
     1859,
     226
    ],
-   "Oswald Bold, sheared 10 deg"
+   "Oswald Bold, sheared 10 deg; R21 reason a: sign letters ~15-18 px cap in the photo"
   ],
   [
    [
@@ -34,7 +34,7 @@
     1893,
     402
    ],
-   "Oswald Bold, sheared 10 deg"
+   "Oswald Bold, sheared 10 deg; R21 reason a: sign letters ~15-18 px cap in the photo"
   ],
   [
    [
@@ -43,7 +43,7 @@
     3126,
     2009
    ],
-   "Jost SemiBold"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
  "exempt": [
@@ -67,6 +67,9 @@
    ],
    "dining car + sign: our own drawing after the 1950s photo"
   ]
+ ],
+ "rules": [
+  "R21"
  ],
  "ink": "#8B0000",
  "print_width_in": 10.503,

@@ -17,38 +17,38 @@
    "layer": "(38, 34, 32)",
    "box": [
     31,
-    3770,
+    3775,
     1412,
-    3888
+    3884
    ],
    "letters": 11,
    "cap_in": 0.347,
-   "tilt_deg": 0.1,
-   "jitter": 0.02,
-   "inflect_per_in": 4.1,
-   "peaks_per_cap": 3.61,
-   "rise_in": 0.008,
+   "tilt_deg": 0.03,
+   "jitter": 0.006,
+   "inflect_per_in": 2.2,
+   "peaks_per_cap": 3.05,
+   "rise_in": 0.002,
    "wobble_limit": 4.1,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "(38, 34, 32)",
    "box": [
     1777,
-    3770,
-    3045,
-    3888
+    3775,
+    3041,
+    3884
    ],
    "letters": 10,
-   "cap_in": 0.357,
-   "tilt_deg": -0.0,
-   "jitter": 0.021,
-   "inflect_per_in": 4.0,
-   "peaks_per_cap": 3.27,
-   "rise_in": 0.0,
+   "cap_in": 0.347,
+   "tilt_deg": -0.12,
+   "jitter": 0.008,
+   "inflect_per_in": 1.6,
+   "peaks_per_cap": 2.75,
+   "rise_in": 0.009,
    "wobble_limit": 4.1,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
@@ -81,7 +81,7 @@
     3048,
     3891
    ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [],

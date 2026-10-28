@@ -2,73 +2,67 @@
  "typeset": [
   [
    [
-    739,
-    398,
-    1871,
-    561
-   ],
-   "Libre Caslon Text Bold"
-  ],
-  [
-   [
-    970,
-    565,
-    1640,
-    717
-   ],
-   "Libre Caslon Text Bold"
-  ],
-  [
-   [
-    130,
-    1869,
-    2480,
-    2025
-   ],
-   "Damion"
-  ],
-  [
-   [
-    447,
-    2073,
-    2331,
-    2221
-   ],
-   "Damion"
-  ],
-  [
-   [
     24,
-    2359,
-    2586,
-    2451
+    1899,
+    2476,
+    2140
    ],
-   "Jost SemiBold"
+   "Sacramento, weighted to the line floor; R21 reason c: hairline script broken by the stair stripes"
+  ],
+  [
+   [
+    902,
+    2170,
+    2557,
+    2395
+   ],
+   "Sacramento, weighted to the line floor; R21 reason c: hairline script broken by the stair stripes"
+  ],
+  [
+   [
+    95,
+    2533,
+    2657,
+    2625
+   ],
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
  "exempt": [
   [
    [
-    130,
-    1869,
-    2480,
-    2221
+    863,
+    406,
+    1991,
+    762
    ],
-   "LEVEL only: Damion is a casual brush script whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
+   "'Devonshire Downs': the flyer's hand-painted lettering, traced (R21)"
+  ],
+  [
+   [
+    24,
+    1899,
+    2557,
+    2395
+   ],
+   "LEVEL only: a looped monoline script whose letters ride the baseline unevenly by design (set level from the font)"
   ]
  ],
  "redrawn": [
   [
    [
-    513,
-    9,
-    2115,
-    1797
+    584,
+    51,
+    2186,
+    1839
    ],
    "sign: our own drawing after the flyer illustration"
   ]
  ],
+ "rules": [
+  "R21"
+ ],
  "ink": "#8B0000",
- "print_width_in": 8.7,
- "print_height_in": 8.25
+ "print_width_in": 8.937,
+ "print_height_in": 8.83
 }

@@ -1,0 +1,156 @@
+[
+ {
+  "sw_in": 0.34,
+  "rough_pct": 5.6,
+  "infl_100sw": 672.1,
+  "wobble_p90_mil": 2.44,
+  "outline_in": 63.9,
+  "town": "SFV v2",
+  "design": "sfv_dons",
+  "what": "Don's logo (+chef)",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.087,
+  "rough_pct": 3.9,
+  "infl_100sw": 163.6,
+  "wobble_p90_mil": 3.31,
+  "outline_in": 49.5,
+  "town": "SFV v2",
+  "design": "sfv_dons",
+  "what": "RESTAURANT AND COFFEE SHOP",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.173,
+  "rough_pct": 3.4,
+  "infl_100sw": 630.7,
+  "wobble_p90_mil": 2.4,
+  "outline_in": 84.5,
+  "town": "SFV v2",
+  "design": "sfv_fantasy_faire_1967",
+  "what": "FF block A",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.113,
+  "rough_pct": 3.9,
+  "infl_100sw": 384.2,
+  "wobble_p90_mil": 2.94,
+  "outline_in": 95.6,
+  "town": "SFV v2",
+  "design": "sfv_fantasy_faire_1967",
+  "what": "FF block B",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.081,
+  "rough_pct": 4.8,
+  "infl_100sw": 180.5,
+  "wobble_p90_mil": 4.33,
+  "outline_in": 59.0,
+  "town": "SFV v2",
+  "design": "sfv_fantasy_faire_1967",
+  "what": "FF block C",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.084,
+  "rough_pct": 2.7,
+  "infl_100sw": 174.6,
+  "wobble_p90_mil": 2.35,
+  "outline_in": 24.4,
+  "town": "SFV v2",
+  "design": "sfv_gemco_membership",
+  "what": "GEMCO (store letters)",
+  "knockout": true
+ },
+ {
+  "sw_in": 0.143,
+  "rough_pct": 5.1,
+  "infl_100sw": 560.2,
+  "wobble_p90_mil": 3.19,
+  "outline_in": 27.6,
+  "town": "SFV v2",
+  "design": "sfv_mikes_pizza",
+  "what": "Mike's script",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.236,
+  "rough_pct": 3.5,
+  "infl_100sw": 459.3,
+  "wobble_p90_mil": 1.5,
+  "outline_in": 19.8,
+  "town": "SFV v2",
+  "design": "sfv_mikes_pizza",
+  "what": "PIZZA",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.198,
+  "rough_pct": 6.0,
+  "infl_100sw": 632.0,
+  "wobble_p90_mil": 4.64,
+  "outline_in": 78.0,
+  "town": "SFV v2",
+  "design": "sfv_moby_disc",
+  "what": "MOBY DISC RECORDS arc",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.085,
+  "rough_pct": 5.1,
+  "infl_100sw": 186.9,
+  "wobble_p90_mil": 4.39,
+  "outline_in": 38.1,
+  "town": "SFV v2",
+  "design": "sfv_moby_disc",
+  "what": "A Whale of a Store!",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.045,
+  "rough_pct": 1.9,
+  "infl_100sw": 73.9,
+  "wobble_p90_mil": 2.82,
+  "outline_in": 185.1,
+  "town": "SFV v2",
+  "design": "sfv_sasch",
+  "what": "Sasch",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.067,
+  "rough_pct": 3.0,
+  "infl_100sw": 177.5,
+  "wobble_p90_mil": 2.76,
+  "outline_in": 153.9,
+  "town": "SFV v2",
+  "design": "sfv_sugar_shack",
+  "what": "Sugar Shack plank logo",
+  "knockout": false
+ },
+ {
+  "sw_in": 0.32,
+  "rough_pct": 3.6,
+  "infl_100sw": 755.0,
+  "wobble_p90_mil": 2.55,
+  "outline_in": 22.6,
+  "town": "SFV v2",
+  "design": "sfv_fm_station",
+  "what": "FM (traced)",
+  "knockout": true
+ },
+ {
+  "sw_in": 0.317,
+  "rough_pct": 7.5,
+  "infl_100sw": 1003.4,
+  "wobble_p90_mil": 2.45,
+  "outline_in": 11.3,
+  "town": "SFV v1",
+  "design": "sfv_fm_station",
+  "what": "FM (v1 brush redraw)",
+  "knockout": true
+ }
+]

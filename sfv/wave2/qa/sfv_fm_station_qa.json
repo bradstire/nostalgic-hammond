@@ -16,146 +16,71 @@
   {
    "layer": "(244, 236, 221)",
    "box": [
-    2332,
-    1752,
-    2732,
-    1920
+    2430,
+    1361,
+    2877,
+    1544
    ],
    "letters": 3,
-   "cap_in": 0.56,
-   "tilt_deg": -0.32,
+   "cap_in": 0.61,
+   "tilt_deg": -0.28,
    "jitter": 0.0,
-   "inflect_per_in": 0.5,
-   "peaks_per_cap": 3.21,
+   "inflect_per_in": 0.0,
+   "peaks_per_cap": 3.07,
    "rise_in": 0.007,
    "wobble_limit": 3.8,
-   "typeset": "Oswald SemiBold",
+   "typeset": "Oswald SemiBold (house locator line on the marquee, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "knockout in (244, 236, 221)",
    "box": [
-    627,
-    1326,
-    2493,
-    1633
-   ],
-   "letters": 9,
-   "cap_in": 1.0,
-   "tilt_deg": 0.02,
-   "jitter": 0.001,
-   "inflect_per_in": 1.8,
-   "peaks_per_cap": 4.38,
-   "rise_in": 0.002,
-   "wobble_limit": 3.6,
-   "typeset": "Oswald SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "knockout in (244, 236, 221)",
-   "box": [
-    340,
-    1718,
-    2780,
-    1954
+    190,
+    1324,
+    2930,
+    1581
    ],
    "letters": 14,
-   "cap_in": 0.767,
+   "cap_in": 0.833,
    "tilt_deg": 0.02,
    "jitter": 0.002,
    "inflect_per_in": 0.9,
-   "peaks_per_cap": 3.49,
+   "peaks_per_cap": 3.72,
    "rise_in": 0.003,
    "wobble_limit": 3.7,
-   "typeset": "Oswald SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "knockout in (244, 236, 221)",
-   "box": [
-    657,
-    2039,
-    1705,
-    2214
-   ],
-   "letters": 9,
-   "cap_in": 0.567,
-   "tilt_deg": 0.16,
-   "jitter": 0.005,
-   "inflect_per_in": 2.1,
-   "peaks_per_cap": 4.16,
-   "rise_in": 0.01,
-   "wobble_limit": 3.8,
-   "typeset": "Oswald SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "knockout in (244, 236, 221)",
-   "box": [
-    2049,
-    2039,
-    2463,
-    2214
-   ],
-   "letters": 4,
-   "cap_in": 0.575,
-   "tilt_deg": 0.31,
-   "jitter": 0.01,
-   "inflect_per_in": 1.2,
-   "peaks_per_cap": 4.41,
-   "rise_in": 0.007,
-   "wobble_limit": 3.8,
-   "typeset": "Oswald SemiBold",
+   "typeset": "Oswald SemiBold (house locator line on the marquee, R21 rule 4)",
    "flags": []
   }
  ],
  "strokes": {
-  "fail_pct": 0.15,
-  "warn_pct": 0.52
+  "fail_pct": 0.01,
+  "warn_pct": 0.22
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
-  "EXEMPT [926, 76, 2126, 891]: hand-brushed FM: redrawn as brush strokes along the sign letters"
+  "EXEMPT [945, 87, 2067, 875]: hand-brushed FM: traced from the sign (R21)"
  ],
  "exemptions": [
   {
    "box": [
-    926,
-    76,
-    2126,
-    891
+    945,
+    87,
+    2067,
+    875
    ],
-   "reason": "hand-brushed FM: redrawn as brush strokes along the sign letters"
+   "reason": "hand-brushed FM: traced from the sign (R21)"
   }
  ],
  "typeset": [
   {
    "box": [
-    621,
-    1320,
-    2499,
-    1639
+    184,
+    1318,
+    2936,
+    1587
    ],
-   "font": "Oswald SemiBold"
-  },
-  {
-   "box": [
-    334,
-    1712,
-    2786,
-    1960
-   ],
-   "font": "Oswald SemiBold"
-  },
-  {
-   "box": [
-    651,
-    2033,
-    2469,
-    2220
-   ],
-   "font": "Oswald SemiBold"
+   "font": "Oswald SemiBold (house locator line on the marquee, R21 rule 4)"
   }
  ],
  "redrawn": [
@@ -173,9 +98,9 @@
     54,
     1166,
     3066,
-    2358
+    1738
    ],
-   "how": "marquee board: constructed"
+   "how": "marquee board: constructed; v1 rows FM STATION / NORTH HOLLYWOOD / LIVE MUSIC 1976 retired (R21 rule 4)"
   }
  ],
  "substrate_layers": []

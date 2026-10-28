@@ -196,6 +196,8 @@ class Art:
     def declare(self, kind, g, note, pad=6):
         b = g.bounds if hasattr(g, 'bounds') else g
         self.decl[kind].append([[b[0] - pad, b[1] - pad, b[2] + pad, b[3] + pad], note])
+        if kind == 'typeset' and hasattr(g, 'buffer'):
+            self.__dict__.setdefault('type_geoms', []).append(g)      # kept crisp through print-clean (L31)
 
     def geom(self):
         g = Polygon()
@@ -208,8 +210,11 @@ class Art:
         g = self.geom()
         b = g.bounds
         f = min(1.0, (max_w_in * DPI - 2 * pad) / (b[2] - b[0]), (max_h_in * DPI - 2 * pad) / (b[3] - b[1]))
+        tg = unary_union(getattr(self, 'type_geoms', [])) if getattr(self, 'type_geoms', None) else None
         if f < 1.0:
             g = affinity.scale(g, f, f, origin=(0, 0))
+            if tg is not None:
+                tg = affinity.scale(tg, f, f, origin=(0, 0))
             for k in self.decl:
                 self.decl[k] = [[[v * f for v in bb], n] for bb, n in self.decl[k]]
             b = g.bounds
@@ -221,7 +226,12 @@ class Art:
         if clean:
             import numpy as np
             a = np.array(im)
-            m = print_clean(a[..., 3] > 0, DPI, **(clean if isinstance(clean, dict) else {}))
+            m0 = a[..., 3] > 0
+            m = print_clean(m0, DPI, **(clean if isinstance(clean, dict) else {}))
+            if tg is not None:
+                # type renders straight from the font: print-clean never touches typeset glyphs (L31, R21)
+                tz = np.array(vtype.raster([(affinity.translate(tg.buffer(4), -ox, -oy), '#000000')], W, H))[..., 3] > 0
+                m = np.where(tz, m0, m)
             h = INK.get(ink, ink)
             a[..., :3] = [int(h[1:3], 16), int(h[3:5], 16), int(h[5:7], 16)]
             a[..., 3] = np.where(m, 255, 0)
@@ -233,6 +243,7 @@ class Art:
         prov = {}
         for k, lst in self.decl.items():
             prov[k] = [[[round(bb[0] - ox), round(bb[1] - oy), round(bb[2] - ox), round(bb[3] - oy)], n] for bb, n in lst]
+        prov['rules'] = ['R21']          # trace-first: every typeset line must carry its R21 reason (S9 SOURCE)
         prov['ink'] = INK.get(ink, ink)
         prov['print_width_in'] = round(W / DPI, 3)
         prov['print_height_in'] = round(H / DPI, 3)

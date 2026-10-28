@@ -1,6 +1,6 @@
 {
  "file": "sfv_moby_disc.png",
- "print_width_in": 10.213,
+ "print_width_in": 9.503,
  "ppi": 300.0,
  "layers": [
   [
@@ -16,99 +16,91 @@
   {
    "layer": "(0, 51, 102)",
    "box": [
-    1774,
-    3908,
-    3036,
-    4022
+    267,
+    3936,
+    1333,
+    4020
    ],
-   "letters": 10,
-   "cap_in": 0.348,
-   "tilt_deg": -0.05,
-   "jitter": 0.009,
-   "inflect_per_in": 3.6,
-   "peaks_per_cap": 3.05,
-   "rise_in": 0.004,
-   "wobble_limit": 4.1,
-   "typeset": "Jost SemiBold",
+   "letters": 11,
+   "cap_in": 0.27,
+   "tilt_deg": 0.04,
+   "jitter": 0.007,
+   "inflect_per_in": 2.8,
+   "peaks_per_cap": 3.04,
+   "rise_in": 0.002,
+   "wobble_limit": 4.3,
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "(0, 51, 102)",
    "box": [
-    35,
-    3909,
-    1411,
-    4022
+    1614,
+    3936,
+    2590,
+    4020
    ],
-   "letters": 11,
-   "cap_in": 0.347,
-   "tilt_deg": 0.1,
-   "jitter": 0.014,
-   "inflect_per_in": 3.6,
-   "peaks_per_cap": 3.43,
-   "rise_in": 0.008,
-   "wobble_limit": 4.1,
-   "typeset": "Jost SemiBold",
+   "letters": 10,
+   "cap_in": 0.27,
+   "tilt_deg": -0.11,
+   "jitter": 0.009,
+   "inflect_per_in": 2.1,
+   "peaks_per_cap": 2.74,
+   "rise_in": 0.006,
+   "wobble_limit": 4.3,
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
  "strokes": {
-  "fail_pct": 0.14,
-  "warn_pct": 1.09
+  "fail_pct": 0.21,
+  "warn_pct": 1.32
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
-  "EXEMPT [109, 254, 2954, 3797]: illustration: whale, record, waves, splash traced from the sleeve (cleaned)",
-  "EXEMPT [25, 25, 3036, 2152]: LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
+  "EXEMPT [17, 314, 2834, 3823]: illustration: whale, record, waves, splash traced from the sleeve (cleaned)",
+  "EXEMPT [57, 25, 2795, 1895]: hand lettering traced from the sleeve: MOBY DISC RECORDS on its arc (R21)",
+  "EXEMPT [52, 2519, 1181, 2891]: hand lettering traced from the sleeve: A Whale of a Store! with its underlines (R21)"
  ],
  "exemptions": [
   {
    "box": [
-    109,
-    254,
-    2954,
-    3797
+    17,
+    314,
+    2834,
+    3823
    ],
    "reason": "illustration: whale, record, waves, splash traced from the sleeve (cleaned)"
   },
   {
    "box": [
+    57,
     25,
-    25,
-    3036,
-    2152
+    2795,
+    1895
    ],
-   "reason": "LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
+   "reason": "hand lettering traced from the sleeve: MOBY DISC RECORDS on its arc (R21)"
+  },
+  {
+   "box": [
+    52,
+    2519,
+    1181,
+    2891
+   ],
+   "reason": "hand lettering traced from the sleeve: A Whale of a Store! with its underlines (R21)"
   }
  ],
  "typeset": [
   {
    "box": [
-    170,
-    2502,
-    952,
-    2650
-   ],
-   "font": "Fraunces Black Italic Soft"
-  },
-  {
-   "box": [
-    222,
-    2700,
-    1179,
-    2884
-   ],
-   "font": "Fraunces Black Italic Soft"
-  },
-  {
-   "box": [
-    30,
-    3905,
-    3039,
+    261,
+    3930,
+    2595,
     4026
    ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [],

@@ -29,7 +29,7 @@
    "peaks_per_cap": 4.69,
    "rise_in": 0.006,
    "wobble_limit": 3.8,
-   "typeset": "Kameron Bold (x0.67)",
+   "typeset": "Kameron Bold (x0.67); R21 reason a: sign letters ~10-12 px cap in the photo",
    "flags": []
   },
   {
@@ -48,7 +48,7 @@
    "peaks_per_cap": 2.81,
    "rise_in": 0.001,
    "wobble_limit": 4.3,
-   "typeset": "Fredoka SemiBold",
+   "typeset": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo",
    "flags": []
   },
   {
@@ -67,7 +67,7 @@
    "peaks_per_cap": 3.38,
    "rise_in": 0.006,
    "wobble_limit": 4.0,
-   "typeset": "Fredoka SemiBold",
+   "typeset": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo",
    "flags": []
   },
   {
@@ -86,7 +86,7 @@
    "peaks_per_cap": 2.39,
    "rise_in": 0.001,
    "wobble_limit": 4.0,
-   "typeset": "Fredoka SemiBold",
+   "typeset": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo",
    "flags": []
   },
   {
@@ -105,7 +105,7 @@
    "peaks_per_cap": 3.34,
    "rise_in": 0.002,
    "wobble_limit": 4.0,
-   "typeset": "Fredoka SemiBold",
+   "typeset": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo",
    "flags": []
   },
   {
@@ -124,7 +124,7 @@
    "peaks_per_cap": 2.06,
    "rise_in": 0.001,
    "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
@@ -143,7 +143,7 @@
    "peaks_per_cap": 2.38,
    "rise_in": 0.002,
    "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
@@ -162,7 +162,7 @@
    "peaks_per_cap": 0.67,
    "rise_in": 0.004,
    "wobble_limit": 4.6,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
@@ -194,7 +194,7 @@
     2127,
     406
    ],
-   "font": "Kameron Bold (x0.67)"
+   "font": "Kameron Bold (x0.67); R21 reason a: sign letters ~10-12 px cap in the photo"
   },
   {
    "box": [
@@ -203,7 +203,7 @@
     2402,
     350
    ],
-   "font": "Kameron Bold (x0.67)"
+   "font": "Kameron Bold (x0.67); R21 reason a: sign letters ~10-12 px cap in the photo"
   },
   {
    "box": [
@@ -212,7 +212,7 @@
     2886,
     406
    ],
-   "font": "Kameron Bold (x0.67)"
+   "font": "Kameron Bold (x0.67); R21 reason a: sign letters ~10-12 px cap in the photo"
   },
   {
    "box": [
@@ -221,7 +221,7 @@
     897,
     721
    ],
-   "font": "Fredoka SemiBold"
+   "font": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
   },
   {
    "box": [
@@ -230,7 +230,7 @@
     820,
     920
    ],
-   "font": "Fredoka SemiBold"
+   "font": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
   },
   {
    "box": [
@@ -239,7 +239,7 @@
     2798,
     754
    ],
-   "font": "Fredoka SemiBold"
+   "font": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
   },
   {
    "box": [
@@ -248,7 +248,7 @@
     2770,
     921
    ],
-   "font": "Fredoka SemiBold"
+   "font": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
   },
   {
    "box": [
@@ -257,7 +257,7 @@
     2694,
     1338
    ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [

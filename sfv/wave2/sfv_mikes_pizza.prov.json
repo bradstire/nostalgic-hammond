@@ -2,21 +2,12 @@
  "typeset": [
   [
    [
-    1563,
-    92,
-    2565,
-    343
-   ],
-   "League Spartan Black (x0.92)"
-  ],
-  [
-   [
     1039,
     3421,
     2076,
     3500
    ],
-   "Jost Bold"
+   "Jost Bold; R21 reason a: ~7 px cap in the menu photo"
   ],
   [
    [
@@ -25,7 +16,7 @@
     3126,
     3781
    ],
-   "Jost SemiBold"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
  "exempt": [
@@ -46,9 +37,31 @@
     370
    ],
    "hand lettering: the menu's 'Mike's' script (traced)"
+  ],
+  [
+   [
+    1636,
+    32,
+    2781,
+    346
+   ],
+   "hand lettering: the menu's PIZZA (traced in place, R21)"
   ]
  ],
- "redrawn": [],
+ "redrawn": [
+  [
+   [
+    1497,
+    -10,
+    3002,
+    423
+   ],
+   "PIZZA: the R21 trace replaces the v1 re-set (League Spartan Black); the old letters are retired on purpose"
+  ]
+ ],
+ "rules": [
+  "R21"
+ ],
  "ink": "#8B0000",
  "print_width_in": 10.503,
  "print_height_in": 12.687

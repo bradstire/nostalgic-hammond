@@ -1,6 +1,6 @@
 {
  "file": "sfv_june_ellens.png",
- "print_width_in": 10.503,
+ "print_width_in": 9.703,
  "ppi": 300.0,
  "layers": [
   [
@@ -16,77 +16,58 @@
   {
    "layer": "(244, 236, 221)",
    "box": [
-    975,
-    717,
-    2176,
-    930
+    173,
+    817,
+    874,
+    926
    ],
    "letters": 6,
-   "cap_in": 0.695,
-   "tilt_deg": 0.07,
-   "jitter": 0.01,
-   "inflect_per_in": 1.0,
-   "peaks_per_cap": 3.06,
-   "rise_in": 0.005,
-   "wobble_limit": 3.8,
-   "typeset": "Oswald Bold",
+   "cap_in": 0.345,
+   "tilt_deg": 0.05,
+   "jitter": 0.019,
+   "inflect_per_in": 1.4,
+   "peaks_per_cap": 2.1,
+   "rise_in": 0.002,
+   "wobble_limit": 4.1,
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "(244, 236, 221)",
    "box": [
-    31,
-    1098,
-    1478,
-    1198
-   ],
-   "letters": 13,
-   "cap_in": 0.303,
-   "tilt_deg": 0.09,
-   "jitter": 0.017,
-   "inflect_per_in": 2.0,
-   "peaks_per_cap": 2.75,
-   "rise_in": 0.007,
-   "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "(244, 236, 221)",
-   "box": [
-    1804,
-    1098,
-    3068,
-    1198
+    1251,
+    817,
+    2678,
+    927
    ],
    "letters": 11,
-   "cap_in": 0.317,
-   "tilt_deg": -0.11,
-   "jitter": 0.022,
-   "inflect_per_in": 2.0,
-   "peaks_per_cap": 2.72,
+   "cap_in": 0.347,
+   "tilt_deg": -0.1,
+   "jitter": 0.021,
+   "inflect_per_in": 1.8,
+   "peaks_per_cap": 2.68,
    "rise_in": 0.008,
-   "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
+   "wobble_limit": 4.1,
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
  "strokes": {
   "fail_pct": 0.0,
-  "warn_pct": 0.01
+  "warn_pct": 0.02
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
-  "EXEMPT [163, 24, 2988, 614]: LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
+  "EXEMPT [24, 24, 2887, 622]: LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
  ],
  "exemptions": [
   {
    "box": [
-    163,
     24,
-    2988,
-    614
+    24,
+    2887,
+    622
    ],
    "reason": "LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
   }
@@ -94,30 +75,21 @@
  "typeset": [
   {
    "box": [
-    163,
     24,
-    2988,
-    614
+    24,
+    2887,
+    622
    ],
-   "font": "Pacifico (the Cruise Night script)"
+   "font": "Pacifico (the Cruise Night script); R21 reason a: neon script ~18 px cap in a night photo"
   },
   {
    "box": [
-    969,
-    711,
-    2182,
-    936
+    167,
+    810,
+    2744,
+    933
    ],
-   "font": "Oswald Bold"
-  },
-  {
-   "box": [
-    25,
-    1092,
-    3127,
-    1205
-   ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [],

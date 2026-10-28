@@ -7,7 +7,7 @@
     3048,
     3891
    ],
-   "Jost SemiBold"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
  "exempt": [
@@ -22,6 +22,9 @@
   ]
  ],
  "redrawn": [],
+ "rules": [
+  "R21"
+ ],
  "ink": "#262220",
  "print_width_in": 10.24,
  "print_height_in": 13.05

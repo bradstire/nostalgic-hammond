@@ -2,54 +2,48 @@
  "typeset": [
   [
    [
-    170,
-    2502,
-    952,
-    2650
-   ],
-   "Fraunces Black Italic Soft"
-  ],
-  [
-   [
-    222,
-    2700,
-    1179,
-    2884
-   ],
-   "Fraunces Black Italic Soft"
-  ],
-  [
-   [
-    30,
-    3905,
-    3039,
+    261,
+    3930,
+    2595,
     4026
    ],
-   "Jost SemiBold"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
  "exempt": [
   [
    [
-    109,
-    254,
-    2954,
-    3797
+    17,
+    314,
+    2834,
+    3823
    ],
    "illustration: whale, record, waves, splash traced from the sleeve (cleaned)"
   ],
   [
    [
+    57,
     25,
-    25,
-    3036,
-    2152
+    2795,
+    1895
    ],
-   "LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
+   "hand lettering traced from the sleeve: MOBY DISC RECORDS on its arc (R21)"
+  ],
+  [
+   [
+    52,
+    2519,
+    1181,
+    2891
+   ],
+   "hand lettering traced from the sleeve: A Whale of a Store! with its underlines (R21)"
   ]
  ],
  "redrawn": [],
+ "rules": [
+  "R21"
+ ],
  "ink": "#003366",
- "print_width_in": 10.213,
+ "print_width_in": 9.503,
  "print_height_in": 13.503
 }

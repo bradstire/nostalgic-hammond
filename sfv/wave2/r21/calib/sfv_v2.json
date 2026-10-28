@@ -1,0 +1,134 @@
+[
+ {
+  "wobble_mil": 0.61,
+  "wobble_p90": 2.53,
+  "infl_per_in": 5.88,
+  "outline_in": 65.9,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_dons",
+  "what": "Don's logo (+chef)",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 0.59,
+  "wobble_p90": 3.31,
+  "infl_per_in": 5.94,
+  "outline_in": 49.5,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_dons",
+  "what": "RESTAURANT AND COFFEE SHOP",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 0.46,
+  "wobble_p90": 2.4,
+  "infl_per_in": 9.04,
+  "outline_in": 84.5,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_fantasy_faire_1967",
+  "what": "FF block A",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 0.6,
+  "wobble_p90": 2.94,
+  "infl_per_in": 11.19,
+  "outline_in": 95.6,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_fantasy_faire_1967",
+  "what": "FF block B",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 1.0,
+  "wobble_p90": 4.33,
+  "infl_per_in": 8.12,
+  "outline_in": 59.0,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_fantasy_faire_1967",
+  "what": "FF block C",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 0.48,
+  "wobble_p90": 2.0,
+  "infl_per_in": 4.31,
+  "outline_in": 34.5,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_gemco_membership",
+  "what": "GEMCO (store letters)",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 0.6,
+  "wobble_p90": 3.19,
+  "infl_per_in": 3.59,
+  "outline_in": 27.6,
+  "speck_n": 1,
+  "town": "SFV v2",
+  "design": "sfv_mikes_pizza",
+  "what": "Mike's script",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 0.22,
+  "wobble_p90": 1.53,
+  "infl_per_in": 5.1,
+  "outline_in": 19.8,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_mikes_pizza",
+  "what": "PIZZA",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 1.27,
+  "wobble_p90": 4.55,
+  "infl_per_in": 7.04,
+  "outline_in": 77.2,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_moby_disc",
+  "what": "MOBY DISC RECORDS arc",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 1.31,
+  "wobble_p90": 4.39,
+  "infl_per_in": 10.12,
+  "outline_in": 38.1,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_moby_disc",
+  "what": "A Whale of a Store!",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 0.62,
+  "wobble_p90": 2.81,
+  "infl_per_in": 3.92,
+  "outline_in": 184.9,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_sasch",
+  "what": "Sasch",
+  "kind": ""
+ },
+ {
+  "wobble_mil": 0.55,
+  "wobble_p90": 2.75,
+  "infl_per_in": 8.95,
+  "outline_in": 153.1,
+  "speck_n": 0,
+  "town": "SFV v2",
+  "design": "sfv_sugar_shack",
+  "what": "Sugar Shack plank logo",
+  "kind": ""
+ }
+]

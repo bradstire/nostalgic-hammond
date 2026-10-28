@@ -1,6 +1,6 @@
 {
  "file": "sfv_leons.png",
- "print_width_in": 7.68,
+ "print_width_in": 7.49,
  "ppi": 300.0,
  "layers": [
   [
@@ -16,296 +16,174 @@
   {
    "layer": "(139, 0, 0)",
    "box": [
-    31,
-    3261,
-    1599,
-    3357
+    30,
+    3926,
+    1559,
+    4020
    ],
    "letters": 14,
-   "cap_in": 0.293,
-   "tilt_deg": 0.01,
-   "jitter": 0.002,
-   "inflect_per_in": 1.8,
-   "peaks_per_cap": 2.08,
+   "cap_in": 0.287,
+   "tilt_deg": -0.01,
+   "jitter": 0.003,
+   "inflect_per_in": 1.9,
+   "peaks_per_cap": 2.18,
    "rise_in": 0.001,
    "wobble_limit": 4.3,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "(139, 0, 0)",
    "box": [
-    1924,
-    3263,
-    2273,
-    3354
+    1876,
+    3928,
+    2217,
+    4017
    ],
    "letters": 4,
-   "cap_in": 0.297,
-   "tilt_deg": 0.35,
-   "jitter": 0.006,
-   "inflect_per_in": 2.9,
-   "peaks_per_cap": 3.24,
-   "rise_in": 0.007,
-   "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
+   "cap_in": 0.29,
+   "tilt_deg": 0.24,
+   "jitter": 0.007,
+   "inflect_per_in": 3.0,
+   "peaks_per_cap": 3.19,
+   "rise_in": 0.005,
+   "wobble_limit": 4.3,
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "knockout in (139, 0, 0)",
    "box": [
-    957,
-    610,
-    1902,
-    920
+    124,
+    1634,
+    2068,
+    2163
    ],
    "letters": 6,
-   "cap_in": 0.86,
-   "tilt_deg": -0.2,
-   "jitter": 0.004,
-   "inflect_per_in": 1.0,
-   "peaks_per_cap": 3.82,
-   "rise_in": 0.011,
-   "wobble_limit": 3.7,
-   "flags": []
-  },
-  {
-   "layer": "knockout in (139, 0, 0)",
-   "box": [
-    957,
-    1130,
-    1902,
-    1440
-   ],
-   "letters": 6,
-   "cap_in": 0.815,
-   "tilt_deg": 0.01,
+   "cap_in": 1.468,
+   "tilt_deg": 0.0,
    "jitter": 0.0,
-   "inflect_per_in": 0.8,
-   "peaks_per_cap": 3.39,
-   "rise_in": 0.001,
-   "wobble_limit": 3.7,
+   "inflect_per_in": 1.9,
+   "peaks_per_cap": 5.99,
+   "rise_in": 0.0,
+   "wobble_limit": 3.6,
    "flags": []
   },
   {
    "layer": "knockout in (139, 0, 0)",
    "box": [
-    657,
-    2702,
-    1217,
-    2894
-   ],
-   "letters": 4,
-   "cap_in": 0.628,
-   "tilt_deg": 0.58,
-   "jitter": 0.005,
-   "inflect_per_in": 1.8,
-   "peaks_per_cap": 3.22,
-   "rise_in": 0.019,
-   "wobble_limit": 3.8,
-   "typeset": "Knewave",
-   "flags": []
-  },
-  {
-   "layer": "knockout in (139, 0, 0)",
-   "box": [
-    553,
-    2460,
-    1281,
-    2647
+    146,
+    769,
+    2062,
+    1329
    ],
    "letters": 6,
-   "cap_in": 0.612,
-   "tilt_deg": 0.17,
-   "jitter": 0.01,
-   "inflect_per_in": 3.3,
-   "peaks_per_cap": 3.55,
-   "rise_in": 0.007,
-   "wobble_limit": 3.8,
-   "typeset": "Knewave",
+   "cap_in": 1.462,
+   "tilt_deg": 0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 1.5,
+   "peaks_per_cap": 5.45,
+   "rise_in": 0.0,
+   "wobble_limit": 3.6,
    "flags": []
   },
   {
    "layer": "knockout in (139, 0, 0)",
    "box": [
-    1293,
-    3279,
-    1581,
-    3337
+    1261,
+    3945,
+    1541,
+    4001
    ],
    "letters": 3,
-   "cap_in": 0.193,
+   "cap_in": 0.187,
    "tilt_deg": -0.24,
    "jitter": 0.0,
    "inflect_per_in": 0.0,
-   "peaks_per_cap": 0.77,
+   "peaks_per_cap": 0.87,
    "rise_in": 0.004,
    "wobble_limit": 4.7,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
  "strokes": {
-  "fail_pct": 0.0,
-  "warn_pct": 0.1
+  "fail_pct": 0.02,
+  "warn_pct": 0.11
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
-  "EXEMPT [321, 122, 793, 558]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
-  "EXEMPT [321, 518, 793, 954]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
-  "EXEMPT [321, 914, 793, 1350]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
-  "EXEMPT [321, 1310, 793, 1746]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
-  "EXEMPT [321, 1706, 793, 2142]: LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+  "EXEMPT [180, 287, 503, 2644]: LEONS letters: traced from the sign (R21)",
+  "EXEMPT [291, 3029, 1385, 3624]: COFFEE SHOP: brush letters traced from the sign (R21)"
  ],
  "exemptions": [
   {
    "box": [
-    321,
-    122,
-    793,
-    558
+    180,
+    287,
+    503,
+    2644
    ],
-   "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+   "reason": "LEONS letters: traced from the sign (R21)"
   },
   {
    "box": [
-    321,
-    518,
-    793,
-    954
+    291,
+    3029,
+    1385,
+    3624
    ],
-   "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
-  },
-  {
-   "box": [
-    321,
-    914,
-    793,
-    1350
-   ],
-   "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
-  },
-  {
-   "box": [
-    321,
-    1310,
-    793,
-    1746
-   ],
-   "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
-  },
-  {
-   "box": [
-    321,
-    1706,
-    793,
-    2142
-   ],
-   "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+   "reason": "COFFEE SHOP: brush letters traced from the sign (R21)"
   }
  ],
  "typeset": [
   {
    "box": [
-    473,
-    208,
-    641,
-    484
+    974,
+    875,
+    2074,
+    2089
    ],
-   "font": "Lilita One"
+   "font": "Antonio Light, each letter fitted to its measured box on the rectified sign (R21 reason c: trace broken by exposed neon)"
   },
   {
    "box": [
-    471,
-    601,
-    641,
-    879
+    24,
+    3920,
+    2222,
+    4026
    ],
-   "font": "Lilita One"
-  },
-  {
-   "box": [
-    432,
-    996,
-    682,
-    1276
-   ],
-   "font": "Lilita One"
-  },
-  {
-   "box": [
-    444,
-    1393,
-    670,
-    1672
-   ],
-   "font": "Lilita One"
-  },
-  {
-   "box": [
-    458,
-    1788,
-    649,
-    2068
-   ],
-   "font": "Lilita One"
-  },
-  {
-   "box": [
-    1076,
-    627,
-    1908,
-    903
-   ],
-   "font": "Oswald SemiBold"
-  },
-  {
-   "box": [
-    1076,
-    1156,
-    1908,
-    1414
-   ],
-   "font": "Oswald SemiBold"
-  },
-  {
-   "box": [
-    547,
-    2454,
-    1287,
-    2653
-   ],
-   "font": "Knewave"
-  },
-  {
-   "box": [
-    651,
-    2696,
-    1223,
-    2900
-   ],
-   "font": "Knewave"
-  },
-  {
-   "box": [
-    25,
-    3254,
-    2279,
-    3363
-   ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [
   {
    "box": [
-    321,
-    2284,
-    1513,
-    3016
+    652,
+    1,
+    913,
+    3815
    ],
-   "how": "COFFEE SHOP panel: our own drawing of the sign shape"
+   "how": "pole, cap, rail, light windows: constructed at their measured positions"
+  },
+  {
+   "box": [
+    89,
+    232,
+    565,
+    2712
+   ],
+   "how": "LEONS pillows: outlines traced, then smoothed as the convex fittings they are"
+  },
+  {
+   "box": [
+    192,
+    2882,
+    1474,
+    3740
+   ],
+   "how": "COFFEE SHOP shield: outline traced, debris on the top edge opened out, smoothed as the convex panel it is"
   }
  ],
  "substrate_layers": []

@@ -18,25 +18,25 @@
    "box": [
     990,
     1978,
-    1793,
+    1790,
     2137
    ],
    "letters": 10,
    "cap_in": 0.37,
    "tilt_deg": -0.12,
    "jitter": 0.011,
-   "inflect_per_in": 2.5,
-   "peaks_per_cap": 3.51,
+   "inflect_per_in": 2.4,
+   "peaks_per_cap": 3.52,
    "rise_in": 0.006,
    "wobble_limit": 4.1,
-   "typeset": "TeX Gyre Heros",
+   "typeset": "TeX Gyre Heros; R21 reasons a+b: ~11 px cap, Helvetica as printed",
    "flags": []
   },
   {
    "layer": "(184, 134, 11)",
    "box": [
     460,
-    1783,
+    1786,
     2320,
     1908
    ],
@@ -44,24 +44,24 @@
    "cap_in": 0.303,
    "tilt_deg": 0.02,
    "jitter": 0.015,
-   "inflect_per_in": 2.7,
-   "peaks_per_cap": 2.95,
+   "inflect_per_in": 2.6,
+   "peaks_per_cap": 2.89,
    "rise_in": 0.002,
    "wobble_limit": 4.2,
-   "typeset": "TeX Gyre Heros",
+   "typeset": "TeX Gyre Heros; R21 reasons a+b: ~11 px cap, Helvetica as printed",
    "flags": []
   }
  ],
  "strokes": {
-  "fail_pct": 0.0,
-  "warn_pct": 11.18
+  "fail_pct": 0.03,
+  "warn_pct": 11.06
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
   "EXEMPT [55, 56, 2724, 1482]: hand lettering from the matchbook (traced); the word rises ~15 deg by design",
   "EXEMPT [636, 1039, 2455, 1592]: LEVEL only: the tagline runs on the matchbook's 15-deg script angle",
-  "STROKES: 11.18% of linework < 0.03 in"
+  "STROKES: 11.06% of linework < 0.03 in"
  ],
  "exemptions": [
   {
@@ -91,7 +91,7 @@
     2455,
     1592
    ],
-   "font": "TeX Gyre Heros (rotated on the script angle)"
+   "font": "TeX Gyre Heros (rotated on the script angle); R21 reasons a+b: ~5 px cap, Helvetica as printed"
   },
   {
    "box": [
@@ -100,7 +100,7 @@
     2326,
     1914
    ],
-   "font": "TeX Gyre Heros"
+   "font": "TeX Gyre Heros; R21 reasons a+b: ~11 px cap, Helvetica as printed"
   },
   {
    "box": [
@@ -109,7 +109,7 @@
     1796,
     2143
    ],
-   "font": "TeX Gyre Heros"
+   "font": "TeX Gyre Heros; R21 reasons a+b: ~11 px cap, Helvetica as printed"
   }
  ],
  "redrawn": [

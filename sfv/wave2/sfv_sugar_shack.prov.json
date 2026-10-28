@@ -2,30 +2,30 @@
  "typeset": [
   [
    [
-    864,
+    832,
     26,
-    2287,
+    2319,
     168
    ],
-   "TeX Gyre Schola Bold"
+   "TeX Gyre Schola Bold; R21 reason a: ~13 px cap on the coupon photo"
   ],
   [
    [
-    852,
+    822,
     192,
-    2299,
+    2329,
     334
    ],
-   "TeX Gyre Schola Bold"
+   "TeX Gyre Schola Bold; R21 reason a: ~13 px cap on the coupon photo"
   ],
   [
    [
-    620,
-    429,
-    894,
-    519
+    586,
+    420,
+    860,
+    511
    ],
-   "TeX Gyre Schola Bold"
+   "TeX Gyre Schola Bold; R21 reason a: ~10 px cap on the coupon photo"
   ],
   [
    [
@@ -34,7 +34,7 @@
     2576,
     1740
    ],
-   "Righteous"
+   "Righteous; R21 reason a: ~13 px cap on the coupon photo"
   ],
   [
    [
@@ -43,7 +43,7 @@
     2354,
     1914
    ],
-   "TeX Gyre Schola Bold"
+   "TeX Gyre Schola Bold; R21 reason a: ~12 px cap on the coupon photo"
   ],
   [
    [
@@ -52,7 +52,7 @@
     3126,
     2098
    ],
-   "Jost SemiBold"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
  "exempt": [
@@ -66,7 +66,20 @@
    "hand lettering: the wood-plank logo from the 1970s coupon (traced)"
   ]
  ],
- "redrawn": [],
+ "redrawn": [
+  [
+   [
+    527,
+    361,
+    919,
+    570
+   ],
+   "THE moved 40 units left, 10 up to clear the logo by the gap floor (type is no longer print-cleaned, L44)"
+  ]
+ ],
+ "rules": [
+  "R21"
+ ],
  "ink": "#262220",
  "print_width_in": 10.503,
  "print_height_in": 7.08

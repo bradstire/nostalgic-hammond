@@ -1,64 +1,21 @@
 {
- "typeset": [
-  [
-   [
-    117,
-    24,
-    1922,
-    243
-   ],
-   "Knewave"
-  ],
-  [
-   [
-    79,
-    317,
-    3072,
-    748
-   ],
-   "Knewave"
-  ],
-  [
-   [
-    115,
-    898,
-    3036,
-    1098
-   ],
-   "Knewave"
-  ],
-  [
-   [
-    753,
-    1143,
-    2398,
-    1343
-   ],
-   "Knewave"
-  ],
-  [
-   [
-    25,
-    1522,
-    3126,
-    1620
-   ],
-   "Jost SemiBold"
-  ]
- ],
+ "typeset": [],
  "exempt": [
   [
    [
-    79,
     24,
-    3072,
-    1343
+    25,
+    3126,
+    1914
    ],
-   "LEVEL only: Knewave is a brush italic whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
+   "the 1972 ad traced as printed (hand-lettered headline, sombrero, the ad's own type) - R21"
   ]
  ],
  "redrawn": [],
+ "rules": [
+  "R21"
+ ],
  "ink": "#8B0000",
  "print_width_in": 10.503,
- "print_height_in": 5.483
+ "print_height_in": 6.463
 }

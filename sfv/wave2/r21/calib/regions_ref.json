@@ -1,0 +1,165 @@
+[
+ {
+  "town": "Hattiesburg",
+  "design": "Hub City 1966 ad",
+  "what": "HUB CITY DRAG RACEWAY",
+  "file": "/home/claude/print-assets/hattiesburg/hubcity_ad_front_v3.png",
+  "box": [
+   63,
+   31,
+   2615,
+   252
+  ],
+  "kind": "print scan, SR"
+ },
+ {
+  "town": "Hattiesburg",
+  "design": "Hub City 1966 ad",
+  "what": "by popular demand: FORD vs. CHEVY!",
+  "file": "/home/claude/print-assets/hattiesburg/hubcity_ad_front_v3.png",
+  "box": [
+   347,
+   490,
+   2867,
+   650
+  ],
+  "kind": "print scan, SR"
+ },
+ {
+  "town": "Hattiesburg",
+  "design": "Culpepper 1968 ad",
+  "what": "CULPEPPER BODY & PAINT SHOP",
+  "file": "/home/claude/print-assets/hattiesburg/wave2/culpepper_full_black.png",
+  "box": [
+   19,
+   33,
+   3050,
+   1174
+  ],
+  "kind": "print scan"
+ },
+ {
+  "town": "Hattiesburg",
+  "design": "Culpepper 1968 ad",
+  "what": "113 N. Tipton",
+  "file": "/home/claude/print-assets/hattiesburg/wave2/culpepper_full_black.png",
+  "box": [
+   540,
+   3586,
+   2660,
+   3880
+  ],
+  "kind": "print scan"
+ },
+ {
+  "town": "Hattiesburg",
+  "design": "Sack's 1980 ad",
+  "what": "SACK'S ARMY STORE",
+  "file": "/home/claude/print-assets/hattiesburg/wave2/sacks_front_black.png",
+  "box": [
+   185,
+   31,
+   3020,
+   240
+  ],
+  "kind": "print scan"
+ },
+ {
+  "town": "Hattiesburg",
+  "design": "Beverly Drive-In",
+  "what": "Beverly script",
+  "file": "/home/claude/print-assets/hattiesburg/beverly_front_navy_v2.png",
+  "box": [
+   44,
+   0,
+   3088,
+   866
+  ],
+  "kind": "sign/print script"
+ },
+ {
+  "town": "Hammond v2",
+  "design": "Casa de Fresa mark",
+  "what": "CASA de FRESA / hotel",
+  "file": "/home/claude/print-assets/hammond/wave2/casa_mark_v2.png",
+  "box": [
+   127,
+   342,
+   2505,
+   1625
+  ],
+  "kind": "matchbook",
+  "invert": true
+ },
+ {
+  "town": "Hammond v2",
+  "design": "Casa strawberries",
+  "what": "CASA de FRESA HOTEL headline",
+  "file": "/home/claude/print-assets/hammond/wave2/casa_strawberries_v2_green.png",
+  "box": [
+   0,
+   0,
+   3834,
+   339
+  ],
+  "kind": "matchbook"
+ },
+ {
+  "town": "Hammond v2",
+  "design": "Fiesta Club v4",
+  "what": "FIESTA block",
+  "file": "/home/claude/print-assets/hammond/wave2/fiesta_club_logo_v4.png",
+  "box": [
+   130,
+   20,
+   1400,
+   625
+  ],
+  "kind": "print",
+  "invert": true
+ },
+ {
+  "town": "Hammond v2",
+  "design": "Galaxy pass",
+  "what": "galaxy drive in theatre script",
+  "file": "/home/claude/print-assets/hammond/wave2/galaxy_pass_ink_v2.png",
+  "box": [
+   63,
+   202,
+   2575,
+   530
+  ],
+  "kind": "print script"
+ },
+ {
+  "town": "Hammond v2",
+  "design": "Magnolia v5",
+  "what": "Magnolia script",
+  "file": "/home/claude/print-assets/hammond/wave2/magnolia_sign_hammond_v5.png",
+  "box": [
+   194,
+   694,
+   2488,
+   1380
+  ],
+  "kind": "sign script",
+  "color": [
+   222,
+   66,
+   40
+  ]
+ },
+ {
+  "town": "Hammond v2",
+  "design": "Toggery logo v3",
+  "what": "Toggery logotype",
+  "file": "/home/claude/print-assets/hammond/wave2/toggery_logo_leftchest_wine_v3.png",
+  "box": [
+   0,
+   0,
+   1050,
+   556
+  ],
+  "kind": "print"
+ }
+]

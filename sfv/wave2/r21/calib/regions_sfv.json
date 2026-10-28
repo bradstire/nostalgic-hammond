@@ -1,0 +1,173 @@
+[
+ {
+  "town": "SFV v2",
+  "design": "sfv_dons",
+  "what": "Don's logo (+chef)",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_dons.png",
+  "box": [
+   25,
+   24,
+   2686,
+   1332
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_dons",
+  "what": "RESTAURANT AND COFFEE SHOP",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_dons.png",
+  "box": [
+   720,
+   1545,
+   1986,
+   2186
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_fantasy_faire_1967",
+  "what": "FF block A",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_fantasy_faire_1967.png",
+  "box": [
+   88,
+   24,
+   2962,
+   880
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_fantasy_faire_1967",
+  "what": "FF block B",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_fantasy_faire_1967.png",
+  "box": [
+   25,
+   918,
+   3025,
+   1667
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_fantasy_faire_1967",
+  "what": "FF block C",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_fantasy_faire_1967.png",
+  "box": [
+   302,
+   1775,
+   2748,
+   1985
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_gemco_membership",
+  "what": "GEMCO (store letters)",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_gemco_membership.png",
+  "box": [
+   347,
+   514,
+   1633,
+   746
+  ],
+  "invert": true
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_mikes_pizza",
+  "what": "Mike's script",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_mikes_pizza.png",
+  "box": [
+   306,
+   25,
+   1490,
+   370
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_mikes_pizza",
+  "what": "PIZZA",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_mikes_pizza.png",
+  "box": [
+   1635,
+   32,
+   2781,
+   346
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_moby_disc",
+  "what": "MOBY DISC RECORDS arc",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_moby_disc.png",
+  "box": [
+   57,
+   25,
+   2795,
+   1000
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_moby_disc",
+  "what": "A Whale of a Store!",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_moby_disc.png",
+  "box": [
+   52,
+   2519,
+   1181,
+   2891
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_sasch",
+  "what": "Sasch",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_sasch.png",
+  "box": [
+   55,
+   56,
+   2724,
+   1482
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_sugar_shack",
+  "what": "Sugar Shack plank logo",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_sugar_shack.png",
+  "box": [
+   637,
+   378,
+   2514,
+   1535
+  ]
+ },
+ {
+  "town": "SFV v2",
+  "design": "sfv_fm_station",
+  "what": "FM (traced)",
+  "file": "/home/claude/print-assets/sfv/wave2/sfv_fm_station.png",
+  "box": [
+   900,
+   50,
+   2100,
+   920
+  ],
+  "invert": true
+ },
+ {
+  "town": "SFV v1",
+  "design": "sfv_fm_station",
+  "what": "FM (v1 brush redraw)",
+  "file": "/home/claude/sfv2/v1_masters/sfv_fm_station.png",
+  "box": [
+   900,
+   50,
+   2100,
+   920
+  ],
+  "invert": true
+ }
+]

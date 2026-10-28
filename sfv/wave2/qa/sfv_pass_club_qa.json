@@ -29,7 +29,7 @@
    "peaks_per_cap": 6.3,
    "rise_in": 0.004,
    "wobble_limit": 3.7,
-   "typeset": "Rye",
+   "typeset": "Rye; R21 reason a: no lettering in any source (the 1963 photo shows no sign text)",
    "flags": []
   },
   {
@@ -48,7 +48,7 @@
    "peaks_per_cap": 3.14,
    "rise_in": 0.0,
    "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
@@ -67,7 +67,7 @@
    "peaks_per_cap": 2.26,
    "rise_in": 0.009,
    "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
@@ -86,7 +86,7 @@
    "peaks_per_cap": 3.57,
    "rise_in": 0.0,
    "wobble_limit": 4.0,
-   "typeset": "Rye",
+   "typeset": "Rye; R21 reason a: no lettering in any source (the 1963 photo shows no sign text)",
    "flags": []
   },
   {
@@ -105,7 +105,7 @@
    "peaks_per_cap": 3.81,
    "rise_in": 0.0,
    "wobble_limit": 4.0,
-   "typeset": "Rye",
+   "typeset": "Rye; R21 reason a: no lettering in any source (the 1963 photo shows no sign text)",
    "flags": []
   }
  ],
@@ -127,7 +127,7 @@
     2769,
     263
    ],
-   "font": "Rye"
+   "font": "Rye; R21 reason a: no lettering in any source (the 1963 photo shows no sign text)"
   },
   {
    "box": [
@@ -136,7 +136,7 @@
     2751,
     1997
    ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [

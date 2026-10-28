@@ -2,45 +2,39 @@
  "typeset": [
   [
    [
-    163,
     24,
-    2988,
-    614
+    24,
+    2887,
+    622
    ],
-   "Pacifico (the Cruise Night script)"
+   "Pacifico (the Cruise Night script); R21 reason a: neon script ~18 px cap in a night photo"
   ],
   [
    [
-    969,
-    711,
-    2182,
-    936
+    167,
+    810,
+    2744,
+    933
    ],
-   "Oswald Bold"
-  ],
-  [
-   [
-    25,
-    1092,
-    3127,
-    1205
-   ],
-   "Jost SemiBold"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
  "exempt": [
   [
    [
-    163,
     24,
-    2988,
-    614
+    24,
+    2887,
+    622
    ],
    "LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
   ]
  ],
  "redrawn": [],
+ "rules": [
+  "R21"
+ ],
  "ink": "#F4ECDD",
- "print_width_in": 10.503,
- "print_height_in": 4.097
+ "print_width_in": 9.703,
+ "print_height_in": 3.193
 }

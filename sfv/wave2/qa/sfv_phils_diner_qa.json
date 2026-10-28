@@ -47,7 +47,7 @@
    "peaks_per_cap": 3.07,
    "rise_in": 0.0,
    "wobble_limit": 4.4,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
@@ -66,7 +66,7 @@
    "peaks_per_cap": 2.31,
    "rise_in": 0.001,
    "wobble_limit": 4.4,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
@@ -103,7 +103,7 @@
    "peaks_per_cap": 1.64,
    "rise_in": 0.004,
    "wobble_limit": 4.9,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
@@ -135,7 +135,7 @@
     1465,
     1668
    ],
-   "font": "Oswald Bold"
+   "font": "Oswald Bold; R21 reason a: sign letters ~15-18 px cap in the photo"
   },
   {
    "box": [
@@ -144,7 +144,7 @@
     2627,
     1664
    ],
-   "font": "Oswald Bold"
+   "font": "Oswald Bold; R21 reason a: sign letters ~15-18 px cap in the photo"
   },
   {
    "box": [
@@ -153,7 +153,7 @@
     1859,
     226
    ],
-   "font": "Oswald Bold, sheared 10 deg"
+   "font": "Oswald Bold, sheared 10 deg; R21 reason a: sign letters ~15-18 px cap in the photo"
   },
   {
    "box": [
@@ -162,7 +162,7 @@
     1893,
     402
    ],
-   "font": "Oswald Bold, sheared 10 deg"
+   "font": "Oswald Bold, sheared 10 deg; R21 reason a: sign letters ~15-18 px cap in the photo"
   },
   {
    "box": [
@@ -171,7 +171,7 @@
     3126,
     2009
    ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [

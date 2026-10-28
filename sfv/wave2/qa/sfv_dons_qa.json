@@ -1,6 +1,6 @@
 {
  "file": "sfv_dons.png",
- "print_width_in": 10.503,
+ "print_width_in": 9.037,
  "ppi": 300.0,
  "layers": [
   [
@@ -16,156 +16,101 @@
   {
    "layer": "(38, 34, 32)",
    "box": [
-    918,
-    1771,
-    2234,
-    1951
-   ],
-   "letters": 10,
-   "cap_in": 0.587,
-   "tilt_deg": -0.03,
-   "jitter": 0.003,
-   "inflect_per_in": 1.5,
-   "peaks_per_cap": 4.31,
-   "rise_in": 0.002,
-   "wobble_limit": 3.8,
-   "typeset": "Oswald SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "(38, 34, 32)",
-   "box": [
-    948,
-    1369,
-    2204,
-    1549
-   ],
-   "letters": 10,
-   "cap_in": 0.59,
-   "tilt_deg": -0.06,
-   "jitter": 0.006,
-   "inflect_per_in": 1.7,
-   "peaks_per_cap": 4.11,
-   "rise_in": 0.004,
-   "wobble_limit": 3.8,
-   "typeset": "Oswald SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "(38, 34, 32)",
-   "box": [
-    1450,
-    1604,
-    1699,
-    1718
-   ],
-   "letters": 3,
-   "cap_in": 0.37,
-   "tilt_deg": -0.95,
-   "jitter": 0.0,
-   "inflect_per_in": 2.8,
-   "peaks_per_cap": 3.65,
-   "rise_in": 0.014,
-   "wobble_limit": 4.1,
-   "typeset": "Oswald SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "(38, 34, 32)",
-   "box": [
-    31,
-    2051,
-    1791,
-    2137
-   ],
-   "letters": 20,
-   "cap_in": 0.257,
-   "tilt_deg": -0.0,
-   "jitter": 0.01,
-   "inflect_per_in": 2.7,
-   "peaks_per_cap": 2.7,
-   "rise_in": 0.0,
-   "wobble_limit": 4.4,
-   "typeset": "Jost SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "(38, 34, 32)",
-   "box": [
-    2082,
-    2051,
-    3084,
-    2137
+    499,
+    2330,
+    1300,
+    2398
    ],
    "letters": 12,
-   "cap_in": 0.257,
-   "tilt_deg": -0.1,
-   "jitter": 0.021,
-   "inflect_per_in": 3.7,
-   "peaks_per_cap": 3.58,
-   "rise_in": 0.006,
-   "wobble_limit": 4.4,
-   "typeset": "Jost SemiBold",
+   "cap_in": 0.212,
+   "tilt_deg": -0.03,
+   "jitter": 0.008,
+   "inflect_per_in": 2.8,
+   "peaks_per_cap": 2.58,
+   "rise_in": 0.002,
+   "wobble_limit": 4.6,
+   "typeset": "Jost SemiBold (the menu address line, its own words, re-set); R21 reason a: ~8 px cap in the pull",
+   "flags": []
+  },
+  {
+   "layer": "(38, 34, 32)",
+   "box": [
+    1518,
+    2330,
+    2632,
+    2398
+   ],
+   "letters": 17,
+   "cap_in": 0.207,
+   "tilt_deg": 0.01,
+   "jitter": 0.002,
+   "inflect_per_in": 2.7,
+   "peaks_per_cap": 2.93,
+   "rise_in": 0.001,
+   "wobble_limit": 4.6,
+   "typeset": "Jost SemiBold (the menu address line, its own words, re-set); R21 reason a: ~8 px cap in the pull",
+   "flags": []
+  },
+  {
+   "layer": "(38, 34, 32)",
+   "box": [
+    73,
+    2332,
+    420,
+    2397
+   ],
+   "letters": 5,
+   "cap_in": 0.213,
+   "tilt_deg": 0.25,
+   "jitter": 0.006,
+   "inflect_per_in": 2.0,
+   "peaks_per_cap": 1.74,
+   "rise_in": 0.005,
+   "wobble_limit": 4.6,
+   "typeset": "Jost SemiBold (the menu address line, its own words, re-set); R21 reason a: ~8 px cap in the pull",
    "flags": []
   }
  ],
  "strokes": {
-  "fail_pct": 0.0,
-  "warn_pct": 3.02
+  "fail_pct": 0.03,
+  "warn_pct": 3.59
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
-  "EXEMPT [307, 25, 2770, 1235]: hand lettering + chef illustration from the menu cover (traced, cleaned)",
-  "STROKES: 3.02% of linework < 0.03 in"
+  "EXEMPT [25, 24, 2686, 1332]: hand lettering + chef illustration from the menu cover (traced, cleaned)",
+  "EXEMPT [720, 1545, 1985, 2186]: hand lettering from the menu cover: RESTAURANT AND COFFEE SHOP (traced, R21)",
+  "STROKES: 3.59% of linework < 0.03 in"
  ],
  "exemptions": [
   {
    "box": [
-    307,
     25,
-    2770,
-    1235
+    24,
+    2686,
+    1332
    ],
    "reason": "hand lettering + chef illustration from the menu cover (traced, cleaned)"
+  },
+  {
+   "box": [
+    720,
+    1545,
+    1985,
+    2186
+   ],
+   "reason": "hand lettering from the menu cover: RESTAURANT AND COFFEE SHOP (traced, R21)"
   }
  ],
  "typeset": [
   {
    "box": [
-    942,
-    1363,
-    2210,
-    1554
+    66,
+    2324,
+    2638,
+    2416
    ],
-   "font": "Oswald SemiBold"
-  },
-  {
-   "box": [
-    1447,
-    1599,
-    1705,
-    1721
-   ],
-   "font": "Oswald SemiBold"
-  },
-  {
-   "box": [
-    912,
-    1765,
-    2240,
-    1957
-   ],
-   "font": "Oswald SemiBold"
-  },
-  {
-   "box": [
-    25,
-    2048,
-    3126,
-    2155
-   ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (the menu address line, its own words, re-set); R21 reason a: ~8 px cap in the pull"
   }
  ],
  "redrawn": [],

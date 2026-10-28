@@ -16,70 +16,52 @@
   {
    "layer": "(139, 0, 0)",
    "box": [
-    1568,
-    94,
-    2561,
-    340
-   ],
-   "letters": 5,
-   "cap_in": 0.81,
-   "tilt_deg": 0.17,
-   "jitter": 0.003,
-   "inflect_per_in": 1.5,
-   "peaks_per_cap": 3.58,
-   "rise_in": 0.01,
-   "wobble_limit": 3.7,
-   "typeset": "League Spartan Black (x0.92)",
-   "flags": []
-  },
-  {
-   "layer": "(139, 0, 0)",
-   "box": [
     30,
-    3679,
+    3682,
     1582,
-    3777
+    3775
    ],
    "letters": 15,
    "cap_in": 0.293,
    "tilt_deg": -0.02,
-   "jitter": 0.025,
-   "inflect_per_in": 3.7,
-   "peaks_per_cap": 2.81,
+   "jitter": 0.027,
+   "inflect_per_in": 2.0,
+   "peaks_per_cap": 2.64,
    "rise_in": 0.002,
    "wobble_limit": 4.3,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "(139, 0, 0)",
    "box": [
     1932,
-    3679,
-    3122,
-    3777
+    3682,
+    3120,
+    3775
    ],
    "letters": 12,
    "cap_in": 0.293,
-   "tilt_deg": -0.11,
-   "jitter": 0.008,
-   "inflect_per_in": 4.3,
-   "peaks_per_cap": 3.2,
-   "rise_in": 0.008,
+   "tilt_deg": -0.05,
+   "jitter": 0.006,
+   "inflect_per_in": 2.3,
+   "peaks_per_cap": 2.85,
+   "rise_in": 0.004,
    "wobble_limit": 4.3,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
  "strokes": {
   "fail_pct": 0.15,
-  "warn_pct": 1.16
+  "warn_pct": 1.13
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
   "EXEMPT [285, 363, 2866, 3563]: illustration: the menu chef (traced, one-colour)",
-  "EXEMPT [306, 25, 1490, 370]: hand lettering: the menu's 'Mike's' script (traced)"
+  "EXEMPT [306, 25, 1490, 370]: hand lettering: the menu's 'Mike's' script (traced)",
+  "EXEMPT [1636, 32, 2781, 346]: hand lettering: the menu's PIZZA (traced in place, R21)"
  ],
  "exemptions": [
   {
@@ -99,18 +81,18 @@
     370
    ],
    "reason": "hand lettering: the menu's 'Mike's' script (traced)"
+  },
+  {
+   "box": [
+    1636,
+    32,
+    2781,
+    346
+   ],
+   "reason": "hand lettering: the menu's PIZZA (traced in place, R21)"
   }
  ],
  "typeset": [
-  {
-   "box": [
-    1563,
-    92,
-    2565,
-    343
-   ],
-   "font": "League Spartan Black (x0.92)"
-  },
   {
    "box": [
     1039,
@@ -118,7 +100,7 @@
     2076,
     3500
    ],
-   "font": "Jost Bold"
+   "font": "Jost Bold; R21 reason a: ~7 px cap in the menu photo"
   },
   {
    "box": [
@@ -127,9 +109,19 @@
     3126,
     3781
    ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
- "redrawn": [],
+ "redrawn": [
+  {
+   "box": [
+    1497,
+    -10,
+    3002,
+    423
+   ],
+   "how": "PIZZA: the R21 trace replaces the v1 re-set (League Spartan Black); the old letters are retired on purpose"
+  }
+ ],
  "substrate_layers": []
 }

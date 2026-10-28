@@ -7,7 +7,7 @@
     2455,
     1592
    ],
-   "TeX Gyre Heros (rotated on the script angle)"
+   "TeX Gyre Heros (rotated on the script angle); R21 reasons a+b: ~5 px cap, Helvetica as printed"
   ],
   [
    [
@@ -16,7 +16,7 @@
     2326,
     1914
    ],
-   "TeX Gyre Heros"
+   "TeX Gyre Heros; R21 reasons a+b: ~11 px cap, Helvetica as printed"
   ],
   [
    [
@@ -25,7 +25,7 @@
     1796,
     2143
    ],
-   "TeX Gyre Heros"
+   "TeX Gyre Heros; R21 reasons a+b: ~11 px cap, Helvetica as printed"
   ]
  ],
  "exempt": [
@@ -58,6 +58,9 @@
    ],
    "keyline: true offset of the traced letters (rebuilt, not traced)"
   ]
+ ],
+ "rules": [
+  "R21"
  ],
  "ink": "#B8860B",
  "print_width_in": 9.267,

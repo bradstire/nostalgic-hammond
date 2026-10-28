@@ -2,21 +2,12 @@
  "typeset": [
   [
    [
-    321,
-    506,
-    1659,
-    754
-   ],
-   "Libre Caslon Text Bold"
-  ],
-  [
-   [
     1127,
     777,
     2871,
     1766
    ],
-   "Jost Bold (rotated with the band)"
+   "Jost Bold (rotated with the band); R21 reason a: ~9 px cap on the only card image"
   ],
   [
    [
@@ -25,7 +16,7 @@
     2768,
     1723
    ],
-   "Jost Medium (rotated with the band)"
+   "Jost Medium (rotated with the band); R21 reason a: ~6 px cap on the only card image"
   ],
   [
    [
@@ -34,10 +25,19 @@
     2579,
     2162
    ],
-   "Jost SemiBold"
+   "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
  "exempt": [
+  [
+   [
+    348,
+    515,
+    1632,
+    745
+   ],
+   "GEMCO: the store-sign letters, traced (R21), spaced as on the membership card"
+  ],
   [
    [
     430,
@@ -58,6 +58,9 @@
    ],
    "card outline: constructed"
   ]
+ ],
+ "rules": [
+  "R21"
  ],
  "ink": "#003366",
  "print_width_in": 10.2,
