@@ -1,0 +1,125 @@
+{
+ "file": "sfv_june_ellens.png",
+ "print_width_in": 10.503,
+ "ppi": 300.0,
+ "layers": [
+  [
+   244,
+   236,
+   221
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    975,
+    717,
+    2176,
+    930
+   ],
+   "letters": 6,
+   "cap_in": 0.695,
+   "tilt_deg": 0.07,
+   "jitter": 0.01,
+   "inflect_per_in": 1.0,
+   "peaks_per_cap": 3.06,
+   "rise_in": 0.005,
+   "wobble_limit": 3.8,
+   "typeset": "Oswald Bold",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    31,
+    1098,
+    1478,
+    1198
+   ],
+   "letters": 13,
+   "cap_in": 0.303,
+   "tilt_deg": 0.09,
+   "jitter": 0.017,
+   "inflect_per_in": 2.0,
+   "peaks_per_cap": 2.75,
+   "rise_in": 0.007,
+   "wobble_limit": 4.2,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    1804,
+    1098,
+    3068,
+    1198
+   ],
+   "letters": 11,
+   "cap_in": 0.317,
+   "tilt_deg": -0.11,
+   "jitter": 0.022,
+   "inflect_per_in": 2.0,
+   "peaks_per_cap": 2.72,
+   "rise_in": 0.008,
+   "wobble_limit": 4.2,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.01
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [163, 24, 2988, 614]: LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    163,
+    24,
+    2988,
+    614
+   ],
+   "reason": "LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    163,
+    24,
+    2988,
+    614
+   ],
+   "font": "Pacifico (the Cruise Night script)"
+  },
+  {
+   "box": [
+    969,
+    711,
+    2182,
+    936
+   ],
+   "font": "Oswald Bold"
+  },
+  {
+   "box": [
+    25,
+    1092,
+    3127,
+    1205
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

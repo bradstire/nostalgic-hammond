@@ -372,3 +372,22 @@ def print_clean(mask, ppi, speck_in=0.04, hole_in=0.035, hair_in=0.02, counter_i
         if close.any():
             m[y0:y1, x0:x1][close] = False
     return drop_specks(m)
+
+
+def T_shaped(text, font, size, var=None):
+    """Whole-string shaping (raqm: ligatures, contextual joins) for connecting scripts. Rendered at 1200 px,
+    traced (font outline at high res), scaled to `size`. Baseline at y=0, pen at x=0."""
+    from PIL import ImageFont, ImageDraw
+    big = 1200
+    f = ImageFont.truetype(fpath(font), big)
+    if var:
+        f.set_variation_by_axes(var)
+    W = int(f.getlength(text) + 2 * big)
+    H = int(big * 3)
+    im = Image.new('L', (W, H), 0)
+    ImageDraw.Draw(im).text((big, int(big * 1.8)), text, font=f, fill=255, anchor='ls')
+    import numpy as np
+    g = vtype.mask_to_geom(np.array(im) > 127)
+    g = affinity.translate(g, -big, -int(big * 1.8))
+    s = size / big
+    return affinity.scale(g, s, s, origin=(0, 0)), f.getlength(text) * s

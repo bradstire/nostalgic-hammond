@@ -1095,6 +1095,73 @@ def phils_diner():
     return a
 
 
+# ------------------------------------------------------------------ C23 The Sugar Shack
+@build
+def sugar_shack():
+    """The Sugar Shack, 12458 Magnolia Blvd at Whitsett, North Hollywood (1970s teenage night club, '20 and
+    under welcome'; now Joe Peep's Pizza). Sources: VRM's Aug 18 2017 post (211/88/19) and Rick Watts' 1970s
+    coupon in the Southern California Memories group (114/40/10), captured 1:1 from the browser (src/C23).
+    The wood-plank SUGAR SHACK logo is traced from a x4 Real-ESRGAN upscale (hand lettering, exempt); the
+    coupon's other lines are re-set: TeX Gyre Schola Bold (Century, as printed) and Righteous for the
+    disco line. No phone number, no hours."""
+    a = Art('sfv_sugar_shack')
+    sc = 2.35
+    logo = affinity.scale(mask_geom(WORK + '/ss_logo_mask.png', smooth=None), sc, sc, origin=(0, 0))
+    lb = logo.bounds
+    cx = (lb[0] + lb[2]) / 2
+    t1, _ = T("L.A.'s Most Popular", 'texgyreschola-bold.otf', cap=120, track=0.0)
+    t2, _ = T('Teenage Night Club', 'texgyreschola-bold.otf', cap=120, track=0.0)
+    t1 = move(t1, cx=cx, bottom=lb[1] - 260)
+    t2 = move(t2, cx=cx, y=t1.bounds[3] + 40)
+    a.add(t1, 'typeset', 'TeX Gyre Schola Bold')
+    a.add(t2, 'typeset', 'TeX Gyre Schola Bold')
+    th, _ = T('THE', 'texgyreschola-bold.otf', cap=95, track=0.04)
+    th = move(th, x=lb[0] - 20, y=lb[1] + 60)
+    a.add(th, 'typeset', 'TeX Gyre Schola Bold')
+    a.add(logo)
+    a.declare('exempt', logo.envelope, 'hand lettering: the wood-plank logo from the 1970s coupon (traced)')
+    d1, _ = T('DANCING · GAMES · SNACKS', 'Righteous-Regular.ttf', cap=118, track=0.04)
+    d1 = move(d1, cx=cx, y=lb[3] + 120)
+    a.add(d1, 'typeset', 'Righteous')
+    d2, _ = T('20 and Under Welcome!', 'texgyreschola-bold.otf', cap=110, track=0.0)
+    d2 = move(d2, cx=cx, y=d1.bounds[3] + 90)
+    a.add(d2, 'typeset', 'TeX Gyre Schola Bold')
+    ad, _ = T('12458 MAGNOLIA BLVD.  ·  NORTH HOLLYWOOD', 'Jost[wght].ttf', cap=88, var=[600], track=0.14)
+    ad = move(ad, cx=cx, y=d2.bounds[3] + 120)
+    a.add(ad, 'typeset', 'Jost SemiBold')
+    a.ink = 'purple'
+    a.clean = True
+    return a
+
+
+# ------------------------------------------------------------------ C38 June Ellen's
+@build
+def june_ellens():
+    """June Ellen's donuts, Van Nuys Blvd (one of the cruising turnarounds; 'the June Ellen's side' of the
+    boulevard, Daily Sundial 1973-11-06). Source: the rooftop script sign in VRM's post (photo by Rick
+    McCloskey, 1972: the photograph itself is not used, only the business's sign script, re-set). 'June
+    Ellen's' set in Pacifico (the script on the Cruise Night tee, so the two pair); the rest in Oswald and Jost. Companion to
+    the Cruise Night tee."""
+    a = Art('sfv_june_ellens')
+    s1, adv1 = T_shaped("June Ellen", 'Pacifico-Regular.ttf', size=560)     # whole-string shaping keeps the script joins
+    s2, _ = T("’s", 'Pacifico-Regular.ttf', size=560, track=0.04)
+    sc = unary_union([s1, affinity.translate(s2, adv1 - 30, 0)])     # apostrophe tucked to the n, clear of it
+    sc = move(sc, x=0, y=0)
+    a.add(sc, 'typeset', 'Pacifico (the Cruise Night script)')
+    a.declare('exempt', sc.envelope, "LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate")
+    W = width(sc)
+    cx = sc.bounds[0] + W / 2
+    dn, _ = T('DONUTS', 'Oswald[wght].ttf', cap=210, var=[700], track=0.3)
+    dn = move(dn, cx=cx, y=sc.bounds[3] + 110)
+    a.add(dn, 'typeset', 'Oswald Bold')
+    y = dn.bounds[3] + 90
+    a.add(box(cx - W * 0.36, y, cx + W * 0.36, y + 14))
+    t2, _ = T('THE TURNAROUND  ·  VAN NUYS BLVD.', 'Jost[wght].ttf', cap=92, var=[600], track=0.16)
+    t2 = move(t2, cx=cx, y=y + 80)
+    a.add(t2, 'typeset', 'Jost SemiBold')
+    return a
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for name, fn in BUILDS.items():

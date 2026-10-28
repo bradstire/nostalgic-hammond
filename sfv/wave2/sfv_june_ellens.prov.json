@@ -1,0 +1,46 @@
+{
+ "typeset": [
+  [
+   [
+    163,
+    24,
+    2988,
+    614
+   ],
+   "Pacifico (the Cruise Night script)"
+  ],
+  [
+   [
+    969,
+    711,
+    2182,
+    936
+   ],
+   "Oswald Bold"
+  ],
+  [
+   [
+    25,
+    1092,
+    3127,
+    1205
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    163,
+    24,
+    2988,
+    614
+   ],
+   "LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
+  ]
+ ],
+ "redrawn": [],
+ "ink": "#F4ECDD",
+ "print_width_in": 10.503,
+ "print_height_in": 4.097
+}

@@ -1,0 +1,267 @@
+{
+ "file": "sfv_sugar_shack.png",
+ "print_width_in": 10.503,
+ "ppi": 300.0,
+ "layers": [
+  [
+   58,
+   16,
+   85
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(58, 16, 85)",
+   "box": [
+    857,
+    197,
+    2294,
+    329
+   ],
+   "letters": 16,
+   "cap_in": 0.33,
+   "tilt_deg": 0.03,
+   "jitter": 0.009,
+   "inflect_per_in": 4.2,
+   "peaks_per_cap": 3.39,
+   "rise_in": 0.002,
+   "wobble_limit": 4.2,
+   "typeset": "TeX Gyre Schola Bold",
+   "flags": []
+  },
+  {
+   "layer": "(58, 16, 85)",
+   "box": [
+    2000,
+    1630,
+    2571,
+    1735
+   ],
+   "letters": 6,
+   "cap_in": 0.333,
+   "tilt_deg": 0.14,
+   "jitter": 0.011,
+   "inflect_per_in": 2.8,
+   "peaks_per_cap": 2.86,
+   "rise_in": 0.005,
+   "wobble_limit": 4.2,
+   "typeset": "Righteous",
+   "flags": []
+  },
+  {
+   "layer": "(58, 16, 85)",
+   "box": [
+    581,
+    1632,
+    1211,
+    1736
+   ],
+   "letters": 7,
+   "cap_in": 0.333,
+   "tilt_deg": 0.01,
+   "jitter": 0.001,
+   "inflect_per_in": 1.8,
+   "peaks_per_cap": 2.56,
+   "rise_in": 0.0,
+   "wobble_limit": 4.2,
+   "typeset": "Righteous",
+   "flags": []
+  },
+  {
+   "layer": "(58, 16, 85)",
+   "box": [
+    869,
+    31,
+    2282,
+    163
+   ],
+   "letters": 14,
+   "cap_in": 0.28,
+   "tilt_deg": 0.04,
+   "jitter": 0.023,
+   "inflect_per_in": 3.9,
+   "peaks_per_cap": 2.78,
+   "rise_in": 0.003,
+   "wobble_limit": 4.3,
+   "typeset": "TeX Gyre Schola Bold",
+   "flags": []
+  },
+  {
+   "layer": "(58, 16, 85)",
+   "box": [
+    1361,
+    1632,
+    1853,
+    1735
+   ],
+   "letters": 5,
+   "cap_in": 0.333,
+   "tilt_deg": -0.22,
+   "jitter": 0.006,
+   "inflect_per_in": 2.0,
+   "peaks_per_cap": 2.85,
+   "rise_in": 0.006,
+   "wobble_limit": 4.2,
+   "typeset": "Righteous",
+   "flags": []
+  },
+  {
+   "layer": "(58, 16, 85)",
+   "box": [
+    801,
+    1812,
+    2348,
+    1909
+   ],
+   "letters": 18,
+   "cap_in": 0.217,
+   "tilt_deg": 0.0,
+   "jitter": 0.022,
+   "inflect_per_in": 3.6,
+   "peaks_per_cap": 2.29,
+   "rise_in": 0.0,
+   "wobble_limit": 4.6,
+   "typeset": "TeX Gyre Schola Bold",
+   "flags": []
+  },
+  {
+   "layer": "(58, 16, 85)",
+   "box": [
+    29,
+    2008,
+    1514,
+    2095
+   ],
+   "letters": 17,
+   "cap_in": 0.257,
+   "tilt_deg": 0.01,
+   "jitter": 0.022,
+   "inflect_per_in": 3.7,
+   "peaks_per_cap": 2.98,
+   "rise_in": 0.001,
+   "wobble_limit": 4.4,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(58, 16, 85)",
+   "box": [
+    1819,
+    2008,
+    3121,
+    2094
+   ],
+   "letters": 14,
+   "cap_in": 0.26,
+   "tilt_deg": -0.06,
+   "jitter": 0.023,
+   "inflect_per_in": 2.7,
+   "peaks_per_cap": 2.29,
+   "rise_in": 0.004,
+   "wobble_limit": 4.4,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (58, 16, 85)",
+   "box": [
+    2866,
+    2027,
+    3105,
+    2076
+   ],
+   "letters": 3,
+   "cap_in": 0.163,
+   "tilt_deg": -0.29,
+   "jitter": 0.0,
+   "inflect_per_in": 0.0,
+   "peaks_per_cap": 0.77,
+   "rise_in": 0.004,
+   "wobble_limit": 4.9,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.36,
+  "warn_pct": 18.39
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [637, 378, 2514, 1535]: hand lettering: the wood-plank logo from the 1970s coupon (traced)",
+  "STROKES: 18.39% of linework < 0.03 in"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    637,
+    378,
+    2514,
+    1535
+   ],
+   "reason": "hand lettering: the wood-plank logo from the 1970s coupon (traced)"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    864,
+    26,
+    2287,
+    168
+   ],
+   "font": "TeX Gyre Schola Bold"
+  },
+  {
+   "box": [
+    852,
+    192,
+    2299,
+    334
+   ],
+   "font": "TeX Gyre Schola Bold"
+  },
+  {
+   "box": [
+    620,
+    429,
+    894,
+    519
+   ],
+   "font": "TeX Gyre Schola Bold"
+  },
+  {
+   "box": [
+    576,
+    1627,
+    2576,
+    1740
+   ],
+   "font": "Righteous"
+  },
+  {
+   "box": [
+    798,
+    1806,
+    2354,
+    1914
+   ],
+   "font": "TeX Gyre Schola Bold"
+  },
+  {
+   "box": [
+    26,
+    2005,
+    3126,
+    2098
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

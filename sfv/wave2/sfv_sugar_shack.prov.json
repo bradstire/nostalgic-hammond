@@ -1,0 +1,73 @@
+{
+ "typeset": [
+  [
+   [
+    864,
+    26,
+    2287,
+    168
+   ],
+   "TeX Gyre Schola Bold"
+  ],
+  [
+   [
+    852,
+    192,
+    2299,
+    334
+   ],
+   "TeX Gyre Schola Bold"
+  ],
+  [
+   [
+    620,
+    429,
+    894,
+    519
+   ],
+   "TeX Gyre Schola Bold"
+  ],
+  [
+   [
+    576,
+    1627,
+    2576,
+    1740
+   ],
+   "Righteous"
+  ],
+  [
+   [
+    798,
+    1806,
+    2354,
+    1914
+   ],
+   "TeX Gyre Schola Bold"
+  ],
+  [
+   [
+    26,
+    2005,
+    3126,
+    2098
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    637,
+    378,
+    2514,
+    1535
+   ],
+   "hand lettering: the wood-plank logo from the 1970s coupon (traced)"
+  ]
+ ],
+ "redrawn": [],
+ "ink": "#3A1055",
+ "print_width_in": 10.503,
+ "print_height_in": 7.08
+}
