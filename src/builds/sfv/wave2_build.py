@@ -932,6 +932,84 @@ def mikes_pizza():
     return a
 
 
+# ------------------------------------------------------------------ C13 The Pass Club
+def suit(kind, cx, cy, h):
+    """Card suits, constructed (circles, triangles, rhombus), height h, centred."""
+    r = h * 0.27
+    if kind == 'diamond':
+        return Polygon([(cx, cy - h / 2), (cx + h * 0.36, cy), (cx, cy + h / 2), (cx - h * 0.36, cy)])
+    if kind in ('heart', 'spade'):
+        top = cy - h / 2
+        c1 = Point(cx - r * 0.95, top + r).buffer(r, resolution=48)
+        c2 = Point(cx + r * 0.95, top + r).buffer(r, resolution=48)
+        tri = Polygon([(cx - r * 1.93, top + r * 1.25), (cx + r * 1.93, top + r * 1.25), (cx, top + h * (0.92 if kind == 'heart' else 0.78))])
+        g = unary_union([c1, c2, tri]).buffer(2).buffer(-2)
+        if kind == 'spade':
+            g = affinity.scale(g, 1, -1, origin=(cx, cy - h * 0.06))
+            stem = Polygon([(cx - h * 0.04, cy + h * 0.12), (cx + h * 0.04, cy + h * 0.12), (cx + h * 0.16, cy + h / 2), (cx - h * 0.16, cy + h / 2)])
+            g = unary_union([g, stem])
+        return g
+    if kind == 'club':
+        rr = h * 0.2
+        c = [Point(cx, cy - h * 0.25).buffer(rr, resolution=48), Point(cx - h * 0.22, cy + h * 0.05).buffer(rr, resolution=48),
+             Point(cx + h * 0.22, cy + h * 0.05).buffer(rr, resolution=48)]
+        stem = Polygon([(cx - h * 0.04, cy), (cx + h * 0.04, cy), (cx + h * 0.16, cy + h / 2), (cx - h * 0.16, cy + h / 2)])
+        return unary_union(c + [stem, Point(cx, cy - h * 0.02).buffer(h * 0.1)])
+
+
+@build
+def pass_club():
+    """The Pass Club, Santa Susana Pass (card club on the Ventura County side of the pass, 'an ace from the
+    LA County line'; Valley Times photo, Oct 14 1963). Source: VRM's post of the LAPL Valley Times photo
+    (src/C13; Brad pulled it twice). Our own drawing of the club house with its four card-suit panels, the
+    hilltop and the ridge behind; THE PASS CLUB set in Rye, the place line in Jost."""
+    a = Art('sfv_pass_club')
+    k = 3.0
+    # ridge line behind (two soft peaks)
+    ridge = [(0, 330), (120, 262), (260, 214), (360, 222), (470, 175), (600, 200), (760, 255), (900, 300), (1000, 325)]
+    a.add(brush([(x * k, y * k) for x, y in ridge], [9 * k] * len(ridge)))
+    # house
+    hx0, hx1, hy = 180 * k, 820 * k, 420 * k
+    roof = Polygon([(160 * k, 350 * k), (500 * k, 300 * k), (840 * k, 350 * k), (840 * k, 372 * k), (500 * k, 322 * k), (160 * k, 372 * k)])
+    a.add(roof)
+    wall = box(hx0, 368 * k, hx1, 560 * k)
+    a.add(ring(wall, 8 * k, inner_offset=-8 * k))
+    gable = Polygon([(hx0, 368 * k), (500 * k, 322 * k), (hx1, 368 * k)])
+    a.add(ring(gable, 6 * k, inner_offset=-6 * k).difference(box(0, 362 * k, 99999, 99999)))
+    # board-and-batten lines
+    for x in (215, 445, 555, 785):
+        a.add(box(x * k - 4, 380 * k, x * k + 4, 548 * k))
+    # door + two panels with the suits
+    door = box(460 * k, 430 * k, 540 * k, 552 * k)
+    a.add(door)
+    a.cut(box(498 * k, 440 * k, 502 * k, 552 * k))
+    for (x0, kinds) in ((240, ('heart', 'spade')), (580, ('diamond', 'club'))):
+        pnl = box(x0 * k, 392 * k, (x0 + 180) * k, 540 * k)
+        a.add(ring(pnl, 6 * k, inner_offset=-6 * k))
+        a.add(suit(kinds[0], (x0 + 52) * k, 442 * k, 74 * k))
+        a.add(suit(kinds[1], (x0 + 128) * k, 492 * k, 74 * k))
+    # chimneys
+    for cxp in (330, 650):
+        a.add(box((cxp - 16) * k, 300 * k, (cxp + 16) * k, 345 * k))
+    # hilltop
+    hill = [(60, 640), (200, 572), (420, 560), (700, 565), (880, 590), (960, 640)]
+    a.add(stroke_line([(x * k, y * k) for x, y in hill], 9 * k))
+    a.add(box(160 * k, 556 * k, 840 * k, 568 * k))
+    # fence to the right
+    for x in range(860, 975, 28):
+        a.add(box(x * k - 6, 545 * k, x * k + 6, 590 * k))
+    a.add(stroke_line([(850 * k, 552 * k), (985 * k, 560 * k)], 6 * k))
+    a.declare('redrawn', box(0, 140 * k, 1000 * k, 650 * k), 'club house + hill: our own drawing after the 1963 photo')
+    t1, _ = T('THE PASS CLUB', 'Rye-Regular.ttf', cap=72 * k, track=0.04)
+    t1 = move(t1, cx=500 * k, y=60 * k)
+    a.add(t1, 'typeset', 'Rye')
+    cap, _ = T('SANTA SUSANA PASS  ·  1963', 'Jost[wght].ttf', cap=30 * k, var=[600], track=0.18)
+    cap = move(cap, cx=500 * k, y=680 * k)
+    a.add(cap, 'typeset', 'Jost SemiBold')
+    a.ink = 'green'
+    return a
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for name, fn in BUILDS.items():

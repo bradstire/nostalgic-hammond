@@ -1,0 +1,154 @@
+{
+ "file": "sfv_pass_club.png",
+ "print_width_in": 10.293,
+ "ppi": 300.0,
+ "layers": [
+  [
+   0,
+   107,
+   63
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(0, 107, 63)",
+   "box": [
+    325,
+    31,
+    2541,
+    257
+   ],
+   "letters": 9,
+   "cap_in": 0.73,
+   "tilt_deg": 0.03,
+   "jitter": 0.005,
+   "inflect_per_in": 6.0,
+   "peaks_per_cap": 6.3,
+   "rise_in": 0.004,
+   "wobble_limit": 3.7,
+   "typeset": "Rye",
+   "flags": []
+  },
+  {
+   "layer": "(0, 107, 63)",
+   "box": [
+    343,
+    1892,
+    2037,
+    1990
+   ],
+   "letters": 15,
+   "cap_in": 0.313,
+   "tilt_deg": -0.0,
+   "jitter": 0.017,
+   "inflect_per_in": 2.2,
+   "peaks_per_cap": 3.14,
+   "rise_in": 0.0,
+   "wobble_limit": 4.2,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(0, 107, 63)",
+   "box": [
+    2385,
+    1894,
+    2745,
+    1988
+   ],
+   "letters": 4,
+   "cap_in": 0.307,
+   "tilt_deg": 0.45,
+   "jitter": 0.006,
+   "inflect_per_in": 2.5,
+   "peaks_per_cap": 2.26,
+   "rise_in": 0.009,
+   "wobble_limit": 4.2,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (0, 107, 63)",
+   "box": [
+    402,
+    54,
+    1428,
+    213
+   ],
+   "letters": 9,
+   "cap_in": 0.45,
+   "tilt_deg": -0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 5.9,
+   "peaks_per_cap": 3.57,
+   "rise_in": 0.0,
+   "wobble_limit": 4.0,
+   "typeset": "Rye",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (0, 107, 63)",
+   "box": [
+    1965,
+    54,
+    2690,
+    213
+   ],
+   "letters": 5,
+   "cap_in": 0.45,
+   "tilt_deg": -0.0,
+   "jitter": 0.0,
+   "inflect_per_in": 5.4,
+   "peaks_per_cap": 3.81,
+   "rise_in": 0.0,
+   "wobble_limit": 4.0,
+   "typeset": "Rye",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.02,
+  "warn_pct": 6.06
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "STROKES: 6.06% of linework < 0.03 in"
+ ],
+ "exemptions": [],
+ "typeset": [
+  {
+   "box": [
+    319,
+    25,
+    2769,
+    263
+   ],
+   "font": "Rye"
+  },
+  {
+   "box": [
+    337,
+    1885,
+    2751,
+    1997
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [
+  {
+   "box": [
+    38,
+    265,
+    3050,
+    1807
+   ],
+   "how": "club house + hill: our own drawing after the 1963 photo"
+  }
+ ],
+ "substrate_layers": []
+}
