@@ -1,0 +1,89 @@
+{
+ "file": "sfv_jolly_roger.png",
+ "print_width_in": 10.24,
+ "ppi": 300.0,
+ "layers": [
+  [
+   38,
+   34,
+   32
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(38, 34, 32)",
+   "box": [
+    31,
+    3770,
+    1412,
+    3888
+   ],
+   "letters": 11,
+   "cap_in": 0.347,
+   "tilt_deg": 0.1,
+   "jitter": 0.02,
+   "inflect_per_in": 4.1,
+   "peaks_per_cap": 3.61,
+   "rise_in": 0.008,
+   "wobble_limit": 4.1,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(38, 34, 32)",
+   "box": [
+    1777,
+    3770,
+    3045,
+    3888
+   ],
+   "letters": 10,
+   "cap_in": 0.357,
+   "tilt_deg": -0.0,
+   "jitter": 0.021,
+   "inflect_per_in": 4.0,
+   "peaks_per_cap": 3.27,
+   "rise_in": 0.0,
+   "wobble_limit": 4.1,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.79,
+  "warn_pct": 7.09
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [150, 24, 2915, 3670]: illustration + hand-cut lettering: the menu's linocut, traced from the 3000 px scan and print-cleaned",
+  "STROKES: 7.09% of linework < 0.03 in"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    150,
+    24,
+    2915,
+    3670
+   ],
+   "reason": "illustration + hand-cut lettering: the menu's linocut, traced from the 3000 px scan and print-cleaned"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    24,
+    3768,
+    3048,
+    3891
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

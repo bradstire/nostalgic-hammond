@@ -1,0 +1,55 @@
+{
+ "typeset": [
+  [
+   [
+    170,
+    2502,
+    952,
+    2650
+   ],
+   "Fraunces Black Italic Soft"
+  ],
+  [
+   [
+    222,
+    2700,
+    1179,
+    2884
+   ],
+   "Fraunces Black Italic Soft"
+  ],
+  [
+   [
+    30,
+    3905,
+    3039,
+    4026
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    110,
+    254,
+    2953,
+    3796
+   ],
+   "illustration: whale, record, waves, splash traced from the sleeve (cleaned)"
+  ],
+  [
+   [
+    25,
+    25,
+    3036,
+    2152
+   ],
+   "LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
+  ]
+ ],
+ "redrawn": [],
+ "ink": "#003366",
+ "print_width_in": 10.213,
+ "print_height_in": 13.503
+}

@@ -556,6 +556,93 @@ def webers():
     return a
 
 
+# ------------------------------------------------------------------ C27 Moby Disc
+WORK = '/home/claude/sfv2/work'
+
+
+def mask_geom(path, smooth=3, alphamax=1.0, min_area=60):
+    import numpy as np
+    from PIL import Image
+    m = np.array(Image.open(path).convert('L')) > 127
+    return trace_geom(m, alphamax=alphamax, smooth_sigma=smooth)
+
+
+@build
+def moby_disc():
+    """Moby Disc Records (14410 Ventura Blvd, Sherman Oaks; 6553 Topanga Canyon Blvd, Canoga Park; early
+    1970s-2001). Source: the store's inner record sleeve, Flickr 5379507456 original 2520 px (src/C27). The
+    whale, spout, record, waves and splash are traced from a x4 Real-ESRGAN upscale of the sleeve print and
+    cleaned (illustration: exempt); MOBY DISC RECORDS is re-set on the arc in Fraunces Black Italic (soft,
+    the Cooper-style face of the sleeve), narrowed x0.78; the tagline re-set in the same face. VRM sells a
+    whale tee: ours is redrawn, adds the two Valley stores, and uses its own layout."""
+    a = Art('sfv_moby_disc')
+    FR = 'Fraunces-Italic[SOFT,WONK,opsz,wght].ttf'
+    V = [72, 900, 100, 0]
+    illu = mask_geom(WORK + '/moby_illu.png', smooth=3)
+    a.add(illu)
+    a.declare('exempt', illu.buffer(10).envelope, 'illustration: whale, record, waves, splash traced from the sleeve (cleaned)')
+    cx, cy = 415 * 4, 470 * 4
+    size = 400 / cap_ratio(FR, V)
+    txt = 'MOBY DISC   RECORDS'
+    arc = arc_text(txt, FR, size, cx, cy, 1330, centre_deg=-89, var=V, track=0.02, xs=0.78, anchor=txt.index('   ') + 1)
+    a.add(arc)
+    a.declare('exempt', arc.envelope, "LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)")
+    t1, _ = T('A Whale', FR, cap=150, var=V, track=0.02)
+    t2, _ = T('of a Store!', FR, cap=150, var=V, track=0.02)
+    t1 = move(t1, x=90, y=3010)
+    t2 = move(t2, x=150, y=t1.bounds[3] + 70)
+    a.cut(unary_union([t1, t2]).buffer(45))
+    a.add(t1, 'typeset', 'Fraunces Black Italic Soft')
+    a.add(t2, 'typeset', 'Fraunces Black Italic Soft')
+    cap, _ = T('SHERMAN OAKS  ·  CANOGA PARK', 'Jost[wght].ttf', cap=115, var=[600], track=0.16)
+    cap = move(cap, cx=cx, y=4630)
+    a.add(cap, 'typeset', 'Jost SemiBold')
+    a.ink = 'navy'
+    a.clean = True
+    return a
+
+
+# ------------------------------------------------------------------ C46 The Jolly Roger
+SRC = '/home/claude/sfv2/src'
+
+
+@build
+def jolly_roger():
+    """The Jolly Roger restaurant (Sherman Oaks Fashion Square on Riverside Dr; also Canoga Park and Northridge;
+    1960s-80s). Source: the 1970s menu cover, VRM archive item 566 (Gorsky Menu Collection), 3000 px scan
+    (src/C46). One-colour version of the linocut: the menu's black block, traced at full resolution and
+    print-cleaned at its final size (S9 floors). The hand-cut 'The Jolly Roger' lettering stays hand lettering
+    (traced, exempt); the menu's (R) and its corner code letter are removed. Ink: charcoal on Vintage White,
+    the paper standing in for the menu's cream."""
+    import numpy as np
+    from PIL import Image
+    from scipy import ndimage as nd
+    im = np.array(Image.open(SRC + '/C46/jolly_roger_menu_1970s_VRM_archive_566.jpg').convert('RGB')).astype(int)
+    crop = im[440:2760, 640:2410]
+    m = crop.max(axis=2) < 80
+    m[2230:, :120] = False                         # menu code letter 'L', bottom-left corner
+    # the (R) after 'Roger': small ring right of the word, top of the cover
+    lab, n = nd.label(m)
+    for i, sl in enumerate(nd.find_objects(lab), 1):
+        h, w = sl[0].stop - sl[0].start, sl[1].stop - sl[1].start
+        if 430 < sl[0].start < 560 and sl[1].start > 1240 and h < 40 and w < 40:
+            m[lab == i] = False
+    target_w = 2850
+    f = target_w / m.shape[1]
+    big = np.array(Image.fromarray((m * 255).astype(np.uint8)).resize((target_w, int(m.shape[0] * f)), Image.LANCZOS)) > 127
+    big = print_clean(big, 300)
+    a = Art('sfv_jolly_roger')
+    g = trace_geom(big, alphamax=1.0)
+    a.add(g)
+    a.declare('exempt', g.envelope, "illustration + hand-cut lettering: the menu's linocut, traced from the 3000 px scan and print-cleaned")
+    cap, _ = T('SHERMAN OAKS  ·  CANOGA PARK', 'Jost[wght].ttf', cap=100, var=[600], track=0.16)
+    cap = move(cap, cx=target_w / 2, y=g.bounds[3] + 110)
+    a.add(cap, 'typeset', 'Jost SemiBold')
+    a.ink = 'charcoal'
+    a.clean = dict(hair_in=0.027)
+    return a
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for name, fn in BUILDS.items():
@@ -563,7 +650,7 @@ def main():
             continue
         art = fn()
         ink = getattr(art, 'ink', 'cream')
-        art.save(OUT, ink=ink)
+        art.save(OUT, ink=ink, clean=getattr(art, 'clean', False))
 
 
 if __name__ == '__main__':

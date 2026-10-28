@@ -1,0 +1,116 @@
+{
+ "file": "sfv_moby_disc.png",
+ "print_width_in": 10.213,
+ "ppi": 300.0,
+ "layers": [
+  [
+   0,
+   51,
+   102
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(0, 51, 102)",
+   "box": [
+    1774,
+    3908,
+    3036,
+    4022
+   ],
+   "letters": 10,
+   "cap_in": 0.348,
+   "tilt_deg": -0.05,
+   "jitter": 0.009,
+   "inflect_per_in": 3.6,
+   "peaks_per_cap": 3.05,
+   "rise_in": 0.004,
+   "wobble_limit": 4.1,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(0, 51, 102)",
+   "box": [
+    35,
+    3909,
+    1411,
+    4022
+   ],
+   "letters": 11,
+   "cap_in": 0.347,
+   "tilt_deg": 0.1,
+   "jitter": 0.014,
+   "inflect_per_in": 3.6,
+   "peaks_per_cap": 3.43,
+   "rise_in": 0.008,
+   "wobble_limit": 4.1,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.14,
+  "warn_pct": 1.28
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [110, 254, 2953, 3796]: illustration: whale, record, waves, splash traced from the sleeve (cleaned)",
+  "EXEMPT [25, 25, 3036, 2152]: LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    110,
+    254,
+    2953,
+    3796
+   ],
+   "reason": "illustration: whale, record, waves, splash traced from the sleeve (cleaned)"
+  },
+  {
+   "box": [
+    25,
+    25,
+    3036,
+    2152
+   ],
+   "reason": "LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    170,
+    2502,
+    952,
+    2650
+   ],
+   "font": "Fraunces Black Italic Soft"
+  },
+  {
+   "box": [
+    222,
+    2700,
+    1179,
+    2884
+   ],
+   "font": "Fraunces Black Italic Soft"
+  },
+  {
+   "box": [
+    30,
+    3905,
+    3039,
+    4026
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

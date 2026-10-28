@@ -23,7 +23,7 @@ DPI = 300
 
 # Drive colour bank (NT_TOOLKIT) + light inks for dark garments
 INK = dict(red='#8B0000', gold='#B8860B', navy='#003366', green='#006B3F', purple='#3A1055',
-           black='#1A1A1A', cream='#F4ECDD', white='#FFFFFF')
+           black='#1A1A1A', charcoal='#262220', cream='#F4ECDD', white='#FFFFFF')
 
 
 def fpath(name):
@@ -126,18 +126,30 @@ def star(cx, cy, r, inner=0.42, n=5):
     return Polygon(pts)
 
 
-def arc_text(text, font, size, cx, cy, radius, centre_deg=-90, var=None, track=0.0, outward=True):
+def arc_text(text, font, size, cx, cy, radius, centre_deg=-90, var=None, track=0.0, outward=True, xs=1.0, anchor=None):
     """Glyphs set along a circle of `radius` (baseline on the circle), centred at angle centre_deg (-90 = top).
     Each glyph is its own font geometry, rotated about its own baseline centre: still typeset, never traced."""
     glyphs = []
     advs = []
+    from PIL import ImageFont
+    pf = ImageFont.truetype(fpath(font), 1000)
+    if var:
+        pf.set_variation_by_axes(var)
+    s = size / 1000.0
     for ch in text:
+        if not ch.strip():
+            glyphs.append(None)
+            advs.append(pf.getlength(ch) * s * xs + track * size)
+            continue
         g, adv = vtype.text_geom(ch, fpath(font), 1000, var, 0)
-        s = size / 1000.0
-        glyphs.append(affinity.scale(g, s, s, origin=(0, 0)) if not g.is_empty else None)
-        advs.append(adv * s + track * size)
+        glyphs.append(affinity.scale(g, s * xs, s, origin=(0, 0)) if (g is not None and not g.is_empty) else None)
+        advs.append(adv * s * xs + track * size)
     total = sum(advs) - track * size
     ang_total = total / radius
+    if anchor is not None:
+        # put the centre of character `anchor` (e.g. a word space) at centre_deg instead of the run's centre
+        pos = sum(advs[:anchor]) + advs[anchor] / 2
+        centre_deg = centre_deg + math.degrees((total / 2 - pos) / radius) * (1 if outward else -1)
     a = math.radians(centre_deg) - ang_total / 2 if outward else math.radians(centre_deg) + ang_total / 2
     out = []
     for g, adv in zip(glyphs, advs):
@@ -191,7 +203,7 @@ class Art:
             g = g.union(h) if op == '+' else g.difference(h)
         return g.buffer(0)
 
-    def save(self, outdir, ink='black', pad=30, extra=None, max_w_in=10.5, max_h_in=13.5):
+    def save(self, outdir, ink='black', pad=30, extra=None, max_w_in=10.5, max_h_in=13.5, clean=False):
         os.makedirs(outdir, exist_ok=True)
         g = self.geom()
         b = g.bounds
@@ -206,6 +218,16 @@ class Art:
         W, H = math.ceil(b[2] - ox) + pad, math.ceil(b[3] - oy) + pad
         g = affinity.translate(g, -ox, -oy)
         im = vtype.raster([(g, INK.get(ink, ink))], W, H)
+        if clean:
+            import numpy as np
+            a = np.array(im)
+            m = print_clean(a[..., 3] > 0, DPI, **(clean if isinstance(clean, dict) else {}))
+            h = INK.get(ink, ink)
+            a[..., :3] = [int(h[1:3], 16), int(h[3:5], 16), int(h[5:7], 16)]
+            a[..., 3] = np.where(m, 255, 0)
+            a[~m, :3] = 0
+            im = Image.fromarray(a, 'RGBA')
+            print('  print-clean pass applied at 300 ppi')
         path = os.path.join(outdir, self.name + '.png')
         im.save(path, dpi=(DPI, DPI))
         prov = {}
@@ -263,3 +285,90 @@ def brush(pts, widths, n=24):
     for a_, b_ in zip(discs[:-1], discs[1:]):
         parts.append(a_.union(b_).convex_hull)
     return unary_union(parts)
+
+
+def _disk(r):
+    import numpy as np
+    yy, xx = np.mgrid[-r:r + 1, -r:r + 1]
+    return (xx ** 2 + yy ** 2) <= r * r
+
+
+def print_clean(mask, ppi, speck_in=0.04, hole_in=0.035, hair_in=0.02, counter_in=0.028, gap_in=0.03):
+    """Print-prep for textured art (woodcut, worn print) at its final ppi, sliced per object so it stays fast:
+    drop specks and pinholes below the floors, lift hairlines on their centreline, open narrow counters,
+    and trim slivers that sit closer than the gap floor to a bigger neighbour (S9 floors)."""
+    import numpy as np
+    from scipy import ndimage as nd
+    from skimage.morphology import skeletonize
+    m = mask.copy()
+
+    def drop_specks(m):
+        lab, n = nd.label(m)
+        if n:
+            areas = nd.sum(m, lab, range(1, n + 1))
+            small = np.zeros(n + 1, bool); small[1:] = areas < (speck_in * ppi) ** 2
+            m[small[lab]] = False
+        return m
+
+    m = drop_specks(m)
+    holes = nd.binary_fill_holes(m) & ~m
+    hl, hn = nd.label(holes)
+    if hn:
+        ha = nd.sum(holes, hl, range(1, hn + 1))
+        fill = np.zeros(hn + 1, bool); fill[1:] = ha < (hole_in * ppi) ** 2
+        m[fill[hl]] = True
+    # hairlines: grow thin skeleton segments to the target width
+    dt = nd.distance_transform_edt(m)
+    sk = skeletonize(m)
+    tgt = hair_in * ppi
+    thin = sk & (2 * dt < tgt)
+    if thin.any():
+        grow = nd.binary_dilation(thin, structure=_disk(int(np.ceil(tgt / 2))))
+        holes0 = nd.binary_fill_holes(m) & ~m
+        hl0, hn0 = nd.label(holes0)
+        if hn0:
+            ha0 = nd.sum(holes0, hl0, range(1, hn0 + 1))
+            smallh = np.zeros(hn0 + 1, bool); smallh[1:] = ha0 < (0.15 * ppi) ** 2
+            holes0 = smallh[hl0]
+        m = m | (grow & ~holes0)            # never grow into a small counter
+    # counters: carve ink around enclosed spaces narrower than the floor (per hole, sliced)
+    holes = nd.binary_fill_holes(m) & ~m
+    hl, hn = nd.label(holes)
+    need = counter_in * ppi
+    for j, sl in enumerate(nd.find_objects(hl), 1):
+        if sl is None:
+            continue
+        r = int(np.ceil(need / 2)) + 2
+        y0, y1 = max(0, sl[0].start - r), min(m.shape[0], sl[0].stop + r)
+        x0, x1 = max(0, sl[1].start - r), min(m.shape[1], sl[1].stop + r)
+        reg = hl[y0:y1, x0:x1] == j
+        if reg.sum() > (0.2 * ppi) ** 2:
+            continue
+        w = 2 * nd.distance_transform_edt(reg).max()
+        if w >= need:
+            continue
+        rr = int(np.ceil((need - w) / 2)) + 1
+        grown = nd.binary_dilation(reg, structure=_disk(rr)) & m[y0:y1, x0:x1]
+        m[y0:y1, x0:x1][grown] = False
+    # gaps: trim the smaller shape where it sits inside the floor distance of a neighbour
+    lab, n = nd.label(m)
+    objs = nd.find_objects(lab)
+    areas = nd.sum(m, lab, range(1, n + 1)) if n else []
+    floor = gap_in * ppi + 1
+    pad = int(floor) + 2
+    for i in range(1, n + 1):
+        sl = objs[i - 1]
+        y0, y1 = max(0, sl[0].start - pad), min(m.shape[0], sl[0].stop + pad)
+        x0, x1 = max(0, sl[1].start - pad), min(m.shape[1], sl[1].stop + pad)
+        sub = lab[y0:y1, x0:x1]
+        others = (sub > 0) & (sub != i)
+        if not others.any():
+            continue
+        js = [j for j in np.unique(sub[others]) if areas[j - 1] >= areas[i - 1]]
+        if not js:
+            continue
+        d = nd.distance_transform_edt(~np.isin(sub, js))
+        close = (sub == i) & (d < floor)
+        if close.any():
+            m[y0:y1, x0:x1][close] = False
+    return drop_specks(m)
