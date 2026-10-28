@@ -1,0 +1,65 @@
+{
+ "typeset": [
+  [
+   [
+    636,
+    1039,
+    2455,
+    1592
+   ],
+   "TeX Gyre Heros (rotated on the script angle)"
+  ],
+  [
+   [
+    454,
+    1780,
+    2326,
+    1914
+   ],
+   "TeX Gyre Heros"
+  ],
+  [
+   [
+    984,
+    1972,
+    1796,
+    2143
+   ],
+   "TeX Gyre Heros"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    55,
+    56,
+    2724,
+    1482
+   ],
+   "hand lettering from the matchbook (traced); the word rises ~15 deg by design"
+  ],
+  [
+   [
+    636,
+    1039,
+    2455,
+    1592
+   ],
+   "LEVEL only: the tagline runs on the matchbook's 15-deg script angle"
+  ]
+ ],
+ "redrawn": [
+  [
+   [
+    24,
+    25,
+    2755,
+    1513
+   ],
+   "keyline: true offset of the traced letters (rebuilt, not traced)"
+  ]
+ ],
+ "ink": "#B8860B",
+ "print_width_in": 9.267,
+ "print_height_in": 7.227
+}

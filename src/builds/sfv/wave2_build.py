@@ -791,6 +791,147 @@ def dons():
     return a
 
 
+# ------------------------------------------------------------------ C18 Sasch
+@build
+def sasch():
+    """Sasch, 11345 Ventura Blvd, Studio City ('L.A.'s most sophisticated nightclub', 1980s). Source: the
+    matchbook in VRM's posts (Sept 2026 + Feb 2022; Brad pulled it twice = emphasis; src/C18). The brush
+    'Sasch' is traced from a x4 Real-ESRGAN upscale (hand lettering, exempt; its deliberate rising angle is
+    kept); the matchbook's keyline is rebuilt as a true offset; the tagline (rotated on the script's angle)
+    and the address are re-set in TeX Gyre Heros (Helvetica, as printed). No phone number."""
+    a = Art('sfv_sasch')
+    sc = 3.5
+    g = mask_geom(WORK + '/sasch_letters.png', smooth=None)
+    g = affinity.scale(g, sc, sc, origin=(0, 0))
+    a.add(g)
+    a.declare('exempt', g.envelope, 'hand lettering from the matchbook (traced); the word rises ~15 deg by design')
+    kl = ring(g.buffer(18, join_style=1), 13, inner_offset=0)
+    kl = kl.buffer(-5, join_style=1).buffer(5, join_style=1)
+    a.add(kl)
+    a.declare('redrawn', kl.envelope, 'keyline: true offset of the traced letters (rebuilt, not traced)')
+    gb = g.bounds
+    ang = -15.0
+    tg, _ = T("LA'S MOST SOPHISTICATED NIGHTCLUB", 'texgyreheros-regular.otf', cap=68, track=0.02)
+    cxy = (gb[0] + (gb[2] - gb[0]) * 0.55, gb[3] - (gb[3] - gb[1]) * 0.18)
+    tg = move(tg, cx=cxy[0], cy=cxy[1] + 95)
+    tg = affinity.rotate(tg, ang, origin=cxy)
+    a.cut(tg.buffer(22))
+    a.add(tg, 'typeset', 'TeX Gyre Heros (rotated on the script angle)')
+    a.declare('exempt', tg.envelope, "LEVEL only: the tagline runs on the matchbook's 15-deg script angle")
+    ad1, _ = T('11345 Ventura Boulevard', 'texgyreheros-regular.otf', cap=120, track=0.01)
+    ad2, _ = T('Studio City', 'texgyreheros-regular.otf', cap=120, track=0.01)
+    cx = (gb[0] + gb[2]) / 2
+    ad1 = move(ad1, cx=cx, y=max(gb[3], tg.bounds[3]) + 200)
+    ad2 = move(ad2, cx=cx, y=ad1.bounds[3] + 70)
+    a.add(ad1, 'typeset', 'TeX Gyre Heros')
+    a.add(ad2, 'typeset', 'TeX Gyre Heros')
+    a.ink = 'gold'
+    a.clean = True
+    return a
+
+
+# ------------------------------------------------------------------ C37 Encino Bowl
+def hhex(cx, cy, w, h, tip):
+    """Horizontal elongated hexagon (pointed left/right)."""
+    x0, x1 = cx - w / 2, cx + w / 2
+    return Polygon([(x0, cy), (x0 + tip, cy - h / 2), (x1 - tip, cy - h / 2), (x1, cy), (x1 - tip, cy + h / 2), (x0 + tip, cy + h / 2)])
+
+
+@build
+def encino_bowl():
+    """Encino Bowl & Coffee Shop, 15945 Ventura Blvd, Encino (1962 - May 1986; co-owners Irv Miro and Harry
+    Grant; birthday parties, arcade, a nursery inside). Source: VRM's Apr 2026 post of the Googie pole sign
+    (src/C37). Our own drawing of the sign: the EB drum on its posts, the ENCINO box, the four hexagon BOWL
+    boxes and the Coffee Shop oval. Letters set in Kameron Bold (BOWL, ENCINO, EB) and Lobster (Coffee Shop)."""
+    a = Art('sfv_encino_bowl')
+    cx = 1600.0
+    # BOWL boxes
+    bw, bh, tip, gap = 760.0, 640.0, 150.0, -60.0
+    xs = [cx + (i - 1.5) * (bw + gap) for i in range(4)]
+    yB = 1250.0
+    row = []
+    for x, ch in zip(xs, 'BOWL'):
+        hx = hhex(x, yB, bw, bh, tip)
+        row.append(hx)
+    rowu = unary_union(row)
+    a.add(rowu)
+    for x in xs[1:]:
+        x0 = x - bw / 2
+        chev = LineString([(x0 + tip, yB - bh / 2), (x0, yB), (x0 + tip, yB + bh / 2)]).buffer(9, cap_style=2, join_style=2)
+        a.cut(chev.intersection(rowu.buffer(-30)))                           # chevron seam where each box meets the last
+    a.cut(ring(rowu, 14, inner_offset=-40))
+    for x, ch in zip(xs, 'BOWL'):
+        g, _ = T(ch, 'Kameron[wght].ttf', cap=430, var=[700])
+        g = move(g, cx=x, cy=yB + 4)
+        a.cut(g, 'typeset', 'Kameron Bold')
+    # ENCINO box
+    eb = box(cx - 720, yB - bh / 2 - 330, cx + 720, yB - bh / 2 - 40)
+    a.add(eb)
+    a.cut(ring(eb, 12, inner_offset=-34))
+    en, _ = T('ENCINO', 'Kameron[wght].ttf', cap=170, var=[700], track=0.22)
+    en = move(en, cx=cx, cy=(eb.bounds[1] + eb.bounds[3]) / 2)
+    a.cut(en, 'typeset', 'Kameron Bold')
+    # posts + EB drum
+    for px in (cx - 210, cx + 210):
+        a.add(box(px - 26, eb.bounds[1] - 330, px + 26, eb.bounds[1] + 5))
+    dc = (cx, eb.bounds[1] - 330)
+    drum = affinity.scale(Point(0, 0).buffer(1, resolution=96), 300, 180)
+    drum = affinity.translate(drum, *dc)
+    a.add(drum)
+    a.cut(ring(drum, 12, inner_offset=-30))
+    e1, _ = T('E', 'Kameron[wght].ttf', cap=190, var=[700])
+    b1, _ = T('B', 'Kameron[wght].ttf', cap=190, var=[700])
+    e1 = move(e1, right=dc[0] + 18, cy=dc[1]); b1 = move(b1, x=dc[0] - 18, cy=dc[1])
+    mono = unary_union([e1, b1])
+    a.cut(mono, 'typeset', 'Kameron Bold (EB monogram, letters overlapped as on the drum)')
+    # pole down to the Coffee Shop oval
+    a.add(box(cx - 40, yB + bh / 2 - 5, cx + 40, yB + bh / 2 + 300))
+    oc = (cx, yB + bh / 2 + 300 + 260)
+    ov = affinity.translate(affinity.scale(Point(0, 0).buffer(1, resolution=128), 820, 260), *oc)
+    a.add(ov)
+    a.cut(ring(ov, 12, inner_offset=-34))
+    cs, _ = T('Coffee Shop', 'Lobster-Regular.ttf', cap=240, track=0.02)
+    cs = move(cs, cx=oc[0], cy=oc[1] + 10)
+    a.cut(cs, 'typeset', 'Lobster')
+    a.declare('redrawn', box(xs[0] - bw / 2, dc[1] - 200, xs[-1] + bw / 2, oc[1] + 270), 'sign: our own drawing after the VRM photo')
+    return a
+
+
+# ------------------------------------------------------------------ C35 Mike's Pizza
+@build
+def mikes_pizza():
+    """Mike's Pizza, 8160 Van Nuys Blvd, Panorama City (closed 1993; 'Serving since 1954'). Source: the menu
+    cover in VRM's Sept 2026 post (1.3K/304/76; src/C35 + Brad's screenshot). The chef and the 'Mike's' script
+    are traced from a x4 Real-ESRGAN upscale (illustration + hand lettering, exempt), one colour: the menu's
+    black and red plates together, the yellow and white left as garment. A napkin occludes the right edge of
+    the cover; it was cut along its own edge and nothing of the chef was redrawn (checked at print zoom).
+    PIZZA re-set in League Spartan Black, SERVING SINCE 1954 in Jost Bold, both from the menu. VRM sells a
+    different redraw of this chef (their own layout): ours is the menu cover's layout."""
+    a = Art('sfv_mikes_pizza')
+    sc = 1.55
+    chef = affinity.scale(mask_geom(WORK + '/mike_chef.png', smooth=None), sc, sc, origin=(0, 0))
+    scr = affinity.scale(mask_geom(WORK + '/mike_script.png', smooth=None), sc, sc, origin=(0, 0))
+    a.add(chef)
+    a.declare('exempt', chef.envelope, 'illustration: the menu chef (traced, one-colour)')
+    a.add(scr)
+    a.declare('exempt', scr.envelope, "hand lettering: the menu's 'Mike's' script (traced)")
+    sb = scr.bounds
+    pz, _ = T('PIZZA', 'LeagueSpartan[wght].ttf', cap=(sb[3] - sb[1]) * 0.72, var=[900], track=0.02)
+    pz = hscale(pz, 0.92)
+    pz = move(pz, x=sb[2] + 95, bottom=sb[3] - (sb[3] - sb[1]) * 0.08)
+    a.add(pz, 'typeset', 'League Spartan Black (x0.92)')
+    cb = chef.bounds
+    sv, _ = T('SERVING SINCE 1954', 'Jost[wght].ttf', cap=70, var=[700], track=0.06)
+    sv = move(sv, cx=(cb[0] + cb[2]) / 2 - 20, y=cb[3] - 150)
+    a.add(sv, 'typeset', 'Jost Bold')
+    ad, _ = T('8160 VAN NUYS BLVD.  ·  PANORAMA CITY', 'Jost[wght].ttf', cap=96, var=[600], track=0.14)
+    ad = move(ad, cx=(cb[0] + cb[2]) / 2, y=cb[3] + 140)
+    a.add(ad, 'typeset', 'Jost SemiBold')
+    a.ink = 'red'
+    a.clean = True
+    return a
+
+
 def main():
     os.makedirs(OUT, exist_ok=True)
     for name, fn in BUILDS.items():

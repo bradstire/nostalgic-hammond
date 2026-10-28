@@ -1,0 +1,82 @@
+{
+ "typeset": [
+  [
+   [
+    196,
+    973,
+    624,
+    1415
+   ],
+   "Kameron Bold"
+  ],
+  [
+   [
+    878,
+    964,
+    1342,
+    1424
+   ],
+   "Kameron Bold"
+  ],
+  [
+   [
+    1473,
+    970,
+    2147,
+    1418
+   ],
+   "Kameron Bold"
+  ],
+  [
+   [
+    2325,
+    973,
+    2695,
+    1415
+   ],
+   "Kameron Bold"
+  ],
+  [
+   [
+    785,
+    590,
+    2135,
+    780
+   ],
+   "Kameron Bold"
+  ],
+  [
+   [
+    1305,
+    109,
+    1632,
+    311
+   ],
+   "Kameron Bold (EB monogram, letters overlapped as on the drum)"
+  ],
+  [
+   [
+    726,
+    1913,
+    2194,
+    2247
+   ],
+   "Lobster"
+  ]
+ ],
+ "exempt": [],
+ "redrawn": [
+  [
+   [
+    24,
+    4,
+    2896,
+    2346
+   ],
+   "sign: our own drawing after the VRM photo"
+  ]
+ ],
+ "ink": "#F4ECDD",
+ "print_width_in": 9.733,
+ "print_height_in": 7.867
+}

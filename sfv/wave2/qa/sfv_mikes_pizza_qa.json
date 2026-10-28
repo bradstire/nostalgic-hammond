@@ -1,0 +1,135 @@
+{
+ "file": "sfv_mikes_pizza.png",
+ "print_width_in": 10.503,
+ "ppi": 300.0,
+ "layers": [
+  [
+   139,
+   0,
+   0
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    1568,
+    94,
+    2561,
+    340
+   ],
+   "letters": 5,
+   "cap_in": 0.81,
+   "tilt_deg": 0.17,
+   "jitter": 0.003,
+   "inflect_per_in": 1.5,
+   "peaks_per_cap": 3.58,
+   "rise_in": 0.01,
+   "wobble_limit": 3.7,
+   "typeset": "League Spartan Black (x0.92)",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    30,
+    3679,
+    1582,
+    3777
+   ],
+   "letters": 15,
+   "cap_in": 0.293,
+   "tilt_deg": -0.02,
+   "jitter": 0.025,
+   "inflect_per_in": 3.7,
+   "peaks_per_cap": 2.81,
+   "rise_in": 0.002,
+   "wobble_limit": 4.3,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    1932,
+    3679,
+    3122,
+    3777
+   ],
+   "letters": 12,
+   "cap_in": 0.293,
+   "tilt_deg": -0.11,
+   "jitter": 0.008,
+   "inflect_per_in": 4.3,
+   "peaks_per_cap": 3.2,
+   "rise_in": 0.008,
+   "wobble_limit": 4.3,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.15,
+  "warn_pct": 1.16
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [285, 363, 2866, 3563]: illustration: the menu chef (traced, one-colour)",
+  "EXEMPT [306, 25, 1490, 370]: hand lettering: the menu's 'Mike's' script (traced)"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    285,
+    363,
+    2866,
+    3563
+   ],
+   "reason": "illustration: the menu chef (traced, one-colour)"
+  },
+  {
+   "box": [
+    306,
+    25,
+    1490,
+    370
+   ],
+   "reason": "hand lettering: the menu's 'Mike's' script (traced)"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    1563,
+    92,
+    2565,
+    343
+   ],
+   "font": "League Spartan Black (x0.92)"
+  },
+  {
+   "box": [
+    1039,
+    3421,
+    2076,
+    3500
+   ],
+   "font": "Jost Bold"
+  },
+  {
+   "box": [
+    25,
+    3676,
+    3126,
+    3781
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

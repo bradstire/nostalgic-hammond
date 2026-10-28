@@ -1,0 +1,55 @@
+{
+ "typeset": [
+  [
+   [
+    1563,
+    92,
+    2565,
+    343
+   ],
+   "League Spartan Black (x0.92)"
+  ],
+  [
+   [
+    1039,
+    3421,
+    2076,
+    3500
+   ],
+   "Jost Bold"
+  ],
+  [
+   [
+    25,
+    3676,
+    3126,
+    3781
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    285,
+    363,
+    2866,
+    3563
+   ],
+   "illustration: the menu chef (traced, one-colour)"
+  ],
+  [
+   [
+    306,
+    25,
+    1490,
+    370
+   ],
+   "hand lettering: the menu's 'Mike's' script (traced)"
+  ]
+ ],
+ "redrawn": [],
+ "ink": "#8B0000",
+ "print_width_in": 10.503,
+ "print_height_in": 12.687
+}
