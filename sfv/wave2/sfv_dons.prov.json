@@ -1,0 +1,55 @@
+{
+ "typeset": [
+  [
+   [
+    942,
+    1363,
+    2210,
+    1554
+   ],
+   "Oswald SemiBold"
+  ],
+  [
+   [
+    1447,
+    1599,
+    1705,
+    1721
+   ],
+   "Oswald SemiBold"
+  ],
+  [
+   [
+    912,
+    1765,
+    2240,
+    1957
+   ],
+   "Oswald SemiBold"
+  ],
+  [
+   [
+    25,
+    2048,
+    3126,
+    2155
+   ],
+   "Jost SemiBold"
+  ]
+ ],
+ "exempt": [
+  [
+   [
+    307,
+    25,
+    2770,
+    1235
+   ],
+   "hand lettering + chef illustration from the menu cover (traced, cleaned)"
+  ]
+ ],
+ "redrawn": [],
+ "ink": "#262220",
+ "print_width_in": 10.503,
+ "print_height_in": 7.267
+}

@@ -1,0 +1,143 @@
+{
+ "file": "sfv_rustys_hacienda.png",
+ "print_width_in": 10.503,
+ "ppi": 300.0,
+ "layers": [
+  [
+   139,
+   0,
+   0
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    1450,
+    1525,
+    3078,
+    1617
+   ],
+   "letters": 18,
+   "cap_in": 0.268,
+   "tilt_deg": 0.02,
+   "jitter": 0.019,
+   "inflect_per_in": 3.9,
+   "peaks_per_cap": 3.34,
+   "rise_in": 0.002,
+   "wobble_limit": 4.3,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(139, 0, 0)",
+   "box": [
+    337,
+    1527,
+    1178,
+    1615
+   ],
+   "letters": 9,
+   "cap_in": 0.27,
+   "tilt_deg": 0.08,
+   "jitter": 0.018,
+   "inflect_per_in": 2.1,
+   "peaks_per_cap": 2.19,
+   "rise_in": 0.004,
+   "wobble_limit": 4.3,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "knockout in (139, 0, 0)",
+   "box": [
+    911,
+    1545,
+    1161,
+    1596
+   ],
+   "letters": 3,
+   "cap_in": 0.17,
+   "tilt_deg": -0.27,
+   "jitter": 0.0,
+   "inflect_per_in": 0.0,
+   "peaks_per_cap": 1.43,
+   "rise_in": 0.004,
+   "wobble_limit": 4.9,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.05
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [79, 24, 3072, 1343]: LEVEL only: Knewave is a brush italic whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    79,
+    24,
+    3072,
+    1343
+   ],
+   "reason": "LEVEL only: Knewave is a brush italic whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    117,
+    24,
+    1922,
+    243
+   ],
+   "font": "Knewave"
+  },
+  {
+   "box": [
+    79,
+    317,
+    3072,
+    748
+   ],
+   "font": "Knewave"
+  },
+  {
+   "box": [
+    115,
+    898,
+    3036,
+    1098
+   ],
+   "font": "Knewave"
+  },
+  {
+   "box": [
+    753,
+    1143,
+    2398,
+    1343
+   ],
+   "font": "Knewave"
+  },
+  {
+   "box": [
+    25,
+    1522,
+    3126,
+    1620
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

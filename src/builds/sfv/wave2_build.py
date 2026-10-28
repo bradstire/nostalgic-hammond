@@ -578,7 +578,7 @@ def moby_disc():
     a = Art('sfv_moby_disc')
     FR = 'Fraunces-Italic[SOFT,WONK,opsz,wght].ttf'
     V = [72, 900, 100, 0]
-    illu = mask_geom(WORK + '/moby_illu.png', smooth=3)
+    illu = mask_geom(WORK + '/moby_illu.png', smooth=None)     # smoothing lost the record-label ring (part B)
     a.add(illu)
     a.declare('exempt', illu.buffer(10).envelope, 'illustration: whale, record, waves, splash traced from the sleeve (cleaned)')
     cx, cy = 415 * 4, 470 * 4
@@ -711,7 +711,7 @@ def fantasy_faire():
     ys = 0.0
     blocks = []
     for name, gap in (('A', -10), ('B', 60), ('C', 0)):
-        g = mask_geom(WORK + f'/ff_{name}.png', smooth=2.5)
+        g = mask_geom(WORK + f'/ff_{name}.png', smooth=None)
         g = affinity.scale(g, sc, sc, origin=(0, 0))
         blocks.append((g, gap))
     W = max(width(g) for g, _ in blocks)
@@ -725,6 +725,68 @@ def fantasy_faire():
     cap = move(cap, cx=W / 2, y=y + 60)
     a.add(cap, 'typeset', 'Jost SemiBold')
     a.ink = 'red'
+    a.clean = True
+    return a
+
+
+# ------------------------------------------------------------------ C42 Rusty's Hacienda
+@build
+def rustys():
+    """Rusty's Hacienda, 6439 Lankershim Blvd near Victory, North Hollywood (Mexican family restaurant; also
+    Glendale and El Monte; c.1965-1970s). Source: the c.1965 take-out menu header, LAPL Menu Collection
+    MENU-002225 (src/C42), and the 1972 Valley News ad in Brad's VRM post. The menu's brush lettering is
+    re-set in Knewave (a heavy brush italic, the closest OFL match); the menu's mascot is left out (period
+    caricature). No phone numbers."""
+    a = Art('sfv_rustys_hacienda')
+    t0, _ = T('Bienvenidos Amigos', 'Knewave-Regular.ttf', cap=170, track=0.03)
+    t1, _ = T("Rusty's Hacienda", 'Knewave-Regular.ttf', cap=335, track=0.015)
+    t2, _ = T('Enjoy a Delicious Margarita Cocktail', 'Knewave-Regular.ttf', cap=150, track=0.03)
+    t3, _ = T("While You're Waiting", 'Knewave-Regular.ttf', cap=150, track=0.03)
+    W = width(t1)
+    t0 = move(t0, x=40, y=0)
+    t1 = move(t1, cx=W / 2, y=t0.bounds[3] + 90)
+    t2 = move(t2, cx=W / 2, y=t1.bounds[3] + 170)
+    t3 = move(t3, cx=W / 2, y=t2.bounds[3] + 60)
+    for g in (t0, t1, t2, t3):
+        a.add(g, 'typeset', 'Knewave')
+    a.declare('exempt', unary_union([t0, t1, t2, t3]).envelope, 'LEVEL only: Knewave is a brush italic whose letters ride the baseline unevenly by design (set from the font on a level baseline)')
+    y = t3.bounds[3] + 120
+    a.add(box(W * 0.12, y, W * 0.88, y + 16))
+    cap, _ = T('NO. HOLLYWOOD  ·  6439 LANKERSHIM BLVD.', 'Jost[wght].ttf', cap=82, var=[600], track=0.14)
+    cap = move(cap, cx=W / 2, y=y + 80)
+    a.add(cap, 'typeset', 'Jost SemiBold')
+    a.ink = 'red'
+    a.clean = True
+    return a
+
+
+# ------------------------------------------------------------------ C25 Don's (Burbank)
+@build
+def dons():
+    """Don's Restaurant & Coffee Shop, 509 S. Glenoaks Blvd, Burbank (Don Draper's drive-in from 1947;
+    closed 2002; one panel of the neon sign is at VRM, the other at the Gordon R. Howard Museum). Source:
+    the menu cover in VRM's Aug 2026 post (src/C25 + Brad's screenshot): the brush 'Don's' with the chef in
+    the D, traced from a x4 Real-ESRGAN upscale and cleaned (hand lettering + illustration: exempt);
+    RESTAURANT AND COFFEE SHOP re-set in Oswald SemiBold, the address in Jost; no phone number."""
+    a = Art('sfv_dons')
+    logo = mask_geom(WORK + '/dons_clean.png', smooth=None)     # smoothing erased the eyes/smile (part B): raw potrace curves
+    logo = affinity.scale(logo, 1.9, 1.9, origin=(0, 0))
+    lb = logo.bounds
+    a.add(logo)
+    a.declare('exempt', logo.envelope, "hand lettering + chef illustration from the menu cover (traced, cleaned)")
+    cx = (lb[0] + lb[2]) / 2 + 40
+    l1, _ = T('RESTAURANT', 'Oswald[wght].ttf', cap=190, var=[600], track=0.08)
+    l2, _ = T('AND', 'Oswald[wght].ttf', cap=120, var=[600], track=0.1)
+    l3, _ = T('COFFEE SHOP', 'Oswald[wght].ttf', cap=190, var=[600], track=0.08)
+    l1 = move(l1, cx=cx, y=lb[3] + 150)
+    l2 = move(l2, cx=cx, y=l1.bounds[3] + 60)
+    l3 = move(l3, cx=cx, y=l2.bounds[3] + 60)
+    for g in (l1, l2, l3):
+        a.add(g, 'typeset', 'Oswald SemiBold')
+    ad, _ = T('509 SOUTH GLENOAKS BLVD.  ·  BURBANK, CALIF.', 'Jost[wght].ttf', cap=80, var=[600], track=0.12)
+    ad = move(ad, cx=cx, y=l3.bounds[3] + 110)
+    a.add(ad, 'typeset', 'Jost SemiBold')
+    a.ink = 'charcoal'
     a.clean = True
     return a
 

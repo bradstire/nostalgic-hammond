@@ -1,0 +1,173 @@
+{
+ "file": "sfv_dons.png",
+ "print_width_in": 10.503,
+ "ppi": 300.0,
+ "layers": [
+  [
+   38,
+   34,
+   32
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(38, 34, 32)",
+   "box": [
+    918,
+    1771,
+    2234,
+    1951
+   ],
+   "letters": 10,
+   "cap_in": 0.587,
+   "tilt_deg": -0.03,
+   "jitter": 0.003,
+   "inflect_per_in": 1.5,
+   "peaks_per_cap": 4.31,
+   "rise_in": 0.002,
+   "wobble_limit": 3.8,
+   "typeset": "Oswald SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(38, 34, 32)",
+   "box": [
+    948,
+    1369,
+    2204,
+    1549
+   ],
+   "letters": 10,
+   "cap_in": 0.59,
+   "tilt_deg": -0.06,
+   "jitter": 0.006,
+   "inflect_per_in": 1.7,
+   "peaks_per_cap": 4.11,
+   "rise_in": 0.004,
+   "wobble_limit": 3.8,
+   "typeset": "Oswald SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(38, 34, 32)",
+   "box": [
+    1450,
+    1604,
+    1699,
+    1718
+   ],
+   "letters": 3,
+   "cap_in": 0.37,
+   "tilt_deg": -0.95,
+   "jitter": 0.0,
+   "inflect_per_in": 2.8,
+   "peaks_per_cap": 3.65,
+   "rise_in": 0.014,
+   "wobble_limit": 4.1,
+   "typeset": "Oswald SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(38, 34, 32)",
+   "box": [
+    31,
+    2051,
+    1791,
+    2137
+   ],
+   "letters": 20,
+   "cap_in": 0.257,
+   "tilt_deg": -0.0,
+   "jitter": 0.01,
+   "inflect_per_in": 2.7,
+   "peaks_per_cap": 2.7,
+   "rise_in": 0.0,
+   "wobble_limit": 4.4,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  },
+  {
+   "layer": "(38, 34, 32)",
+   "box": [
+    2082,
+    2051,
+    3084,
+    2137
+   ],
+   "letters": 12,
+   "cap_in": 0.257,
+   "tilt_deg": -0.1,
+   "jitter": 0.021,
+   "inflect_per_in": 3.7,
+   "peaks_per_cap": 3.58,
+   "rise_in": 0.006,
+   "wobble_limit": 4.4,
+   "typeset": "Jost SemiBold",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 3.02
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [307, 25, 2770, 1235]: hand lettering + chef illustration from the menu cover (traced, cleaned)",
+  "STROKES: 3.02% of linework < 0.03 in"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    307,
+    25,
+    2770,
+    1235
+   ],
+   "reason": "hand lettering + chef illustration from the menu cover (traced, cleaned)"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    942,
+    1363,
+    2210,
+    1554
+   ],
+   "font": "Oswald SemiBold"
+  },
+  {
+   "box": [
+    1447,
+    1599,
+    1705,
+    1721
+   ],
+   "font": "Oswald SemiBold"
+  },
+  {
+   "box": [
+    912,
+    1765,
+    2240,
+    1957
+   ],
+   "font": "Oswald SemiBold"
+  },
+  {
+   "box": [
+    25,
+    2048,
+    3126,
+    2155
+   ],
+   "font": "Jost SemiBold"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": []
+}

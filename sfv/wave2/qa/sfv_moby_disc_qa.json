@@ -54,21 +54,21 @@
  ],
  "strokes": {
   "fail_pct": 0.14,
-  "warn_pct": 1.28
+  "warn_pct": 1.09
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
-  "EXEMPT [110, 254, 2953, 3796]: illustration: whale, record, waves, splash traced from the sleeve (cleaned)",
+  "EXEMPT [109, 254, 2954, 3797]: illustration: whale, record, waves, splash traced from the sleeve (cleaned)",
   "EXEMPT [25, 25, 3036, 2152]: LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
  ],
  "exemptions": [
   {
    "box": [
-    110,
+    109,
     254,
-    2953,
-    3796
+    2954,
+    3797
    ],
    "reason": "illustration: whale, record, waves, splash traced from the sleeve (cleaned)"
   },
