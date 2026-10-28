@@ -111,13 +111,13 @@
  ],
  "strokes": {
   "fail_pct": 0.3,
-  "warn_pct": 4.53
+  "warn_pct": 4.42
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
   "EXEMPT [130, 1869, 2480, 2221]: LEVEL only: Damion is a casual brush script whose letters ride the baseline unevenly by design (set from the font on a level baseline)",
-  "STROKES: 4.53% of linework < 0.03 in"
+  "STROKES: 4.42% of linework < 0.03 in"
  ],
  "exemptions": [
   {

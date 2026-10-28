@@ -657,7 +657,7 @@ def devonshire_downs():
         return Polygon([(x * k, y * k) for x, y in pts])
     lw = 14 * 1.0
     panel = P([(285, 130), (740, 130), (688, 512), (337, 512)])
-    a.add(ring(panel, lw * 2.0, inner_offset=-lw * 2.0))
+    a.add(ring(panel, lw * 3.2, inner_offset=-lw * 3.2))
     # pediment: cornice band rising to the finial
     ped_out = P([(258, 135), (515, 62), (770, 135), (770, 150), (515, 80), (258, 150)])
     a.add(ped_out)
@@ -665,16 +665,16 @@ def devonshire_downs():
     a.cut(Point(509 * k, 44 * k).buffer(8 * k, resolution=32))            # highlight on the ball
     # display case
     case = box(380 * k, 272 * k, 635 * k, 486 * k)
-    a.add(ring(case, 5 * k, inner_offset=0))
-    a.add(ring(case.buffer(-12 * k, join_style=2), 3.4 * k, inner_offset=0))
+    a.add(ring(case, 8 * k, inner_offset=0))
+    a.add(ring(case.buffer(-14 * k, join_style=2), 4 * k, inner_offset=0))
     a.add(Point(392 * k, 302 * k).buffer(5 * k))                          # latch
     # glass glints
     for x0, y0, x1, y1 in ((430, 320, 470, 280 + 20), (455, 380, 545, 300), (500, 440, 600, 340)):
-        a.add(stroke_line([(x0 * k, y0 * k), (x1 * k, y1 * k)], 3.2 * k).intersection(case.buffer(-16 * k)))
+        a.add(stroke_line([(x0 * k, y0 * k), (x1 * k, y1 * k)], 4.5 * k).intersection(case.buffer(-20 * k)))
     # base moulding + posts
     a.add(box(330 * k, 505 * k, 695 * k, 524 * k))
     for px in (410, 614):
-        a.add(box((px - 9) * k, 524 * k, (px + 9) * k, 610 * k))
+        a.add(box((px - 12) * k, 524 * k, (px + 12) * k, 610 * k))
     a.declare('redrawn', box(250 * k, 20 * k, 780 * k, 612 * k), 'sign: our own drawing after the flyer illustration')
     t1, _ = T('Devonshire', 'LibreCaslonText[wght].ttf', cap=46 * k, var=[700], track=0.035)
     t2, _ = T('Downs', 'LibreCaslonText[wght].ttf', cap=46 * k, var=[700], track=0.035)
