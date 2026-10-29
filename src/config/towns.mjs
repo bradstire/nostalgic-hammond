@@ -140,6 +140,8 @@ export const towns = {
     launched: true,
     // Search Console URL-prefix property for the free address (HTML-file method); the build writes this file into dist.
     gscFile: 'googlefa2b66d4119a9761.html',
+    // Bing Webmaster Tools (manual add, XML-file method): the build writes BingSiteAuth.xml with this code.
+    bingAuth: 'FFD16A4E5888EA89D7EE3C6663A09577',
     layout: 'v2',
     heroImage: '/images/sfv/hero/ranchos-wide-1600.webp',
     heroPosition: 'center 50%',

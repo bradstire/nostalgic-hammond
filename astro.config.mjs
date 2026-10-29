@@ -37,6 +37,7 @@ const v2NotFound = {
       }
       // A town's own Search Console verification file (URL-prefix property), written into its dist only.
       if (town.gscFile) fs.writeFileSync(new URL(town.gscFile, dir), `google-site-verification: ${town.gscFile}`);
+      if (town.bingAuth) fs.writeFileSync(new URL('BingSiteAuth.xml', dir), `<?xml version="1.0"?>\n<users>\n\t<user>${town.bingAuth}</user>\n</users>\n`);
       if (town.layout !== 'v2') return;
       const src = new URL('404/index.html', dir);
       if (fs.existsSync(src)) fs.copyFileSync(src, new URL('404.html', dir));
