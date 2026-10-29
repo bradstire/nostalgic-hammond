@@ -18,7 +18,7 @@ const PLACES: Place[] = [
       'Before the tract houses, the San Fernando Valley was sold by the acre. In 1887 the Lankershim Ranch Land and Water Co. advertised 12,000 acres in lots of 2½ to 40 acres, at $35 to $165 an acre.',
       'Around 1908 the Lankershim Development Company mailed a painted bird\'s-eye postcard of the Lankershim and Van Nuys Ranchos, looking in from the Pacific over the Santa Monica Mountains. A decade later Little Farms Magazine of Los Angeles sold the same dream as "A Little Land and a Living" in California.',
       'The McKeon Canning Company opened in Burbank in 1922 and packed the Valley\'s fruit under the Burbank Brand label.',
-      'Our framed prints reproduce the postcards and the label. They are cleaned of dust and enlarged, never repainted.',
+      'Our framed print reproduces the Ranchos postcard. It is cleaned of dust and enlarged, never repainted.',
     ],
     facts: [
       { k: 'Lankershim ad', v: '1887' },
@@ -32,7 +32,7 @@ const PLACES: Place[] = [
       { label: 'Same library: Lankershim Ranch Land and Water Co. advertisement, 1887', url: CSUN + '2442' },
       { label: 'Same library: Burbank Brand peach can label, McKeon Canning Company, c. 1922 (Burbank Historical Society)', url: CSUN + '1721' },
     ],
-    prefixes: ['lankershim-van-nuys-ranchos', 'a-little-land-and-a-living', 'burbank-brand'],
+    prefixes: ['lankershim-van-nuys-ranchos'],
     tile: 'orchard-valley', tone: '#e9dfc8', ink: '#1e1a16',
     note: 'Not affiliated with any current business using the McKeon or Burbank names.',
   },
@@ -108,7 +108,7 @@ const PLACES: Place[] = [
     story: [
       'Valley Plaza opened at Laurel Canyon and Victory in North Hollywood on August 12, 1951, and by the mid-1950s it was called the largest shopping center on the West Coast. It declined after the 1970s, and demolition began on October 29, 2025.',
       'Out on the boulevards the Valley shopped at the discount stores. White Front opened its ninth store at 21300 Roscoe in Canoga Park in May 1963; the chain closed in 1974. Zodys opened at 8201 Topanga Canyon on September 27, 1962, under five hexagon letter boxes, and its California stores closed in March 1986. GEMCO, the members-only department store and supermarket, closed all 80 of its stores that same year.',
-      'The signs are redrawn from photos and the membership card, with the lettering re-set.',
+      'The signs are redrawn from photos and the membership card, with the old lettering traced wherever the photos hold it.',
     ],
     facts: [
       { k: 'Valley Plaza opened', v: 'Aug. 12, 1951' },
@@ -137,7 +137,7 @@ const PLACES: Place[] = [
     story: [
       'Phil\'s Diner, a 1926 dining car called the oldest in California, opened beside the Lankershim depot in 1928 and is now a Los Angeles Historic-Cultural Monument. Leon\'s Steak House and Coffee Shop opened at Victory and Vineland in 1945 and closed in July 2003. Don\'s in Burbank started as a drive-in in 1947 and closed in 2002.',
       'Mike\'s Pizza in Panorama City was "serving since 1954" until 1993. The Jolly Roger served the Sherman Oaks Fashion Square under a linocut galleon, Rusty\'s Hacienda poured margaritas on Lankershim, and Encino Bowl kept a coffee shop next to the lanes from 1962 to 1986.',
-      'Each design is redrawn from the place\'s own menu or sign, with the lettering re-set.',
+      'Each design comes from the place\'s own menu, ad or sign, with the old lettering traced wherever the source holds it.',
     ],
     facts: [
       { k: 'Phil\'s Diner', v: 'from 1928' },
@@ -165,7 +165,7 @@ const PLACES: Place[] = [
     story: [
       'FM Station opened in North Hollywood in 1976 and was the Valley\'s hard-rock room until 1997; Poison, Warrant, Metallica and Great White played it. Weber\'s Place on Vanowen in Reseda was a dive bar with live music and punk shows. Sasch, on Ventura in Studio City, billed itself as "L.A.\'s most sophisticated nightclub."',
       'For the under-21 crowd there was the Sugar Shack, 12458 Magnolia at Whitsett, "L.A.\'s most popular teenage night club" in the 1970s: dancing, games, snacks and a light show. Up in the Santa Susana Pass, just over the county line, the Pass Club dealt cards under four suit panels.',
-      'The signs, matchbook and coupon art are redrawn, with the lettering re-set.',
+      'The signs, matchbook and coupon art are traced from the originals; only lines too small to trace are re-set.',
     ],
     facts: [
       { k: 'FM Station', v: '1976–1997' },
@@ -195,7 +195,7 @@ const PLACES: Place[] = [
       { label: 'Wikipedia: Dutton\'s Books', url: 'https://en.wikipedia.org/wiki/Dutton%27s_Books' },
       { label: 'Daily Bruin, "Moby Disc runs out on lease" (2002)', url: 'https://dailybruin.com/2002/02/11/moby-disc-runs-out-on-lease-ci' },
     ],
-    prefixes: ['moby-disc', 'duttons-books'],
+    prefixes: ['moby-disc'],
     tile: 'records-books', tone: '#a9dff6', ink: '#0f2a44',
     note: 'Not affiliated with any current business or publisher using the Moby Disc or Dutton names.',
   },
@@ -258,7 +258,6 @@ const SINGLE_COLOR: Record<string, string> = {
   'moby-disc-records-tee': 'Ocean Blue',
   'leons-steak-house-sign-tee': 'Vintage White',
   'devonshire-downs-tee': 'Vintage White',
-  'duttons-books-sign-tee': 'Vintage White',
   'the-pass-club-tee': 'Kelly Green',
   'phils-diner-tee': 'Pink',
   'webers-place-reseda-tee': 'Vintage Black',
@@ -288,7 +287,7 @@ const START_HERE = [
   'van-nuys-phys-ed-ringer-tee',
   'van-nuys-blvd-cruise-night-hat',
   'san-fernando-raceway-tee',
-  'burbank-brand-peaches-label-framed-print',
+  'fm-station-north-hollywood-tee',
 ];
 
 const NOTE_BY_PREFIX: Record<string, string> = {
@@ -310,8 +309,6 @@ const MEMBER_LABEL: Record<string, string> = {};
 const TITLE_OVERRIDE: Record<string, string> = {};
 const FRAME_SIZE: Record<string, string> = {
   'lankershim-van-nuys-ranchos-postcard-framed-print': '16×12 in, black wood frame',
-  'a-little-land-and-a-living-postcard-framed-print': '16×12 in, black wood frame',
-  'burbank-brand-peaches-label-framed-print': '16×12 in, black wood frame',
 };
 
 const FAQ: Faq[] = [

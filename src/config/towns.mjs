@@ -130,6 +130,12 @@ export const towns = {
     // Own icons; and the build ships only images/sfv (none of the shared legacy files).
     iconDir: '/images/sfv',
     strictAssets: true,
+    redirects: {
+      // Listings retired 10-28 after Brad's wave-2 review (archived in Shopify, reversible): each goes to its place.
+      '/products/duttons-books-sign-tee': '/places/records-books',
+      '/products/a-little-land-and-a-living-postcard-framed-print': '/places/orchard-valley',
+      '/products/burbank-brand-peaches-label-framed-print': '/places/orchard-valley',
+    },
     launched: false,
     layout: 'v2',
     heroImage: '/images/sfv/hero/ranchos-wide-1600.webp',
