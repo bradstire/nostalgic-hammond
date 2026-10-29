@@ -124,9 +124,9 @@ export const towns = {
     stateName: 'California',
     tagline: 'San Fernando Valley, California',
     brandName: 'Nostalgic San Fernando Valley',
-    // Working URL until a domain is bought (Brad's call); switch siteUrl + contactEmail together then.
-    siteUrl: 'https://nostalgic-sfv.vercel.app',
-    contactEmail: 'stire.brad@gmail.com',
+    // Domain bought 10-29 (Brad); www is canonical, apex and nostalgic-sfv.vercel.app redirect to it (Vercel).
+    siteUrl: 'https://www.nostalgicsfv.com',
+    contactEmail: 'info@nostalgicsfv.com',
     // Own icons; and the build ships only images/sfv (none of the shared legacy files).
     iconDir: '/images/sfv',
     strictAssets: true,
