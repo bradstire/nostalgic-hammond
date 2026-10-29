@@ -1,6 +1,6 @@
 {
  "file": "sfv_valley_plaza.png",
- "print_width_in": 9.2,
+ "print_width_in": 9.44,
  "ppi": 300.0,
  "layers": [
   [
@@ -16,46 +16,10 @@
   {
    "layer": "(244, 236, 221)",
    "box": [
-    565,
-    1820,
-    2186,
-    2551
-   ],
-   "letters": 5,
-   "cap_in": 2.437,
-   "tilt_deg": 0.0,
-   "jitter": 0.0,
-   "inflect_per_in": 0.5,
-   "peaks_per_cap": 4.99,
-   "rise_in": 0.0,
-   "wobble_limit": 3.5,
-   "flags": []
-  },
-  {
-   "layer": "(244, 236, 221)",
-   "box": [
-    448,
-    767,
-    2312,
-    1498
-   ],
-   "letters": 6,
-   "cap_in": 2.437,
-   "tilt_deg": 0.0,
-   "jitter": 0.0,
-   "inflect_per_in": 0.4,
-   "peaks_per_cap": 4.22,
-   "rise_in": 0.0,
-   "wobble_limit": 3.5,
-   "flags": []
-  },
-  {
-   "layer": "(244, 236, 221)",
-   "box": [
-    186,
-    3102,
-    1879,
-    3205
+    222,
+    3235,
+    1915,
+    3338
    ],
    "letters": 14,
    "cap_in": 0.317,
@@ -65,16 +29,16 @@
    "peaks_per_cap": 2.09,
    "rise_in": 0.001,
    "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "(244, 236, 221)",
    "box": [
-    2230,
-    3104,
-    2574,
-    3202
+    2266,
+    3237,
+    2610,
+    3335
    ],
    "letters": 4,
    "cap_in": 0.322,
@@ -84,16 +48,16 @@
    "peaks_per_cap": 2.79,
    "rise_in": 0.002,
    "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "knockout in (244, 236, 221)",
    "box": [
-    1549,
-    3122,
-    1859,
-    3185
+    1585,
+    3255,
+    1895,
+    3318
    ],
    "letters": 3,
    "cap_in": 0.21,
@@ -103,27 +67,50 @@
    "peaks_per_cap": 0.78,
    "rise_in": 0.008,
    "wobble_limit": 4.6,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
  "strokes": {
   "fail_pct": 0.01,
-  "warn_pct": 0.13
+  "warn_pct": 16.4
  },
  "verdict": "PASS",
  "fails": [],
- "warns": [],
- "exemptions": [],
+ "warns": [
+  "EXEMPT [276, 946, 2565, 2620]: VALLEY PLAZA: the sign letters traced (tube centreline + measured channel width), R21",
+  "EXEMPT [307, 978, 2532, 2587]: neon tubes: traced centrelines at a 0.03 in printable width",
+  "STROKES: 16.4% of linework < 0.03 in"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    276,
+    946,
+    2565,
+    2620
+   ],
+   "reason": "VALLEY PLAZA: the sign letters traced (tube centreline + measured channel width), R21"
+  },
+  {
+   "box": [
+    307,
+    978,
+    2532,
+    2587
+   ],
+   "reason": "neon tubes: traced centrelines at a 0.03 in printable width"
+  }
+ ],
  "typeset": [
   {
    "box": [
-    180,
-    3095,
-    2580,
-    3212
+    216,
+    3228,
+    2616,
+    3345
    ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [
@@ -131,37 +118,28 @@
    "box": [
     24,
     24,
-    2736,
-    2877
+    2808,
+    3008
    ],
-   "how": "sign panel: constructed geometry after the LAist photo"
+   "how": "sign panel + crown: constructed at the measured outline (rectified photo)"
   },
   {
    "box": [
-    162,
-    304,
-    2598,
-    2738
+    134,
+    318,
+    2698,
+    2898
    ],
-   "how": "double inline border: constructed (two 0.08 in lines, 0.10 in apart)"
+   "how": "stepped rail: constructed on the measured path (rail + its shadow line as two knocked-out lines)"
   },
   {
    "box": [
-    394,
-    721,
-    2366,
-    1543
+    748,
+    1518,
+    2277,
+    2597
    ],
-   "how": "VALLEY: monoline channel letters constructed from the sign photo (not traced)"
-  },
-  {
-   "box": [
-    519,
-    1774,
-    2241,
-    2596
-   ],
-   "how": "PLAZA: monoline channel letters constructed from the sign photo (not traced)"
+   "how": "A ornament: inverted triangle drawn from its measured outline on the first A, repeated on the other two"
   }
  ],
  "substrate_layers": []

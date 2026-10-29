@@ -2,19 +2,10 @@
  "typeset": [
   [
    [
-    1020,
-    247,
-    2967,
-    751
-   ],
-   "TeX Gyre Bonum Bold Italic, fitted to the sign's x-height and width; R21 reason b: Bookman Bold Italic is the sign's face"
-  ],
-  [
-   [
-    290,
-    1259,
-    2886,
-    1374
+    514,
+    1296,
+    2841,
+    1398
    ],
    "Jost SemiBold (house locator line, R21 rule 4)"
   ]
@@ -22,38 +13,52 @@
  "exempt": [
   [
    [
-    24,
     25,
-    1066,
-    945
+    25,
+    1063,
+    1005
    ],
-   "the orange swash W: traced from the sign's face (R21)"
+   "the orange swash W: traced from the sign's face in the squared-up frame (R21, L46)"
   ],
   [
    [
-    1206,
-    824,
-    2051,
-    997
+    991,
+    194,
+    2977,
+    794
    ],
-   "PLACE: traced from the sign box (R21)"
+   "eber's: the sign's letter faces traced in the squared-up frame (R21; Bookman set at its own spacing is 19 % wider than the sign's word, so it is not an exact match)"
+  ],
+  [
+   [
+    1266,
+    891,
+    2018,
+    1047
+   ],
+   "PLACE: traced from the sign box in the squared-up frame (R21)"
   ]
  ],
  "redrawn": [
   [
    [
-    104,
-    75,
-    3072,
-    1151
+    229,
+    90,
+    3126,
+    1199
    ],
    "oval panel rim + PLACE box: constructed at the measured outline"
   ]
  ],
+ "frame": {
+  "scale": 0.896736,
+  "ox": 157,
+  "oy": 157
+ },
  "rules": [
   "R21"
  ],
  "ink": "#F4ECDD",
- "print_width_in": 10.32,
- "print_height_in": 4.66
+ "print_width_in": 10.503,
+ "print_height_in": 4.747
 }

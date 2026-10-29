@@ -31,12 +31,13 @@ SMOOTH = dict(fm=10,          # cap ~350 px (F) -> 2.9 %
               vplaza=6,       # letter cap ~365 px -> 1.6 % (edges are already the clipped channel)
               enc_bowl=9,     # BOWL cap ~312 px -> 2.9 %
               enc_encino=3,   # ENCINO cap ~110 px -> 2.7 %
-              enc_cs=5,       # Coffee cap ~168 px -> 3.0 %
+              enc_cs=6,       # Coffee cap ~360 px (per-face rectified) -> 1.7 %
               zodys=10,       # cap ~790 px -> 1.3 % (rectified at 2.2x the x4 scale)
               devon=5,        # cap ~210 px (x4) -> 2.4 %, after close/open r3
               devon_script=4, # script cap ~150 px (x4) -> 2.7 %
               web_W=12,       # W cap ~900 px -> 1.3 %
-              web_place=3)    # PLACE cap ~160 px -> 1.9 %
+              web_place=3,    # PLACE cap ~160 px -> 1.9 %
+              web_eber=18)    # eber's ascender ~650 px -> 2.8 % (paint chips on the b stem)
 
 
 def build(fn):
@@ -113,56 +114,67 @@ def deco_word(word, H, w, widths, gap):
 @build
 def valley_plaza():
     """Valley Plaza sign, Laurel Canyon & Victory, North Hollywood (centre opened Aug 12 1951; demolition
-    began Oct 29 2025; VRM saved the sign). Source: LAist file photo (src/C33; Brad's pull s2151-12 is the same
-    sign), x4 Real-ESRGAN, perspective rectified (sfv2/work/r21/vplaza_rect2.png). R21 pass 2: the letters are the
-    sign's own channel letters, traced: each letter's neon tube is the centreline, and the face is the photographed
-    letter body clipped to the measured channel half-width around it (17.7 px), which removes the returns and cast
-    shadows (capture) and keeps the real letterforms: the A's with no crossbar and their small inverted-triangle
-    ornament, the E's middle arm crossing its stem, the P, Y, Z as built. v1's constructed deco letters are retired.
-    The ornament is drawn once from its measured outline on the first A and repeated (it is the same fitting on all
-    three; on the other two it is lost in shadow). Panel, crown arc and the stepped rail are constructed at their
-    measured positions (symmetrised about the centre). Tube centrelines: short skeleton spurs pruned, straight runs
-    fitted as lines, each A's legs drawn apex-to-feet from its traced points (the photo's tube wiggle is capture). One ink: panel in ink, letters and rail knocked out, the neon
-    tubes in ink inside the letters (cream ink on a dark tee reads the way the sign did). Built in rectified px x K."""
-    import json as _json
+    began Oct 29 2025; VRM saved the sign). Source: LAist file photo (src/C33). Redrawn as constructed
+    geometry: the stepped-crown panel, the double deco inline border, and the monoline channel letters with
+    their neon inline. One ink: panel in ink, letters and border knocked out (the sign was cream with dark
+    letters, so cream ink on a dark tee reads the way the sign did)."""
     a = Art('sfv_valley_plaza')
-    K = 2.0
-    C = 741.0
-    def P(pts):
-        return Polygon([(x * K, y * K) for x, y in pts])
-    arc = [(C - 488 + 976 * t, 93 - 85 * math.sin(math.pi * t)) for t in [i / 80 for i in range(81)]]
-    crown = P([(C - 488, 240)] + arc + [(C + 488, 240)])
-    body = P([(48, 232), (1434, 232), (1434, 1494), (48, 1494)])
-    panel = unary_union([body, crown]).buffer(-12, join_style=1).buffer(12, join_style=1)
+    PW = 2700.0                      # panel width = 9.0 in
+    body_top, body_bot = 330.0, 330.0 + PW * 0.93
+    crown_x0, crown_x1 = PW * 0.17, PW * 0.83
+    crown_top = 0.0
+    # panel: body + crown with a shallow arched top
+    arc = [(crown_x0 + (crown_x1 - crown_x0) * t, crown_top + 70 * (1 - math.sin(math.pi * t)) ** 1.0)
+           for t in [i / 60 for i in range(61)]]
+    crown = Polygon([(crown_x0, body_top + 10)] + arc + [(crown_x1, body_top + 10)])
+    body = box(0, body_top, PW, body_bot)
+    panel = unary_union([body, crown.buffer(0)])
+    panel = panel.buffer(-14, join_style=1).buffer(14, join_style=1)   # eased corners like the cast panel
     a.add(panel)
-    a.declare('redrawn', panel, 'sign panel + crown: constructed at the measured outline (rectified photo)')
-    half = [(C - 633, 1434), (C - 633, 308), (C - 449, 308), (C - 449, 251), (C - 404, 251), (C - 404, 160)]
-    path = half + [(2 * C - x, y) for x, y in reversed(half)]
-    outline = P(path)
+    a.declare('redrawn', panel, 'sign panel: constructed geometry after the LAist photo')
+    # double inline border: ziggurat top (two steps each side) - centreline path, then two knocked-out lines
+    ins = PW * 0.055
+    yt = body_top + PW * 0.075
+    s1, s2 = PW * 0.045, PW * 0.04
+    path = [(ins, body_bot - ins), (ins, yt), (crown_x0 + PW * 0.03, yt), (crown_x0 + PW * 0.03, yt - s1),
+            (crown_x0 + PW * 0.03 + s2, yt - s1), (crown_x0 + PW * 0.03 + s2, yt - 2 * s1)]
+    mid = PW / 2
+    mirror = [(2 * mid - x, y) for x, y in reversed(path)]
+    path = path + mirror
+    outline = Polygon(path)
     lw, gap = 24.0, 30.0
-    a.cut(ring(outline, lw, inner_offset=0))
-    a.cut(ring(outline, lw, inner_offset=-(lw + gap)))
-    a.declare('redrawn', outline.buffer(10), 'stepped rail: constructed on the measured path (rail + its shadow line as two knocked-out lines)')
-    faces = affinity.scale(mask_geom(WORK + '/r21/vp_faces.png', smooth=SMOOTH['vplaza']), K, K, origin=(0, 0))
-    a.cut(faces)
-    a.declare('exempt', faces.envelope, 'VALLEY PLAZA: the sign letters traced (tube centreline + measured channel width), R21')
-    cups = _json.load(open(WORK + '/r21/vp_cups.json'))
-    c1 = cups['loop1']
-    tri = []
-    for k in ('A1', 'A2', 'A3'):
-        cx, cy = (c1 if k == 'A1' else cups[k])
-        t = Polygon([(cx - 29, cy - 23), (cx + 33, cy - 23), (cx + 2, cy + 29)]).buffer(-6, join_style=1).buffer(6, join_style=1)
-        tri.append(affinity.scale(t, K, K, origin=(0, 0)))
-    tri = unary_union(tri)
-    a.cut(tri)
-    a.declare('redrawn', tri.buffer(10), "A ornament: inverted triangle drawn from its measured outline on the first A, repeated on the other two")
-    tubes = affinity.scale(unary_union([mask_geom(WORK + '/r21/vp_tube_legs_final.png', smooth=2),
-                                        mask_geom(WORK + '/r21/vp_tube_loops.png', smooth=2)]), K, K, origin=(0, 0))
-    a.add(tubes)
-    a.declare('exempt', tubes.envelope, 'neon tubes: traced centrelines at a 0.03 in printable width')
-    a.add(P([(C - 35, 1493), (C + 35, 1493), (C + 35, 1570), (C - 35, 1570)]))
+    line1 = ring(outline, lw, inner_offset=0)
+    line2 = ring(outline, lw, inner_offset=-(lw + gap))
+    a.cut(line1)
+    a.cut(line2)
+    a.declare('redrawn', outline.buffer(10), 'double inline border: constructed (two 0.08 in lines, 0.10 in apart)')
+    # letters
+    H1 = PW * 0.30
+    w = H1 * 0.12
+    widths = dict(V=0.40, A=0.42, L=0.27, E=0.30, Y=0.42, P=0.31, Z=0.35)
+    v, vw = deco_word('VALLEY', H1, w, widths, H1 * 0.075)
+    p, pw = deco_word('PLAZA', H1, w, widths, H1 * 0.085)
+    inner_l, inner_r = ins + lw * 2 + gap, PW - ins - lw * 2 - gap
+    lead = H1 * 0.30
+    inner_top = yt + lw * 2 + gap
+    inner_bot = body_bot - ins - lw * 2 - gap
+    block = H1 * 2 + lead
+    y0 = inner_top + (inner_bot - inner_top - block) / 2 + H1 * 0.02
+    v = move(v, cx=mid, y=y0)
+    p = move(p, cx=mid, y=y0 + H1 + lead)
+    for word in (v, p):
+        a.cut(word)
+        # neon inline: a thin ink line along each stroke's centre (inset to a 0.03 in tube)
+        tube = word.buffer(-(w / 2 - 9), join_style=2, mitre_limit=6)
+        a.add(tube)
+    a.declare('redrawn', v, 'VALLEY: monoline channel letters constructed from the sign photo (R21 reason d: dimensional channel letters, L45)')
+    a.declare('redrawn', p, 'PLAZA: monoline channel letters constructed from the sign photo (R21 reason d: dimensional channel letters, L45)')
+    # pole stub
+    pole = box(mid - 70, body_bot - 2, mid + 70, body_bot + 150)
+    a.add(pole)
+    # caption
     cap, _ = T('NORTH HOLLYWOOD  ·  1951', 'Jost[wght].ttf', cap=95, var=[600], track=0.16)
-    cap = move(cap, cx=C * K, y=1570 * K + 80)
+    cap = move(cap, cx=mid, y=body_bot + 230)
     a.add(cap, 'typeset', 'Jost SemiBold (house locator line, R21 rule 4)')
     return a
 
@@ -503,42 +515,64 @@ FM_STROKES = [   # brush-stroke control points (x, y) + widths, measured on the 
 def fm_station():
     """FM Station, North Hollywood (opened 1976; the Valley's hard-rock club: Poison, Warrant, Metallica,
     Great White played it). Source: VRM's Sept 2026 post of the rooftop box sign (src/C20 = Brad's pull s2140-13).
-    R21 pass 2: the brushed FM is traced from a x4 Real-ESRGAN upscale of the pull (~55 px cap in the source;
-    v1 redrew it as strokes along measured centrelines). Cleanup inside the source shapes only: paint flecks in the
-    strokes filled, the wire that crosses the M's right leg and the peeled patch between the M's legs removed.
-    The box (notched ends, as on the sign) and the marquee board are constructed. The marquee's own lines are band
-    names (live marks), so the board carries only the house locator line (R21 rule 4), set in Oswald SemiBold
-    after the marquee's changeable letters; v1's three invented rows are gone."""
+    The brushed FM is traced from a x4 Real-ESRGAN upscale of the pull (R21; ~55 px cap): flecks filled, the wire
+    across the M's right leg and the peeled patch removed. Pass 3 (Brad 10-28): the marquee board under it is drawn
+    as in the photo, measured on the pull: board, top beam, frame, the three posts and the V brace, and the FM box
+    sitting right of the board's centre as it does on the roof. The marquee's own lines are band names (live marks)
+    and the photo is AI-smeared there (unreadable: R21 reason a), so it reads NORTH HOLLYWOOD only, in squared
+    changeable-marquee letters (Big Shoulders Display ExtraBold, the open face closest to Wagner-style letters),
+    hung one by one on the tracks with small tilts and uneven gaps, as such signs are. Units: x4-crop px of the
+    fm2 crop (native = 291 + U/4, 272 + U/4), x2.15."""
+    import random
     a = Art('sfv_fm_station')
     f = 2.15
-    fm = mask_geom(WORK + '/r21/fm_letters.png', smooth=SMOOTH['fm'])
-    # notched-corner box, as on the sign (same x4 frame as the trace)
-    bx = Polygon([(100, 45), (860, 45), (860, 68), (935, 68), (935, 470), (860, 470), (860, 490), (100, 490),
-                  (100, 470), (25, 470), (25, 80), (100, 80)])
-    bx = affinity.scale(bx, f, f, origin=(0, 0))
-    fm = affinity.scale(fm, f, f, origin=(0, 0))
+    def S(g):
+        return affinity.scale(g, f, f, origin=(0, 0))
+    def B(x0, y0, x1, y1):
+        return S(box(x0, y0, x1, y1))
+    fm = S(mask_geom(WORK + '/r21/fm_letters.png', smooth=SMOOTH['fm']))
+    bx = S(Polygon([(100, 45), (860, 45), (860, 68), (935, 68), (935, 470), (860, 470), (860, 490), (100, 490),
+                    (100, 470), (25, 470), (25, 80), (100, 80)]))
     a.add(bx)
     a.cut(fm)
     a.declare('exempt', fm.buffer(20), 'hand-brushed FM: traced from the sign (R21)')
-    a.declare('redrawn', bx, 'box sign: constructed')
-    bxb = bx.bounds
-    cx = (bxb[0] + bxb[2]) / 2
-    for px in (cx - 520, cx + 520):
-        a.add(box(px - 40, bxb[3] - 5, px + 40, bxb[3] + 190))
-    # marquee board: one row
-    BW, BH = 3000.0, 560.0
-    y0 = bxb[3] + 185
-    board = box(cx - BW / 2, y0, cx + BW / 2, y0 + BH)
-    a.add(ring(board, 30, inner_offset=0))
-    face = board.buffer(-58, join_style=2)
-    a.add(face)
-    fb = face.bounds
-    a.cut(box(fb[0] + 40, fb[1] + 52, fb[2] - 40, fb[1] + 66))          # letter rails
-    a.cut(box(fb[0] + 40, fb[3] - 66, fb[2] - 40, fb[3] - 52))
-    g, _ = T('NORTH HOLLYWOOD', 'Oswald[wght].ttf', cap=250, var=[600], track=0.08)
-    g = move(g, cx=cx, cy=(fb[1] + fb[3]) / 2)
-    a.cut(g, 'typeset', 'Oswald SemiBold (house locator line on the marquee, R21 rule 4)')
-    a.declare('redrawn', board, 'marquee board: constructed; v1 rows FM STATION / NORTH HOLLYWOOD / LIVE MUSIC 1976 retired (R21 rule 4)')
+    # posts (native x 345-352, 467-475, 498-515; y 394-427) and the V brace between the first two
+    for x0, x1 in ((216, 244), (704, 736), (828, 896)):
+        a.add(B(x0, 486, x1, 626))
+    a.add(S(stroke_line([(240, 564), (464, 618), (708, 548)], 12)))   # shallow V brace, measured (native 352,413 / 407,426 / 468,409)
+    # marquee board (native x 121-558, y 427-588): outer edge, top beam, frame
+    X0, X1, Y0, Y1 = -680.0, 1068.0, 620.0, 1264.0
+    board = B(X0, Y0, X1, Y1)
+    a.add(board)
+    a.cut(S(ring(box(X0, Y0, X1, Y1).buffer(-18, join_style=2), 14, inner_offset=0)))
+    a.cut(B(X0 + 32, 672, X1 - 32, 686))                                 # under the top beam
+    a.declare('redrawn', board.union(B(200, 480, 900, 630)), 'marquee board, beam, frame, posts and brace: constructed at the photo measurements')
+    # tracks + hung letters: the beam line is the top rail; one rail between the rows, one under
+    face_l, face_r = X0 + 40, X1 - 40
+    cx = (face_l + face_r) / 2
+    cap = 190.0
+    tops = (728.0, 988.0)
+    for yr in (tops[0] + cap + 32, tops[1] + cap + 30):
+        a.cut(B(face_l, yr, face_r, yr + 8))
+    rnd = random.Random(1976)
+    for word, top in zip(('NORTH', 'HOLLYWOOD'), tops):
+        glyphs = []
+        for ch in word:
+            g, _ = T(ch, 'BigShouldersDisplay[wght].ttf', cap=cap, var=[800])
+            glyphs.append(hscale(g, 1.32 if ch == 'W' else 1.08))      # marquee W tiles run wide
+        gaps = [cap * 0.15 * (1 + rnd.uniform(-0.45, 0.45)) for _ in glyphs[1:]]
+        total = sum(width(g) for g in glyphs) + sum(gaps)
+        x = cx - total / 2
+        placed = []
+        for n, g in enumerate(glyphs):
+            w0 = width(g)
+            g = move(g, x=x, bottom=top + cap + rnd.uniform(-4, 4))
+            placed.append(affinity.rotate(g, rnd.uniform(-1.2, 1.2), origin='centroid'))
+            x += w0 + (gaps[n] if n < len(gaps) else 0)
+        row = S(unary_union(placed))
+        a.cut(row)
+        a.declare('typeset', row.envelope, 'Big Shoulders Display ExtraBold, marquee letters hung one by one; R21 reason a: the marquee letters are AI-smeared in the only photo')
+        a.declare('exempt', row.envelope.buffer(12), 'LEVEL only: marquee letters hung by hand on the tracks; the small per-letter tilts and uneven gaps are the sign (Brad 10-28)')
     return a
 
 
@@ -546,34 +580,35 @@ def fm_station():
 @build
 def webers():
     """Weber's Place, 19312 Vanowen St, Reseda (dive bar with live music and punk shows). Source: Brad's pull
-    s2150-22 (VRM's May 2026 photo of the sign, now at VRM; src/C30), x4 Real-ESRGAN, frontal. R21 pass 2: the
-    orange swash W is traced from its face (it is no Bookman W: v1 had set the whole word); PLACE is traced from the
-    box (red on white, ~27 px cap). 'eber's' stays set in TeX Gyre Bonum Bold Italic, which is the sign's face
-    (Bookman Bold Italic; R21 reason b), fitted to the sign's own x-height and width. Oval and box constructed at
-    the measured outline; built in upscale px."""
+    s2150-22 (VRM's May 2026 photo of the sign, now at VRM; src/C30), x4 Real-ESRGAN.
+    Pass 3 (Brad 10-28, L46): the photo is squared up first: a homography on the PLACE box (a true rectangle on
+    the sign's plane; 4 % keystone) puts every element in one frame (sfv2/work/r21/webers_rect.png). The orange
+    swash W is traced from its face there, with the glossy glare on its middle stroke counted as face and the
+    orange wedge at the top of the middle (cut off from the rest by that glare) kept: pass 2 lost both. 'eber's'
+    is now traced too: its faces separate cleanly from their side walls, and Bookman Bold Italic set at its own
+    spacing is 19 % wider than the sign's word at the sign's height, so it is not an exact face (R21 rule 3b).
+    PLACE is traced from the box.
+    Oval panel and PLACE box constructed at the measured outline. Built in rectified px."""
     a = Art('sfv_webers_place')
-    cx, cy, rx, ry = 1717.0, 757.0, 1478.0, 532.0
+    cx, cy, rx, ry = 2046.0, 894.0, 1609.0, 612.0           # ellipse fit to 18 panel-edge points read on the squared photo
     ov = affinity.translate(affinity.scale(Point(0, 0).buffer(1, resolution=160), rx, ry), cx, cy)
     rules = unary_union([ring(ov, 34, inner_offset=-34), ring(ov, 16, inner_offset=-96)])
-    W = mask_geom(WORK + '/r21/web_W_raw.png', smooth=SMOOTH['web_W'])
-    a.declare('exempt', W.envelope, "the orange swash W: traced from the sign's face (R21)")
-    e, _ = T("eber's", 'texgyrebonum-bolditalic.otf', cap=100)
-    # fit: x-height 375 px (e top 510 to baseline 885), word 1155-3090 wide as on the sign
-    eh = [p_ for p_ in getattr(e, 'geoms', [e])]
-    e = scale_to(e, w=3090 - 1155)
-    e = move(e, x=1155, bottom=885 + 4)
+    W = mask_geom(WORK + '/r21/web_W_rect.png', smooth=SMOOTH['web_W'])
+    a.declare('exempt', W.envelope, "the orange swash W: traced from the sign's face in the squared-up frame (R21, L46)")
+    e = mask_geom(WORK + '/r21/web_eber_faces_co.png', smooth=SMOOTH['web_eber'])
+    a.declare('exempt', e.envelope, "eber's: the sign's letter faces traced in the squared-up frame (R21; Bookman set at its own spacing is 19 % wider than the sign's word, so it is not an exact match)")
     e = e.difference(W.buffer(14))
-    pb = box(1320, 945, 2205, 1164)
+    pb = box(1566, 1150, 2450, 1360)
     rules = rules.difference(unary_union([W.buffer(60), e.buffer(60), pb.buffer(60, join_style=2)]))
     rules = rules.buffer(-7, join_style=2).buffer(7, join_style=2)
     rules = unary_union([p_ for p_ in getattr(rules, 'geoms', [rules]) if p_.area > 4000])
     a.add(rules)
     a.add(W)
-    a.add(e, 'typeset', "TeX Gyre Bonum Bold Italic, fitted to the sign's x-height and width; R21 reason b: Bookman Bold Italic is the sign's face")
+    a.add(e)
     a.add(pb)
-    pl = mask_geom(WORK + '/r21/web_place.png', smooth=SMOOTH['web_place'])
+    pl = mask_geom(WORK + '/r21/web_place_rect.png', smooth=SMOOTH['web_place'])
     a.cut(pl)
-    a.declare('exempt', pl.envelope, 'PLACE: traced from the sign box (R21)')
+    a.declare('exempt', pl.envelope, 'PLACE: traced from the sign box in the squared-up frame (R21)')
     a.declare('redrawn', ov, 'oval panel rim + PLACE box: constructed at the measured outline')
     cap, _ = T('19312 VANOWEN ST.  ·  RESEDA', 'Jost[wght].ttf', cap=92, var=[600], track=0.16)
     cap = move(cap, cx=cx, y=cy + ry + 120)
@@ -731,28 +766,29 @@ def devonshire_downs():
 @build
 def fantasy_faire():
     """Fantasy Faire and Magic Music Festival, July 15-16 1967, at Devonshire Downs ('Devonshire Meadows' on
-    the poster), Northridge. Source: the 1967 poster (Penny Havard / The Gates of Eden; Circle Printing, LA),
-    PAE lot 13574, 1999 x 2804 (src/C40). No copyright notice appears on the poster (1909 Act: published
-    without notice). Only the hand lettering is used, traced from the red plate and lightly cleaned (hand
-    lettering: exempt); no band names (live marks), no figures, no times. Caption set in Jost."""
+    the poster), Northridge. Source: the 1967 poster (The Gates of Eden; Circle Printing, LA), PAE lot 13574,
+    1999 x 2804 (src/C40). The credit line reads 'Poster design -- The Gates of Eden, Penny Havard - 1967' with no
+    copyright symbol or word, so the poster was published without notice (1909 Act): public domain, art included.
+    Pass 3 (Brad 10-28, L49): the gap between the title and the festival lines is filled with the poster's own centre
+    figure, the Mucha-style woman with the rose and her burst of stars, traced from the red plate (x4 Real-ESRGAN,
+    then cut out by a drawn boundary). Every element sits at its printed position on the poster (the lettering
+    masks are 1:1 crops; offsets measured by template match). Left out: the two winged figures (bare-chested, which
+    Meta's ad rules reject), the laurel fronds they hold, the band list (live marks), times and credits.
+    The figure's hairlines are lifted to the DTG line floor along their own centrelines (print-clean)."""
     a = Art('sfv_fantasy_faire_1967')
     sc = 1.9
-    ys = 0.0
-    blocks = []
-    for name, gap in (('A', -10), ('B', 60), ('C', 0)):
+    for name, (px, py) in (('A', (224, 192)), ('B', (208, 1704)), ('C', (212, 2120))):
         g = mask_geom(WORK + f'/ff_{name}.png', smooth=None)
-        g = affinity.scale(g, sc, sc, origin=(0, 0))
-        blocks.append((g, gap))
-    W = max(width(g) for g, _ in blocks)
-    y = 0
-    for g, gap in blocks:
-        g = move(g, cx=W / 2, y=y)
+        g = affinity.scale(affinity.translate(g, px, py), sc, sc, origin=(0, 0))
         a.add(g)
         a.declare('exempt', g.envelope, 'hand lettering from the 1967 poster: traced from the red plate, lightly cleaned')
-        y = g.bounds[3] + gap + 60
-    # R21 rule 4: the poster's own DEVONSHIRE MEADOWS · JULY 15+16 line carries place and date, so no added line
+    fig = mask_geom(WORK + '/r21/ff_figure_floor.png', smooth=None)   # hairlines lifted to 0.021 in on their own centrelines (floor, L27; Hub City's 1.5 pt)
+    fig = affinity.scale(fig, 0.25, 0.25, origin=(0, 0))                  # x4 crop -> poster px
+    fig = affinity.scale(affinity.translate(fig, 600, 540), sc, sc, origin=(0, 0))
+    a.add(fig)
+    a.declare('exempt', fig.envelope, "illustration: the poster's centre figure with the rose and stars, traced from the red plate (pass 3)")
     a.ink = 'red'
-    a.clean = True
+    a.clean = dict(hair_in=0.021)
     return a
 
 
@@ -765,9 +801,10 @@ def rustys():
     (SR + threshold, no smoothing; print-clean floors only): the RUSTY'S HACIENDA headline with its zigzag inline,
     Family Restaurants, the MEXICAN FOOD sombrero, Cocktail Lounge / Banquets / Food to Go / Entertainment, and the
     ad's own address block (No. Hollywood Hacienda / 6439 Lankershim Blvd. / (near Victory)), which is the place
-    line, so no house line is added. Left out: the mustache under the sombrero (period caricature), the phone
-    number (standing rule) and the other-locations block; (near Victory) is re-centred where the phone was cut
-    (L21). v1's menu-based Knewave re-set is retired."""
+    line, so no house line is added. Left out: the phone number (standing rule) and the other-locations block;
+    (near Victory) is re-centred where the phone was cut (L21). The sombrero's mustache is kept (Brad 10-28: it is
+    the ad's own art; pass 2 had cut it on a caricature caution that was HQ's, not his, L48). v1's menu-based
+    Knewave re-set is retired."""
     a = Art('sfv_rustys_hacienda')
     g = mask_geom(WORK + '/r21/rusty_keep_final.png', smooth=None)
     a.add(g)
@@ -884,6 +921,9 @@ def encino_bowl():
         a.cut(B(x - 4, 380, x + 4, 713))
     a.declare('redrawn', row, 'BOWL boxes: four pointy-top hexagons at the measured outline (regularised to equal width)')
     bowl = S(mask_geom(WORK + '/r21/enc_bowl_letters_w.png', smooth=SMOOTH['enc_bowl']))
+    # L47: the traced row still rose 1.05 deg left to right after the BOWL-plane rectification (tops and feet both
+    # climb ~40 px B->L against the level boxes): graduated capture drift (L39), levelled as one unit.
+    bowl = affinity.rotate(bowl, 1.05, origin=bowl.centroid)
     a.cut(bowl)
     a.declare('exempt', bowl.envelope, 'BOWL: the sign letters traced (R21)')
     # ENCINO box + its dark lower body, letters knocked out
@@ -905,30 +945,41 @@ def encino_bowl():
     e1 = move(e1, right=dc[0] + 4, cy=dc[1]); b1 = move(b1, x=dc[0] - 4, cy=dc[1])
     a.cut(unary_union([e1, b1]), 'typeset', 'Michroma (EB drum monogram, R21 reason a)')
     a.declare('redrawn', drum, 'EB drum: constructed')
-    # poles
-    a.add(B(1124, 740, 1166, 1400))
-    a.add(B(1589, 740, 1631, 1040))
-    # Coffee Shop oval (lozenge) with a keyline; words traced
-    oc = (1800 * K, 1182 * K)
-    rw, rh = 560 * K, 160 * K
-    lz = Point(0, 0).buffer(1, resolution=128)
-    lz = affinity.scale(lz, rw, rh)
-    lz = lz.intersection(Polygon([(-rw, 0), (-rw * 0.86, -rh), (rw * 0.86, -rh), (rw, 0), (rw * 0.86, rh), (-rw * 0.86, rh)]))
-    lz = affinity.translate(lz, *oc)
-    a.add(lz)
-    a.cut(ring(lz, 9 * K, inner_offset=-22 * K))
-    a.declare('redrawn', lz, 'Coffee Shop oval: constructed (pointed lozenge) at the measured position')
-    cof = mask_geom(WORK + '/r21/enc_coffee_clean.png', smooth=SMOOTH['enc_cs'])
-    shp = mask_geom(WORK + '/r21/enc_shop_clean.png', smooth=SMOOTH['enc_cs'])
-    shp = affinity.scale(shp, 0.84, 0.84, origin=(0, 0))
-    cof = S(cof); shp = S(shp)
-    base = oc[1] + 62 * K
-    cof = move(cof, cx=1560 * K, bottom=base + 25 * K)
-    shp = move(shp, cx=2030 * K, bottom=base + 46 * 0.84 * K)
-    a.cut(cof); a.cut(shp)
-    a.declare('exempt', unary_union([cof, shp]).envelope, 'Coffee Shop: the sign lettering traced, each word levelled on its own face (R21)')
+    # Coffee Shop sign (pass 3, Brad 10-28, L47): the two-faced lozenge rectified face by face: the vertical
+    # vanishing point from the BOWL stems (the seam and the f stems run to it: the script is upright) and each
+    # face's horizontal vanishing point fitted so its top and bottom edges mirror (sfv2/work/r21/enc_sym.py;
+    # rectified faces enc_rect_L3.0.png, length = 3 x seam height). Letters traced there at mid-tone thresholds
+    # (pass 2's dark-core threshold thinned the brush strokes). The outline is the right face's measured profile,
+    # mirrored (the sign is symmetric; the left tip is lost in rim glare). Placed as in the photo: 56 % of the
+    # BOWL row wide, centred under its right half, hung on a short post; the main pole is the thick one to its left.
+    import json as _json
+    lz = _json.load(open(WORK + '/r21/enc_lozenge.json'))
+    kk = 1210.0 / (2 * lz['x'][-1])                         # rectified px -> build units
+    OX, OY = 1931.0, 1172.0                                  # oval centre (build units)
+    xs_, hs_ = lz['x'], lz['h']
+    upper = [(OX + x * kk, OY - h * kk) for x, h in zip(xs_, hs_)]
+    lower = [(OX + x * kk, OY + h * kk) for x, h in zip(xs_, hs_)][::-1]
+    right = upper + lower
+    left = [(2 * OX - x, y) for x, y in right][::-1]
+    face = S(Polygon(right).union(Polygon(left)).buffer(0))
+    a.add(B(1052, 718, 1179, 1430))                          # main pole (photo x 870-1000), runs on past the sign
+    a.add(B(1612, 712, 1732, OY - hs_[0] * kk + 20))         # short post the sign hangs from (photo x 1440-1580)
+    rim = face.buffer(16 * K, join_style=1)
+    a.add(rim)
+    a.cut(ring(rim, 8 * K, inner_offset=-8 * K))            # dark trim line at the face edge (0.037 in), outer band 0.036 in
+    a.cut(B(OX - 4, OY - hs_[0] * kk + 8, OX + 4, OY + hs_[0] * kk - 8))      # the seam where the two faces meet
+    a.declare('redrawn', face.buffer(12 * K), 'Coffee Shop lozenge: measured right-face profile, mirrored; trim and seam constructed')
+    def place(path, sm):
+        g = mask_geom(path, smooth=sm)
+        g = affinity.translate(g, -lz['cx'], -lz['cy'])
+        g = affinity.scale(g, kk, kk, origin=(0, 0))
+        return S(affinity.translate(g, OX, OY))
+    cs = unary_union([place(WORK + '/r21/enc_coffee_rect.png', SMOOTH['enc_cs']),
+                      place(WORK + '/r21/enc_shop_rect.png', SMOOTH['enc_cs'])])
+    a.cut(cs)
+    a.declare('exempt', cs.envelope, 'Coffee Shop: the sign lettering traced from the per-face rectified photo (R21, L47)')
     cap, _ = T('15945 VENTURA BLVD.  ·  ENCINO', 'Jost[wght].ttf', cap=95, var=[600], track=0.16)
-    cap = move(cap, cx=1350 * K, y=1400 * K + 90)
+    cap = move(cap, cx=1350 * K, y=1430 * K + 90)
     a.add(cap, 'typeset', 'Jost SemiBold (house locator line, R21 rule 4)')
     return a
 

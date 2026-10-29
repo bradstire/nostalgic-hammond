@@ -1,79 +1,71 @@
 [
  [
   "sfv_devonshire_downs.png",
-  8.7,
+  8.937,
   "#8B0000",
   "PASS",
   [],
   [
-   "EXEMPT [130, 1869, 2480, 2221]: LEVEL only: Damion is a casual brush script whose letters ride the baseline unevenly by design (set from the font on a level baseline)",
-   "STROKES: 4.53% of linework < 0.03 in"
+   "EXEMPT [863, 406, 1991, 762]: 'Devonshire Downs': the flyer's hand-painted lettering, traced (R21)",
+   "EXEMPT [24, 1899, 2557, 2395]: LEVEL only: a looped monoline script whose letters ride the baseline unevenly by design (set level from the font)",
+   "STROKES: 29.59% of linework < 0.03 in"
   ],
   [
    {
     "box": [
-     130,
-     1869,
-     2480,
-     2221
+     863,
+     406,
+     1991,
+     762
     ],
-    "reason": "LEVEL only: Damion is a casual brush script whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
-   }
-  ],
-  [
-   {
-    "box": [
-     739,
-     398,
-     1871,
-     561
-    ],
-    "font": "Libre Caslon Text Bold"
-   },
-   {
-    "box": [
-     970,
-     565,
-     1640,
-     717
-    ],
-    "font": "Libre Caslon Text Bold"
-   },
-   {
-    "box": [
-     130,
-     1869,
-     2480,
-     2025
-    ],
-    "font": "Damion"
-   },
-   {
-    "box": [
-     447,
-     2073,
-     2331,
-     2221
-    ],
-    "font": "Damion"
+    "reason": "'Devonshire Downs': the flyer's hand-painted lettering, traced (R21)"
    },
    {
     "box": [
      24,
-     2359,
-     2586,
-     2451
+     1899,
+     2557,
+     2395
     ],
-    "font": "Jost SemiBold"
+    "reason": "LEVEL only: a looped monoline script whose letters ride the baseline unevenly by design (set level from the font)"
    }
   ],
   [
    {
     "box": [
-     513,
-     9,
-     2115,
-     1797
+     24,
+     1899,
+     2476,
+     2140
+    ],
+    "font": "Sacramento, weighted to the line floor; R21 reason c: hairline script broken by the stair stripes"
+   },
+   {
+    "box": [
+     902,
+     2170,
+     2557,
+     2395
+    ],
+    "font": "Sacramento, weighted to the line floor; R21 reason c: hairline script broken by the stair stripes"
+   },
+   {
+    "box": [
+     95,
+     2533,
+     2657,
+     2625
+    ],
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
+   }
+  ],
+  [
+   {
+    "box": [
+     584,
+     51,
+     2186,
+     1839
     ],
     "how": "sign: our own drawing after the flyer illustration"
    }
@@ -81,61 +73,44 @@
  ],
  [
   "sfv_dons.png",
-  10.503,
+  9.037,
   "#262220",
   "PASS",
   [],
   [
-   "EXEMPT [307, 25, 2770, 1235]: hand lettering + chef illustration from the menu cover (traced, cleaned)",
-   "STROKES: 3.02% of linework < 0.03 in"
+   "EXEMPT [25, 24, 2686, 1332]: hand lettering + chef illustration from the menu cover (traced, cleaned)",
+   "EXEMPT [720, 1545, 1985, 2186]: hand lettering from the menu cover: RESTAURANT AND COFFEE SHOP (traced, R21)",
+   "STROKES: 3.59% of linework < 0.03 in"
   ],
   [
    {
     "box": [
-     307,
      25,
-     2770,
-     1235
+     24,
+     2686,
+     1332
     ],
     "reason": "hand lettering + chef illustration from the menu cover (traced, cleaned)"
+   },
+   {
+    "box": [
+     720,
+     1545,
+     1985,
+     2186
+    ],
+    "reason": "hand lettering from the menu cover: RESTAURANT AND COFFEE SHOP (traced, R21)"
    }
   ],
   [
    {
     "box": [
-     942,
-     1363,
-     2210,
-     1554
+     66,
+     2324,
+     2638,
+     2416
     ],
-    "font": "Oswald SemiBold"
-   },
-   {
-    "box": [
-     1447,
-     1599,
-     1705,
-     1721
-    ],
-    "font": "Oswald SemiBold"
-   },
-   {
-    "box": [
-     912,
-     1765,
-     2240,
-     1957
-    ],
-    "font": "Oswald SemiBold"
-   },
-   {
-    "box": [
-     25,
-     2048,
-     3126,
-     2155
-    ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (the menu address line, its own words, re-set); R21 reason a: ~8 px cap in the pull"
    }
   ],
   []
@@ -168,7 +143,7 @@
      2127,
      406
     ],
-    "font": "Kameron Bold (x0.67)"
+    "font": "Kameron Bold (x0.67); R21 reason a: sign letters ~10-12 px cap in the photo"
    },
    {
     "box": [
@@ -177,7 +152,7 @@
      2402,
      350
     ],
-    "font": "Kameron Bold (x0.67)"
+    "font": "Kameron Bold (x0.67); R21 reason a: sign letters ~10-12 px cap in the photo"
    },
    {
     "box": [
@@ -186,7 +161,7 @@
      2886,
      406
     ],
-    "font": "Kameron Bold (x0.67)"
+    "font": "Kameron Bold (x0.67); R21 reason a: sign letters ~10-12 px cap in the photo"
    },
    {
     "box": [
@@ -195,7 +170,7 @@
      897,
      721
     ],
-    "font": "Fredoka SemiBold"
+    "font": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
    },
    {
     "box": [
@@ -204,7 +179,7 @@
      820,
      920
     ],
-    "font": "Fredoka SemiBold"
+    "font": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
    },
    {
     "box": [
@@ -213,7 +188,7 @@
      2798,
      754
     ],
-    "font": "Fredoka SemiBold"
+    "font": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
    },
    {
     "box": [
@@ -222,7 +197,7 @@
      2770,
      921
     ],
-    "font": "Fredoka SemiBold"
+    "font": "Fredoka SemiBold; R21 reason a: ~6 px cap in the photo"
    },
    {
     "box": [
@@ -231,7 +206,7 @@
      2694,
      1338
     ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   [
@@ -257,86 +232,100 @@
  ],
  [
   "sfv_encino_bowl.png",
-  9.733,
+  10.28,
   "#F4ECDD",
   "PASS",
   [],
-  [],
-  [],
+  [
+   "EXEMPT [130, 1069, 2923, 1555]: BOWL: the sign letters traced (R21)",
+   "EXEMPT [921, 656, 2110, 834]: ENCINO: the sign letters traced (R21); broken C jaw mirrored from its upper jaw",
+   "EXEMPT [1520, 1992, 2701, 2336]: Coffee Shop: the sign lettering traced, each word levelled on its own face (R21)"
+  ],
   [
    {
     "box": [
-     196,
-     973,
-     624,
-     1415
+     130,
+     1069,
+     2923,
+     1555
     ],
-    "font": "Kameron Bold"
+    "reason": "BOWL: the sign letters traced (R21)"
    },
    {
     "box": [
-     878,
-     964,
-     1342,
-     1424
+     921,
+     656,
+     2110,
+     834
     ],
-    "font": "Kameron Bold"
+    "reason": "ENCINO: the sign letters traced (R21); broken C jaw mirrored from its upper jaw"
    },
    {
     "box": [
-     1473,
-     970,
-     2147,
-     1418
+     1520,
+     1992,
+     2701,
+     2336
     ],
-    "font": "Kameron Bold"
-   },
+    "reason": "Coffee Shop: the sign lettering traced, each word levelled on its own face (R21)"
+   }
+  ],
+  [
    {
     "box": [
-     2325,
-     973,
-     2695,
-     1415
-    ],
-    "font": "Kameron Bold"
-   },
-   {
-    "box": [
-     785,
-     590,
-     2135,
-     780
-    ],
-    "font": "Kameron Bold"
-   },
-   {
-    "box": [
-     1305,
+     1352,
      109,
-     1632,
-     311
+     1714,
+     287
     ],
-    "font": "Kameron Bold (EB monogram, letters overlapped as on the drum)"
+    "font": "Michroma (EB drum monogram, R21 reason a)"
    },
    {
     "box": [
-     726,
-     1913,
-     2194,
-     2247
+     110,
+     2578,
+     2974,
+     2696
     ],
-    "font": "Lobster"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   [
    {
     "box": [
      24,
-     4,
-     2896,
-     2346
+     979,
+     3060,
+     1626
     ],
-    "how": "sign: our own drawing after the VRM photo"
+    "how": "BOWL boxes: four pointy-top hexagons at the measured outline (regularised to equal width)"
+   },
+   {
+    "box": [
+     767,
+     609,
+     2272,
+     870
+    ],
+    "how": "ENCINO box face: constructed at the measured outline"
+   },
+   {
+    "box": [
+     1192,
+     24,
+     1848,
+     372
+    ],
+    "how": "EB drum: constructed"
+   },
+   {
+    "box": [
+     1382,
+     1959,
+     2962,
+     2419
+    ],
+    "how": "Coffee Shop oval: constructed (pointed lozenge) at the measured position"
    }
   ]
  ],
@@ -349,7 +338,8 @@
   [
    "EXEMPT [88, 24, 2962, 880]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned",
    "EXEMPT [25, 918, 3025, 1667]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned",
-   "EXEMPT [302, 1775, 2748, 1985]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
+   "EXEMPT [302, 1775, 2748, 1985]: hand lettering from the 1967 poster: traced from the red plate, lightly cleaned",
+   "No text lines detected: LEVEL/EDGES did not run - sign-off must check lettering by eye"
   ],
   [
    {
@@ -380,17 +370,7 @@
     "reason": "hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
    }
   ],
-  [
-   {
-    "box": [
-     191,
-     2093,
-     2859,
-     2235
-    ],
-    "font": "Jost SemiBold"
-   }
-  ],
+  [],
   []
  ],
  [
@@ -400,46 +380,28 @@
   "PASS",
   [],
   [
-   "EXEMPT [926, 76, 2126, 891]: hand-brushed FM: redrawn as brush strokes along the sign letters"
+   "EXEMPT [945, 87, 2067, 875]: hand-brushed FM: traced from the sign (R21)"
   ],
   [
    {
     "box": [
-     926,
-     76,
-     2126,
-     891
+     945,
+     87,
+     2067,
+     875
     ],
-    "reason": "hand-brushed FM: redrawn as brush strokes along the sign letters"
+    "reason": "hand-brushed FM: traced from the sign (R21)"
    }
   ],
   [
    {
     "box": [
-     621,
-     1320,
-     2499,
-     1639
+     184,
+     1318,
+     2936,
+     1587
     ],
-    "font": "Oswald SemiBold"
-   },
-   {
-    "box": [
-     334,
-     1712,
-     2786,
-     1960
-    ],
-    "font": "Oswald SemiBold"
-   },
-   {
-    "box": [
-     651,
-     2033,
-     2469,
-     2220
-    ],
-    "font": "Oswald SemiBold"
+    "font": "Oswald SemiBold (house locator line on the marquee, R21 rule 4)"
    }
   ],
   [
@@ -457,9 +419,9 @@
      54,
      1166,
      3066,
-     2358
+     1738
     ],
-    "how": "marquee board: constructed"
+    "how": "marquee board: constructed; v1 rows FM STATION / NORTH HOLLYWOOD / LIVE MUSIC 1976 retired (R21 rule 4)"
    }
   ]
  ],
@@ -470,9 +432,19 @@
   "PASS",
   [],
   [
+   "EXEMPT [348, 515, 1632, 745]: GEMCO: the store-sign letters, traced (R21), spaced as on the membership card",
    "EXEMPT [430, 601, 2976, 1866]: LEVEL only: band lettering runs on the card's printed diagonal (deliberate angle)"
   ],
   [
+   {
+    "box": [
+     348,
+     515,
+     1632,
+     745
+    ],
+    "reason": "GEMCO: the store-sign letters, traced (R21), spaced as on the membership card"
+   },
    {
     "box": [
      430,
@@ -486,21 +458,12 @@
   [
    {
     "box": [
-     321,
-     506,
-     1659,
-     754
-    ],
-    "font": "Libre Caslon Text Bold"
-   },
-   {
-    "box": [
      1127,
      777,
      2871,
      1766
     ],
-    "font": "Jost Bold (rotated with the band)"
+    "font": "Jost Bold (rotated with the band); R21 reason a: ~9 px cap on the only card image"
    },
    {
     "box": [
@@ -509,7 +472,7 @@
      2768,
      1723
     ],
-    "font": "Jost Medium (rotated with the band)"
+    "font": "Jost Medium (rotated with the band); R21 reason a: ~6 px cap on the only card image"
    },
    {
     "box": [
@@ -518,7 +481,7 @@
      2579,
      2162
     ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   [
@@ -562,27 +525,27 @@
      3048,
      3891
     ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   []
  ],
  [
   "sfv_june_ellens.png",
-  10.503,
+  9.703,
   "#F4ECDD",
   "PASS",
   [],
   [
-   "EXEMPT [163, 24, 2988, 614]: LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
+   "EXEMPT [24, 24, 2887, 622]: LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
   ],
   [
    {
     "box": [
-     163,
      24,
-     2988,
-     614
+     24,
+     2887,
+     622
     ],
     "reason": "LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
    }
@@ -590,195 +553,102 @@
   [
    {
     "box": [
-     163,
      24,
-     2988,
-     614
+     24,
+     2887,
+     622
     ],
-    "font": "Pacifico (the Cruise Night script)"
+    "font": "Pacifico (the Cruise Night script); R21 reason a: neon script ~18 px cap in a night photo"
    },
    {
     "box": [
-     969,
-     711,
-     2182,
-     936
+     167,
+     810,
+     2744,
+     933
     ],
-    "font": "Oswald Bold"
-   },
-   {
-    "box": [
-     25,
-     1092,
-     3127,
-     1205
-    ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   []
  ],
  [
   "sfv_leons.png",
-  7.68,
+  7.49,
   "#8B0000",
   "PASS",
   [],
   [
-   "EXEMPT [321, 122, 793, 558]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
-   "EXEMPT [321, 518, 793, 954]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
-   "EXEMPT [321, 914, 793, 1350]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
-   "EXEMPT [321, 1310, 793, 1746]: LEVEL only: the sign pillows hang at small deliberate tilts (source)",
-   "EXEMPT [321, 1706, 793, 2142]: LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+   "EXEMPT [180, 287, 503, 2644]: LEONS letters: traced from the sign (R21)",
+   "EXEMPT [291, 3029, 1385, 3624]: COFFEE SHOP: brush letters traced from the sign (R21)"
   ],
   [
    {
     "box": [
-     321,
-     122,
-     793,
-     558
+     180,
+     287,
+     503,
+     2644
     ],
-    "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+    "reason": "LEONS letters: traced from the sign (R21)"
    },
    {
     "box": [
-     321,
-     518,
-     793,
-     954
+     291,
+     3029,
+     1385,
+     3624
     ],
-    "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
-   },
-   {
-    "box": [
-     321,
-     914,
-     793,
-     1350
-    ],
-    "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
-   },
-   {
-    "box": [
-     321,
-     1310,
-     793,
-     1746
-    ],
-    "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
-   },
-   {
-    "box": [
-     321,
-     1706,
-     793,
-     2142
-    ],
-    "reason": "LEVEL only: the sign pillows hang at small deliberate tilts (source)"
+    "reason": "COFFEE SHOP: brush letters traced from the sign (R21)"
    }
   ],
   [
    {
     "box": [
-     473,
-     208,
-     641,
-     484
+     974,
+     875,
+     2074,
+     2089
     ],
-    "font": "Lilita One"
+    "font": "Antonio Light, each letter fitted to its measured box on the rectified sign (R21 reason c: trace broken by exposed neon)"
    },
    {
     "box": [
-     471,
-     601,
-     641,
-     879
+     24,
+     3920,
+     2222,
+     4026
     ],
-    "font": "Lilita One"
-   },
-   {
-    "box": [
-     432,
-     996,
-     682,
-     1276
-    ],
-    "font": "Lilita One"
-   },
-   {
-    "box": [
-     444,
-     1393,
-     670,
-     1672
-    ],
-    "font": "Lilita One"
-   },
-   {
-    "box": [
-     458,
-     1788,
-     649,
-     2068
-    ],
-    "font": "Lilita One"
-   },
-   {
-    "box": [
-     1076,
-     627,
-     1908,
-     903
-    ],
-    "font": "Oswald SemiBold"
-   },
-   {
-    "box": [
-     1076,
-     1156,
-     1908,
-     1414
-    ],
-    "font": "Oswald SemiBold"
-   },
-   {
-    "box": [
-     547,
-     2454,
-     1287,
-     2653
-    ],
-    "font": "Knewave"
-   },
-   {
-    "box": [
-     651,
-     2696,
-     1223,
-     2900
-    ],
-    "font": "Knewave"
-   },
-   {
-    "box": [
-     25,
-     3254,
-     2279,
-     3363
-    ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   [
    {
     "box": [
-     321,
-     2284,
-     1513,
-     3016
+     652,
+     1,
+     913,
+     3815
     ],
-    "how": "COFFEE SHOP panel: our own drawing of the sign shape"
+    "how": "pole, cap, rail, light windows: constructed at their measured positions"
+   },
+   {
+    "box": [
+     89,
+     232,
+     565,
+     2712
+    ],
+    "how": "LEONS pillows: outlines traced, then smoothed as the convex fittings they are"
+   },
+   {
+    "box": [
+     192,
+     2882,
+     1474,
+     3740
+    ],
+    "how": "COFFEE SHOP shield: outline traced, debris on the top edge opened out, smoothed as the convex panel it is"
    }
   ]
  ],
@@ -790,7 +660,8 @@
   [],
   [
    "EXEMPT [285, 363, 2866, 3563]: illustration: the menu chef (traced, one-colour)",
-   "EXEMPT [306, 25, 1490, 370]: hand lettering: the menu's 'Mike's' script (traced)"
+   "EXEMPT [306, 25, 1490, 370]: hand lettering: the menu's 'Mike's' script (traced)",
+   "EXEMPT [1636, 32, 2781, 346]: hand lettering: the menu's PIZZA (traced in place, R21)"
   ],
   [
    {
@@ -810,18 +681,18 @@
      370
     ],
     "reason": "hand lettering: the menu's 'Mike's' script (traced)"
+   },
+   {
+    "box": [
+     1636,
+     32,
+     2781,
+     346
+    ],
+    "reason": "hand lettering: the menu's PIZZA (traced in place, R21)"
    }
   ],
   [
-   {
-    "box": [
-     1563,
-     92,
-     2565,
-     343
-    ],
-    "font": "League Spartan Black (x0.92)"
-   },
    {
     "box": [
      1039,
@@ -829,7 +700,7 @@
      2076,
      3500
     ],
-    "font": "Jost Bold"
+    "font": "Jost Bold; R21 reason a: ~7 px cap in the menu photo"
    },
    {
     "box": [
@@ -838,68 +709,70 @@
      3126,
      3781
     ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
-  ],
-  []
- ],
- [
-  "sfv_moby_disc.png",
-  10.213,
-  "#003366",
-  "PASS",
-  [],
-  [
-   "EXEMPT [109, 254, 2954, 3797]: illustration: whale, record, waves, splash traced from the sleeve (cleaned)",
-   "EXEMPT [25, 25, 3036, 2152]: LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
   ],
   [
    {
     "box": [
-     109,
-     254,
-     2954,
-     3797
+     1497,
+     -10,
+     3002,
+     423
+    ],
+    "how": "PIZZA: the R21 trace replaces the v1 re-set (League Spartan Black); the old letters are retired on purpose"
+   }
+  ]
+ ],
+ [
+  "sfv_moby_disc.png",
+  9.503,
+  "#003366",
+  "PASS",
+  [],
+  [
+   "EXEMPT [17, 314, 2834, 3823]: illustration: whale, record, waves, splash traced from the sleeve (cleaned)",
+   "EXEMPT [57, 25, 2795, 1895]: hand lettering traced from the sleeve: MOBY DISC RECORDS on its arc (R21)",
+   "EXEMPT [52, 2519, 1181, 2891]: hand lettering traced from the sleeve: A Whale of a Store! with its underlines (R21)"
+  ],
+  [
+   {
+    "box": [
+     17,
+     314,
+     2834,
+     3823
     ],
     "reason": "illustration: whale, record, waves, splash traced from the sleeve (cleaned)"
    },
    {
     "box": [
+     57,
      25,
-     25,
-     3036,
-     2152
+     2795,
+     1895
     ],
-    "reason": "LEVEL only: lettering set on the sleeve's arc (typeset glyph by glyph in Fraunces Black Italic Soft)"
+    "reason": "hand lettering traced from the sleeve: MOBY DISC RECORDS on its arc (R21)"
+   },
+   {
+    "box": [
+     52,
+     2519,
+     1181,
+     2891
+    ],
+    "reason": "hand lettering traced from the sleeve: A Whale of a Store! with its underlines (R21)"
    }
   ],
   [
    {
     "box": [
-     170,
-     2502,
-     952,
-     2650
-    ],
-    "font": "Fraunces Black Italic Soft"
-   },
-   {
-    "box": [
-     222,
-     2700,
-     1179,
-     2884
-    ],
-    "font": "Fraunces Black Italic Soft"
-   },
-   {
-    "box": [
-     30,
-     3905,
-     3039,
+     261,
+     3930,
+     2595,
      4026
     ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   []
@@ -922,7 +795,7 @@
      2769,
      263
     ],
-    "font": "Rye"
+    "font": "Rye; R21 reason a: no lettering in any source (the 1963 photo shows no sign text)"
    },
    {
     "box": [
@@ -931,7 +804,7 @@
      2751,
      1997
     ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   [
@@ -974,7 +847,7 @@
      1465,
      1668
     ],
-    "font": "Oswald Bold"
+    "font": "Oswald Bold; R21 reason a: sign letters ~15-18 px cap in the photo"
    },
    {
     "box": [
@@ -983,7 +856,7 @@
      2627,
      1664
     ],
-    "font": "Oswald Bold"
+    "font": "Oswald Bold; R21 reason a: sign letters ~15-18 px cap in the photo"
    },
    {
     "box": [
@@ -992,7 +865,7 @@
      1859,
      226
     ],
-    "font": "Oswald Bold, sheared 10 deg"
+    "font": "Oswald Bold, sheared 10 deg; R21 reason a: sign letters ~15-18 px cap in the photo"
    },
    {
     "box": [
@@ -1001,7 +874,7 @@
      1893,
      402
     ],
-    "font": "Oswald Bold, sheared 10 deg"
+    "font": "Oswald Bold, sheared 10 deg; R21 reason a: sign letters ~15-18 px cap in the photo"
    },
    {
     "box": [
@@ -1010,7 +883,7 @@
      3126,
      2009
     ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   [
@@ -1032,66 +905,22 @@
   "PASS",
   [],
   [
-   "EXEMPT [79, 24, 3072, 1343]: LEVEL only: Knewave is a brush italic whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
+   "EXEMPT [24, 25, 3126, 1914]: the 1972 ad traced as printed (hand-lettered headline, sombrero, the ad's own type) - R21",
+   "STROKES: 2.24% of linework < 0.03 in",
+   "No text lines detected: LEVEL/EDGES did not run - sign-off must check lettering by eye"
   ],
   [
    {
     "box": [
-     79,
      24,
-     3072,
-     1343
-    ],
-    "reason": "LEVEL only: Knewave is a brush italic whose letters ride the baseline unevenly by design (set from the font on a level baseline)"
-   }
-  ],
-  [
-   {
-    "box": [
-     117,
-     24,
-     1922,
-     243
-    ],
-    "font": "Knewave"
-   },
-   {
-    "box": [
-     79,
-     317,
-     3072,
-     748
-    ],
-    "font": "Knewave"
-   },
-   {
-    "box": [
-     115,
-     898,
-     3036,
-     1098
-    ],
-    "font": "Knewave"
-   },
-   {
-    "box": [
-     753,
-     1143,
-     2398,
-     1343
-    ],
-    "font": "Knewave"
-   },
-   {
-    "box": [
      25,
-     1522,
      3126,
-     1620
+     1914
     ],
-    "font": "Jost SemiBold"
+    "reason": "the 1972 ad traced as printed (hand-lettered headline, sombrero, the ad's own type) - R21"
    }
   ],
+  [],
   []
  ],
  [
@@ -1103,7 +932,7 @@
   [
    "EXEMPT [55, 56, 2724, 1482]: hand lettering from the matchbook (traced); the word rises ~15 deg by design",
    "EXEMPT [636, 1039, 2455, 1592]: LEVEL only: the tagline runs on the matchbook's 15-deg script angle",
-   "STROKES: 11.18% of linework < 0.03 in"
+   "STROKES: 11.06% of linework < 0.03 in"
   ],
   [
    {
@@ -1133,7 +962,7 @@
      2455,
      1592
     ],
-    "font": "TeX Gyre Heros (rotated on the script angle)"
+    "font": "TeX Gyre Heros (rotated on the script angle); R21 reasons a+b: ~5 px cap, Helvetica as printed"
    },
    {
     "box": [
@@ -1142,7 +971,7 @@
      2326,
      1914
     ],
-    "font": "TeX Gyre Heros"
+    "font": "TeX Gyre Heros; R21 reasons a+b: ~11 px cap, Helvetica as printed"
    },
    {
     "box": [
@@ -1151,7 +980,7 @@
      1796,
      2143
     ],
-    "font": "TeX Gyre Heros"
+    "font": "TeX Gyre Heros; R21 reasons a+b: ~11 px cap, Helvetica as printed"
    }
   ],
   [
@@ -1174,7 +1003,7 @@
   [],
   [
    "EXEMPT [637, 378, 2514, 1535]: hand lettering: the wood-plank logo from the 1970s coupon (traced)",
-   "STROKES: 18.39% of linework < 0.03 in"
+   "STROKES: 18.34% of linework < 0.03 in"
   ],
   [
    {
@@ -1190,30 +1019,30 @@
   [
    {
     "box": [
-     864,
+     832,
      26,
-     2287,
+     2319,
      168
     ],
-    "font": "TeX Gyre Schola Bold"
+    "font": "TeX Gyre Schola Bold; R21 reason a: ~13 px cap on the coupon photo"
    },
    {
     "box": [
-     852,
+     822,
      192,
-     2299,
+     2329,
      334
     ],
-    "font": "TeX Gyre Schola Bold"
+    "font": "TeX Gyre Schola Bold; R21 reason a: ~13 px cap on the coupon photo"
    },
    {
     "box": [
-     620,
-     429,
-     894,
-     519
+     586,
+     420,
+     860,
+     511
     ],
-    "font": "TeX Gyre Schola Bold"
+    "font": "TeX Gyre Schola Bold; R21 reason a: ~10 px cap on the coupon photo"
    },
    {
     "box": [
@@ -1222,7 +1051,7 @@
      2576,
      1740
     ],
-    "font": "Righteous"
+    "font": "Righteous; R21 reason a: ~13 px cap on the coupon photo"
    },
    {
     "box": [
@@ -1231,7 +1060,7 @@
      2354,
      1914
     ],
-    "font": "TeX Gyre Schola Bold"
+    "font": "TeX Gyre Schola Bold; R21 reason a: ~12 px cap on the coupon photo"
    },
    {
     "box": [
@@ -1240,28 +1069,61 @@
      3126,
      2098
     ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
-  []
+  [
+   {
+    "box": [
+     527,
+     361,
+     919,
+     570
+    ],
+    "how": "THE moved 40 units left, 10 up to clear the logo by the gap floor (type is no longer print-cleaned, L44)"
+   }
+  ]
  ],
  [
   "sfv_valley_plaza.png",
-  9.2,
+  9.44,
   "#F4ECDD",
   "PASS",
   [],
-  [],
-  [],
+  [
+   "EXEMPT [276, 946, 2565, 2620]: VALLEY PLAZA: the sign letters traced (tube centreline + measured channel width), R21",
+   "EXEMPT [307, 978, 2532, 2587]: neon tubes: traced centrelines at a 0.03 in printable width",
+   "STROKES: 16.4% of linework < 0.03 in"
+  ],
   [
    {
     "box": [
-     180,
-     3095,
-     2580,
-     3212
+     276,
+     946,
+     2565,
+     2620
     ],
-    "font": "Jost SemiBold"
+    "reason": "VALLEY PLAZA: the sign letters traced (tube centreline + measured channel width), R21"
+   },
+   {
+    "box": [
+     307,
+     978,
+     2532,
+     2587
+    ],
+    "reason": "neon tubes: traced centrelines at a 0.03 in printable width"
+   }
+  ],
+  [
+   {
+    "box": [
+     216,
+     3228,
+     2616,
+     3345
+    ],
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   [
@@ -1269,86 +1131,90 @@
     "box": [
      24,
      24,
-     2736,
-     2877
+     2808,
+     3008
     ],
-    "how": "sign panel: constructed geometry after the LAist photo"
+    "how": "sign panel + crown: constructed at the measured outline (rectified photo)"
    },
    {
     "box": [
-     162,
-     304,
-     2598,
-     2738
+     134,
+     318,
+     2698,
+     2898
     ],
-    "how": "double inline border: constructed (two 0.08 in lines, 0.10 in apart)"
+    "how": "stepped rail: constructed on the measured path (rail + its shadow line as two knocked-out lines)"
    },
    {
     "box": [
-     394,
-     721,
-     2366,
-     1543
+     748,
+     1518,
+     2277,
+     2597
     ],
-    "how": "VALLEY: monoline channel letters constructed from the sign photo (not traced)"
-   },
-   {
-    "box": [
-     519,
-     1774,
-     2241,
-     2596
-    ],
-    "how": "PLAZA: monoline channel letters constructed from the sign photo (not traced)"
+    "how": "A ornament: inverted triangle drawn from its measured outline on the first A, repeated on the other two"
    }
   ]
  ],
  [
   "sfv_webers_place.png",
-  10.203,
+  10.32,
   "#F4ECDD",
   "PASS",
   [],
-  [],
-  [],
+  [
+   "EXEMPT [24, 25, 1066, 945]: the orange swash W: traced from the sign's face (R21)",
+   "EXEMPT [1206, 824, 2051, 997]: PLACE: traced from the sign box (R21)"
+  ],
   [
    {
     "box": [
-     36,
-     175,
-     2966,
-     753
+     24,
+     25,
+     1066,
+     945
     ],
-    "font": "TeX Gyre Bonum Bold Italic"
+    "reason": "the orange swash W: traced from the sign's face (R21)"
    },
    {
     "box": [
-     1106,
-     866,
-     2036,
-     1054
+     1206,
+     824,
+     2051,
+     997
     ],
-    "font": "TeX Gyre Bonum Bold"
-   },
-   {
-    "box": [
-     233,
-     1365,
-     2829,
-     1480
-    ],
-    "font": "Jost SemiBold"
+    "reason": "PLACE: traced from the sign box (R21)"
    }
   ],
   [
    {
     "box": [
-     25,
-     25,
-     3037,
-     1257
+     1020,
+     247,
+     2967,
+     751
     ],
-    "how": "oval panel + PLACE box: constructed"
+    "font": "TeX Gyre Bonum Bold Italic, fitted to the sign's x-height and width; R21 reason b: Bookman Bold Italic is the sign's face"
+   },
+   {
+    "box": [
+     290,
+     1259,
+     2886,
+     1374
+    ],
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
+   }
+  ],
+  [
+   {
+    "box": [
+     104,
+     75,
+     3072,
+     1151
+    ],
+    "how": "oval panel rim + PLACE box: constructed at the measured outline"
    }
   ]
  ],
@@ -1368,7 +1234,7 @@
      291,
      808
     ],
-    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
    },
    {
     "box": [
@@ -1377,7 +1243,7 @@
      471,
      627
     ],
-    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
    },
    {
     "box": [
@@ -1386,7 +1252,7 @@
      674,
      441
     ],
-    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
    },
    {
     "box": [
@@ -1395,7 +1261,7 @@
      960,
      318
     ],
-    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
    },
    {
     "box": [
@@ -1404,7 +1270,7 @@
      1306,
      244
     ],
-    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
    },
    {
     "box": [
@@ -1413,7 +1279,7 @@
      2004,
      236
     ],
-    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
    },
    {
     "box": [
@@ -1422,7 +1288,7 @@
      2321,
      327
     ],
-    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
    },
    {
     "box": [
@@ -1431,7 +1297,7 @@
      2618,
      436
     ],
-    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
    },
    {
     "box": [
@@ -1440,7 +1306,7 @@
      2881,
      619
     ],
-    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
    },
    {
     "box": [
@@ -1449,7 +1315,7 @@
      3043,
      804
     ],
-    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+    "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
    },
    {
     "box": [
@@ -1458,7 +1324,7 @@
      2502,
      1589
     ],
-    "font": "Yellowtail"
+    "font": "Yellowtail; R21 reason a: the photo caption script is ~18 px cap"
    },
    {
     "box": [
@@ -1467,7 +1333,7 @@
      2983,
      1782
     ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   [
@@ -1484,66 +1350,33 @@
  ],
  [
   "sfv_zodys.png",
-  9.52,
+  8.467,
   "#F4ECDD",
   "PASS",
   [],
-  [],
-  [],
+  [
+   "EXEMPT [24, 24, 2516, 1116]: ZODYS: the canopy letters traced, one rectified box at a time (R21)"
+  ],
   [
    {
     "box": [
-     129,
-     318,
-     431,
-     830
+     24,
+     24,
+     2516,
+     1116
     ],
-    "font": "Kameron Bold (narrowed to the box, max x0.78)"
-   },
+    "reason": "ZODYS: the canopy letters traced, one rectified box at a time (R21)"
+   }
+  ],
+  [
    {
     "box": [
-     703,
-     308,
-     1005,
-     840
-    ],
-    "font": "Kameron Bold (narrowed to the box, max x0.78)"
-   },
-   {
-    "box": [
-     1277,
-     317,
-     1579,
-     831
-    ],
-    "font": "Kameron Bold (narrowed to the box, max x0.78)"
-   },
-   {
-    "box": [
-     1851,
-     318,
-     2153,
-     830
-    ],
-    "font": "Kameron Bold (narrowed to the box, max x0.78)"
-   },
-   {
-    "box": [
-     2425,
-     308,
-     2727,
-     840
-    ],
-    "font": "Kameron Bold (narrowed to the box, max x0.78)"
-   },
-   {
-    "box": [
-     383,
+     225,
      1224,
-     2473,
+     2315,
      1347
     ],
-    "font": "Jost SemiBold"
+    "font": "Jost SemiBold (house locator line, R21 rule 4)"
    }
   ],
   [
@@ -1551,10 +1384,10 @@
     "box": [
      24,
      24,
-     2832,
+     2516,
      1116
     ],
-    "how": "hexagon boxes: constructed geometry after the LAPL photo"
+    "how": "hexagon boxes: constructed in the photo proportions (plain faces; v1 keylines retired)"
    }
   ]
  ]

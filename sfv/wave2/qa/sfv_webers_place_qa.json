@@ -1,6 +1,6 @@
 {
  "file": "sfv_webers_place.png",
- "print_width_in": 10.203,
+ "print_width_in": 10.32,
  "ppi": 300.0,
  "layers": [
   [
@@ -16,29 +16,29 @@
   {
    "layer": "(244, 236, 221)",
    "box": [
-    42,
-    181,
-    2960,
-    747
+    1026,
+    253,
+    2961,
+    745
    ],
-   "letters": 7,
-   "cap_in": 1.347,
-   "tilt_deg": 0.06,
-   "jitter": 0.004,
-   "inflect_per_in": 1.3,
-   "peaks_per_cap": 4.34,
+   "letters": 6,
+   "cap_in": 1.17,
+   "tilt_deg": -0.08,
+   "jitter": 0.002,
+   "inflect_per_in": 1.4,
+   "peaks_per_cap": 3.92,
    "rise_in": 0.009,
    "wobble_limit": 3.6,
-   "typeset": "TeX Gyre Bonum Bold Italic",
+   "typeset": "TeX Gyre Bonum Bold Italic, fitted to the sign's x-height and width; R21 reason b: Bookman Bold Italic is the sign's face",
    "flags": []
   },
   {
    "layer": "(244, 236, 221)",
    "box": [
-    239,
-    1372,
-    1844,
-    1473
+    296,
+    1266,
+    1901,
+    1367
    ],
    "letters": 14,
    "cap_in": 0.318,
@@ -48,16 +48,16 @@
    "peaks_per_cap": 2.62,
    "rise_in": 0.007,
    "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "(244, 236, 221)",
    "box": [
-    2229,
-    1372,
-    2822,
-    1471
+    2286,
+    1266,
+    2879,
+    1365
    ],
    "letters": 6,
    "cap_in": 0.307,
@@ -67,75 +67,69 @@
    "peaks_per_cap": 3.45,
    "rise_in": 0.002,
    "wobble_limit": 4.2,
-   "typeset": "Jost SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "knockout in (244, 236, 221)",
-   "box": [
-    1112,
-    872,
-    2030,
-    1048
-   ],
-   "letters": 5,
-   "cap_in": 0.567,
-   "tilt_deg": 0.09,
-   "jitter": 0.003,
-   "inflect_per_in": 1.6,
-   "peaks_per_cap": 4.74,
-   "rise_in": 0.005,
-   "wobble_limit": 3.8,
-   "typeset": "TeX Gyre Bonum Bold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
  "strokes": {
   "fail_pct": 0.0,
-  "warn_pct": 0.13
+  "warn_pct": 0.18
  },
  "verdict": "PASS",
  "fails": [],
- "warns": [],
- "exemptions": [],
+ "warns": [
+  "EXEMPT [24, 25, 1066, 945]: the orange swash W: traced from the sign's face (R21)",
+  "EXEMPT [1206, 824, 2051, 997]: PLACE: traced from the sign box (R21)"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    24,
+    25,
+    1066,
+    945
+   ],
+   "reason": "the orange swash W: traced from the sign's face (R21)"
+  },
+  {
+   "box": [
+    1206,
+    824,
+    2051,
+    997
+   ],
+   "reason": "PLACE: traced from the sign box (R21)"
+  }
+ ],
  "typeset": [
   {
    "box": [
-    36,
-    175,
-    2966,
-    753
+    1020,
+    247,
+    2967,
+    751
    ],
-   "font": "TeX Gyre Bonum Bold Italic"
+   "font": "TeX Gyre Bonum Bold Italic, fitted to the sign's x-height and width; R21 reason b: Bookman Bold Italic is the sign's face"
   },
   {
    "box": [
-    1106,
-    866,
-    2036,
-    1054
+    290,
+    1259,
+    2886,
+    1374
    ],
-   "font": "TeX Gyre Bonum Bold"
-  },
-  {
-   "box": [
-    233,
-    1365,
-    2829,
-    1480
-   ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [
   {
    "box": [
-    25,
-    25,
-    3037,
-    1257
+    104,
+    75,
+    3072,
+    1151
    ],
-   "how": "oval panel + PLACE box: constructed"
+   "how": "oval panel rim + PLACE box: constructed at the measured outline"
   }
  ],
  "substrate_layers": []

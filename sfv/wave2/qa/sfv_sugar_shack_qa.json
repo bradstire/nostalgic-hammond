@@ -16,39 +16,20 @@
   {
    "layer": "(38, 34, 32)",
    "box": [
-    857,
+    828,
     197,
-    2294,
+    2324,
     329
    ],
    "letters": 16,
    "cap_in": 0.33,
-   "tilt_deg": 0.03,
-   "jitter": 0.009,
+   "tilt_deg": 0.02,
+   "jitter": 0.007,
    "inflect_per_in": 4.2,
-   "peaks_per_cap": 3.39,
+   "peaks_per_cap": 3.09,
    "rise_in": 0.002,
    "wobble_limit": 4.2,
-   "typeset": "TeX Gyre Schola Bold",
-   "flags": []
-  },
-  {
-   "layer": "(38, 34, 32)",
-   "box": [
-    2000,
-    1630,
-    2571,
-    1735
-   ],
-   "letters": 6,
-   "cap_in": 0.333,
-   "tilt_deg": 0.14,
-   "jitter": 0.011,
-   "inflect_per_in": 2.8,
-   "peaks_per_cap": 2.86,
-   "rise_in": 0.005,
-   "wobble_limit": 4.2,
-   "typeset": "Righteous",
+   "typeset": "TeX Gyre Schola Bold; R21 reason a: ~13 px cap on the coupon photo",
    "flags": []
   },
   {
@@ -57,36 +38,36 @@
     581,
     1632,
     1211,
-    1736
+    1735
    ],
    "letters": 7,
    "cap_in": 0.333,
-   "tilt_deg": 0.01,
-   "jitter": 0.001,
-   "inflect_per_in": 1.8,
-   "peaks_per_cap": 2.56,
-   "rise_in": 0.0,
+   "tilt_deg": 0.15,
+   "jitter": 0.01,
+   "inflect_per_in": 1.3,
+   "peaks_per_cap": 2.57,
+   "rise_in": 0.005,
    "wobble_limit": 4.2,
-   "typeset": "Righteous",
+   "typeset": "Righteous; R21 reason a: ~13 px cap on the coupon photo",
    "flags": []
   },
   {
    "layer": "(38, 34, 32)",
    "box": [
-    869,
+    837,
     31,
-    2282,
+    2314,
     163
    ],
    "letters": 14,
    "cap_in": 0.28,
-   "tilt_deg": 0.04,
+   "tilt_deg": 0.03,
    "jitter": 0.023,
-   "inflect_per_in": 3.9,
-   "peaks_per_cap": 2.78,
+   "inflect_per_in": 3.8,
+   "peaks_per_cap": 2.79,
    "rise_in": 0.003,
    "wobble_limit": 4.3,
-   "typeset": "TeX Gyre Schola Bold",
+   "typeset": "TeX Gyre Schola Bold; R21 reason a: ~13 px cap on the coupon photo",
    "flags": []
   },
   {
@@ -105,64 +86,83 @@
    "peaks_per_cap": 2.85,
    "rise_in": 0.006,
    "wobble_limit": 4.2,
-   "typeset": "Righteous",
+   "typeset": "Righteous; R21 reason a: ~13 px cap on the coupon photo",
    "flags": []
   },
   {
    "layer": "(38, 34, 32)",
    "box": [
-    801,
+    2000,
+    1632,
+    2571,
+    1735
+   ],
+   "letters": 6,
+   "cap_in": 0.333,
+   "tilt_deg": 0.04,
+   "jitter": 0.002,
+   "inflect_per_in": 2.2,
+   "peaks_per_cap": 2.74,
+   "rise_in": 0.001,
+   "wobble_limit": 4.2,
+   "typeset": "Righteous; R21 reason a: ~13 px cap on the coupon photo",
+   "flags": []
+  },
+  {
+   "layer": "(38, 34, 32)",
+   "box": [
+    803,
     1812,
     2348,
     1909
    ],
    "letters": 18,
    "cap_in": 0.217,
-   "tilt_deg": 0.0,
-   "jitter": 0.022,
-   "inflect_per_in": 3.6,
-   "peaks_per_cap": 2.29,
-   "rise_in": 0.0,
+   "tilt_deg": 0.02,
+   "jitter": 0.019,
+   "inflect_per_in": 3.4,
+   "peaks_per_cap": 2.27,
+   "rise_in": 0.002,
    "wobble_limit": 4.6,
-   "typeset": "TeX Gyre Schola Bold",
+   "typeset": "TeX Gyre Schola Bold; R21 reason a: ~12 px cap on the coupon photo",
    "flags": []
   },
   {
    "layer": "(38, 34, 32)",
    "box": [
-    29,
-    2008,
+    31,
+    2011,
     1514,
-    2095
+    2093
    ],
    "letters": 17,
-   "cap_in": 0.257,
-   "tilt_deg": 0.01,
-   "jitter": 0.022,
-   "inflect_per_in": 3.7,
-   "peaks_per_cap": 2.98,
-   "rise_in": 0.001,
+   "cap_in": 0.253,
+   "tilt_deg": 0.03,
+   "jitter": 0.01,
+   "inflect_per_in": 2.3,
+   "peaks_per_cap": 2.72,
+   "rise_in": 0.003,
    "wobble_limit": 4.4,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "(38, 34, 32)",
    "box": [
-    1819,
-    2008,
+    1822,
+    2011,
     3121,
-    2094
+    2092
    ],
    "letters": 14,
-   "cap_in": 0.26,
-   "tilt_deg": -0.06,
-   "jitter": 0.023,
-   "inflect_per_in": 2.7,
-   "peaks_per_cap": 2.29,
-   "rise_in": 0.004,
+   "cap_in": 0.25,
+   "tilt_deg": -0.0,
+   "jitter": 0.001,
+   "inflect_per_in": 2.1,
+   "peaks_per_cap": 2.09,
+   "rise_in": 0.0,
    "wobble_limit": 4.4,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
@@ -181,19 +181,19 @@
    "peaks_per_cap": 0.77,
    "rise_in": 0.004,
    "wobble_limit": 4.9,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
  "strokes": {
-  "fail_pct": 0.36,
-  "warn_pct": 18.39
+  "fail_pct": 0.38,
+  "warn_pct": 18.34
  },
  "verdict": "PASS",
  "fails": [],
  "warns": [
   "EXEMPT [637, 378, 2514, 1535]: hand lettering: the wood-plank logo from the 1970s coupon (traced)",
-  "STROKES: 18.39% of linework < 0.03 in"
+  "STROKES: 18.34% of linework < 0.03 in"
  ],
  "exemptions": [
   {
@@ -209,30 +209,30 @@
  "typeset": [
   {
    "box": [
-    864,
+    832,
     26,
-    2287,
+    2319,
     168
    ],
-   "font": "TeX Gyre Schola Bold"
+   "font": "TeX Gyre Schola Bold; R21 reason a: ~13 px cap on the coupon photo"
   },
   {
    "box": [
-    852,
+    822,
     192,
-    2299,
+    2329,
     334
    ],
-   "font": "TeX Gyre Schola Bold"
+   "font": "TeX Gyre Schola Bold; R21 reason a: ~13 px cap on the coupon photo"
   },
   {
    "box": [
-    620,
-    429,
-    894,
-    519
+    586,
+    420,
+    860,
+    511
    ],
-   "font": "TeX Gyre Schola Bold"
+   "font": "TeX Gyre Schola Bold; R21 reason a: ~10 px cap on the coupon photo"
   },
   {
    "box": [
@@ -241,7 +241,7 @@
     2576,
     1740
    ],
-   "font": "Righteous"
+   "font": "Righteous; R21 reason a: ~13 px cap on the coupon photo"
   },
   {
    "box": [
@@ -250,7 +250,7 @@
     2354,
     1914
    ],
-   "font": "TeX Gyre Schola Bold"
+   "font": "TeX Gyre Schola Bold; R21 reason a: ~12 px cap on the coupon photo"
   },
   {
    "box": [
@@ -259,9 +259,19 @@
     3126,
     2098
    ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
- "redrawn": [],
+ "redrawn": [
+  {
+   "box": [
+    527,
+    361,
+    919,
+    570
+   ],
+   "how": "THE moved 40 units left, 10 up to clear the logo by the gap floor (type is no longer print-cleaned, L44)"
+  }
+ ],
  "substrate_layers": []
 }

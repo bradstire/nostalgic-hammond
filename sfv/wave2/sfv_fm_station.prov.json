@@ -2,49 +2,67 @@
  "typeset": [
   [
    [
-    184,
-    1318,
-    2936,
-    1587
+    1035,
+    1223,
+    2118,
+    1586
    ],
-   "Oswald SemiBold (house locator line on the marquee, R21 rule 4)"
+   "Big Shoulders Display ExtraBold, marquee letters hung one by one; R21 reason a: the marquee letters are AI-smeared in the only photo"
+  ],
+  [
+   [
+    498,
+    1681,
+    2651,
+    2046
+   ],
+   "Big Shoulders Display ExtraBold, marquee letters hung one by one; R21 reason a: the marquee letters are AI-smeared in the only photo"
   ]
  ],
  "exempt": [
   [
    [
-    945,
-    87,
-    2067,
-    875
+    1576,
+    77,
+    2499,
+    725
    ],
    "hand-brushed FM: traced from the sign (R21)"
+  ],
+  [
+   [
+    1025,
+    1213,
+    2128,
+    1596
+   ],
+   "LEVEL only: marquee letters hung by hand on the tracks; the small per-letter tilts and uneven gaps are the sign (Brad 10-28)"
+  ],
+  [
+   [
+    488,
+    1671,
+    2660,
+    2055
+   ],
+   "LEVEL only: marquee letters hung by hand on the tracks; the small per-letter tilts and uneven gaps are the sign (Brad 10-28)"
   ]
  ],
  "redrawn": [
   [
    [
-    576,
-    25,
-    2544,
-    994
+    26,
+    795,
+    3126,
+    2190
    ],
-   "box sign: constructed"
-  ],
-  [
-   [
-    54,
-    1166,
-    3066,
-    1738
-   ],
-   "marquee board: constructed; v1 rows FM STATION / NORTH HOLLYWOOD / LIVE MUSIC 1976 retired (R21 rule 4)"
+   "marquee board, beam, frame, posts and brace: constructed at the photo measurements"
   ]
  ],
  "rules": [
   "R21"
  ],
  "ink": "#F4ECDD",
- "print_width_in": 10.4,
- "print_height_in": 5.977
+ "print_width_in": 10.503,
+ "print_height_in": 7.387
 }

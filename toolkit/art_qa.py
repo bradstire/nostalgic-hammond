@@ -39,6 +39,8 @@ re-set COURTESY PASS line behind its own declaration).
 Writes NAME_qa.json + NAME_qa.png (overlay: red counters, magenta gaps, blue thin strokes,
 green/red baselines with angle, orange boxes = wobbly lines).
 SOURCE (R21): when the sidecar carries rules ["R21"], every typeset line must give its R21 reason or FAIL.
+TRACED-TILT (L47): traced lettering inside an exemption still fails a whole-line tilt > 1 deg (visible rise) unless the
+reason declares a deliberate angle. Part B for traces: toolkit/trace_overlay.py (master outline on the source).
 Exit code 0 = PASS, 1 = FAIL. WARNs never fail the gate but must be looked at.
 Visual sign-off (S9 part B) is still required: the overlay + print-zoom tiles vs the source.
 """
@@ -472,6 +474,34 @@ def run(path, width_in, out_dir, name=None, exempt=(), typeset=(), compare=None,
             entry['flags'] = flags
             rep['lines'].append(entry)
             line_draw.append((entry, p))
+    # TRACED-TILT (L47, 10-28): exemptions waive LEVEL for hand lettering, but a whole traced line set off level
+    # by capture (Encino 'Shop' at -3.5 deg in pass 2) is not hand quality. Each traced-lettering exemption is
+    # re-read on its own and fails when a line tilts > 1.0 deg with a visible rise > 0.03 in, unless its reason
+    # declares a deliberate angle (arc, slant, rise, diagonal, angle, hung, tilt, LEVEL only).
+    DELIB = ('arc', 'slant', 'rise', 'rising', 'diagonal', 'angle', 'hung', 'tilt', 'level only', 'illustration')
+    for b, r in exempt:
+        rl = r.lower()
+        if not any(k in rl for k in ('letter', 'lettering', 'traced')) or any(k in rl for k in DELIB):
+            continue
+        x0, y0, x1, y1 = [max(0, int(v)) for v in b]
+        for col, m in sources:
+            sub = np.zeros_like(m); sub[y0:y1, x0:x1] = m[y0:y1, x0:x1]
+            lab2, lines2 = text_lines(sub, ppi, excl, ())
+            for ln in lines2:
+                if len(ln) < 3:
+                    continue
+                ang, jit, p2, h2, _ = fit_baseline(ln)
+                # the topline must agree: a capture tilt moves tops and feet together; a tall S/h beside a small o
+                # moves them apart (letter size, not tilt)
+                flip = [dict(c, y1=-c['y0'], y0=-c['y1']) for c in ln]
+                angt = -fit_baseline(flip)[0]
+                lx0 = min(c['x0'] for c in ln); lx1 = max(c['x1'] for c in ln)
+                rise = abs(math.tan(math.radians(ang))) * (lx1 - lx0)
+                if (lx1 - lx0) >= 1.0 * ppi and abs(ang) > 1.0 and abs(angt) > 0.6 and ang * angt > 0 and rise > 0.03 * ppi:
+                    rep.setdefault('traced_tilt', []).append(dict(box=[int(lx0), int(min(c['y0'] for c in ln)), int(lx1), int(max(c['y1'] for c in ln))],
+                                                                 tilt_deg=round(ang, 2), top_tilt_deg=round(angt, 2), rise_in=round(rise / ppi, 3), exempt=r))
+    if rep.get('traced_tilt'):
+        rep['fails'].append(f"TRACED-TILT: {len(rep['traced_tilt'])} traced line(s) set off level by capture (> 1 deg, visible rise); fix the rectification or declare the deliberate angle")
     # strokes (all ink)
     f_tot = w_tot = sk_all = 0
     for col, m in layers:

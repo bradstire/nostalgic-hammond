@@ -1,6 +1,6 @@
 {
  "file": "sfv_zodys.png",
- "print_width_in": 9.52,
+ "print_width_in": 8.467,
  "ppi": 300.0,
  "layers": [
   [
@@ -16,9 +16,9 @@
   {
    "layer": "(244, 236, 221)",
    "box": [
-    389,
+    231,
     1231,
-    1682,
+    1524,
     1340
    ],
    "letters": 10,
@@ -29,15 +29,15 @@
    "peaks_per_cap": 2.77,
    "rise_in": 0.009,
    "wobble_limit": 4.1,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
    "layer": "(244, 236, 221)",
    "box": [
-    2064,
+    1906,
     1234,
-    2467,
+    2309,
     1338
    ],
    "letters": 4,
@@ -48,90 +48,39 @@
    "peaks_per_cap": 2.24,
    "rise_in": 0.004,
    "wobble_limit": 4.1,
-   "typeset": "Jost SemiBold",
-   "flags": []
-  },
-  {
-   "layer": "knockout in (244, 236, 221)",
-   "box": [
-    135,
-    314,
-    2721,
-    834
-   ],
-   "letters": 5,
-   "cap_in": 1.673,
-   "tilt_deg": 0.1,
-   "jitter": 0.009,
-   "inflect_per_in": 1.3,
-   "peaks_per_cap": 6.46,
-   "rise_in": 0.015,
-   "wobble_limit": 3.5,
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   }
  ],
  "strokes": {
-  "fail_pct": 0.02,
-  "warn_pct": 0.02
+  "fail_pct": 0.03,
+  "warn_pct": 0.04
  },
  "verdict": "PASS",
  "fails": [],
- "warns": [],
- "exemptions": [],
+ "warns": [
+  "EXEMPT [24, 24, 2516, 1116]: ZODYS: the canopy letters traced, one rectified box at a time (R21)"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    24,
+    24,
+    2516,
+    1116
+   ],
+   "reason": "ZODYS: the canopy letters traced, one rectified box at a time (R21)"
+  }
+ ],
  "typeset": [
   {
    "box": [
-    129,
-    318,
-    431,
-    830
-   ],
-   "font": "Kameron Bold (narrowed to the box, max x0.78)"
-  },
-  {
-   "box": [
-    703,
-    308,
-    1005,
-    840
-   ],
-   "font": "Kameron Bold (narrowed to the box, max x0.78)"
-  },
-  {
-   "box": [
-    1277,
-    317,
-    1579,
-    831
-   ],
-   "font": "Kameron Bold (narrowed to the box, max x0.78)"
-  },
-  {
-   "box": [
-    1851,
-    318,
-    2153,
-    830
-   ],
-   "font": "Kameron Bold (narrowed to the box, max x0.78)"
-  },
-  {
-   "box": [
-    2425,
-    308,
-    2727,
-    840
-   ],
-   "font": "Kameron Bold (narrowed to the box, max x0.78)"
-  },
-  {
-   "box": [
-    383,
+    225,
     1224,
-    2473,
+    2315,
     1347
    ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [
@@ -139,10 +88,10 @@
    "box": [
     24,
     24,
-    2832,
+    2516,
     1116
    ],
-   "how": "hexagon boxes: constructed geometry after the LAPL photo"
+   "how": "hexagon boxes: constructed in the photo proportions (plain faces; v1 keylines retired)"
   }
  ],
  "substrate_layers": []

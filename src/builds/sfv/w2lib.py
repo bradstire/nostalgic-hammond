@@ -243,6 +243,7 @@ class Art:
         prov = {}
         for k, lst in self.decl.items():
             prov[k] = [[[round(bb[0] - ox), round(bb[1] - oy), round(bb[2] - ox), round(bb[3] - oy)], n] for bb, n in lst]
+        prov['frame'] = {'scale': round(f, 6), 'ox': ox, 'oy': oy}   # master px = build units * scale - (ox, oy) (part B overlays)
         prov['rules'] = ['R21']          # trace-first: every typeset line must carry its R21 reason (S9 SOURCE)
         prov['ink'] = INK.get(ink, ink)
         prov['print_width_in'] = round(W / DPI, 3)

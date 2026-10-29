@@ -29,7 +29,7 @@
    "peaks_per_cap": 4.1,
    "rise_in": 0.018,
    "wobble_limit": 3.7,
-   "typeset": "Yellowtail",
+   "typeset": "Yellowtail; R21 reason a: the photo caption script is ~18 px cap",
    "flags": []
   },
   {
@@ -48,7 +48,7 @@
    "peaks_per_cap": 2.64,
    "rise_in": 0.002,
    "wobble_limit": 4.3,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
@@ -67,7 +67,7 @@
    "peaks_per_cap": 2.32,
    "rise_in": 0.002,
    "wobble_limit": 4.3,
-   "typeset": "Jost SemiBold",
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
    "flags": []
   },
   {
@@ -86,7 +86,7 @@
    "peaks_per_cap": 1.64,
    "rise_in": 0.009,
    "wobble_limit": 4.1,
-   "typeset": "Yellowtail",
+   "typeset": "Yellowtail; R21 reason a: the photo caption script is ~18 px cap",
    "flags": []
   }
  ],
@@ -106,7 +106,7 @@
     291,
     808
    ],
-   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
   },
   {
    "box": [
@@ -115,7 +115,7 @@
     471,
     627
    ],
-   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
   },
   {
    "box": [
@@ -124,7 +124,7 @@
     674,
     441
    ],
-   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
   },
   {
    "box": [
@@ -133,7 +133,7 @@
     960,
     318
    ],
-   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
   },
   {
    "box": [
@@ -142,7 +142,7 @@
     1306,
     244
    ],
-   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
   },
   {
    "box": [
@@ -151,7 +151,7 @@
     2004,
     236
    ],
-   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
   },
   {
    "box": [
@@ -160,7 +160,7 @@
     2321,
     327
    ],
-   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
   },
   {
    "box": [
@@ -169,7 +169,7 @@
     2618,
     436
    ],
-   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
   },
   {
    "box": [
@@ -178,7 +178,7 @@
     2881,
     619
    ],
-   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
   },
   {
    "box": [
@@ -187,7 +187,7 @@
     3043,
     804
    ],
-   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph)"
+   "font": "Rokkitt ExtraBold, rotated to the arch (per-glyph); R21 reason a: arch letters ~12 px cap in the photo"
   },
   {
    "box": [
@@ -196,7 +196,7 @@
     2502,
     1589
    ],
-   "font": "Yellowtail"
+   "font": "Yellowtail; R21 reason a: the photo caption script is ~18 px cap"
   },
   {
    "box": [
@@ -205,7 +205,7 @@
     2983,
     1782
    ],
-   "font": "Jost SemiBold"
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
   }
  ],
  "redrawn": [

@@ -2,19 +2,19 @@
  "typeset": [
   [
    [
-    1352,
-    109,
-    1714,
-    287
+    1314,
+    108,
+    1666,
+    280
    ],
    "Michroma (EB drum monogram, R21 reason a)"
   ],
   [
    [
-    110,
-    2578,
-    2974,
-    2696
+    108,
+    2545,
+    2889,
+    2659
    ],
    "Jost SemiBold (house locator line, R21 rule 4)"
   ]
@@ -22,74 +22,79 @@
  "exempt": [
   [
    [
-    130,
-    1069,
-    2923,
-    1555
+    125,
+    1055,
+    2836,
+    1495
    ],
    "BOWL: the sign letters traced (R21)"
   ],
   [
    [
-    921,
-    656,
-    2110,
-    834
+    895,
+    638,
+    2050,
+    811
    ],
    "ENCINO: the sign letters traced (R21); broken C jaw mirrored from its upper jaw"
   ],
   [
    [
-    1520,
-    1992,
-    2701,
-    2336
+    1594,
+    1882,
+    2942,
+    2286
    ],
-   "Coffee Shop: the sign lettering traced, each word levelled on its own face (R21)"
+   "Coffee Shop: the sign lettering traced from the per-face rectified photo (R21, L47)"
   ]
  ],
  "redrawn": [
   [
    [
-    24,
-    979,
-    3060,
-    1626
+    25,
+    952,
+    2972,
+    1580
    ],
    "BOWL boxes: four pointy-top hexagons at the measured outline (regularised to equal width)"
   ],
   [
    [
-    767,
-    609,
-    2272,
-    870
+    747,
+    593,
+    2207,
+    847
    ],
    "ENCINO box face: constructed at the measured outline"
   ],
   [
    [
-    1192,
-    24,
-    1848,
-    372
+    1158,
+    25,
+    1795,
+    363
    ],
    "EB drum: constructed"
   ],
   [
    [
-    1382,
-    1959,
-    2962,
-    2419
+    1444,
+    1809,
+    3132,
+    2416
    ],
-   "Coffee Shop oval: constructed (pointed lozenge) at the measured position"
+   "Coffee Shop lozenge: measured right-face profile, mirrored; trim and seam constructed"
   ]
  ],
+ "frame": {
+  "scale": 0.970603,
+  "ox": 336,
+  "oy": -520
+ },
  "rules": [
   "R21"
  ],
  "ink": "#F4ECDD",
- "print_width_in": 10.28,
- "print_height_in": 9.067
+ "print_width_in": 10.503,
+ "print_height_in": 8.947
 }

@@ -2,67 +2,57 @@
  "typeset": [
   [
    [
-    216,
-    3228,
-    2616,
-    3345
+    180,
+    3095,
+    2580,
+    3212
    ],
    "Jost SemiBold (house locator line, R21 rule 4)"
   ]
  ],
- "exempt": [
-  [
-   [
-    276,
-    946,
-    2565,
-    2620
-   ],
-   "VALLEY PLAZA: the sign letters traced (tube centreline + measured channel width), R21"
-  ],
-  [
-   [
-    307,
-    978,
-    2532,
-    2587
-   ],
-   "neon tubes: traced centrelines at a 0.03 in printable width"
-  ]
- ],
+ "exempt": [],
  "redrawn": [
   [
    [
     24,
     24,
-    2808,
-    3008
+    2736,
+    2877
    ],
-   "sign panel + crown: constructed at the measured outline (rectified photo)"
+   "sign panel: constructed geometry after the LAist photo"
   ],
   [
    [
-    134,
-    318,
-    2698,
-    2898
+    162,
+    304,
+    2598,
+    2738
    ],
-   "stepped rail: constructed on the measured path (rail + its shadow line as two knocked-out lines)"
+   "double inline border: constructed (two 0.08 in lines, 0.10 in apart)"
   ],
   [
    [
-    748,
-    1518,
-    2277,
-    2597
+    394,
+    721,
+    2366,
+    1543
    ],
-   "A ornament: inverted triangle drawn from its measured outline on the first A, repeated on the other two"
+   "VALLEY: monoline channel letters constructed from the sign photo (R21 reason d: dimensional channel letters, L45)"
+  ],
+  [
+   [
+    519,
+    1774,
+    2241,
+    2596
+   ],
+   "PLAZA: monoline channel letters constructed from the sign photo (R21 reason d: dimensional channel letters, L45)"
   ]
  ],
  "rules": [
   "R21"
  ],
  "ink": "#F4ECDD",
- "print_width_in": 9.44,
- "print_height_in": 11.23
+ "print_width_in": 9.2,
+ "print_height_in": 10.787
 }

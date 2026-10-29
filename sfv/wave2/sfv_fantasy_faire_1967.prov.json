@@ -3,37 +3,51 @@
  "exempt": [
   [
    [
-    88,
+    83,
     24,
-    2962,
-    880
+    2958,
+    881
    ],
    "hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
   ],
   [
    [
-    25,
-    918,
-    3025,
-    1667
+    24,
+    2861,
+    3024,
+    3610
    ],
    "hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
   ],
   [
    [
-    302,
-    1775,
-    2748,
-    1985
+    40,
+    3646,
+    2485,
+    3855
    ],
    "hand lettering from the 1967 poster: traced from the red plate, lightly cleaned"
+  ],
+  [
+   [
+    759,
+    683,
+    2202,
+    2772
+   ],
+   "illustration: the poster's centre figure with the rose and stars, traced from the red plate (pass 3)"
   ]
  ],
  "redrawn": [],
+ "frame": {
+  "scale": 1.0,
+  "ox": 390,
+  "oy": 388
+ },
  "rules": [
   "R21"
  ],
  "ink": "#8B0000",
- "print_width_in": 10.167,
- "print_height_in": 6.697
+ "print_width_in": 10.163,
+ "print_height_in": 12.933
 }
