@@ -273,13 +273,22 @@ function blankFor(handle: string, imageUrl = ''): Blank | null {
 }
 
 // Homepage "Start here" picks, in order. AUTO_START adds the first piece of any place not covered here.
+// Brad 10-29 (SFV, applied to every town): the designs drawn from a place's own sign, ad or card lead; our own
+// generic designs (phys. ed., greetings) come last. Neighbours alternate garment colour where the catalog allows.
 const START_HERE = [
   'cave-tangi-tee-black',
+  'didi-wa-restaurant-sign-tee',
+  'magnolia-inn-restaurant-sign-tee',
+  'fiesta-club-tee',
+  'toggery-shop-logo-tee',
+  'cave-tangi-dad-hat-black',
+  'casa-de-fresa-hotel-dixie-home-ad-tee',
+  'strawberry-stadium-framed-poster-12-16',
+  'rushs-drive-in-tee',
+  'tornadoes-crew-neck-sweatshirt',
+  'galaxy-drive-in-courtesy-pass-tee-natural',
   'hammond-phys-ed-ringer-tee',
   'greetings-from-hammond',
-  'cave-tangi-dad-hat-black',
-  'strawberry-stadium-framed-poster-12-16',
-  'tornadoes-crew-neck-sweatshirt',
 ];
 
 // Site copy where the store description needs more (frame and garment details from the Printful product).

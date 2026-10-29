@@ -2,7 +2,7 @@
 import V2Layout from '../V2Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { getCatalog, cdn, srcset, money } from '../catalog';
-import { START_HERE, AUTO_START, PAIRS, FAQ, FREE_SHIP, TYPE_ORDER, TYPE_SLUG, TYPE_IMG, HOLIDAY_CUTOFF, PLACE_DIR, livePlaces, storyCount, numWord, typePhrase } from '../data';
+import { START_HERE, AUTO_START, PAIRS, FAQ, FREE_SHIP, TYPE_ORDER, TYPE_SLUG, TYPE_IMG, HOLIDAY_CUTOFF, PLACE_DIR, COPY, livePlaces, storyCount, numWord, typePhrase } from '../data';
 import { nw } from '../nw';
 import { siteConfig } from '../../config/site.config';
 // Town-specific home sections (src/v2/towns/<town>/): hero (+ its <head> preloads), a band under "Start here", the sources story.
@@ -58,12 +58,19 @@ const HAS_SIGNUP = !!import.meta.env.PUBLIC_KLAVIYO_LIST;
     <div class="hb-wrap">
       <div class="hb-head">
         <div>
-          <h2 class="hb-h2" id="start-h">Start here: one piece from every story</h2>
+          <h2 class="hb-h2" id="start-h">{COPY.startTitle || 'Start here: one piece from every story'}</h2>
         </div>
         <a class="hb-link" href="/shop">Shop all {leads.length}</a>
       </div>
       <div class="hb-rail" role="list">
         {start.map((p, i) => <div role="listitem"><ProductCard p={p} eager={i < 2} sizes="(max-width: 760px) 62vw, 300px" /></div>)}
+        {/* Phones scroll this row sideways: the last card says there is more, instead of a dead end. */}
+        <div role="listitem" class="hb-rail__end"><a class="hb-rail__all" href="/shop"><span class="hb-rail__all-n">{leads.length}</span><span>designs in all</span><span class="hb-rail__all-go">Shop all <span aria-hidden="true">→</span></span></a></div>
+      </div>
+      {/* The featured picks are a sample, not the catalog: a clear next step where the list ends (top link kept for scanners). */}
+      <div class="hb-more">
+        <a class="hb-btn hb-btn--dark" href="/shop">Shop all {leads.length} designs <span aria-hidden="true">→</span></a>
+        <span class="hb-more__note">{start.length} of {leads.length} shown here</span>
       </div>
     </div>
   </section>

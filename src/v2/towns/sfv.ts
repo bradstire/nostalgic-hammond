@@ -279,15 +279,23 @@ function blankFor(handle: string): Blank | null {
   return 'mc1082';
 }
 
+// Brad 10-29: lead with the tees drawn from the Valley's own signs (by score, garment colours alternated so
+// neighbours differ), then one piece from each remaining story. The generic Greetings tee comes last (AUTO_START).
 const START_HERE = [
-  'greetings-from-san-fernando-valley-tee',
-  'lankershim-van-nuys-ranchos-postcard-framed-print',
-  'van-nuys-blvd-cruise-night-tee',
-  'valley-music-theatre-tee',
-  'van-nuys-phys-ed-ringer-tee',
-  'van-nuys-blvd-cruise-night-hat',
-  'san-fernando-raceway-tee',
   'fm-station-north-hollywood-tee',
+  'valley-plaza-sign-tee',
+  'white-front-canoga-park-tee',
+  'zodys-canoga-park-tee',
+  'leons-steak-house-sign-tee',
+  'phils-diner-tee',
+  'devonshire-downs-tee',
+  'webers-place-reseda-tee',
+  'encino-bowl-sign-tee',
+  'van-nuys-blvd-cruise-night-tee',
+  'moby-disc-records-tee',
+  'valley-music-theatre-tee',
+  'lankershim-van-nuys-ranchos-postcard-framed-print',
+  'van-nuys-phys-ed-ringer-tee',
 ];
 
 const NOTE_BY_PREFIX: Record<string, string> = {
@@ -334,9 +342,9 @@ export const sfv: TownContent = {
   SOCK_FIX: [], SOCK_DIR: '/images/sfv/socks',
   STALE_IMAGE: null,
   PLACE_DIR: '/images/sfv/places',
-  ADD_ONS: ['van-nuys-blvd-cruise-night-hat', 'van-nuys-blvd-cruise-night-tee', 'greetings-from-san-fernando-valley-tee', 'lankershim-van-nuys-ranchos-postcard-framed-print'],
-  MATE_FALLBACK: { Tee: 'van-nuys-blvd-cruise-night-hat', Hat: 'van-nuys-blvd-cruise-night-tee', 'Framed print': 'greetings-from-san-fernando-valley-tee' },
-  TYPE_IMG: { Tee: 'greetings-from-san-fernando-valley-tee', Hat: 'van-nuys-blvd-cruise-night-hat', 'Framed print': 'lankershim-van-nuys-ranchos-postcard-framed-print' },
+  ADD_ONS: ['van-nuys-blvd-cruise-night-hat', 'van-nuys-blvd-cruise-night-tee', 'fm-station-north-hollywood-tee', 'lankershim-van-nuys-ranchos-postcard-framed-print'],
+  MATE_FALLBACK: { Tee: 'van-nuys-blvd-cruise-night-hat', Hat: 'van-nuys-blvd-cruise-night-tee', 'Framed print': 'fm-station-north-hollywood-tee' },
+  TYPE_IMG: { Tee: 'fm-station-north-hollywood-tee', Hat: 'van-nuys-blvd-cruise-night-hat', 'Framed print': 'lankershim-van-nuys-ranchos-postcard-framed-print' },
   COPY: {
     homeTitle: 'San Fernando Valley tees, hats & prints from the places we remember',
     metaDescription: 'Tees, hats and framed prints from the San Fernando Valley we remember: Valley Plaza, GEMCO and Zodys, Moby Disc, FM Station, Phil\'s Diner, Devonshire Downs and Van Nuys cruise night, redrawn and restored from the record.',
@@ -346,6 +354,7 @@ export const sfv: TownContent = {
     footerBlurb: 'Tees, hats and prints for the San Fernando Valley we remember, redrawn and restored from old postcards, labels, ads and signs. Made to order, one at a time.',
     footerLegalHtml: 'Nostalgic San Fernando Valley is an independent tribute shop, not affiliated with or endorsed by the businesses, schools or institutions shown. Archival images from the San Fernando Valley History Digital Library, CSUN Oviatt Library.',
     aboutDesc: 'How Nostalgic San Fernando Valley researches, restores and redraws the Valley we remember, and where every image comes from.',
+    startTitle: 'Start here: the Valley\'s own signs, then every story',
     termsArtworkHtml: 'The designs on this site were researched, restored and redrawn by Nostalgic San Fernando Valley. Please don\'t copy or resell them. Archival postcards come from the San Fernando Valley History Digital Library at CSUN, which lists them as public domain.',
   },
 };

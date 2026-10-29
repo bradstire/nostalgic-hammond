@@ -116,5 +116,6 @@ export type TownContent = {
     footerLegalHtml: string;    // raw HTML
     aboutDesc: string;          // /about meta description
     termsArtworkHtml: string;   // "Our artwork" paragraph on /terms (raw HTML)
+    startTitle?: string;        // home "Start here" heading; default "Start here: one piece from every story"
   };
 };
