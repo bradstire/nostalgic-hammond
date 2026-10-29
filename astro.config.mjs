@@ -35,6 +35,8 @@ const v2NotFound = {
         const ico = new URL(TOWN_ONLY_ASSETS[townSlug] + '/favicon.ico', dir);
         if (fs.existsSync(ico)) fs.copyFileSync(ico, new URL('favicon.ico', dir));
       }
+      // A town's own Search Console verification file (URL-prefix property), written into its dist only.
+      if (town.gscFile) fs.writeFileSync(new URL(town.gscFile, dir), `google-site-verification: ${town.gscFile}`);
       if (town.layout !== 'v2') return;
       const src = new URL('404/index.html', dir);
       if (fs.existsSync(src)) fs.copyFileSync(src, new URL('404.html', dir));

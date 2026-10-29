@@ -136,7 +136,10 @@ export const towns = {
       '/products/a-little-land-and-a-living-postcard-framed-print': '/places/orchard-valley',
       '/products/burbank-brand-peaches-label-framed-print': '/places/orchard-valley',
     },
-    launched: false,
+    // Launched 10-29 on the free address (Brad's QA + one revision pass done, 21:07 ruling; goal prompt v2).
+    launched: true,
+    // Search Console URL-prefix property for the free address (HTML-file method); the build writes this file into dist.
+    gscFile: 'googlefa2b66d4119a9761.html',
     layout: 'v2',
     heroImage: '/images/sfv/hero/ranchos-wide-1600.webp',
     heroPosition: 'center 50%',
