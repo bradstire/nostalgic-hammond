@@ -41,6 +41,11 @@ green/red baselines with angle, orange boxes = wobbly lines).
 SOURCE (R21): when the sidecar carries rules ["R21"], every typeset line must give its R21 reason or FAIL.
 TRACED-TILT (L47): traced lettering inside an exemption still fails a whole-line tilt > 1 deg (visible rise) unless the
 reason declares a deliberate angle. Part B for traces: toolkit/trace_overlay.py (master outline on the source).
+The numbers cannot tell a hand-lettered bounce (Leon's COFFEE SHOP, Moby's underlined tagline) from a capture tilt
+(Encino 'Shop', pass 2): both read 1-2 deg at the feet and 3-7 deg at the tops. So a flagged line that was traced
+with no per-word transform and checked line-for-line on the (rectified) source may be declared "source-matched";
+it is then listed as a WARN with its numbers instead of failing. Never declare it for a word that was moved,
+sheared, rotated or rescaled on its own.
 Exit code 0 = PASS, 1 = FAIL. WARNs never fail the gate but must be looked at.
 Visual sign-off (S9 part B) is still required: the overlay + print-zoom tiles vs the source.
 """
@@ -498,8 +503,14 @@ def run(path, width_in, out_dir, name=None, exempt=(), typeset=(), compare=None,
                 lx0 = min(c['x0'] for c in ln); lx1 = max(c['x1'] for c in ln)
                 rise = abs(math.tan(math.radians(ang))) * (lx1 - lx0)
                 if (lx1 - lx0) >= 1.0 * ppi and abs(ang) > 1.0 and abs(angt) > 0.6 and ang * angt > 0 and rise > 0.03 * ppi:
-                    rep.setdefault('traced_tilt', []).append(dict(box=[int(lx0), int(min(c['y0'] for c in ln)), int(lx1), int(max(c['y1'] for c in ln))],
-                                                                 tilt_deg=round(ang, 2), top_tilt_deg=round(angt, 2), rise_in=round(rise / ppi, 3), exempt=r))
+                    hit = dict(box=[int(lx0), int(min(c['y0'] for c in ln)), int(lx1), int(max(c['y1'] for c in ln))],
+                               tilt_deg=round(ang, 2), top_tilt_deg=round(angt, 2), rise_in=round(rise / ppi, 3), exempt=r)
+                    if 'source-matched' in rl:
+                        rep.setdefault('traced_tilt_source_matched', []).append(hit)
+                        rep['warns'].append(f"TRACED-TILT source-matched {hit['box']}: {hit['tilt_deg']} deg feet / {hit['top_tilt_deg']} deg tops, "
+                                            f"rise {hit['rise_in']} in - declared as the source's own line; confirm on the trace_overlay sheet")
+                    else:
+                        rep.setdefault('traced_tilt', []).append(hit)
     if rep.get('traced_tilt'):
         rep['fails'].append(f"TRACED-TILT: {len(rep['traced_tilt'])} traced line(s) set off level by capture (> 1 deg, visible rise); fix the rectification or declare the deliberate angle")
     # strokes (all ink)

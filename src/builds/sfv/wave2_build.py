@@ -415,7 +415,7 @@ def leons():
     a.declare('redrawn', sh, 'COFFEE SHOP shield: outline traced, debris on the top edge opened out, smoothed as the convex panel it is')
     cs = S(mask_geom(WORK + '/r21/leons_cs.png', smooth=SMOOTH['leons_cs']))
     a.cut(cs)
-    a.declare('exempt', cs.envelope, 'COFFEE SHOP: brush letters traced from the sign (R21)')
+    a.declare('exempt', cs.envelope, 'COFFEE SHOP: brush letters traced from the sign (R21); source-matched: the mask of the rectified photo, no per-word transform (Part B 10-28)')
     cap, _ = T('NORTH HOLLYWOOD  ·  1945', 'Jost[wght].ttf', cap=88, var=[600], track=0.16)
     cap = move(cap, cx=(68 + 770) / 2 * K, y=1300 * K + 120)
     a.add(cap, 'typeset', 'Jost SemiBold (house locator line, R21 rule 4)')
@@ -642,7 +642,7 @@ def moby_disc():
     a.declare('exempt', arch.envelope, 'hand lettering traced from the sleeve: MOBY DISC RECORDS on its arc (R21)')
     tag = mask_geom(WORK + '/moby_tag_trace.png', smooth=3)
     a.add(tag)
-    a.declare('exempt', tag.envelope, 'hand lettering traced from the sleeve: A Whale of a Store! with its underlines (R21)')
+    a.declare('exempt', tag.envelope, 'hand lettering traced from the sleeve: A Whale of a Store! with its underlines (R21); source-matched: straight from the flat sleeve scan, no per-word transform')
     cx = 415 * 4
     cap, _ = T('SHERMAN OAKS  ·  CANOGA PARK', 'Jost[wght].ttf', cap=90, var=[600], track=0.16)
     cap = move(cap, cx=cx, y=4630)
