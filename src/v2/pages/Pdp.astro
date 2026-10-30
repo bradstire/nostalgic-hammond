@@ -98,6 +98,8 @@ const desc = clip(story[0] || `${p.baseTitle} from ${siteConfig.brandName}.`);
 // (towns that read Shopify's CDN directly), use the first opaque Shopify image instead, e.g. the lifestyle photo.
 const ogSrc = p.images.find((i) => localFor(i.url)) || p.images.find((i) => !isCut(i.url)) || p.images[0];
 const ogImg = ogSrc ? shareImg(ogSrc.url) : undefined;
+// Towns without a Klaviyo list have no signup form, so no 15% offer either (Footer/Home use the same test).
+const HAS_SIGNUP = !!import.meta.env.PUBLIC_KLAVIYO_LIST;
 ---
 <V2Layout title={p.baseTitle} description={desc} image={ogImg} jsonld={jsonld} noindex={HIDDEN_FROM_GRID.has(p.handle)}>
   <div class="hb-wrap">
@@ -203,7 +205,7 @@ const ogImg = ogSrc ? shareImg(ogSrc.url) : undefined;
             <button type="button" class="hb-btn hb-btn--dark hb-btn--block hb-mate__btn" data-mate-add data-value={together}>Add both · {money(together)}</button>
           </div>
         )}
-        <p class="hb-note" style="margin:0"><a class="hb-link" href="#hb-foot-email" data-focus-signup>Get 15% off your first order</a> when you join our email list.</p>
+        {HAS_SIGNUP && <p class="hb-note" style="margin:0"><a class="hb-link" href="#hb-foot-email" data-focus-signup>Get 15% off your first order</a> when you join our email list.</p>}
 
         <ul class="hb-assure">
           <li><Fragment set:html={check} /><span><strong>Made to order for you.</strong> Ships in <span class="hb-nw">{SHIP_MAKE} business days</span>, then <span class="hb-nw">{SHIP_TRANSIT} business days</span> to most US addresses. Order by <span class="hb-nw">{HOLIDAY_CUTOFF}</span> for Christmas.</span></li>
