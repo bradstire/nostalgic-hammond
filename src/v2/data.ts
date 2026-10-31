@@ -17,6 +17,7 @@ export const {
   START_HERE, AUTO_START, NOTE_BY_PREFIX, DESC_OVERRIDE, PAIRS, FAMILIES, MEMBER_LABEL, TITLE_OVERRIDE, FRAME_SIZE, FAQ,
   PRODUCT_IMAGES, OPAQUE_IMAGES, PLACE_DIR, ADD_ONS, MATE_FALLBACK, TYPE_IMG, COPY,
 } = TOWN;
+export const SHOP_ORDER: string[] = TOWN.SHOP_ORDER ?? [];
 
 // Near-duplicates kept in the store but left out of grids (their pages still work). Brad has the final call.
 import hiddenList from './hidden.json';

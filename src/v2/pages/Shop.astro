@@ -2,12 +2,15 @@
 import V2Layout from '../V2Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { getCatalog } from '../catalog';
-import { TYPE_ORDER, TYPE_SLUG, START_HERE, COPY, livePlaces, storyCount, numWord } from '../data';
+import { TYPE_ORDER, TYPE_SLUG, START_HERE, SHOP_ORDER, COPY, livePlaces, storyCount, numWord } from '../data';
 const all = (await getCatalog()).filter((p) => p.lead);
 const PLACES = livePlaces(all);
 // Story order: place order, then type order; "start here" picks lead their place.
 const placeIdx = (p: any) => PLACES.findIndex((x) => x.slug === p.place?.slug);
-const sorted = [...all].sort((a, b) => placeIdx(a) - placeIdx(b) || TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) || (START_HERE.includes(b.handle) ? 1 : 0) - (START_HERE.includes(a.handle) ? 1 : 0));
+const storySort = (a: any, b: any) => placeIdx(a) - placeIdx(b) || TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) || (START_HERE.includes(b.handle) ? 1 : 0) - (START_HERE.includes(a.handle) ? 1 : 0);
+// Towns with a SHOP_ORDER rank "All" strongest-first (Brad 10-31: lead with the high-signal signage, generic designs last).
+const rank = (p: any) => { const i = SHOP_ORDER.indexOf(p.handle); return i < 0 ? 1e4 : i; };
+const sorted = [...all].sort((a, b) => rank(a) - rank(b) || storySort(a, b));
 const types = TYPE_ORDER.filter((t) => all.some((p) => p.type === t));
 import { siteConfig } from '../../config/site.config';
 const jsonld = [{

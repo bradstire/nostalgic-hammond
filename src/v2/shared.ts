@@ -83,6 +83,8 @@ export type TownContent = {
   START_HERE: string[];
   // Also add the first piece of any place the START_HERE list doesn't cover yet.
   AUTO_START: boolean;
+  // Optional ranked order for Shop all and for items inside a place (strongest first). Unlisted items follow in place order.
+  SHOP_ORDER?: string[];
   NOTE_BY_PREFIX: Record<string, string>;
   DESC_OVERRIDE: Record<string, string>;
   PAIRS: Pair[];

@@ -2,14 +2,15 @@
 import V2Layout from '../V2Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { getCatalog } from '../catalog';
-import { TYPE_ORDER, PLACE_DIR, livePlaces, placeStory, placeSources, type Place } from '../data';
+import { TYPE_ORDER, PLACE_DIR, SHOP_ORDER, livePlaces, placeStory, placeSources, type Place } from '../data';
 import { siteConfig, town } from '../../config/site.config';
 import { nw } from '../nw';
 import { clip } from '../clip';
 interface Props { pl: Place }
 const { pl } = Astro.props;
 const all = await getCatalog();
-const items = all.filter((p) => p.lead && p.place?.slug === pl.slug).sort((a, b) => TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type));
+const rank = (h: string) => { const i = SHOP_ORDER.indexOf(h); return i < 0 ? 1e4 : i; };
+const items = all.filter((p) => p.lead && p.place?.slug === pl.slug).sort((a, b) => TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) || rank(a.handle) - rank(b.handle));
 const others = livePlaces(all).filter((x) => x.slug !== pl.slug);
 const big = !!pl.tileTall;
 const handles = all.map((p) => p.handle);

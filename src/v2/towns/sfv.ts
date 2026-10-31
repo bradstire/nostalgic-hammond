@@ -279,24 +279,47 @@ function blankFor(handle: string): Blank | null {
   return 'mc1082';
 }
 
-// Brad 10-29: lead with the tees drawn from the Valley's own signs (by score, garment colours alternated so
-// neighbours differ), then one piece from each remaining story. The generic Greetings tee comes last (AUTO_START).
-const START_HERE = [
+// Brad 10-31: the Shop page still led with the generic wave-1 lockups (it sorted by story, and the first stories
+// were the Orchard Valley print and Greetings). Ranked order now, strongest first: measured Facebook signal
+// (SFV_WAVE2.md score) weighed with how the design reads as a thumbnail, garment colours alternated so
+// neighbours differ. Our own lockups (Greetings, phys. ed.) close the list.
+const SHOP_ORDER = [
   'fm-station-north-hollywood-tee',
+  'mikes-pizza-menu-tee',
   'valley-plaza-sign-tee',
-  'white-front-canoga-park-tee',
-  'zodys-canoga-park-tee',
   'leons-steak-house-sign-tee',
-  'phils-diner-tee',
-  'devonshire-downs-tee',
-  'webers-place-reseda-tee',
+  'zodys-canoga-park-tee',
+  'gemco-membership-card-tee',
   'encino-bowl-sign-tee',
-  'van-nuys-blvd-cruise-night-tee',
+  'white-front-canoga-park-tee',
+  'the-jolly-roger-menu-tee',
   'moby-disc-records-tee',
+  'devonshire-downs-tee',
+  'van-nuys-blvd-cruise-night-tee',
+  'the-pass-club-tee',
+  'phils-diner-tee',
+  'webers-place-reseda-tee',
+  'san-fernando-raceway-tee',
+  'sasch-studio-city-tee',
+  'rustys-hacienda-tee',
+  'the-sugar-shack-tee',
+  'dons-restaurant-burbank-tee',
   'valley-music-theatre-tee',
+  'fantasy-faire-1967-tee',
+  'june-ellens-donuts-tee',
+  'van-nuys-blvd-cruise-night-hat',
   'lankershim-van-nuys-ranchos-postcard-framed-print',
   'van-nuys-phys-ed-ringer-tee',
+  'san-fernando-phys-ed-tee',
+  'greetings-from-san-fernando-valley-tee',
 ];
+
+// Home "Start here": the first twelve of the ranked order, exactly (no auto-added story leads, so Greetings stays off the rail).
+const START_HERE = SHOP_ORDER.slice(0, 12);
+
+// Stories in the same spirit: the places with the strongest signage and signal first, our own lockups last.
+const PLACE_ORDER = ['shopping', 'coffee-shops', 'after-dark', 'cruise-night', 'records-books', 'devonshire-downs', 'valley-music-theatre', 'orchard-valley', 'phys-ed', 'greetings'];
+const PLACES_RANKED = [...PLACES].sort((a, b) => PLACE_ORDER.indexOf(a.slug) - PLACE_ORDER.indexOf(b.slug));
 
 const NOTE_BY_PREFIX: Record<string, string> = {
   'van-nuys-phys-ed': 'Not affiliated with Van Nuys High School or the Los Angeles Unified School District.',
@@ -330,9 +353,9 @@ const FAQ: Faq[] = [
 ];
 
 export const sfv: TownContent = {
-  PLACES, FALLBACK_PLACE: null, HIDE_EMPTY_PLACES: true,
+  PLACES: PLACES_RANKED, FALLBACK_PLACE: null, HIDE_EMPTY_PLACES: true,
   HELD_PREFIXES: [], SINGLE_COLOR, TYPE_OVERRIDE: {}, blankFor,
-  START_HERE, AUTO_START: true,
+  START_HERE, AUTO_START: false, SHOP_ORDER,
   NOTE_BY_PREFIX, DESC_OVERRIDE: {}, PAIRS, FAMILIES, MEMBER_LABEL, TITLE_OVERRIDE, FRAME_SIZE, FAQ,
   CATALOG_QUERY: "tag:'town:sfv'",
   includeTags: () => true,
