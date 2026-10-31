@@ -282,13 +282,15 @@ function blankFor(handle: string): Blank | null {
 // Brad 10-31: the Shop page still led with the generic wave-1 lockups (it sorted by story, and the first stories
 // were the Orchard Valley print and Greetings). Ranked order now, strongest first: measured Facebook signal
 // (SFV_WAVE2.md score) weighed with how the design reads as a thumbnail, garment colours alternated so
-// neighbours differ. Our own lockups (Greetings, phys. ed.) close the list.
+// neighbours differ. Our own lockups (Greetings, phys. ed.) close the list. June Ellen's moved up 10-31 once its
+// v2 art (the storefront sign) replaced the font-set script.
 const SHOP_ORDER = [
   'fm-station-north-hollywood-tee',
   'mikes-pizza-menu-tee',
   'valley-plaza-sign-tee',
   'leons-steak-house-sign-tee',
   'zodys-canoga-park-tee',
+  'june-ellens-donuts-tee',
   'gemco-membership-card-tee',
   'encino-bowl-sign-tee',
   'white-front-canoga-park-tee',
@@ -306,7 +308,6 @@ const SHOP_ORDER = [
   'dons-restaurant-burbank-tee',
   'valley-music-theatre-tee',
   'fantasy-faire-1967-tee',
-  'june-ellens-donuts-tee',
   'van-nuys-blvd-cruise-night-hat',
   'lankershim-van-nuys-ranchos-postcard-framed-print',
   'van-nuys-phys-ed-ringer-tee',
