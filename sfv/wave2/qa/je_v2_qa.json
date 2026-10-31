@@ -1,0 +1,114 @@
+{
+ "file": "sfv_june_ellens_v2.png",
+ "print_width_in": 10.523,
+ "ppi": 300.0,
+ "layers": [
+  [
+   139,
+   0,
+   0
+  ],
+  [
+   244,
+   236,
+   221
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    798,
+    1461,
+    2293,
+    1571
+   ],
+   "letters": 11,
+   "cap_in": 0.347,
+   "tilt_deg": -0.1,
+   "jitter": 0.021,
+   "inflect_per_in": 1.8,
+   "peaks_per_cap": 2.76,
+   "rise_in": 0.008,
+   "wobble_limit": 4.1,
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.0,
+  "warn_pct": 0.01
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [24, 656, 3133, 1352]: DONUTS: D O N U T traced from the rectified 1972 photo, one homography for the coplanar panel row (R21)",
+  "EXEMPT [241, 25, 2916, 584]: LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    24,
+    656,
+    3133,
+    1352
+   ],
+   "reason": "DONUTS: D O N U T traced from the rectified 1972 photo, one homography for the coplanar panel row (R21)"
+  },
+  {
+   "box": [
+    241,
+    25,
+    2916,
+    584
+   ],
+   "reason": "LEVEL only: font-set script on a level baseline; the raised apostrophe-s reads as a tilt to the gate"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    2834,
+    820,
+    3040,
+    1183
+   ],
+   "font": "Bebas Neue (S only); R21 reason a: the S's top is cut off by the frame in the only source above the floor; fitted to the traced letters' cap height and width ratio"
+  },
+  {
+   "box": [
+    241,
+    25,
+    2916,
+    584
+   ],
+   "font": "Pacifico (the Cruise Night script); R21 reason a: the neon script is ~10-25 px cap in every frame"
+  },
+  {
+   "box": [
+    791,
+    1454,
+    2366,
+    1577
+   ],
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
+  }
+ ],
+ "redrawn": [
+  {
+   "box": [
+    24,
+    656,
+    3133,
+    1352
+   ],
+   "how": "panels and ovals: constructed in the measured proportions (panel 1 : 1.80, oval 0.895 x 1.58 at 0.905; mean of D, O, U)"
+  }
+ ],
+ "substrate_layers": [
+  "(244, 236, 221)"
+ ]
+}
