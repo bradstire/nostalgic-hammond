@@ -1,0 +1,83 @@
+{
+ "file": "sfv_biffs.png",
+ "print_width_in": 10.7,
+ "ppi": 300.0,
+ "layers": [
+  [
+   179,
+   58,
+   43
+  ],
+  [
+   242,
+   201,
+   76
+  ],
+  [
+   244,
+   236,
+   221
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [],
+ "strokes": {
+  "fail_pct": 0.65,
+  "warn_pct": 25.85
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [0, 0, 3210, 1960]: Illustration traced from the menu cover (R21): the restaurant drawing - tower with its neon script, canopy, windows, planters, cloud. Hand-drawn art, not type",
+  "EXEMPT [1780, 2590, 3000, 3240]: RESTAURANTS traced from the menu cover (R21), set on the script's climb (L39 deliberate slant); source-matched: the cover's own angle, no per-word transform",
+  "STROKES: 25.85% of linework < 0.03 in",
+  "No text lines detected: LEVEL/EDGES did not run - sign-off must check lettering by eye",
+  "REDRAWN [760, 89, 995, 573]: Tower top: the neon B's red tube now runs unbroken across the fin it crossed (the cream sliver between its two ends was under the 0.03 in floor, S9 GAPS); the fin reads as passing behind the tube - survival not checked there; compare to the previous master by eye",
+  "REDRAWN [1236, 1002, 1293, 1071]: Canopy: one yellow highlight is split by the red trim above it (a 2 px yellow sliver between two red pieces, under the floor; the red runs through, S9 GAPS) - survival not checked there; compare to the previous master by eye"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    0,
+    0,
+    3210,
+    1960
+   ],
+   "reason": "Illustration traced from the menu cover (R21): the restaurant drawing - tower with its neon script, canopy, windows, planters, cloud. Hand-drawn art, not type"
+  },
+  {
+   "box": [
+    1780,
+    2590,
+    3000,
+    3240
+   ],
+   "reason": "RESTAURANTS traced from the menu cover (R21), set on the script's climb (L39 deliberate slant); source-matched: the cover's own angle, no per-word transform"
+  }
+ ],
+ "typeset": [],
+ "redrawn": [
+  {
+   "box": [
+    760,
+    89,
+    995,
+    573
+   ],
+   "how": "Tower top: the neon B's red tube now runs unbroken across the fin it crossed (the cream sliver between its two ends was under the 0.03 in floor, S9 GAPS); the fin reads as passing behind the tube"
+  },
+  {
+   "box": [
+    1236,
+    1002,
+    1293,
+    1071
+   ],
+   "how": "Canopy: one yellow highlight is split by the red trim above it (a 2 px yellow sliver between two red pieces, under the floor; the red runs through, S9 GAPS)"
+  }
+ ],
+ "substrate_layers": [],
+ "survival": []
+}

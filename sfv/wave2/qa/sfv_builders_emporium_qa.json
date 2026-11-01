@@ -1,0 +1,125 @@
+{
+ "file": "sfv_builders_emporium.png",
+ "print_width_in": 7.44,
+ "ppi": 299.9,
+ "layers": [
+  [
+   42,
+   34,
+   29
+  ],
+  [
+   244,
+   236,
+   221
+  ]
+ ],
+ "halftone_area_pct": 0.0,
+ "counters": [],
+ "gaps": [],
+ "lines": [
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    1512,
+    3803,
+    2200,
+    3888
+   ],
+   "letters": 7,
+   "cap_in": 0.273,
+   "tilt_deg": -0.07,
+   "jitter": 0.008,
+   "inflect_per_in": 2.8,
+   "peaks_per_cap": 2.58,
+   "rise_in": 0.003,
+   "wobble_limit": 4.3,
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
+   "flags": []
+  },
+  {
+   "layer": "(244, 236, 221)",
+   "box": [
+    31,
+    3803,
+    1182,
+    3888
+   ],
+   "letters": 13,
+   "cap_in": 0.26,
+   "tilt_deg": -0.04,
+   "jitter": 0.006,
+   "inflect_per_in": 2.3,
+   "peaks_per_cap": 3.04,
+   "rise_in": 0.003,
+   "wobble_limit": 4.4,
+   "typeset": "Jost SemiBold (house locator line, R21 rule 4)",
+   "flags": []
+  }
+ ],
+ "strokes": {
+  "fail_pct": 0.5,
+  "warn_pct": 11.79
+ },
+ "verdict": "PASS",
+ "fails": [],
+ "warns": [
+  "EXEMPT [100, 180, 2020, 540]: BUILDERS traced from the 1961 brochure (R21)",
+  "EXEMPT [150, 520, 2100, 1110]: Emporium script traced from the 1961 brochure (R21); hand lettering",
+  "EXEMPT [180, 1140, 2100, 1280]: America's Greatest Hardware Stores traced from the brochure (R21)",
+  "EXEMPT [0, 1290, 2231, 3560]: Beaver mascot illustration traced from the brochure (R21): hand-drawn figure, pipes, B-E hat, water drops. Not type",
+  "STROKES: 11.79% of linework < 0.03 in"
+ ],
+ "exemptions": [
+  {
+   "box": [
+    100,
+    180,
+    2020,
+    540
+   ],
+   "reason": "BUILDERS traced from the 1961 brochure (R21)"
+  },
+  {
+   "box": [
+    150,
+    520,
+    2100,
+    1110
+   ],
+   "reason": "Emporium script traced from the 1961 brochure (R21); hand lettering"
+  },
+  {
+   "box": [
+    180,
+    1140,
+    2100,
+    1280
+   ],
+   "reason": "America's Greatest Hardware Stores traced from the brochure (R21)"
+  },
+  {
+   "box": [
+    0,
+    1290,
+    2231,
+    3560
+   ],
+   "reason": "Beaver mascot illustration traced from the brochure (R21): hand-drawn figure, pipes, B-E hat, water drops. Not type"
+  }
+ ],
+ "typeset": [
+  {
+   "box": [
+    0,
+    3780,
+    2231,
+    3922
+   ],
+   "font": "Jost SemiBold (house locator line, R21 rule 4)"
+  }
+ ],
+ "redrawn": [],
+ "substrate_layers": [],
+ "survival": []
+}

@@ -1,0 +1,63 @@
+{
+ "exempt": [
+  [
+   [
+    100,
+    180,
+    2020,
+    540
+   ],
+   "BUILDERS traced from the 1961 brochure (R21)"
+  ],
+  [
+   [
+    150,
+    520,
+    2100,
+    1110
+   ],
+   "Emporium script traced from the 1961 brochure (R21); hand lettering"
+  ],
+  [
+   [
+    180,
+    1140,
+    2100,
+    1280
+   ],
+   "America's Greatest Hardware Stores traced from the brochure (R21)"
+  ],
+  [
+   [
+    0,
+    1290,
+    2231,
+    3560
+   ],
+   "Beaver mascot illustration traced from the brochure (R21): hand-drawn figure, pipes, B-E hat, water drops. Not type"
+  ]
+ ],
+ "typeset": [
+  [
+   [
+    0,
+    3780,
+    2231,
+    3922
+   ],
+   "Jost SemiBold (house locator line, R21 rule 4)"
+  ]
+ ],
+ "redrawn": [],
+ "rules": [
+  "R21"
+ ],
+ "ink": [
+  "#F4ECDD",
+  "#2A221D"
+ ],
+ "print_width_in": 7.44,
+ "print_height_in": 13.07,
+ "source": "Builders Emporium 1961 brochure cover (src/be_42.jpg) + storefront photo (src/be_41.jpg), Valley Relics Museum Facebook posts",
+ "build": "src/builds/sfv/concepts/be_sep.py -> be_master.py -> gatefix.py (v1: bridges) -> unsplit.py -> separator widening at the last 4 gaps"
+}
