@@ -103,11 +103,11 @@ const PLACES: Place[] = [
     slug: 'shopping',
     name: 'Valley Plaza & the Discount Stores',
     short: 'Valley Plaza & the Discount Stores',
-    era: '1951–1986',
-    line: 'The Plaza, GEMCO, Zodys and White Front.',
+    era: '1951–1993',
+    line: 'The Plaza, GEMCO, Zodys, White Front and Builders Emporium.',
     story: [
       'Valley Plaza opened at Laurel Canyon and Victory in North Hollywood on August 12, 1951, and by the mid-1950s it was called the largest shopping center on the West Coast. It declined after the 1970s, and demolition began on October 29, 2025.',
-      'Out on the boulevards the Valley shopped at the discount stores. White Front opened its ninth store at 21300 Roscoe in Canoga Park in May 1963; the chain closed in 1974. Zodys opened at 8201 Topanga Canyon on September 27, 1962, under five hexagon letter boxes, and its California stores closed in March 1986. GEMCO, the members-only department store and supermarket, closed all 80 of its stores that same year.',
+      'Out on the boulevards the Valley shopped at the discount stores. White Front opened its ninth store at 21300 Roscoe in Canoga Park in May 1963; the chain closed in 1974. Zodys opened at 8201 Topanga Canyon on September 27, 1962, under five hexagon letter boxes, and its California stores closed in March 1986. GEMCO, the members-only department store and supermarket, closed all 80 of its stores that same year. Builders Emporium, the hardware chain that began at Sepulveda and Oxnard in Van Nuys, lasted until 1993.',
       'The signs are redrawn from photos and the membership card, with the old lettering traced wherever the photos hold it.',
     ],
     facts: [
@@ -124,19 +124,19 @@ const PLACES: Place[] = [
       { label: 'Wikipedia: Gemco', url: 'https://en.wikipedia.org/wiki/Gemco' },
       { label: 'D. J. Waldie, "For the vanished discounters of suburban L.A.," PBS SoCal (2014)', url: 'https://www.pbssocal.org/commentary/for-the-vanished-discounters-of-suburban-l-a-retail-nostalgia' },
     ],
-    prefixes: ['valley-plaza', 'gemco', 'zodys', 'white-front'],
+    prefixes: ['valley-plaza', 'gemco', 'zodys', 'white-front', 'builders-emporium'],
     tile: 'shopping', tone: '#161a20', ink: '#f4ecdd',
-    note: 'Not affiliated with any current business using the Valley Plaza, GEMCO, Zodys or White Front names.',
+    note: 'Not affiliated with any current business using the Valley Plaza, GEMCO, Zodys, White Front or Builders Emporium names.',
   },
   {
     slug: 'coffee-shops',
     name: 'Coffee Shops & Supper Spots',
     short: 'Coffee Shops & Supper Spots',
     era: '1928–2003',
-    line: 'Leon\'s, Phil\'s, Don\'s, Mike\'s and more.',
+    line: 'Biff\'s, Leon\'s, Phil\'s, Don\'s, Mike\'s and more.',
     story: [
       'Phil\'s Diner, a 1926 dining car called the oldest in California, opened beside the Lankershim depot in 1928 and is now a Los Angeles Historic-Cultural Monument. Leon\'s Steak House and Coffee Shop opened at Victory and Vineland in 1945 and closed in July 2003. Don\'s in Burbank started as a drive-in in 1947 and closed in 2002.',
-      'Mike\'s Pizza in Panorama City was "serving since 1954" until 1993. The Jolly Roger served the Sherman Oaks Fashion Square under a linocut galleon, Rusty\'s Hacienda poured margaritas on Lankershim, and Encino Bowl kept a coffee shop next to the lanes from 1962 to 1986.',
+      'Biff\'s Restaurants ran six coffee shops, among them No. 5 on Van Nuys Blvd. at Chase St. and No. 3 on Magnolia at Lankershim. Mike\'s Pizza in Panorama City was "serving since 1954" until 1993. The Jolly Roger served the Sherman Oaks Fashion Square under a linocut galleon, Rusty\'s Hacienda poured margaritas on Lankershim, and Encino Bowl kept a coffee shop next to the lanes from 1962 to 1986.',
       'Each design comes from the place\'s own menu, ad or sign, with the old lettering traced wherever the source holds it.',
     ],
     facts: [
@@ -152,7 +152,7 @@ const PLACES: Place[] = [
       { label: 'Valley Relics Museum archive: The Jolly Roger menu (Gorsky Menu Collection)', url: 'https://valleyrelicsmuseum.org/archives/items/show/566' },
       { label: 'Los Angeles Public Library Menu Collection: Rusty\'s Hacienda take-out menu, c. 1965', url: 'https://tessa2.lapl.org/digital/collection/menus/id/3082' },
     ],
-    prefixes: ['phils-diner', 'leons', 'dons-restaurant', 'mikes-pizza', 'the-jolly-roger', 'rustys-hacienda', 'encino-bowl'],
+    prefixes: ['biffs-restaurants', 'phils-diner', 'leons', 'dons-restaurant', 'mikes-pizza', 'the-jolly-roger', 'rustys-hacienda', 'encino-bowl'],
     tile: 'coffee-shops', tone: '#f3ecdd', ink: '#1e1a16',
     note: 'Not affiliated with any current business using these names.',
   },
@@ -268,9 +268,11 @@ const SINGLE_COLOR: Record<string, string> = {
   'dons-restaurant-burbank-tee': 'Vintage White',
   'fantasy-faire-1967-tee': 'Yellow',
   'june-ellens-donuts-tee': 'Black',
+  'biffs-restaurants-menu-tee': 'Forest',
+  'builders-emporium-van-nuys-tee': 'Aqua',
 };
 
-const BC3001 = new Set(['moby-disc-records-tee', 'the-pass-club-tee', 'phils-diner-tee', 'the-sugar-shack-tee', 'fantasy-faire-1967-tee']);
+const BC3001 = new Set(['moby-disc-records-tee', 'the-pass-club-tee', 'phils-diner-tee', 'the-sugar-shack-tee', 'fantasy-faire-1967-tee', 'biffs-restaurants-menu-tee', 'builders-emporium-van-nuys-tee']);
 
 function blankFor(handle: string): Blank | null {
   if (handle.includes('ringer')) return 'ringer';
@@ -283,10 +285,13 @@ function blankFor(handle: string): Blank | null {
 // were the Orchard Valley print and Greetings). Ranked order now, strongest first: measured Facebook signal
 // (SFV_WAVE2.md score) weighed with how the design reads as a thumbnail, garment colours alternated so
 // neighbours differ. Our own lockups (Greetings, phys. ed.) close the list. June Ellen's moved up 10-31 once its
-// v2 art (the storefront sign) replaced the font-set script.
+// v2 art (the storefront sign) replaced the font-set script. Brad 11-01: Biff's and Builders Emporium are top-tier
+// graphic work (traced whole from a menu cover and a brochure), so they lead with FM; low scorers stay, at the bottom.
 const SHOP_ORDER = [
   'fm-station-north-hollywood-tee',
+  'biffs-restaurants-menu-tee',
   'mikes-pizza-menu-tee',
+  'builders-emporium-van-nuys-tee',
   'valley-plaza-sign-tee',
   'leons-steak-house-sign-tee',
   'zodys-canoga-park-tee',
