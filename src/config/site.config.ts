@@ -26,6 +26,8 @@ export const siteConfig = {
   shopifyStorefrontToken: import.meta.env.SHOPIFY_STOREFRONT_TOKEN || PUBLIC_STOREFRONT_TOKEN,
   // Meta Pixel ID (not a secret; ships in every page). Empty = pixel disabled.
   metaPixelId: import.meta.env.PUBLIC_META_PIXEL_ID || "",
+  // Facebook domain-verification token (public; required to unlock rich link previews).
+  fbDomainVerification: (town as any).fbDomainVerification || "",
   socialLinks: {
     instagram: "",
     facebook: "",

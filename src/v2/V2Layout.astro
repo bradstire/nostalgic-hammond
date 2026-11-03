@@ -44,6 +44,9 @@ const ogImage = new URL(image, siteConfig.siteUrl).href;
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />
+    {siteConfig.fbDomainVerification && (
+      <meta name="facebook-domain-verification" content={siteConfig.fbDomainVerification} />
+    )}
     <slot name="head" />
     {jsonld.map((j) => <script type="application/ld+json" set:html={JSON.stringify(j)} />)}
     <script is:inline>

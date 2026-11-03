@@ -18,6 +18,10 @@ export const towns = {
     brandName: 'Nostalgic Hammond',
     siteUrl: 'https://www.nostalgichammond.com',
     contactEmail: 'info@nostalgichammond.com',
+    // Meta (Facebook) Business Manager domain verification token.
+    // Ships as <meta name="facebook-domain-verification" content="…"> in every page's <head>.
+    // Unlocks full link-preview cards for posts on all three Pages that link here.
+    fbDomainVerification: 'toj3tdq6kyg1uybxa9htmhry2uckju',
     // false = noindex + robots disallow (private preview on its vercel.app URL)
     launched: true,
     // Storefront v2 ("shop by place", src/v2), same as Hattiesburg. The original layout stays in src/legacy.
@@ -98,6 +102,7 @@ export const towns = {
     tagline: 'Hattiesburg, Mississippi',
     brandName: 'Nostalgic Hattiesburg',
     siteUrl: 'https://www.nostalgichattiesburg.com',
+    fbDomainVerification: '', // set when the token lands from Business Manager
     contactEmail: 'info@nostalgichattiesburg.com',
     launched: true,
     // Storefront v2 ("shop by place", src/v2).
@@ -126,6 +131,7 @@ export const towns = {
     brandName: 'Nostalgic San Fernando Valley',
     // Domain bought 10-29 (Brad); www is canonical, apex and nostalgic-sfv.vercel.app redirect to it (Vercel).
     siteUrl: 'https://www.nostalgicsfv.com',
+    fbDomainVerification: '', // set when the token lands from Business Manager
     contactEmail: 'info@nostalgicsfv.com',
     // Own icons; and the build ships only images/sfv (none of the shared legacy files).
     iconDir: '/images/sfv',
