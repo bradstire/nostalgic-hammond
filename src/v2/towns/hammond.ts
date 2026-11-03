@@ -23,7 +23,6 @@ const PLACES: Place[] = [
       'The Cave Tangi opened in October 1938 on Highway 51, just north of Ponchatoula on the road to Hammond. It was a nightclub and restaurant: drink, dine, dance.',
       // [repo] ponchatoula.astro
       'About ten years later the Cave Tangi Drive-In opened across the road. It showed its last picture in 1957.',
-      'Hammond folks drove down for it too, and people from both towns still talk about it.',
     ],
     storyIf: [{
       // [brief] the restaurants' napkin (IMG_7198): rooster art, Baton Rouge and Ponchatoula locations
