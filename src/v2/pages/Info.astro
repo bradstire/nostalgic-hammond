@@ -4,15 +4,17 @@ import { FAQ, FREE_SHIP, HOLIDAY_CUTOFF, COPY } from '../data';
 import { siteConfig } from '../../config/site.config';
 // Town-specific /about body (src/v2/towns/<town>/About.astro).
 import About from '@town/About.astro';
-interface Props { page: 'about' | 'faq' | 'shipping-returns' | 'terms' | 'contact' }
+interface Props { page: 'about' | 'faq' | 'shipping-returns' | 'terms' | 'privacy' | 'contact' }
 const { page } = Astro.props;
 const email = siteConfig.contactEmail;
-const titles = { about: 'Our story & sources', faq: 'Help & FAQ', 'shipping-returns': 'Shipping & returns', terms: 'Terms of service', contact: 'Contact us' };
+const host = new URL(siteConfig.siteUrl).hostname.replace(/^www\./, '');
+const titles = { about: 'Our story & sources', faq: 'Help & FAQ', 'shipping-returns': 'Shipping & returns', terms: 'Terms of service', privacy: 'Privacy policy', contact: 'Contact us' };
 const descs = {
   about: COPY.aboutDesc,
   faq: `Sizing, shipping times, returns and more for ${siteConfig.brandName} orders.`,
   'shipping-returns': `Free US shipping on orders $${FREE_SHIP}+, made-to-order timing, and our misprint and damage replacement policy.`,
-  terms: `Terms of service for ${new URL(siteConfig.siteUrl).hostname.replace(/^www\./, '')}.`,
+  terms: `Terms of service for ${host}.`,
+  privacy: `How ${siteConfig.brandName} collects, uses and protects the information you give us when you shop at ${host}.`,
   contact: `Questions about an order, sizing or a place we should bring back? Here is how to reach ${siteConfig.brandName}.`,
 };
 const jsonld = page === 'faq' ? [{ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: FAQ.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })) }] : [];
@@ -74,6 +76,56 @@ const jsonld = page === 'faq' ? [{ '@context': 'https://schema.org', '@type': 'F
         </Fragment>
       )}
 
+      {page === 'privacy' && (
+        <Fragment>
+          <p class="hb-lede">This policy covers what {siteConfig.brandName} collects when you visit {host} or place an order, how we use it, and your choices. Short version: we only collect what we need to sell and ship, and we never sell your information.</p>
+          <h2>Who we are</h2>
+          <p>{siteConfig.brandName} is an independent tribute shop that sells tees, hats and framed prints redrawn from places {siteConfig.townName} remembers. The site at {host} is the only place we take orders. Reach us any time at <a href={`mailto:${email}`}>{email}</a>.</p>
+          <h2>What we collect</h2>
+          <ul>
+            <li><strong>Order information</strong> — your name, shipping address, email, phone (if you give one) and what you bought. This is what we need to make the order and get it to you.</li>
+            <li><strong>Payment information</strong> — handled by Shopify Payments; we do not see or store your card number.</li>
+            <li><strong>Email signups</strong> — only if you enter your address in our signup form.</li>
+            <li><strong>Site analytics</strong> — Shopify, Vercel Web Analytics and the Meta pixel record visits to the site (pages viewed, approximate location, device type) so we can see what people look at. The Meta pixel also lets us show ads to people who visited the site.</li>
+            <li><strong>Cookies</strong> — small files stored by your browser to keep your cart working, remember your preferences, and power the analytics above.</li>
+          </ul>
+          <h2>How we use it</h2>
+          <ul>
+            <li>To process, fulfil and ship your order (we pass your name and address to Printful, our print-on-demand partner, to make and ship each item).</li>
+            <li>To answer your emails about orders, sizing or local history.</li>
+            <li>To send you order updates and, if you signed up, our occasional email about new designs.</li>
+            <li>To understand which pages and designs people look at, and to show ads to people who have visited the site.</li>
+          </ul>
+          <h2>Who we share it with</h2>
+          <p>Only the services we need to run the shop. In short:</p>
+          <ul>
+            <li><strong>Shopify</strong> — the e-commerce platform that powers checkout, payments and order records.</li>
+            <li><strong>Printful</strong> — our print-on-demand partner, which receives your name, shipping address and the items you ordered so it can produce and ship them.</li>
+            <li><strong>Klaviyo</strong> — our email service, if you signed up for emails.</li>
+            <li><strong>Meta (Facebook)</strong> and <strong>Google</strong> — analytics and advertising, as described above.</li>
+            <li><strong>Vercel</strong> — the host that serves this site, with basic request logs.</li>
+          </ul>
+          <p>We do not sell or rent your information to anyone.</p>
+          <h2>How long we keep it</h2>
+          <p>Order records are kept as long as Shopify requires for tax and bookkeeping (usually seven years). Email signups are kept until you unsubscribe. Analytics logs follow each provider's own retention schedule.</p>
+          <h2>Your choices</h2>
+          <ul>
+            <li><strong>Email</strong> — every email we send has an unsubscribe link, and you can email us at any time to be removed.</li>
+            <li><strong>Cookies and ads</strong> — most browsers let you block or clear cookies in Settings. You can opt out of Meta pixel tracking in your Facebook Ad Preferences, and Google ads at <a href="https://adssettings.google.com/" rel="nofollow">adssettings.google.com</a>.</li>
+            <li><strong>California, EU and other residents</strong> — you can ask us at any time to see, correct or delete the information we hold about you. Email <a href={`mailto:${email}`}>{email}</a> and we will reply within 30 days.</li>
+          </ul>
+          <h2>Children</h2>
+          <p>Our shop is for adults. We do not knowingly collect information from anyone under 13.</p>
+          <h2>Security</h2>
+          <p>The site runs over HTTPS. Payments are handled by Shopify's PCI-compliant checkout; we do not see or store card numbers.</p>
+          <h2>Changes</h2>
+          <p>We will post any changes to this page and update the date below.</p>
+          <h2>Contact</h2>
+          <p>Questions about privacy? Email <a href={`mailto:${email}`}>{email}</a>.</p>
+          <p class="hb-note">Last updated November 2026.</p>
+        </Fragment>
+      )}
+
       {page === 'terms' && (
         <Fragment>
           <p class="hb-lede">These terms cover your use of this site and purchases made through it. By placing an order you agree to them.</p>
@@ -86,7 +138,7 @@ const jsonld = page === 'faq' ? [{ '@context': 'https://schema.org', '@type': 'F
           <h2>No affiliation</h2>
           <p>{siteConfig.brandName} is an independent tribute shop. We are not affiliated with or endorsed by the businesses, schools or institutions shown, and any names are used to describe the history our designs honor.</p>
           <h2>Privacy</h2>
-          <p>See our <a href="https://checkout.shopify.com/97765622131/policies/50774835571.html?locale=en" rel="nofollow">privacy policy</a> for how we handle your information, including email signups and advertising cookies.</p>
+          <p>See our <a href="/privacy">privacy policy</a> for how we handle your information, including email signups and advertising cookies.</p>
           <h2>Contact</h2>
           <p><a href={`mailto:${email}`}>{email}</a></p>
           <p class="hb-note">Last updated October 2026.</p>
