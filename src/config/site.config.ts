@@ -13,6 +13,8 @@ export const siteConfig = {
   townName: town.townName,
   tagline: town.tagline,
   brandName: town.brandName,
+  // Brand as it appears in <title> (a shorter form where the full name eats the 60-character budget).
+  titleSuffix: (town as any).titleSuffix || town.brandName,
   siteUrl: town.siteUrl,
   contactEmail: town.contactEmail,
   // Folder holding favicon.svg + apple-touch-icon.png (v2 layout). Hattiesburg's set is the default.

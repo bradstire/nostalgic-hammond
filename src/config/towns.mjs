@@ -129,6 +129,7 @@ export const towns = {
     stateName: 'California',
     tagline: 'San Fernando Valley, California',
     brandName: 'Nostalgic San Fernando Valley',
+    titleSuffix: 'Nostalgic SFV',
     // Domain bought 10-29 (Brad); www is canonical, apex and nostalgic-sfv.vercel.app redirect to it (Vercel).
     siteUrl: 'https://www.nostalgicsfv.com',
     fbDomainVerification: '', // set when the token lands from Business Manager

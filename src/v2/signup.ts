@@ -18,6 +18,8 @@ export function signup(form: HTMLFormElement) {
       input.setAttribute('aria-invalid', 'true'); input.focus(); return;
     }
     input.removeAttribute('aria-invalid');
+    // Optional "which place should we bring back next?" answer (home form only): stored on the profile as bring_back.
+    const place = ((form.querySelector('input[name=place]') as HTMLInputElement | null)?.value || '').trim().slice(0, 120);
     const btn = form.querySelector('button') as HTMLButtonElement;
     btn.disabled = true; msg.textContent = 'Signing you up…';
     try {
@@ -26,7 +28,7 @@ export function signup(form: HTMLFormElement) {
         headers: { 'Content-Type': 'application/vnd.api+json', revision: '2024-10-15' },
         body: JSON.stringify({ data: { type: 'subscription', attributes: {
           custom_source: import.meta.env.PUBLIC_SIGNUP_SOURCE,
-          profile: { data: { type: 'profile', attributes: { email, properties: { town: import.meta.env.PUBLIC_TOWN } } } },
+          profile: { data: { type: 'profile', attributes: { email, properties: { town: import.meta.env.PUBLIC_TOWN, ...(place ? { bring_back: place } : {}) } } } },
         }, relationships: { list: { data: { type: 'list', id: LIST } } } } }),
       });
       if (!r.ok && r.status !== 202) throw new Error(String(r.status));

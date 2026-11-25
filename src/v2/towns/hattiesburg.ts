@@ -12,7 +12,7 @@ const PLACES: Place[] = [
     era: '1948–2005',
     line: 'Double features under the pines on Highway 49.',
     story: [
-      'The Beverly Drive-In Theatre opened on May\u00a029, 1948, and ran until 1987. It reopened in 2001 and showed films until Hurricane Katrina damaged it in 2005; it never reopened.',
+      'The Beverly Drive-In Theatre opened on May\u00a029, 1948, and ran until 1987. It reopened in 2001; Hurricane Katrina badly damaged it in 2005 and it never recovered.',
       'The Beverly was listed on the National Register of Historic Places in 2008. A fire destroyed what was left in 2010, and the site is now the Village at the Beverly apartments.',
       'Our lettering is redrawn from the theatre\'s marquee script.',
     ],
@@ -24,6 +24,8 @@ const PLACES: Place[] = [
     sources: [
       { label: 'Wikipedia: Beverly Drive-In Theatre', url: 'https://en.wikipedia.org/wiki/Beverly_Drive-In_Theatre' },
       { label: 'Mississippi Dept. of Archives and History, historic resources database' },
+      { label: 'National Park Service, National Register record 08000761 (5320 U.S. Hwy 49 S.)', url: 'https://npgallery.nps.gov/AssetDetail/NRIS/08000761' },
+      { label: 'MultifamilyBiz, May 25, 2016: the Village at the Beverly apartments open on the site', url: 'https://www.multifamilybiz.com/news/6946/site_of_former_drivein_theater_becomes_apartment_c' },
     ],
     prefixes: ['beverly-drive-in'],
     tile: 'beverly-drive-in', tileTall: true, tone: '#14171c', ink: '#f4ecdd',
@@ -32,7 +34,7 @@ const PLACES: Place[] = [
     slug: 'cloverleaf-mall',
     name: 'Cloverleaf Mall',
     short: 'Cloverleaf Mall',
-    era: '1974–1990s',
+    era: 'Opened 1974',
     line: 'Records at Camelot, jeans at Britches.',
     story: [
       'Camelot Music opened at Cloverleaf Mall in 1974 and appears in the mall\'s grand-opening tenant list. Our Camelot pieces follow the 1974 storefront sign and the chain\'s 1970s paper bag, with its red-and-blue rainbow arch.',
@@ -40,13 +42,14 @@ const PLACES: Place[] = [
     ],
     facts: [
       { k: 'Camelot Music opened', v: '1974' },
-      { k: 'Address', v: '999 Broadway (Cloverleaf Mall)' },
+      { k: 'Camelot address, 1995', v: '999 Broadway (Cloverleaf Mall)' },
       { k: 'Britches ad', v: '1987' },
     ],
     sources: [
       { label: 'Cloverleaf Mall grand-opening ad, Hattiesburg American, Aug. 27, 1974, p. 25 (Camelot Music in the tenant list)' },
       { label: 'Camelot Music corporate store list, Mar. 15, 1995: store #38, Cloverleaf Mall, 999 Broadway' },
       { label: 'Mississippi Britches newspaper ad, 1987 (clipping)' },
+      { label: 'Mississippi Secretary of State, bicentennial timeline: Cloverleaf Mall opened in 1974', url: 'https://sos.ms.gov/PTV/Bicentennial/inc/html/197.html' },
     ],
     prefixes: ['camelot-music', 'mississippi-britches'],
     tile: 'cloverleaf-mall', tone: '#f6f1e6', ink: '#1e1a16',
@@ -67,7 +70,10 @@ const PLACES: Place[] = [
       { k: 'Location', v: 'I-59 at the Eatonville exit' },
       { k: 'Ad restored from', v: '1966' },
     ],
-    sources: [{ label: 'Newspaper ad for the Sunday, May 22, 1966 match races (clipping)' }],
+    sources: [
+      { label: 'Newspaper ad for the Sunday, May 22, 1966 match races (clipping)' },
+      { label: 'Wikipedia: Hattiesburg, Mississippi (the Hub City nickname, 1912)', url: 'https://en.wikipedia.org/wiki/Hattiesburg,_Mississippi' },
+    ],
     prefixes: ['hub-city-drag-raceway'],
     tile: 'hub-city-drag-raceway', tone: '#ece2cb', ink: '#1e1a16',
   },
@@ -88,6 +94,7 @@ const PLACES: Place[] = [
     sources: [
       { label: 'Postcard photograph of the restaurant and its sign, 1966' },
       { label: 'Later history of the site: Hattiesburg Memory, a local-history community' },
+      { label: 'Sam Miller, Hattiesburg repeat-photography project: Albert Speed\'s Restaurant, 304 Broadway Drive (Highway 11)', url: 'https://motosambo.wordpress.com/' },
     ],
     prefixes: ['albert-speeds'],
     tile: 'albert-speeds', tone: '#efe5cf', ink: '#1e1a16',
@@ -130,20 +137,82 @@ const PLACES: Place[] = [
     era: '1900s–1920s',
     line: 'Main Street and the Hub City, from the postcard rack.',
     story: [
-      'Our framed prints come from early-1900s postcards in the Cooper Postcard Collection at the Mississippi Department of Archives and History, which lists them as having no known copyright restrictions.',
+      'Our framed prints come from early-1900s postcards in the Cooper Postcard Collection at the Mississippi Department of Archives and History, which states that the collection\'s postcards are in the public domain.',
       'We cleaned up dust and foxing and left the original color and paper alone.',
     ],
     facts: [
       { k: 'Collection', v: 'MDAH Cooper Postcard Collection' },
-      { k: 'Main Street card', v: 'c. 1915–20' },
+      { k: 'Main Street card', v: '1910s (archive date: 19xx)' },
     ],
     sources: [
       { label: 'MDAH Cooper Postcard Collection, PI/1992.0001 (system IDs 90128, 90199)', url: 'https://www.flickr.com/people/mississippi-dept-of-archives-and-history/' },
+      { label: 'MDAH record: Main Street, Hattiesburg, Miss. (item 1468)', url: 'https://da.mdah.ms.gov/series/cooper/detail/16985' },
+      { label: 'MDAH record: Greetings from Hattiesburg, Miss. (item 1445)', url: 'https://da.mdah.ms.gov/series/cooper/detail/17978' },
+      { label: 'MDAH, Cooper Postcard Collection: rights statement', url: 'https://da.mdah.ms.gov/series/cooper/gentech' },
     ],
     prefixes: ['greetings-from-hattiesburg', 'main-street-hattiesburg'],
     tile: 'postcards', tone: '#e9dfc8', ink: '#1e1a16',
   },
 ];
+
+// One page per business inside a shared place (/places/<slug>). Products keep their place (Cloverleaf Mall).
+const NAMES: Place[] = [
+  {
+    slug: 'camelot-music',
+    name: 'Camelot Music',
+    short: 'Camelot Music',
+    era: 'From 1974',
+    line: 'Records, tapes and the rainbow bag at Cloverleaf Mall.',
+    story: [
+      'Camelot Music opened at Cloverleaf Mall in 1974 and appears in the mall\'s grand-opening tenant list. A 1995 company store list still carried it as store #38, at 999 Broadway.',
+      'The chain began in Ohio in 1956, when Paul David started a service that stocked record racks in other people\'s stores. The first shop under the Camelot Music name opened in 1965, and by May 1998 the company ran 455 stores in 37 states. Trans World Entertainment bought it later that year and went on to rename its mall stores FYE.',
+      'People who shopped the Cloverleaf store remember the $2 cut-out bin, and paying for tapes with paper-route money.',
+      'Our Camelot pieces follow the 1974 storefront sign and the chain\'s 1970s paper bag, with its red-and-blue rainbow arch.',
+    ],
+    facts: [
+      { k: 'Opened at Cloverleaf Mall', v: '1974' },
+      { k: 'Store number', v: '#38' },
+      { k: 'Chain founded', v: '1956, Ohio' },
+    ],
+    sources: [
+      { label: 'Cloverleaf Mall grand-opening ad, Hattiesburg American, Aug. 27, 1974, p. 25 (Camelot Music in the tenant list)' },
+      { label: 'Camelot Music corporate store list, Mar. 15, 1995: store #38, Cloverleaf Mall, 999 Broadway' },
+      { label: 'Wikipedia: Camelot Music', url: 'https://en.wikipedia.org/wiki/Camelot_Music' },
+      { label: 'Memories shared by people who shopped there (Hattiesburg local-history group, Nov. 2026)' },
+    ],
+    prefixes: ['camelot-music'],
+    parent: 'cloverleaf-mall',
+    tile: 'camelot-music', tone: '#f6f1e6', ink: '#1e1a16',
+    note: 'Not affiliated with any current owner of the Camelot Music name.',
+  },
+  {
+    slug: 'mississippi-britches',
+    name: 'Mississippi Britches',
+    short: 'Mississippi Britches',
+    era: 'Advertised 1987',
+    line: 'The jeans store at Cloverleaf Mall.',
+    story: [
+      'Mississippi Britches was the jeans and clothing store at Cloverleaf Mall, the shopping center at 999 Broadway that held its grand opening in August 1974.',
+      'The record we have is thin: the store\'s 1987 newspaper ad, which set the name in plain lowercase letters. We have not found the year it opened or the year it closed.',
+      'If you shopped or worked there, tell us what you remember. What can be confirmed gets added to this page.',
+      'Our tee carries that lowercase logotype, redrawn from the ad, over the line "Cloverleaf Mall · Hattiesburg, Miss." The hat has the name embroidered in white.',
+    ],
+    facts: [
+      { k: 'Where', v: 'Cloverleaf Mall, 999 Broadway' },
+      { k: 'Sold', v: 'Jeans and clothing' },
+      { k: 'Ad we drew from', v: '1987' },
+    ],
+    sources: [
+      { label: 'Mississippi Britches newspaper ad, 1987 (clipping)' },
+      { label: 'Cloverleaf Mall grand-opening ad, Hattiesburg American, Aug. 27, 1974, p. 25' },
+    ],
+    prefixes: ['mississippi-britches'],
+    parent: 'cloverleaf-mall',
+    tile: 'mississippi-britches', tone: '#262b45', ink: '#f4ecdd',
+    note: 'Not affiliated with Mississippi Britches or any current owner of its name.',
+  },
+];
+
 
 // Held from the storefront pending an owner decision (live business with a related name).
 const HELD_PREFIXES = ['sacks-army-store'];
@@ -266,7 +335,7 @@ const DETAIL = [
 ];
 
 export const hattiesburg: TownContent = {
-  PLACES, FALLBACK_PLACE: null, HIDE_EMPTY_PLACES: false,
+  PLACES, NAMES, FALLBACK_PLACE: null, HIDE_EMPTY_PLACES: false,
   HELD_PREFIXES, SINGLE_COLOR, TYPE_OVERRIDE: {}, blankFor,
   START_HERE, AUTO_START: false,
   NOTE_BY_PREFIX, DESC_OVERRIDE, PAIRS, FAMILIES, MEMBER_LABEL, TITLE_OVERRIDE, FRAME_SIZE, FAQ,
@@ -295,14 +364,14 @@ export const hattiesburg: TownContent = {
     Tee: 'hub-city-drag-raceway-tee', Hat: 'camelot-music-hat', Socks: 'hub-city-drag-raceway-socks', 'Framed print': 'main-street-hattiesburg-framed-poster-18-12',
   },
   COPY: {
-    homeTitle: 'Hattiesburg tees, hats & prints from the places we remember',
-    metaDescription: 'Tees, hats, socks and framed prints redrawn and restored from lost Hattiesburg signs, ads and postcards: the Beverly Drive-In, Camelot Music, Hub City Drag Raceway and more.',
+    homeTitle: 'Hattiesburg tees, hats & prints',
+    metaDescription: 'Tees, hats, socks and framed prints redrawn from lost Hattiesburg signs, ads and postcards: the Beverly Drive-In, Camelot Music, Hub City Drag Raceway and more.',
     ogImage: '/images/hb/og.jpg',
     placesDesc: 'Seven lost Hattiesburg stories, from the Beverly Drive-In to Camelot Music at Cloverleaf Mall, each with its story, sources and collection.',
     shopDesc: 'Every Nostalgic Hattiesburg tee, hat, sock and framed print, by place and by type: the Beverly Drive-In, Hub City Drag Raceway, Camelot Music and more.',
     footerBlurb: 'Tees, hats, socks and prints for the places Hattiesburg remembers, redrawn and restored from the original signs, ads and postcards. Made to order, one at a time.',
     footerLegalHtml: 'Nostalgic Hattiesburg is an independent tribute shop, not affiliated with or endorsed by the businesses, schools or institutions shown. Archival postcards from the MDAH Cooper Postcard Collection, Mississippi Department of Archives and History.',
     aboutDesc: 'How Nostalgic Hattiesburg researches, restores and redraws the places Hattiesburg remembers, and where every image comes from.',
-    termsArtworkHtml: 'The designs on this site were researched, restored and redrawn by Nostalgic Hattiesburg. Please don\'t copy or resell them. Archival postcards come from the MDAH Cooper Postcard Collection, which lists them as having no known copyright restrictions.',
+    termsArtworkHtml: 'The designs on this site were researched, restored and redrawn by Nostalgic Hattiesburg. Please don\'t copy or resell them. Archival postcards come from the MDAH Cooper Postcard Collection, which the archive states are in the public domain.',
   },
 };

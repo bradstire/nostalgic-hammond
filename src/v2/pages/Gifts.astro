@@ -1,0 +1,39 @@
+---
+// Gift page: the town's lead designs in "start here" order, the Christmas order-by date and the free-shipping line.
+import V2Layout from '../V2Layout.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getCatalog } from '../catalog';
+import { START_HERE, SHOP_ORDER, FREE_SHIP, HOLIDAY_CUTOFF } from '../data';
+import { siteConfig } from '../../config/site.config';
+const leads = (await getCatalog()).filter((p) => p.lead);
+const order = [...START_HERE, ...SHOP_ORDER];
+const rank = (p: any) => { const i = order.indexOf(p.handle); return i < 0 ? 1e4 : i; };
+const picks = [...leads].sort((a, b) => rank(a) - rank(b)).slice(0, 8);
+const town = siteConfig.townName;
+const from = /^San /.test(town) ? `the ${town}` : town;
+const title = `Gifts for someone from ${from}`;
+// The brand suffix is long on the Valley site: keep the <title> under 60 characters there.
+const pageTitle = `${title} | ${siteConfig.brandName}`.length <= 60 ? title : `${town} gifts`;
+const description = `Gifts for someone from ${from}: tees, hats and framed prints from its lost signs, ads and postcards. Order by ${HOLIDAY_CUTOFF} for Christmas.`;
+const jsonld = [{
+  '@context': 'https://schema.org', '@type': 'CollectionPage', name: title, url: `${siteConfig.siteUrl}/gifts`,
+  mainEntity: { '@type': 'ItemList', numberOfItems: picks.length, itemListElement: picks.map((p, i) => ({ '@type': 'ListItem', position: i + 1, url: `${siteConfig.siteUrl}/products/${p.handle}`, name: p.baseTitle })) },
+}];
+---
+<V2Layout title={pageTitle} jsonld={jsonld} description={description}>
+  <section class="hb-section--tight">
+    <div class="hb-wrap">
+      <p class="hb-eyebrow">Gifts</p>
+      <h1 class="hb-h1" style="font-size:clamp(2rem,4vw,3rem)">{title}</h1>
+      <p class="hb-lede">Tees, hats and framed prints from the places {from} remembers, most of them redrawn from the real sign, ad or postcard. Made to order and shipped to any US address.</p>
+      <p class="hb-lede"><strong>Order by {HOLIDAY_CUTOFF} for Christmas delivery.</strong> Free US shipping on ${FREE_SHIP}+. Sending it straight to them? Enter their address at checkout.</p>
+      <div class="hb-grid" style="margin-top:26px">
+        {picks.map((p, i) => <div><ProductCard p={p} eager={i < 4} /></div>)}
+      </div>
+      <p style="margin-top:32px;display:flex;gap:12px;flex-wrap:wrap">
+        <a class="hb-btn hb-btn--primary" href="/#gifts">Gift pairs that ship free</a>
+        <a class="hb-btn hb-btn--ghost" href="/shop">Shop all {leads.length} designs</a>
+      </p>
+    </div>
+  </section>
+</V2Layout>

@@ -1,6 +1,6 @@
 // Route params for storefront v2.
 import { getCatalog } from '../catalog';
-import { livePlaces } from '../data';
+import { livePlaces, liveNames } from '../data';
 
 export async function productPaths() {
   const all = await getCatalog();
@@ -11,5 +11,6 @@ export async function collectionPaths() {
 }
 export async function placePaths() {
   // Only places with products get a page (towns with HIDE_EMPTY_PLACES); the rest appear once their products do.
-  return livePlaces(await getCatalog()).map((pl) => ({ params: { slug: pl.slug }, props: { pl } }));
+  const all = await getCatalog();
+  return [...livePlaces(all), ...liveNames(all)].map((pl) => ({ params: { slug: pl.slug }, props: { pl } }));
 }

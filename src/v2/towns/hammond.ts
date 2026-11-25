@@ -22,7 +22,7 @@ const PLACES: Place[] = [
       // [repo] ponchatoula.astro + product copy ("on the road to Hammond", "Drink. Dine. Dance.")
       'The Cave Tangi opened in October 1938 on Highway 51, just north of Ponchatoula on the road to Hammond. It was a nightclub and restaurant: drink, dine, dance.',
       // [repo] ponchatoula.astro
-      'About ten years later the Cave Tangi Drive-In opened across the road. It showed its last picture in 1957.',
+      'A little more than ten years later, in July 1949, the Cave Tangi Drive-In opened across the road. Its last advertised show was in September 1957.',
     ],
     storyIf: [{
       // [brief] the restaurants' napkin (IMG_7198): rooster art, Baton Rouge and Ponchatoula locations
@@ -33,11 +33,12 @@ const PLACES: Place[] = [
     facts: [
       { k: 'Opened', v: 'October 1938' },
       { k: 'Where', v: 'Highway 51, north of Ponchatoula' },
-      { k: 'Drive-in', v: 'Last picture 1957' },
+      { k: 'Drive-in', v: 'July 1949 to September 1957' },
     ],
     sources: [
       // [art] the inlaid floor medallion in the hero photo reads "CAVE TANGI 1938 OCT-1"
       { label: 'The Cave Tangi floor medallion, inlaid "Cave Tangi 1938 Oct-1" (photograph on our home page)' },
+      { label: 'Cinema Treasures: Cave Tangi Drive-In (the club\'s October 1, 1938 opening; the drive-in, 1949 to 1957)', url: 'https://cinematreasures.org/theaters/70811' },
     ],
     prefixes: ['cave-tangi'],
     tile: 'cave-tangi', tone: '#2a211b', ink: '#f4ecdd',
@@ -59,7 +60,10 @@ const PLACES: Place[] = [
       { k: 'Built', v: '1937, a WPA project' },
       { k: 'Postcard', v: '1940, Curt Teich & Co.' },
     ],
-    sources: [{ label: 'Linen postcard, "Strawberry Stadium, Southeastern Louisiana College, Hammond, La.", Curt Teich & Co., 1940' }],
+    sources: [
+      { label: 'Linen postcard, "Strawberry Stadium, Southeastern Louisiana College, Hammond, La.", Curt Teich & Co., 1940' },
+      { label: 'Wikipedia: Strawberry Stadium (built in 1937 under the WPA; named to honor local farmers)', url: 'https://en.wikipedia.org/wiki/Strawberry_Stadium' },
+    ],
     prefixes: ['strawberry-stadium'],
     tile: 'strawberry-stadium', tone: '#d9cfb8', ink: '#1e1a16',
     note: 'Not affiliated with Southeastern Louisiana University.',
@@ -104,21 +108,25 @@ const PLACES: Place[] = [
     slug: 'casa-de-fresa',
     name: 'Hotel Casa de Fresa',
     short: 'Hotel Casa de Fresa',
-    era: 'Closed 1966',
-    line: 'The strawberry buyers’ hotel on the depot block.',
+    era: 'Burned 1979',
+    line: 'The strawberry buyers’ hotel across from the depot.',
     story: [
       // [brief] NRHP form https://npgallery.nps.gov/GetAsset/c48e5991-58ca-4c94-8904-5e9e187f1ca4
-      'The Hotel Casa de Fresa stood on the depot block in Hammond. Its name, Spanish for “House of Strawberries,” was picked in a contest after the 1929 fire, and it was where the strawberry buyers stayed.',
-      'The hotel closed in 1966. It burned in 1979 and was later torn down.',
+      'The Hotel Casa de Fresa stood across Railroad Avenue from the depot in Hammond. It was the Oaks Hotel until a fire gutted it in 1929; the new name, Spanish for “House of Strawberries,” was picked in a contest, and it was where the strawberry buyers stayed.',
+      'A 1976 newspaper report was headlined “Landmark Hotel Closes Its Doors,” and the building stood unoccupied when it was nominated to the National Register in 1978. It burned in 1979.',
       // [brief] wave 2 art: traced from the hotel's matchbook
       'Our lettering is traced from the hotel\'s own matchbook.',
     ],
     facts: [
       { k: 'Named', v: 'After the 1929 fire' },
-      { k: 'Closed', v: '1966' },
-      { k: 'Where', v: 'The depot block' },
+      { k: 'Closed', v: 'By 1976' },
+      { k: 'Burned', v: '1979' },
+      { k: 'Where', v: 'Across Railroad Ave. from the depot' },
     ],
-    sources: [{ label: 'National Register of Historic Places nomination form (NPGallery)', url: 'https://npgallery.nps.gov/GetAsset/c48e5991-58ca-4c94-8904-5e9e187f1ca4' }],
+    sources: [
+      { label: 'National Register of Historic Places nomination form, Oaks Hotel / Casa de Fresa, 1978 (NPGallery)', url: 'https://npgallery.nps.gov/GetAsset/c48e5991-58ca-4c94-8904-5e9e187f1ca4' },
+      { label: 'Wikipedia: Oaks Hotel (destroyed by fire in 1979)', url: 'https://en.wikipedia.org/wiki/Oaks_Hotel' },
+    ],
     prefixes: ['casa-de-fresa'],
     tile: 'casa-de-fresa', tone: '#f1e8d2', ink: '#1e1a16',
     note: 'Not affiliated with any current business using the name.',
@@ -128,20 +136,23 @@ const PLACES: Place[] = [
     name: 'The Toggery Shop',
     short: 'Toggery Shop',
     era: 'Closed 2002',
-    line: 'Its 1930s neon sign still hangs on West Thomas Street.',
+    line: 'Its Art Deco neon sign still hangs on West Thomas Street.',
     story: [
       // [brief] https://hammondhistoricdistrict.org/tour-toggery
       'The Toggery Shop sold men\'s clothing at 105 W. Thomas St. in downtown Hammond until it closed in 2002.',
-      'Its 1930s Art Deco neon blade sign still hangs downtown, in the Hammond Historic District.',
+      'The shop dates from the 1930s. A fire destroyed the building\'s facade in 1947, and its Art Deco neon blade sign, put up when the front was rebuilt, still hangs downtown in the Hammond Historic District.',
       // [brief] wave 2 art: sign redrawn flat; logotype traced from the shop's ad
       'Our designs follow the sign and the logotype from one of the shop\'s own ads.',
     ],
     facts: [
       { k: 'Address', v: '105 W. Thomas St.' },
       { k: 'Closed', v: '2002' },
-      { k: 'Sign', v: '1930s Art Deco neon' },
+      { k: 'Sign', v: 'Art Deco neon, after the 1947 fire' },
     ],
-    sources: [{ label: 'Hammond Historic District walking tour: the Toggery Shop', url: 'https://hammondhistoricdistrict.org/tour-toggery' }],
+    sources: [
+      { label: 'Hammond Historic District walking tour: the Toggery Shop', url: 'https://hammondhistoricdistrict.org/tour-toggery' },
+      { label: 'RoadsideArchitecture.com, Louisiana signs: Toggery Shop (the 1947 fire, the sign, the 2002 closing)', url: 'https://www.roadarch.com/signs/la.html' },
+    ],
     prefixes: ['toggery-shop'],
     tile: 'toggery-shop', tone: '#efe5cf', ink: '#1e1a16',
   },
@@ -150,19 +161,23 @@ const PLACES: Place[] = [
     name: 'Joy Twin / Galaxy Drive-In',
     short: 'Joy / Galaxy Drive-In',
     era: '1968–1992',
-    line: 'The Joy Twin, later the Galaxy: a drive-in from 1968 to 1992.',
+    line: 'The Joy, later the Galaxy: a drive-in on Natchez Street, 1968 to 1992.',
     story: [
       // [brief] https://drive-ins.com/wiki/latjoyd/galaxy-drive-in-theater
-      'The drive-in opened in 1968 as the Joy Twin and was later called the Galaxy. It closed in 1992, and apartments stand on the site today.',
+      'The Joy Drive-In opened in November 1968 with one screen and added a second in 1974. It went dark in 1984, reopened in 1989 as the Galaxy and closed for good in 1992. It has since been demolished.',
       // [art] both passes
       'Our tees follow the theatre\'s driver\'s courtesy passes.',
     ],
     facts: [
-      { k: 'Opened', v: '1968, as the Joy Twin' },
-      { k: 'Later', v: 'The Galaxy' },
+      { k: 'Opened', v: '1968, as the Joy' },
+      { k: 'Second screen', v: '1974' },
+      { k: 'The Galaxy', v: '1989 to 1992' },
       { k: 'Closed', v: '1992' },
     ],
-    sources: [{ label: 'Drive-ins.com: Galaxy Drive-In Theater, Hammond', url: 'https://drive-ins.com/wiki/latjoyd/galaxy-drive-in-theater' }],
+    sources: [
+      { label: 'Cinema Treasures: Galaxy Drive-In, Hammond', url: 'https://cinematreasures.org/theaters/43614' },
+      { label: 'Drive-ins.com: Galaxy Drive-In Theater, Hammond', url: 'https://drive-ins.com/wiki/latjoyd/galaxy-drive-in-theater' },
+    ],
     prefixes: ['joy-drive-in', 'galaxy-drive-in'],
     tile: 'joy-galaxy-drive-in', tone: '#14171c', ink: '#f4ecdd',
     note: 'Not affiliated with the Joy Theater in New Orleans.',
@@ -365,12 +380,12 @@ export const hammond: TownContent = {
     Tee: 'cave-tangi-tee-black', Sweatshirt: 'tornadoes-crew-neck-sweatshirt', Hat: 'cave-tangi-dad-hat-khaki', 'Framed print': 'greetings-from-hammond',
   },
   COPY: {
-    homeTitle: 'Hammond tees, hats & prints from the places we remember',
-    metaDescription: 'Tees, hats and framed prints redrawn and restored from the places Hammond remembers: the Cave Tangi, Strawberry Stadium, Hammond High and the 1946 Greetings from Hammond postcard.',
+    homeTitle: 'Hammond, Ponchatoula & Tangipahoa tees',
+    metaDescription: 'Tees, hats and framed prints redrawn from the places Hammond, Ponchatoula and Tangipahoa Parish remember: the Cave Tangi, Strawberry Stadium and Hammond High.',
     ogImage: '/images/hm/og.jpg',
-    placesDesc: 'Lost Hammond stories, from the Cave Tangi on Highway 51 to Strawberry Stadium, each with its story, sources and collection.',
-    shopDesc: 'Every Nostalgic Hammond tee, sweatshirt, hat and framed print, by place and by type: the Cave Tangi, Strawberry Stadium, Hammond High and more.',
-    footerBlurb: 'Tees, hats and prints for the places Hammond remembers, redrawn and restored from the original signs, ads and postcards. Made to order, one at a time.',
+    placesDesc: 'Lost Hammond, Ponchatoula and Tangipahoa Parish stories, from the Cave Tangi on Highway 51 to Strawberry Stadium, each with its story and sources.',
+    shopDesc: 'Every Nostalgic Hammond tee, sweatshirt, hat and framed print from Hammond, Ponchatoula and Tangipahoa Parish, by place and by type.',
+    footerBlurb: 'Tees, hats and prints for the places Hammond, Ponchatoula and Tangipahoa Parish remember, redrawn and restored from the original signs, ads and postcards. Made to order, one at a time.',
     footerLegalHtml: 'Nostalgic Hammond is an independent tribute shop, not affiliated with or endorsed by the businesses, schools or institutions shown.',
     aboutDesc: 'How Nostalgic Hammond researches, restores and redraws the places Hammond remembers, and where every image comes from.',
     termsArtworkHtml: 'The designs on this site were researched, restored and redrawn by Nostalgic Hammond. Please don\'t copy or resell them.',

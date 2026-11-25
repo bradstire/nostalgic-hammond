@@ -116,6 +116,7 @@ const HAS_SIGNUP = !!import.meta.env.PUBLIC_KLAVIYO_LIST;
           <h2 class="hb-h2" id="gifts-h">Gift pairs that ship free</h2>
           <p>A tee and a hat for {money(pairFrom)}: over our ${FREE_SHIP} line, so US shipping is free (before any discount code). Order by {HOLIDAY_CUTOFF} for Christmas delivery.</p>
         </div>
+        <a class="hb-link" href="/gifts">All gift picks</a>
       </div>
       <div class="hb-pairs">
         {pairs.map((pr, pi) => {
@@ -189,6 +190,8 @@ const HAS_SIGNUP = !!import.meta.env.PUBLIC_KLAVIYO_LIST;
       <form class="hb-form" data-signup novalidate>
         <label for="hb-email-in">Email address</label>
         <input class="hb-input" id="hb-email-in" type="email" name="email" autocomplete="email" placeholder="you@example.com" required />
+        <label for="hb-place-in">Which place should we bring back next? <span style="font-weight:400">(optional)</span></label>
+        <input class="hb-input" id="hb-place-in" type="text" name="place" maxlength="120" autocomplete="off" placeholder="A restaurant, a store, a sign…" style="flex-basis:100%" />
         <button class="hb-btn hb-btn--dark" type="submit">Get my 15% off</button>
         <p class="hb-form__msg" role="status" aria-live="polite"></p>
         <p class="hb-form__legal">A few emails a month. Unsubscribe anytime. <a href="https://checkout.shopify.com/97765622131/policies/50774835571.html?locale=en" rel="nofollow">Privacy policy</a></p>

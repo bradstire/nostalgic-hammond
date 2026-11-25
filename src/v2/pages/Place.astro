@@ -2,7 +2,7 @@
 import V2Layout from '../V2Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { getCatalog } from '../catalog';
-import { TYPE_ORDER, PLACE_DIR, SHOP_ORDER, livePlaces, placeStory, placeSources, type Place } from '../data';
+import { TYPE_ORDER, PLACE_DIR, SHOP_ORDER, PLACES, livePlaces, liveNames, inName, placeStory, placeSources, type Place } from '../data';
 import { siteConfig, town } from '../../config/site.config';
 import { nw } from '../nw';
 import { clip } from '../clip';
@@ -10,7 +10,9 @@ interface Props { pl: Place }
 const { pl } = Astro.props;
 const all = await getCatalog();
 const rank = (h: string) => { const i = SHOP_ORDER.indexOf(h); return i < 0 ? 1e4 : i; };
-const items = all.filter((p) => p.lead && p.place?.slug === pl.slug).sort((a, b) => TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) || rank(a.handle) - rank(b.handle));
+const parent = pl.parent ? PLACES.find((x) => x.slug === pl.parent) || null : null;
+const names = liveNames(all).filter((n) => n.parent === pl.slug);
+const items = all.filter((p) => p.lead && (parent ? inName(pl, p.handle) : p.place?.slug === pl.slug)).sort((a, b) => TYPE_ORDER.indexOf(a.type) - TYPE_ORDER.indexOf(b.type) || rank(a.handle) - rank(b.handle));
 const others = livePlaces(all).filter((x) => x.slug !== pl.slug);
 const big = !!pl.tileTall;
 const handles = all.map((p) => p.handle);
@@ -21,7 +23,8 @@ const jsonld = [{
   '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
     { '@type': 'ListItem', position: 1, name: 'Home', item: siteConfig.siteUrl + '/' },
     { '@type': 'ListItem', position: 2, name: 'Places', item: `${siteConfig.siteUrl}/places` },
-    { '@type': 'ListItem', position: 3, name: pl.name, item: `${siteConfig.siteUrl}/places/${pl.slug}` },
+    ...(parent ? [{ '@type': 'ListItem', position: 3, name: parent.name, item: `${siteConfig.siteUrl}/places/${parent.slug}` }] : []),
+    { '@type': 'ListItem', position: parent ? 4 : 3, name: pl.name, item: `${siteConfig.siteUrl}/places/${pl.slug}` },
   ],
 }, {
   '@context': 'https://schema.org', '@type': 'CollectionPage', name: `${pl.name}: ${T} tees, hats & prints`, url: `${siteConfig.siteUrl}/places/${pl.slug}`,
@@ -30,7 +33,7 @@ const jsonld = [{
 ---
 <V2Layout title={pl.name.includes(T) ? pl.name : `${pl.name}, ${T}`} description={clip(story[0])} image={`${PLACE_DIR}/${pl.tile}-900.jpg`} jsonld={jsonld}>
   <div class="hb-wrap">
-    <nav class="hb-crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/places">Places</a></li><li aria-current="page">{pl.short}</li></ol></nav>
+    <nav class="hb-crumbs" aria-label="Breadcrumb"><ol><li><a href="/">Home</a></li><li><a href="/places">Places</a></li>{parent && <li><a href={`/places/${parent.slug}`}>{parent.short}</a></li>}<li aria-current="page">{pl.short}</li></ol></nav>
   </div>
   <section class="hb-section--tight">
     <div class="hb-wrap" style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(24px,4vw,56px);align-items:center" data-place-hero>
@@ -55,6 +58,8 @@ const jsonld = [{
     <div class="hb-wrap">
       <div class="hb-head"><h2 class="hb-h2" id="pieces-h" set:html={nw(pl.catchAll ? pl.short : `${pl.short.startsWith('The ') ? pl.short : 'The ' + pl.short} collection`)} />{pl.note && <p class="hb-note" style="margin:0">{pl.note}</p>}</div>
       <div class={`hb-grid${items.length <= 2 ? ' hb-grid--few' : ''}`}>{items.map((p, i) => <ProductCard p={p} eager={i < 2} />)}</div>
+      {names.length > 0 && <p class="hb-note" style="margin-top:18px" data-name-links>The full story: {names.map((n, i) => <Fragment>{i > 0 && ' · '}<a class="hb-link" href={`/places/${n.slug}`}>{n.short}</a></Fragment>)}</p>}
+      {parent && <p class="hb-note" style="margin-top:18px" data-parent>Part of <a class="hb-link" href={`/places/${parent.slug}`}>{parent.short}</a>.</p>}
       <aside class="hb-sources" aria-labelledby="src-h">
         <h3 id="src-h">{sources.length ? 'Sources' : 'Know more?'}</h3>
         {sources.length > 0 && <ul>{sources.map((s) => <li>{s.url ? <a class="hb-link" href={s.url} rel="nofollow noopener">{s.label}</a> : s.label}</li>)}</ul>}

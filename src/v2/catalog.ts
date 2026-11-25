@@ -82,7 +82,7 @@ export async function getCatalog(): Promise<V2Product[]> {
     if (SOCK_FIX.has(n.handle)) images = [{ url: `local:${TOWN.SOCK_DIR}/${n.handle}`, width: 1080, height: 1080, alt: `${title}, front and back`, cut: true, color: null }];
     out.push({
       handle: n.handle, title, baseTitle: title.replace(/\s*\((Black|Natural|Dark)\)$/, ''), shopifyTitle: n.title, family: [], lead: true,
-      description: (DESC_OVERRIDE[n.handle] || n.description).replace(/Postcard from the 1910s/, 'Postcard from about 1915–20').replace(/(\d)—(\d)/g, '$1–$2'), descriptionHtml: n.descriptionHtml,
+      description: (DESC_OVERRIDE[n.handle] || n.description).replace(/(\d)—(\d)/g, '$1–$2'), descriptionHtml: n.descriptionHtml,
       type, productType: n.productType, place: placeFor(n.handle),
       price: parseFloat(n.priceRange.minVariantPrice.amount), images,
       detail: DETAIL.has(n.handle) ? `${TOWN.DETAIL_DIR}/${n.handle}` : null,

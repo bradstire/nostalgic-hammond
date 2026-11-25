@@ -446,6 +446,9 @@ p, li, figcaption { text-wrap: pretty; }
   .hb-crumbs ol { flex-wrap: nowrap; overflow: hidden; white-space: nowrap; }
   .hb-crumbs li { white-space: nowrap; flex: none; }
   .hb-crumbs li:last-child { flex: 0 1 auto; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  /* Four steps (a business-name page under its place): wrap, so the page's own name is never cut away. */
+  .hb-crumbs ol:has(li:nth-child(4)) { flex-wrap: wrap; white-space: normal; }
+  .hb-crumbs ol:has(li:nth-child(4)) li { max-width: 100%; overflow: hidden; text-overflow: ellipsis; }
   .hb-thumbs { display: flex; overflow-x: auto; overscroll-behavior-x: contain; scroll-snap-type: x mandatory; scrollbar-width: none;
     margin: -5px calc(var(--gutter) * -1); padding: 5px var(--gutter); scroll-padding: 0 var(--gutter); }   /* 5px: room for the focus ring */
   .hb-thumbs::-webkit-scrollbar { display: none; }

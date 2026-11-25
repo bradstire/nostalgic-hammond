@@ -28,6 +28,7 @@ export type Place = {
   note?: string;         // not-affiliated line, shown on place + product pages
   locality?: string;     // town the place was in, when it isn't the site's town (structured data)
   catchAll?: boolean;    // "Around <town>": not counted as a story in headings
+  parent?: string;       // NAMES only: slug of the place whose collection this business sits in
 };
 
 // color pins a variant of a multi-colour product; label only names the colour of a single-colour product.
@@ -75,6 +76,9 @@ export const SOCK_CHART = [
 // Everything a town supplies to the v2 storefront.
 export type TownContent = {
   PLACES: Place[];
+  // One page per business name inside a shared place (/places/<slug>): same layout, its own story, sources and pieces.
+  // Products keep their place; a name page lists the place's products whose handle starts with its prefixes.
+  NAMES?: Place[];
   // A product that matches no place lands here (slug), or nowhere when null.
   FALLBACK_PLACE: string | null;
   // Places with no products are left out of grids, nav and routes.

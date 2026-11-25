@@ -13,6 +13,7 @@ interface Props {
   jsonld?: object[];
   noHeader?: boolean;
   noindex?: boolean;
+  ogType?: string;
 }
 const {
   title,
@@ -20,8 +21,12 @@ const {
   image = COPY.ogImage,
   jsonld = [],
   noindex = false,
+  ogType = 'website',
 } = Astro.props;
-const fullTitle = title ? `${title} | ${siteConfig.brandName}` : `${siteConfig.brandName}: ${COPY.homeTitle}`;
+// Titles stay within 60 characters: a short brand suffix where the town sets one (titleSuffix), and no suffix when
+// the page title plus the suffix would still run over (og:site_name carries the brand either way).
+const sfx = siteConfig.titleSuffix;
+const fullTitle = !title ? `${sfx}: ${COPY.homeTitle}` : `${title} | ${sfx}`.length <= 60 ? `${title} | ${sfx}` : title;
 const canonical = new URL(Astro.url.pathname, siteConfig.siteUrl).href;
 const ogImage = new URL(image, siteConfig.siteUrl).href;
 ---
@@ -40,7 +45,7 @@ const ogImage = new URL(image, siteConfig.siteUrl).href;
     <meta property="og:site_name" content={siteConfig.brandName} />
     <meta property="og:title" content={fullTitle} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
     <meta name="twitter:card" content="summary_large_image" />

@@ -18,6 +18,13 @@ export const {
   PRODUCT_IMAGES, OPAQUE_IMAGES, PLACE_DIR, ADD_ONS, MATE_FALLBACK, TYPE_IMG, COPY,
 } = TOWN;
 export const SHOP_ORDER: string[] = TOWN.SHOP_ORDER ?? [];
+export const NAMES: Place[] = TOWN.NAMES ?? [];
+// Business-name pages that have something to sell, and the one a product belongs to.
+export const inName = (pl: Place, handle: string) => pl.prefixes.some((pre) => handle.startsWith(pre));
+export function liveNames(products: { lead: boolean; handle: string }[]): Place[] {
+  return NAMES.filter((n) => products.some((p) => p.lead && inName(n, p.handle)));
+}
+export const nameFor = (handle: string): Place | null => NAMES.find((n) => inName(n, handle)) || null;
 
 // Near-duplicates kept in the store but left out of grids (their pages still work). Brad has the final call.
 import hiddenList from './hidden.json';

@@ -1,11 +1,12 @@
 ---
 import V2Layout from '../V2Layout.astro';
 import { getCatalog } from '../catalog';
-import { PLACE_DIR, COPY, TYPE_ORDER, livePlaces, storyCount, numWord, typePhrase } from '../data';
+import { PLACE_DIR, COPY, TYPE_ORDER, livePlaces, liveNames, storyCount, numWord, typePhrase } from '../data';
 import { siteConfig } from '../../config/site.config';
 import { nw } from '../nw';
 const all = (await getCatalog()).filter((p) => p.lead);
 const PLACES = livePlaces(all);
+const NAMES = liveNames(all);
 const types = TYPE_ORDER.filter((t) => all.some((p) => p.type === t));
 const count = (slug: string) => all.filter((p) => p.place?.slug === slug).length;
 const placeCta = (slug: string) => {
@@ -51,6 +52,7 @@ const jsonld = [{
           <span class="hb-place__go">Shop all <span aria-hidden="true">→</span></span>
         </a>
       </div>
+      {NAMES.length > 0 && <p class="hb-note" style="margin-top:24px" data-name-links>By name: {NAMES.map((n, i) => <Fragment>{i > 0 && ' · '}<a class="hb-link" href={`/places/${n.slug}`}>{n.short}</a></Fragment>)}</p>}
     </div>
   </section>
 </V2Layout>

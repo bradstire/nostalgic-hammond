@@ -2,7 +2,7 @@
 import V2Layout from '../V2Layout.astro';
 import ProductCard from '../components/ProductCard.astro';
 import { getCatalog, cdn, srcset, money, storyOf, specsOf, shareImg, localFor, isCut, type V2Product, type V2Image } from '../catalog';
-import { FREE_SHIP, HOLIDAY_CUTOFF, SIZE_CHART, SOCK_CHART, FRAME_SIZE, MEMBER_LABEL, SHIP_MAKE, SHIP_TRANSIT, NOTE_BY_PREFIX, HIDDEN_FROM_GRID, PAIRS, blankFor, START_HERE, MATE_FALLBACK } from '../data';
+import { FREE_SHIP, HOLIDAY_CUTOFF, SIZE_CHART, SOCK_CHART, FRAME_SIZE, MEMBER_LABEL, SHIP_MAKE, SHIP_TRANSIT, NOTE_BY_PREFIX, HIDDEN_FROM_GRID, PAIRS, blankFor, START_HERE, MATE_FALLBACK, nameFor } from '../data';
 import { clip } from '../clip';
 import { siteConfig } from '../../config/site.config';
 import { nw } from '../nw';
@@ -73,9 +73,13 @@ const jsonld = [
     '@context': 'https://schema.org', '@type': 'Product', name: p.baseTitle, description: story.join(' ') || p.title,
     image: p.images.slice(0, 6).map((i) => { const s = shareImg(i.url); return s.startsWith('/') ? siteConfig.siteUrl + s : s; }), brand: { '@type': 'Brand', name: siteConfig.brandName }, url,
     category: p.type,
+    // One price across the sizes: a single Offer (Google's merchant listings read Offer, not AggregateOffer). Sizes priced
+    // apart (the framed prints) keep the range. No shippingDetails: under the free-shipping line the rate is set at checkout.
     offers: {
-      '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: Math.min(...p.variants.map((v) => v.price)), highPrice: Math.max(...p.variants.map((v) => v.price)),
-      offerCount: p.variants.length, availability: p.available ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock', url,
+      ...(new Set(p.variants.map((v) => v.price)).size === 1
+        ? { '@type': 'Offer', priceCurrency: 'USD', price: p.variants[0].price, itemCondition: 'https://schema.org/NewCondition' }
+        : { '@type': 'AggregateOffer', priceCurrency: 'USD', lowPrice: Math.min(...p.variants.map((v) => v.price)), highPrice: Math.max(...p.variants.map((v) => v.price)), offerCount: p.variants.length }),
+      availability: p.available ? 'https://schema.org/InStock' : 'https://schema.org/OutOfStock', url,
       hasMerchantReturnPolicy: {
         '@type': 'MerchantReturnPolicy', applicableCountry: 'US',
         // Made to order: no returns for fit or change of mind (misprints and damage are replaced; see /shipping-returns).
@@ -93,6 +97,11 @@ const jsonld = [
 ];
 const variantsJson = JSON.stringify(p.variants.map((v) => ({ id: v.id, n: v.numericId, a: v.available, p: v.price, o: v.options, i: v.image, ci: v.image ? cdn(v.image, 1080) : undefined })));
 const check = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>';
+// A colour sold as its own product (its own URL) names the colour in <title> and the structured data, so sibling pages differ.
+const ownOpts = p.family.filter((f) => f.handle === p.handle);
+const ownLabel = ownOpts.map((f) => f.label.replace(/\s+tee$/i, '')).filter((l) => l !== 'Default').join(' & ');
+const seoTitle = p.family.some((f) => f.handle !== p.handle) && ownLabel && ownOpts.length <= 2 ? `${p.baseTitle}, ${ownLabel}` : p.baseTitle;
+(jsonld[0] as any).name = seoTitle;
 const desc = clip(story[0] || `${p.baseTitle} from ${siteConfig.brandName}.`);
 // Share images are opaque JPGs (transparent images render on black in some apps). Without a local -og.jpg copy
 // (towns that read Shopify's CDN directly), use the first opaque Shopify image instead, e.g. the lifestyle photo.
@@ -101,7 +110,7 @@ const ogImg = ogSrc ? shareImg(ogSrc.url) : undefined;
 // Towns without a Klaviyo list have no signup form, so no 15% offer either (Footer/Home use the same test).
 const HAS_SIGNUP = !!import.meta.env.PUBLIC_KLAVIYO_LIST;
 ---
-<V2Layout title={p.baseTitle} description={desc} image={ogImg} jsonld={jsonld} noindex={HIDDEN_FROM_GRID.has(p.handle)}>
+<V2Layout title={seoTitle} description={desc} image={ogImg} ogType="product" jsonld={jsonld} noindex={HIDDEN_FROM_GRID.has(p.handle)}>
   <div class="hb-wrap">
     <nav class="hb-crumbs" aria-label="Breadcrumb">
       <ol>
@@ -217,7 +226,7 @@ const HAS_SIGNUP = !!import.meta.env.PUBLIC_KLAVIYO_LIST;
           <div class="hb-storybox">
             <p class="hb-eyebrow" style="margin-bottom:6px">The story</p>
             {story.map((s) => <p>{s}</p>)}
-            {p.place && !p.place.catchAll && <p><a class="hb-link" href={`/places/${p.place.slug}`}>More about {p.place.short}</a></p>}
+            {nameFor(p.handle) ? <p><a class="hb-link" href={`/places/${nameFor(p.handle)!.slug}`}>The {nameFor(p.handle)!.short} story</a></p> : p.place && !p.place.catchAll && <p><a class="hb-link" href={`/places/${p.place.slug}`}>More about {p.place.short}</a></p>}
             {note && <p class="hb-note">{note}</p>}
           </div>
         )}
